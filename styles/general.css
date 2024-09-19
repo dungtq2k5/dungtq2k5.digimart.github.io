@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;700&display=swap');
+:root {
+  --lightgrey: #c4c7c5;
+  --lightblue: #f0f4f9;
+  --blue: #1a73e8;
+  --darkblue: #1358b2;
+  --black: #1f1f1f;
+  --white: #ffff;
+  --darkwhite: #f5f5f5;
+
+  --border-radius: 2px;
+  --max-screen-size-section: 1440px;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  transition: .15s;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  background-color: var(--white);
+  color: var(--black);
+}
+i, button, label {
+  cursor: pointer;
+}
+i {
+  font-size: 1.75rem;
+}
+button, input {
+  font-size: 1rem;
+}
+a {
+  text-decoration: none;
+  color: var(--black);
+  width: max-content;
+}
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.root, #root {
+  max-width: 1920px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.btn1, .btn2 {
+  border: 1px solid transparent;
+  padding: .5em 1em;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  width: max-content;
+  height: max-content;
+}
+.btn1 {
+  background-color: var(--blue);
+  color: var(--white);
+}
+.btn1:hover, .btn1:focus {
+  background-color: var(--darkblue);
+}
+.btn2 {
+  background-color: transparent;
+  color: var(--blue);
+  border-color: var(--lightgrey);
+}
+.btn2:hover, .btn2:focus {
+  background-color: var(--lightblue);
+  border-color: var(--blue);
+  color: var(--darkblue);
+}
+
+.red-dot {
+  position: absolute;
+  width: .5rem;
+  height: .5rem;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.link {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.link:hover, .link:focus {
+  color: var(--darkblue);
+}
+
+/* testing */
+.border-line, .b {
+  border: 1px solid rgb(255, 92, 92);
+}
+
+/*media query*/
+@media (max-width: 720px) {
+  html {
+    font-size: 14px;
+  }
+}
+@media (max-width: 500px) {
+  html {
+    font-size: 10px;
+  }
+}
+@media (max-width: 344px) {
+  html {
+    font-size: 8px;
+  }
+}
