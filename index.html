@@ -11,86 +11,74 @@
   <link rel="stylesheet" href="styles/content.css">
   <link rel="stylesheet" href="styles/detail.css">
   <link rel="stylesheet" href="styles/form.css">
+  <link rel="stylesheet" href="styles/cart.css">
 </head>
-<body class="b2">
+<body>
   
-  <header class="header">
-      <a href="#home" class="b" title="home">
-        <div class="header-logo">
-          <p>Logo</p>
-        </div>
-      </a>
-
-    <div class="header-ulti">
-      <div class="header-ulti-search-box b">
-        <input type="text" placeholder="What are you looking for?"/>
-        <button class="header-ulti-search-box-btn" title="search">
-          <i class="uil uil-search"></i>
-        </button>
-      </div>
-      
-      
-      <div id="cart" class="header-ulti-cart b2">
-        <a href="#cart">
-          <span class="red-dot"></span>
-          <i class="uil uil-shopping-cart"></i>
+  <!--
+    <header class="header">
+        <a href="#home" class="b" title="home">
+          <div class="header-logo">
+            <p>Logo</p>
+          </div>
         </a>
+  
+      <div class="header-ulti">
+        <div class="header-ulti-search-box b">
+          <input type="text" placeholder="What are you looking for?"/>
+          <button class="header-ulti-search-box-btn" title="search">
+            <i class="uil uil-search"></i>
+          </button>
+        </div>
         
-        <!-- cart-popup -->
-        <div id="cart-popup" class="pop-up b">
-          <div class="cart-popup">
-            <p class="cart-popup-title b">Recently added products</p>
         
-            <ul>
-              <li class="cart-popup-section b">
-                <img class="b" src="assets/products/image.png" alt="">
-                <p class="b">Samsung Galaxy watch6</p>
-                <p class="cart-popup-section-price b">$190</p>
-              </li>
-              <li class="cart-popup-section b">
-                <img class="b" src="assets/products/image.png" alt="">
-                <p class="b">Samsung Galaxy watch6</p>
-                <p class="cart-popup-section-price b">$190</p>
-              </li>
-            </ul>
-    
-            <a href="#cart" class="btn1">Viewing my shop cart</a>
+        <div id="cart" class="header-ulti-cart b2">
+          <a href="#cart">
+            <span class="red-dot"></span>
+            <i class="uil uil-shopping-cart"></i>
+          </a>
+          
+          <!- - cart-popup - ->
+          <div id="cart-popup" class="pop-up b">
+            <div class="cart-popup">
+              <p class="cart-popup-title b">Recently added products</p>
+          
+              <ul>
+                <li class="cart-popup-section b">
+                  <img class="b" src="assets/products/image.png" alt="">
+                  <p class="b">Samsung Galaxy watch6</p>
+                  <p class="cart-popup-section-price b">$190</p>
+                </li>
+                <li class="cart-popup-section b">
+                  <img class="b" src="assets/products/image.png" alt="">
+                  <p class="b">Samsung Galaxy watch6</p>
+                  <p class="cart-popup-section-price b">$190</p>
+                </li>
+              </ul>
+      
+              <a href="#cart" class="btn1">Viewing my shop cart</a>
+            </div>
           </div>
         </div>
+  
+  
+        <a href="#return&orders" class="header-ulti-return b" title="return&orders">
+          <i class="uil uil-package"></i>
+          <span class="red-dot"></span>
+        </a>
       </div>
+  
+      <div class="header-auth b">
+        <a href="#login" class="btn1 header-auth-login">Login</a>
+        <a href="#register" class="btn2 header-auth-logout">Register</a>
+        <a href="#auth" class="header-auth-profile b" title="auth">
+          <i class="uil uil-user-square"></i>
+        </a>
+        <!- - <a href="#logout" class="btn2">Logout</a> - ->
+      </div>
+    </header>
+  -->
 
-
-      <a href="#return&orders" class="header-ulti-return b" title="return&orders">
-        <i class="uil uil-package"></i>
-        <span class="red-dot"></span>
-      </a>
-    </div>
-
-    <div class="header-auth b">
-      <a href="#login" class="btn1 header-auth-login">Login</a>
-      <a href="#register" class="btn2 header-auth-logout">Register</a>
-      <a href="#auth" class="header-auth-profile b" title="auth">
-        <i class="uil uil-user-square"></i>
-      </a>
-      <!-- <a href="#logout" class="btn2">Logout</a> -->
-    </div>
-  </header>
-
-  <!-- cart -->
-  <main class="cart b">
-    <div class="cart-header b">
-      <p>Product</p>
-      <p>Price</p>
-      <p>Quantity</p>
-      <p>Subtotal</p>
-    </div>
-
-    <ul>
-      <li class="cart-section b">
-
-      </li>
-    </ul>
-  </main>
 
   <footer class="footer b">
     <div class="footer-copyright b">
@@ -100,4 +88,4 @@
 
   <script src="backend/interactive.js"></script>
 </body>
-</html>
+</html>   
