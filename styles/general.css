@@ -83,6 +83,7 @@ img {
 
 .red-dot {
   position: absolute;
+  right: 0;
   width: .5rem;
   height: .5rem;
   background-color: red;
@@ -101,12 +102,38 @@ img {
   display: none;
 }
 
+.overlay-container {
+  position: fixed;  
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-width: var(--max-screen-size);
+  margin: 0 auto;
+  background-color: rgba(255,255,255,.5);
+  z-index: 98;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* transform: translateY(-100%); */
+}
+
+.close-btn {
+  font-size: 1.5em;
+  border: none;
+  background-color: transparent;
+  border-radius: var(--border-radius);
+}
+.close-btn:hover {
+  opacity: .6;
+}
+
 /* testing */
 .border-line, .b {
   border: .5px solid rgb(255, 92, 92);
 }
 .b2 {
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
 }
 
 /*media query*/

@@ -1,4 +1,8 @@
 .login-form {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 1em;
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 1.5em;
@@ -7,9 +11,16 @@
   border-radius: var(--border-radius);
   padding: 2em;
 }
+
+.form-close {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
 .login-form-field {
   display: flex;
   flex-direction: column;
+  gap: .5em;
 }
 .login-form-field input {
   padding: .5em;

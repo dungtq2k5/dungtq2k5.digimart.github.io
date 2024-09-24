@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="styles/footer.css">
   <link rel="stylesheet" href="styles/content.css">
   <link rel="stylesheet" href="styles/detail.css">
-  <link rel="stylesheet" href="styles/login.css">
+  <link rel="stylesheet" href="styles/form.css">
 </head>
 <body class="b2">
   
@@ -29,18 +29,40 @@
         </button>
       </div>
       
-      <a href="#cart" title="cart">
-        <div class="header-ulti-cart b">
+      
+      <div id="cart" class="header-ulti-cart b2">
+        <a href="#cart">
+          <span class="red-dot"></span>
           <i class="uil uil-shopping-cart"></i>
-          <span class="red-dot"></span>
+        </a>
+        
+        <!-- cart-popup -->
+        <div id="cart-popup" class="pop-up b">
+          <div class="cart-popup">
+            <p class="cart-popup-title b">Recently added products</p>
+        
+            <ul>
+              <li class="cart-popup-section b">
+                <img class="b" src="assets/products/image.png" alt="">
+                <p class="b">Samsung Galaxy watch6</p>
+                <p class="cart-popup-section-price b">$190</p>
+              </li>
+              <li class="cart-popup-section b">
+                <img class="b" src="assets/products/image.png" alt="">
+                <p class="b">Samsung Galaxy watch6</p>
+                <p class="cart-popup-section-price b">$190</p>
+              </li>
+            </ul>
+    
+            <a href="#cart" class="btn1">Viewing my shop cart</a>
+          </div>
         </div>
-      </a>
+      </div>
 
-      <a href="#return&orders" title="return&orders">
-        <div class="header-ulti-cart b">
-          <i class="uil uil-package"></i>
-          <span class="red-dot"></span>
-        </div>
+
+      <a href="#return&orders" class="header-ulti-return b" title="return&orders">
+        <i class="uil uil-package"></i>
+        <span class="red-dot"></span>
       </a>
     </div>
 
@@ -54,158 +76,21 @@
     </div>
   </header>
 
-  <!-- content -->
-  <!-- <div class="content b">
-    <aside class="content-menu b"><ul>
-        <li>
-          <a href="#smartphone">
-            <div class="content-menu-item b">
-              <p>Smartphone</p>
-              <i class="uil uil-arrow-right"></i>
-            </div>
-          </a>
-        </li>
-  
-        <li>
-          <a href="#smartphone">
-            <div class="content-menu-item b">
-              <p>Smartphone</p>
-              <i class="uil uil-arrow-right"></i>
-            </div>
-          </a>
-        </li>
-        
-        <li>
-          <a href="#smartphone">
-            <div class="content-menu-item b">
-              <p>Smartphone</p>
-              <i class="uil uil-arrow-right"></i>
-            </div>
-          </a>
-        </li>
-
-    </ul></aside>
-
-    <main class="main b">
-      <a href="#detail">
-        <div class="main-card b">
-          <div class="main-card-img-box b">
-            <span class="main-card-img-box-tag b">-20%</span>
-            <img
-              class="b"
-              src="assets/products/image.png"
-              alt="Red black gaming hand console"
-            />
-          </div>
-    
-          <div class="main-card-info">
-            <p>Samsung Galaxy watch6 44mm</p>
-            <span class="main-card-info-price">$120</span>
-            <s class="main-card-info-plain-price">$140</s>
-          </div>
-        </div>
-      </a>
-    </main>
-  </div>
-
-  <nav class="content-nav b">
-    <button class="btn2">
-      <i class="uil uil-arrow-left" title="prev"></i>
-    </button>
-    <p class="b">1</p>
-    <button class="btn2">
-      <i class="uil uil-arrow-right" title="next"></i>
-    </button>
-  </nav> -->
-
-  <!-- detail -->
-  <!-- <div class="detail-container b2">
-    <div class="detail b">
-      <button class="detail-close b" title="close">
-        <i class="uil uil-times detail-close-icon b"></i>
-      </button>
-      <img src="assets/products/image.png" alt="" class="b">
-  
-      <div class="detail-right">
-        <div class="detail-right-info b">
-          <h2>Samsung Galaxy watch6</h2>
-          <p class="detail-right-info-price">$190.00</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </p>
-        </div>
-    
-        <div class="detail-right-btns">
-          <button class="btn1">Buy now</button>
-          <button class="btn2">Add to cart</button>
-        </div>
-      </div>
+  <!-- cart -->
+  <main class="cart b">
+    <div class="cart-header b">
+      <p>Product</p>
+      <p>Price</p>
+      <p>Quantity</p>
+      <p>Subtotal</p>
     </div>
-  </div> -->
 
-  <!-- login form -->
-  <!-- <main class="login b">
-    <form class="login-form b">
-      <h1>Login</h1>
+    <ul>
+      <li class="cart-section b">
 
-      <div class="login-form-field b">
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          placeholder="nikola.tesla@gmail.com"
-          required
-        />
-      </div>
-      <div class="login-form-field b">
-        <label htmlFor="password">Password</label>
-        <input id="password" type="password" placeholder="password123" required />
-      </div>
-
-      <button class="btn1">Login in</button>
-
-      <p class="login-form-question">
-        Don't have an account?
-        <a href="#register" class="link">Register now.</a>
-      </p>
-    </form>
-  </main> -->
-
-  <!-- register form -->
-  <!-- <main class="logout">
-    <form class="login-form border-line">
-      <h1>Register</h1>
-  
-      <div class="login-form-field border-line">
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          placeholder="nikola.tesla@gmail.com"
-          required
-        />
-      </div>
-      <div class="login-form-field border-line">
-        <label htmlFor="phone">Phone number</label>
-        <input id="phone" type="tel" placeholder="+123456789" required />
-      </div>
-      <div class="login-form-field border-line">
-        <label htmlFor="password">Password</label>
-        <input id="password" type="password" placeholder="password123" required />
-      </div>
-  
-      <button class="btn1">Login in</button>
-  
-      <p class="login-form-question">
-        ALready have an account?
-        <a href="#login" class="link">Login now.</a>
-      </p>
-    </form>
-   </main> -->
-
-   
+      </li>
+    </ul>
+  </main>
 
   <footer class="footer b">
     <div class="footer-copyright b">
@@ -213,6 +98,6 @@
     </div>
   </footer>
 
-  <script src="main.js"></script>
+  <script src="backend/interactive.js"></script>
 </body>
 </html>
