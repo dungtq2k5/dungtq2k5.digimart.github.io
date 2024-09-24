@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="styles/general.css">
   <link rel="stylesheet" href="styles/header.css">
   <link rel="stylesheet" href="styles/footer.css">
+  <link rel="stylesheet" href="styles/content.css">
+  <link rel="stylesheet" href="styles/detail.css">
 </head>
-<body>
+<body class="b2">
   
   <header class="header">
       <a href="#home" class="b" title="home">
@@ -21,28 +23,105 @@
     <div class="header-ulti">
       <div class="header-ulti-search-box b">
         <input type="text" placeholder="What are you looking for?"/>
-        <button class="header-ulti-search-box-btn">
-          <i class="uil uil-search" title="search"></i>
+        <button class="header-ulti-search-box-btn" title="search">
+          <i class="uil uil-search"></i>
         </button>
       </div>
-
-        <div class="header-ulti-cart">
+      
+      <a href="#cart" title="cart">
+        <div class="header-ulti-cart b">
           <i class="uil uil-shopping-cart"></i>
           <span class="red-dot"></span>
         </div>
+      </a>
 
-        <div class="header-ulti-cart">
+      <a href="#return&orders" title="return&orders">
+        <div class="header-ulti-cart b">
           <i class="uil uil-package"></i>
           <span class="red-dot"></span>
         </div>
+      </a>
     </div>
 
-    <div class="header-login-logout b">
-      <a class="btn1">Login</a>
-      <a class="btn2">Register</a>
+    <div class="header-auth b">
+      <a href="#login" class="btn1 header-auth-login">Login</a>
+      <a href="#register" class="btn2 header-auth-logout">Register</a>
+      <a href="#auth" class="header-auth-profile b" title="auth">
+        <i class="uil uil-user-square"></i>
+      </a>
       <!-- <a href="#logout" class="btn2">Logout</a> -->
     </div>
   </header>
+
+  <div class="content b">
+    <aside class="content-menu b"><ul>
+        <li>
+          <a href="#smartphone">
+            <div class="content-menu-item border-line">
+              <p>Smartphone</p>
+              <i class="uil uil-arrow-right"></i>
+            </div>
+          </a>
+        </li>
+  
+        <li>
+          <a href="#smartphone">
+            <div class="content-menu-item border-line">
+              <p>Smartphone</p>
+              <i class="uil uil-arrow-right"></i>
+            </div>
+          </a>
+        </li>
+        
+        <li>
+          <a href="#smartphone">
+            <div class="content-menu-item border-line">
+              <p>Smartphone</p>
+              <i class="uil uil-arrow-right"></i>
+            </div>
+          </a>
+        </li>
+
+    </ul></aside>
+
+    <main class="main b">
+      <a href="#detail">
+        <div class="main-card b">
+          <div class="main-card-img-box b">
+            <span class="main-card-img-box-tag b">-20%</span>
+            <img
+              class="border-line"
+              src="assets/products/image.png"
+              alt="Red black gaming hand console"
+            />
+          </div>
+    
+          <div class="main-card-info">
+            <p>Samsung Galaxy watch6 44mm</p>
+            <span class="main-card-info-price">$120</span>
+            <s class="main-card-info-plain-price">$140</s>
+          </div>
+        </div>
+      </a>
+    </main>
+  </div>
+
+  <nav class="content-nav b">
+    <i class="uil uil-arrow-left btn2" title="prev"></i>
+    <p class="b">1</p>
+    <i class="uil uil-arrow-right btn2" title="next"></i>
+  </nav>
+<!-- 
+  <div class="detail b">
+    <main class="detail-main b">
+
+    </main>
+
+    <div class="detail-related b">
+
+    </div>
+  </div> -->
+
 
   <footer class="footer b">
     <div class="footer-copyright b">
