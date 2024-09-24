@@ -1,11 +1,10 @@
 .cart {
   display: flex;
   flex-direction: column;
-  gap: 2em;
-  width: 100%;
+  gap: var(--section-gap);
   max-width: var(--max-screen-size-section);
   margin: 0 auto;
-  padding: 2em;
+  padding: var(--section-padding);
 }
 .cart-product li {
   margin-top: .5em;

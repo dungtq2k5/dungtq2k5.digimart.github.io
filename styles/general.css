@@ -11,6 +11,8 @@
   --border-radius: 4px;
   --max-screen-size-section: 1440px;
   --max-screen-size: 1920px;
+  --section-gap: 2em;
+  --section-padding: 2em;
 }
 * {
   margin: 0;
@@ -133,7 +135,7 @@ img {
   /* border: .5px solid rgb(255, 92, 92); */
 }
 .b2 {
-  /* border: 1px solid blue; */
+  border: 1px solid blue;
 }
 
 /*media query*/
