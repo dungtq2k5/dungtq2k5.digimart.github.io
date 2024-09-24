@@ -1,0 +1,16 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  background-color: var(--lightblue);
+  border: 1px solid var(--lightgrey);
+  border-radius: var(--border-radius);
+  padding: 2em;
+}
+.login-form-field {
+  display: flex;
+  flex-direction: column;
+}
+.login-form-field input {
+  padding: .5em;
+}
