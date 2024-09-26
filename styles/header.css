@@ -54,7 +54,8 @@
   top: 40px;
   left: -10px;
   width: 500px;
-  display: none;
+  display: block;
+  z-index: 1;
 }
 .cart-popup {
   display: flex;
@@ -81,6 +82,7 @@
   align-items: center;
   gap: .5em;
   border-radius: var(--border-radius);
+  cursor: pointer;
 }
 .cart-popup-section:hover {
   background-color: var(--darkwhite);

@@ -1,14 +1,15 @@
-/*
 //cart pop-up
 const cartIcon = document.getElementById("cart");
 const cartPopup = document.getElementById("cart-popup");
 
 cartIcon.addEventListener("mouseover", () => {
-  cartPopup.style.display = "block";
-  // console.log("over");
+  if(cartPopup.classList.contains("hide")) {
+    cartPopup.classList.remove("hide");
+    // console.log("over");
+  }
 });
 cartIcon.addEventListener("mouseleave", () => {
-  cartPopup.style.display = "none";
+  cartPopup.classList.add("hide");
   // console.log("out");
 });
 
@@ -16,11 +17,26 @@ cartIcon.addEventListener("mouseleave", () => {
 //search btn
 const searchBtn = document.getElementById("search-btn");
 const searchField = document.getElementById("search-field");
+const filterSearch = document.getElementById("filter-search");
 
 searchBtn.addEventListener("click", () => {
   searchField.focus();
+});
+
+searchField.addEventListener("focus", () => {
+  if(filterSearch.classList.contains("hide")) {
+    filterSearch.classList.remove("hide");
+    // console.log("focus");
+  }
+});
+document.addEventListener("click", e => {
+  if(!searchBtn.contains(e.target) && !searchField.contains(e.target) && !filterSearch.contains(e.target)) {
+    filterSearch.classList.add("hide");
+    // console.log("unfocus");
+  }
+  // console.log("click");
 })
-*/
+
 
 
 //price-slider
