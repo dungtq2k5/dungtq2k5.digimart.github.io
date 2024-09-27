@@ -52,7 +52,6 @@ document.addEventListener("click", e => {
 })
 
 
-
 //price-slider
 let minVal = document.getElementById("min-value");
 let maxVal = document.getElementById("max-value");
@@ -80,3 +79,36 @@ function validateRange() {
 }
 
 validateRange();
+
+
+//form
+const loginBtns = document.querySelectorAll(".login-btn-js");
+const loginForm = document.getElementById("login-form");
+const loginCloseBtn = document.getElementById("login-form-close");
+
+
+loginBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    loginForm.classList.remove("hide");
+    // console.log("show-login");
+  })
+});
+loginCloseBtn.addEventListener("click", () => {
+  loginForm.classList.add("hide");
+  // console.log("hide-login");
+});
+
+const registerBtns = document.querySelectorAll(".register-btn-js");
+const registerForm = document.getElementById("register-form");
+const registerCloseBtn = document.getElementById("register-form-close");
+
+registerBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    registerForm.classList.remove("hide");
+    // console.log("show-register");
+  })
+});
+registerCloseBtn.addEventListener("click", () => {
+  registerForm.classList.add("hide");
+  // console.log("hide-register");
+});

@@ -71,16 +71,16 @@
     </div>
 
     <div class="header-auth b">
-      <a href="#login" class="btn1 header-auth-login">Login</a>
-      <a href="#register" class="btn2 header-auth-logout">Register</a>
+      <button class="btn1 header-auth-login login-btn-js">Login</button>
+      <button class="btn2 header-auth-logout register-btn-js">Register</button>
 
-      <a id="header-auth-profile" href="#auth" class="header-auth-profile b" title="auth">
+      <button id="header-auth-profile" class="header-auth-profile b" title="auth">
         <i class="uil uil-user-square"></i>
-      </a>
+      </button>
       <!-- auth pop-up -->
       <div id="header-auth-profile-popup" class="header-auth-profile-popup hide b"> 
-        <a href="#login" class="btn1 header-auth-profile-popup-login">Login</a>
-        <a href="#register" class="btn2 header-auth-profile-popup-logout">Register</a>
+        <button class="btn1 header-auth-profile-popup-login login-btn-js">Login</button>
+        <button class="btn2 header-auth-profile-popup-logout register-btn-js">Register</button>
       </div>
       <!-- <a href="#logout" class="btn2">Logout</a> -->
     </div>
@@ -135,123 +135,72 @@
     </div>
   </header>
 
-  <!-- content -->
-  <div class="content b">
-    <aside class="content-menu b"><ul>
-        <li>
-          <a href="#smartphone">
-            <div class="content-menu-item b">
-              <p>Smartphone</p>
-              <i class="uil uil-arrow-right"></i>
-            </div>
-          </a>
-        </li>
+  <!-- login form -->
+  <div id="login-form" class="backdrop hide b">
+    <form class="login-form b">
+      <button id="login-form-close" class="form-close close-btn b">
+        <i class="uil uil-times"></i>
+      </button>
 
-        <li>
-          <a href="#smartphone">
-            <div class="content-menu-item b">
-              <p>Smartphone</p>
-              <i class="uil uil-arrow-right"></i>
-            </div>
-          </a>
-        </li>
-        
-        <li>
-          <a href="#smartphone">
-            <div class="content-menu-item b">
-              <p>Smartphone</p>
-              <i class="uil uil-arrow-right"></i>
-            </div>
-          </a>
-        </li>
+      <h1>Login</h1>
 
-    </ul></aside>
+      <div class="login-form-field b">
+        <label htmlFor="login-form-field-email">Email</label>
+        <input
+          id="login-form-field-email"
+          type="email"
+          placeholder="nikola.tesla@gmail.com"
+        />
+      </div>
+      <div class="login-form-field b">
+        <label htmlFor="login-form-field-password">Password</label>
+        <input id="login-form-field-password" type="password" placeholder="password123" />
+      </div>
 
-    <main class="main b">
-      <a href="#detail">
-        <div class="main-card b">
-          <div class="main-card-img-box b">
-            <span class="main-card-img-box-tag b">-20%</span>
-            <img
-              class="b"
-              src="assets/products/image.png"
-              alt="Red black gaming hand console"
-            />
-          </div>
-    
-          <div class="main-card-info">
-            <p>Samsung Galaxy watch6 44mm</p>
-            <span class="main-card-info-price">$120</span>
-            <s class="main-card-info-plain-price">$140</s>
-          </div>
-        </div>
-      </a>
-      <a href="#detail">
-        <div class="main-card b">
-          <div class="main-card-img-box b">
-            <span class="main-card-img-box-tag b">-20%</span>
-            <img
-              class="b"
-              src="assets/products/image.png"
-              alt="Red black gaming hand console"
-            />
-          </div>
-    
-          <div class="main-card-info">
-            <p>Samsung Galaxy watch6 44mm</p>
-            <span class="main-card-info-price">$120</span>
-            <s class="main-card-info-plain-price">$140</s>
-          </div>
-        </div>
-      </a>
-      <a href="#detail">
-        <div class="main-card b">
-          <div class="main-card-img-box b">
-            <span class="main-card-img-box-tag b">-20%</span>
-            <img
-              class="b"
-              src="assets/products/image.png"
-              alt="Red black gaming hand console"
-            />
-          </div>
-    
-          <div class="main-card-info">
-            <p>Samsung Galaxy watch6 44mm</p>
-            <span class="main-card-info-price">$120</span>
-            <s class="main-card-info-plain-price">$140</s>
-          </div>
-        </div>
-      </a>
-      <a href="#detail">
-        <div class="main-card b">
-          <div class="main-card-img-box b">
-            <span class="main-card-img-box-tag b">-20%</span>
-            <img
-              class="b"
-              src="assets/products/image.png"
-              alt="Red black gaming hand console"
-            />
-          </div>
-    
-          <div class="main-card-info">
-            <p>Samsung Galaxy watch6 44mm</p>
-            <span class="main-card-info-price">$120</span>
-            <s class="main-card-info-plain-price">$140</s>
-          </div>
-        </div>
-      </a>
-    </main>
+      <button class="btn1">Login in</button>
+
+      <p class="login-form-question">
+        Don't have an account?
+        <a href="#register" class="link">Register now.</a>
+      </p>
+    </form>
   </div>
 
-  <nav class="content-nav b">
-    <button class="btn2">
-      <i class="uil uil-arrow-left" title="prev"></i>
-    </button>
-    <p class="b">1</p>
-    <button class="btn2">
-      <i class="uil uil-arrow-right" title="next"></i>
-    </button>
-  </nav>
+
+<!-- register form -->
+  <div id="register-form" class="backdrop hide b">
+    <form class="login-form border-line">
+      <button id="register-form-close" class="form-close close-btn b">
+        <i class="uil uil-times"></i>
+      </button>
+
+      <h1>Register</h1>
+
+      <div class="login-form-field border-line">
+        <label htmlFor="register-form-field-email">Email</label>
+        <input
+          id="register-form-field-email"
+          type="email"
+          placeholder="nikola.tesla@gmail.com"
+        />
+      </div>
+      <div class="login-form-field border-line">
+        <label htmlFor="register-form-field-phone">Phone number</label>
+        <input id="register-form-field-phone" type="tel" placeholder="+123456789"/>
+      </div>
+      <div class="login-form-field border-line">
+        <label htmlFor="register-form-field-password">Password</label>
+        <input id="register-form-field-password" type="password" placeholder="password123"/>
+      </div>
+
+      <button class="btn1">Login in</button>
+
+      <p class="login-form-question">
+        ALready have an account?
+        <a href="#login" class="link">Login now.</a>
+      </p>
+    </form>
+  </div>
 
   <!-- footer -->
   <footer class="footer b">
