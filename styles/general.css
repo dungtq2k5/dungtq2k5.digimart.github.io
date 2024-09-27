@@ -87,6 +87,7 @@ img {
 
 .red-dot {
   position: absolute;
+  top: 0;
   right: 0;
   width: .5rem;
   height: .5rem;

@@ -13,6 +13,20 @@ cartIcon.addEventListener("mouseleave", () => {
   // console.log("out");
 });
 
+//auth-profile
+const authIcon = document.getElementById("header-auth-profile");
+const authPopup = document.getElementById("header-auth-profile-popup");
+
+authIcon.addEventListener("click", () => {
+  authPopup.classList.toggle("hide");
+  console.log("toggle");
+});
+document.addEventListener("click", e => {
+  if(!authIcon.contains(e.target) && !authPopup.classList.contains("hide")) {
+    authPopup.classList.add("hide");
+    console.log("hidden");
+  }
+});
 
 //search btn
 const searchBtn = document.getElementById("search-btn");

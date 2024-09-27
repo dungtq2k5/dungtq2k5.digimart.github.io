@@ -25,7 +25,7 @@
       </div>
     </a>
 
-    <div class="header-ulti">
+    <div class="header-ulti b">
       <div class="header-ulti-search-box b2">
         <input id="search-field" type="text" placeholder="What are you looking for?"/>
         
@@ -73,11 +73,19 @@
     <div class="header-auth b">
       <a href="#login" class="btn1 header-auth-login">Login</a>
       <a href="#register" class="btn2 header-auth-logout">Register</a>
-      <a href="#auth" class="header-auth-profile b" title="auth">
+
+      <a id="header-auth-profile" href="#auth" class="header-auth-profile b" title="auth">
         <i class="uil uil-user-square"></i>
       </a>
+      <!-- auth pop-up -->
+      <div id="header-auth-profile-popup" class="header-auth-profile-popup hide b"> 
+        <a href="#login" class="btn1 header-auth-profile-popup-login">Login</a>
+        <a href="#register" class="btn2 header-auth-profile-popup-logout">Register</a>
+      </div>
       <!-- <a href="#logout" class="btn2">Logout</a> -->
     </div>
+
+
 
     <!-- filter-search -->
     <div id="filter-search" class="filter-search hide b">
