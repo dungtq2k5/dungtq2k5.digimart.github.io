@@ -19,12 +19,12 @@ const authPopup = document.getElementById("header-auth-profile-popup");
 
 authIcon.addEventListener("click", () => {
   authPopup.classList.toggle("hide");
-  console.log("toggle");
+  // console.log("toggle");
 });
 document.addEventListener("click", e => {
   if(!authIcon.contains(e.target) && !authPopup.classList.contains("hide")) {
     authPopup.classList.add("hide");
-    console.log("hidden");
+    // console.log("hidden");
   }
 });
 

@@ -39,9 +39,7 @@
   grid-template-columns: repeat(6, 1fr);
   gap: .5em;
 }
-
 .main-card {
-  max-width: 250px;
   padding: 1em;
   display: flex;
   flex-direction: column;

@@ -124,7 +124,7 @@
 /*filter-search*/
 .filter-search {
   position: absolute;
-  top: 110%;
+  top: 95%;
   width: 95%;
   max-width: var(--max-screen-size-section);
   display: flex;
@@ -133,6 +133,7 @@
   padding: 1em;
   border: 1px solid var(--lightgrey);
   border-radius: var(--border-radius);
+  background-color: var(--white);
 }
 
 .filter-search-category {
@@ -170,7 +171,6 @@
   position: absolute;
   z-index: 1;
   height: .5em;
-  transition: none !important; /*specificity*/
   border-radius: var(--border-radius);
 }
 .filter-search-slider-range-input[type="range"] {
