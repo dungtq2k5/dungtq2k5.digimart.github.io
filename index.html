@@ -16,7 +16,6 @@
   <title>Document</title>
 </head>
 <body>
-  
   <!-- header -->
   <header class="header">
     <a href="#home" class="b" title="home">
@@ -47,11 +46,6 @@
             <p class="cart-popup-title b">Recently added products</p>
         
             <ul>
-              <li class="cart-popup-section b">
-                <img class="b" src="assets/products/image.png" alt="">
-                <p class="b">Samsung Galaxy watch6</p>
-                <p class="cart-popup-section-price b">$190</p>
-              </li>
               <li class="cart-popup-section b">
                 <img class="b" src="assets/products/image.png" alt="">
                 <p class="b">Samsung Galaxy watch6</p>
@@ -127,13 +121,75 @@
           <img class="b" src="assets/products/image.png" alt="">
           <p class="b">SamSung Galaxy watch6</p>
         </li>
-        <li class="filter-search-result-item b">
-          <img class="b" src="assets/products/image.png" alt="">
-          <p class="b">SamSung Galaxy watch6</p>
-        </li>
       </ul>
     </div>
   </header>
+
+  <!-- content -->
+  <div class="content b">
+    <aside class="content-menu b"><ul>
+        <li>
+          <a href="#smartphone">
+            <div class="content-menu-item b">
+              <p>Smartphone</p>
+              <i class="uil uil-arrow-right"></i>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a href="#smartphone">
+            <div class="content-menu-item b">
+              <p>Smartphone</p>
+              <i class="uil uil-arrow-right"></i>
+            </div>
+          </a>
+        </li>
+        
+        <li>
+          <a href="#smartphone">
+            <div class="content-menu-item b">
+              <p>Smartphone</p>
+              <i class="uil uil-arrow-right"></i>
+            </div>
+          </a>
+        </li>
+
+    </ul></aside>
+
+    <main id="products-container" class="main b">
+      <a href="#detail">
+        <div class="main-card b">
+          <div class="main-card-img-box b">
+            <span class="main-card-img-box-tag b">-20%</span>
+            <img
+              class="b"
+              src="assets/img/products/samsung-galaxy-watch6.webp"
+              alt="Red black gaming hand console"
+            />
+          </div>
+    
+          <div class="main-card-info b">
+            <p>Samsung Galaxy watch6 44mm</p>
+            <div class="b">   
+              <span class="main-card-info-price">$120</span>
+              <s class="main-card-info-plain-price">$140</s>
+            </div>
+          </div>
+        </div>
+      </a>
+    </main>
+  </div>
+
+  <nav class="content-nav b">
+    <button class="btn2">
+      <i class="uil uil-arrow-left" title="prev"></i>
+    </button>
+    <p class="b">1</p>
+    <button class="btn2">
+      <i class="uil uil-arrow-right" title="next"></i>
+    </button>
+  </nav>
 
   <!-- login form -->
   <div id="login-form" class="backdrop hide b">
@@ -167,7 +223,7 @@
   </div>
 
 
-<!-- register form -->
+  <!-- register form -->
   <div id="register-form" class="backdrop hide b">
     <form class="login-form border-line">
       <button id="register-form-close" class="form-close close-btn b">
@@ -209,7 +265,7 @@
     </div>
   </footer>
 
-  <!-- <script src="backend/interactive.js"></script> -->
+
   <script type="module" src="backend/main.js"></script>
 </body>
 </html>   

@@ -40,9 +40,10 @@
   gap: .5em;
 }
 .main-card {
-  padding: 1em;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  padding: 1em;
   gap: .5em;
   border: 1px solid var(--lightgrey);
   border-radius: var(--border-radius);
@@ -62,6 +63,13 @@
   padding: .25em .5em;
   font-size: small;
   border-radius: var(--border-radius);
+}
+.main-card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: .5em;
+  height: 100%;
 }
 .main-card-info-price, .main-card-info-plain-price {
   color: var(--darkblue);
