@@ -114,3 +114,10 @@ const products = [
 export default function getData() {
   return products;
 }
+
+export function getDetail(id) {
+  const findIndex = getData().findIndex(item => item.id == id);
+  if(findIndex != -1) return getData()[findIndex];
+  console.log(`Product with an id ${id} not found!`);
+  return findIndex;
+}

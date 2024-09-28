@@ -123,6 +123,7 @@ export function responsiveRegisterBtn() {
   });
 }
 
+
 export default function activateResponsiveAll() {
   responsiveCartIcon();
   responsiveSearch();
