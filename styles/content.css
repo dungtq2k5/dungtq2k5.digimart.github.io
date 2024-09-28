@@ -80,9 +80,14 @@
 .content-nav {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1em;
   margin: 1em auto 0 auto;
   width: max-content;
+}
+.content-nav-index {
+  width: 2rem;
+  text-align: center;
 }
 .content-nav button {
   font-size: 1.5em;

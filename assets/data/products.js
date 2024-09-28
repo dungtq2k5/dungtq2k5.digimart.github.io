@@ -108,11 +108,24 @@ const products = [
     brand: "Garmin",
     types: ["sporty", "smartwatch"],
     size: 43
-  }
+  },
+  {
+    id: 11,
+    name: "Garmin Venu 3 Plus",
+    description: "A fitness-focused smartwatch with GPS tracking, music storage, and contactless payments.",
+    price: 399,
+    quantity: 70,
+    img: "samsung-galaxy-watch6",
+    brand: "Garmin",
+    types: ["sporty", "smartwatch"],
+    size: 43
+  },
 ];
 
-export default function getData() {
-  return products;
+  
+export function getData(from=0, to=products.length) {
+  if(from > to) [from, to] = [to, from];
+  return products.slice(from, to);
 }
 
 export function getDetail(id) {

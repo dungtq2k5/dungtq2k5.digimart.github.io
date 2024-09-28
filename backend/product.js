@@ -1,12 +1,19 @@
-import { default as getProductData, getDetail as getProductDetail } from "../assets/data/products.js";
+import { 
+  getData as getProductData,
+  getDetail as getProductDetail
+} from "../assets/data/products.js";
 
+const maxItem = 1;
 const imgLinkPath = "assets/img/products"; //relative to index.html
+const productContainer = document.getElementById("products-container");
 const backDrop = document.getElementById("backdrop"); //fixed at index.html
+const navBackBtn = document.getElementById("content-nav-back");
+const navForwardBtn = document.getElementById("content-nav-forward");
+const navIndex = document.getElementById("content-nav-index");
 
-
-export default function render() {
+export default function renderProducts(from=maxItem*(navIndex.innerHTML-1), to=maxItem*navIndex.innerHTML) {
   let htmlDoc = ``;
-  getProductData().forEach(item => {
+  getProductData(from, to).forEach(item => {
     htmlDoc += `
       <div class="main-card b" data-product-id="${item.id}">
         <div class="main-card-img-box b">
@@ -25,16 +32,17 @@ export default function render() {
     `;
   });
 
-  document.getElementById("products-container").innerHTML = htmlDoc;
+  productContainer.innerHTML = htmlDoc;
   document.querySelectorAll(".main-card").forEach(card => {
     card.addEventListener("click", () => {
       const productId = card.dataset.productId;
-      renderDetail(getProductDetail(productId));
+      renderProductDetail(getProductDetail(productId));
     });
   });
+  // console.log("render-products");
 }
 
-function renderDetail(item) {
+function renderProductDetail(item) {
   backDrop.innerHTML = `
     <div class="detail b">
       <button id="detail-product-close" class="detail-close close-btn b" title="close">
@@ -60,9 +68,30 @@ function renderDetail(item) {
   document.getElementById("detail-product-close").addEventListener("click", () => {
     backDrop.innerHTML = "";
     backDrop.classList.add("hide");
-    console.log("close-detail-products");
+    // console.log("close-detail-products");
   });
 
   backDrop.classList.remove("hide");
-  console.log("detail-product");
+  // console.log("detail-product");
 }
+
+export function activeProductNav() {
+  navBackBtn.addEventListener("click", () => {
+    if(navIndex.innerHTML > 1) {
+      navIndex.innerHTML--;
+      renderProducts();
+      // console.log(maxItem*(navIndex.innerHTML-1), maxItem*navIndex.innerHTML);
+      // console.log("back");
+    }
+  });
+
+  navForwardBtn.addEventListener("click", () => {
+    if(maxItem*(navIndex.innerHTML) < getProductData().length) {
+      navIndex.innerHTML++;
+      renderProducts();
+      // console.log(maxItem*(navIndex.innerHTML-1), maxItem*navIndex.innerHTML);
+      // console.log("forward");
+    }
+  }); 
+}
+ 
