@@ -2,54 +2,60 @@
 const cartIcon = document.getElementById("cart");
 const cartPopup = document.getElementById("cart-popup");
 
-cartIcon.addEventListener("mouseover", () => {
-  if(cartPopup.classList.contains("hide")) {
-    cartPopup.classList.remove("hide");
-    // console.log("over");
-  }
-});
-cartIcon.addEventListener("mouseleave", () => {
-  cartPopup.classList.add("hide");
-  // console.log("out");
-});
+export function responsiveCartIcon() {
+  cartIcon.addEventListener("mouseover", () => {
+    if(cartPopup.classList.contains("hide")) {
+      cartPopup.classList.remove("hide");
+      // console.log("over");
+    }
+  });
+  cartIcon.addEventListener("mouseleave", () => {
+    cartPopup.classList.add("hide");
+    // console.log("out");
+  });
+}
 
 //auth-profile
 const authIcon = document.getElementById("header-auth-profile");
 const authPopup = document.getElementById("header-auth-profile-popup");
 
-authIcon.addEventListener("click", () => {
-  authPopup.classList.toggle("hide");
-  // console.log("toggle");
-});
-document.addEventListener("click", e => {
-  if(!authIcon.contains(e.target) && !authPopup.classList.contains("hide")) {
-    authPopup.classList.add("hide");
-    // console.log("hidden");
-  }
-});
+export function responsiveAuthIcon() {
+  authIcon.addEventListener("click", () => {
+    authPopup.classList.toggle("hide");
+    // console.log("toggle");
+  });
+  document.addEventListener("click", e => {
+    if(!authIcon.contains(e.target) && !authPopup.classList.contains("hide")) {
+      authPopup.classList.add("hide");
+      // console.log("hidden");
+    }
+  });
+}
 
 //search btn
 const searchBtn = document.getElementById("search-btn");
 const searchField = document.getElementById("search-field");
 const filterSearch = document.getElementById("filter-search");
 
-searchBtn.addEventListener("click", () => {
-  searchField.focus();
-});
-
-searchField.addEventListener("focus", () => {
-  if(filterSearch.classList.contains("hide")) {
-    filterSearch.classList.remove("hide");
-    // console.log("focus");
-  }
-});
-document.addEventListener("click", e => {
-  if(!searchBtn.contains(e.target) && !searchField.contains(e.target) && !filterSearch.contains(e.target)) {
-    filterSearch.classList.add("hide");
-    // console.log("unfocus");
-  }
-  // console.log("click");
-})
+export function responsiveSearch() {
+  searchBtn.addEventListener("click", () => {
+    searchField.focus();
+  });
+  
+  searchField.addEventListener("focus", () => {
+    if(filterSearch.classList.contains("hide")) {
+      filterSearch.classList.remove("hide");
+      // console.log("focus");
+    }
+  });
+  document.addEventListener("click", e => {
+    if(!searchBtn.contains(e.target) && !searchField.contains(e.target) && !filterSearch.contains(e.target)) {
+      filterSearch.classList.add("hide");
+      // console.log("unfocus");
+    }
+    // console.log("click");
+  })
+}
 
 
 //price-slider
@@ -58,10 +64,12 @@ let maxVal = document.getElementById("max-value");
 const rangeFill = document.getElementById("filter-search-slider-range-fill");
 const inputEles = document.querySelectorAll(".filter-search-slider-range-input");
 
-inputEles.forEach(e => {
-  e.addEventListener("input", validateRange);
-});
-
+export function responsivePriceSlider() {
+  inputEles.forEach(e => {
+    e.addEventListener("input", validateRange);
+  });
+  validateRange();
+}
 function validateRange() {
   let minPrice = parseInt(inputEles[0].value);
   let maxPrice = parseInt(inputEles[1].value);
@@ -78,7 +86,6 @@ function validateRange() {
   maxVal.innerHTML = maxPrice;
 }
 
-validateRange();
 
 
 //form
@@ -86,29 +93,41 @@ const loginBtns = document.querySelectorAll(".login-btn-js");
 const loginForm = document.getElementById("login-form");
 const loginCloseBtn = document.getElementById("login-form-close");
 
-
-loginBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    loginForm.classList.remove("hide");
-    // console.log("show-login");
-  })
-});
-loginCloseBtn.addEventListener("click", () => {
-  loginForm.classList.add("hide");
-  // console.log("hide-login");
-});
+export function responsiveLoginBtn() {
+  loginBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      loginForm.classList.remove("hide");
+      // console.log("show-login");
+    })
+  });
+  loginCloseBtn.addEventListener("click", () => {
+    loginForm.classList.add("hide");
+    // console.log("hide-login");
+  });
+}
 
 const registerBtns = document.querySelectorAll(".register-btn-js");
 const registerForm = document.getElementById("register-form");
 const registerCloseBtn = document.getElementById("register-form-close");
 
-registerBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    registerForm.classList.remove("hide");
-    // console.log("show-register");
-  })
-});
-registerCloseBtn.addEventListener("click", () => {
-  registerForm.classList.add("hide");
-  // console.log("hide-register");
-});
+export function responsiveRegisterBtn() {
+  registerBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      registerForm.classList.remove("hide");
+      // console.log("show-register");
+    })
+  });
+  registerCloseBtn.addEventListener("click", () => {
+    registerForm.classList.add("hide");
+    // console.log("hide-register");
+  });
+}
+
+export default function activateResponsiveAll() {
+  responsiveCartIcon();
+  responsiveSearch();
+  responsivePriceSlider();
+  responsiveAuthIcon();
+  responsiveLoginBtn();
+  responsiveRegisterBtn();
+}
