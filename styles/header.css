@@ -135,18 +135,22 @@
   border-radius: var(--border-radius);
   background-color: var(--white);
 }
-
 .filter-search-category {
   display: flex;
   gap: .5em;
 }
 .filter-search-category-item {
+  display: flex;
+  align-items: center;
+  gap: .25em;
   padding: .25em .5em;
   cursor: pointer;
   border: 1px solid var(--lightgrey);
   border-radius: var(--border-radius);
 }
-
+.filter-search-category-item i {
+  font-size: 1rem;
+}
 .filter-search-slider {
   display: flex;
   flex-direction: column;

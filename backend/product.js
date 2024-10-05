@@ -1,4 +1,4 @@
-import { IMG_ROOT_PATH } from "./settings.js";
+import { IMG_ROOT_PATH, CLASSNAME } from "./settings.js";
 import { 
   getData as getProductData,
   getDetail as getProductDetail
@@ -67,11 +67,11 @@ function renderProductDetail(item) {
 
   document.getElementById("detail-product-close").addEventListener("click", () => {
     backDrop.innerHTML = "";
-    backDrop.classList.add("hide");
+    backDrop.classList.add(CLASSNAME.hide);
     // console.log("close-detail-products");
   });
 
-  backDrop.classList.remove("hide");
+  backDrop.classList.remove(CLASSNAME.hide);
   // console.log("detail-product");
 }
 

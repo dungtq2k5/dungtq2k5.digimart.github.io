@@ -105,6 +105,10 @@ img {
 .hide {
   display: none !important;
 }
+.checked {
+  background-color: var(--blue);
+  color: var(--white);
+}
 
 .backdrop {
   position: fixed;  
@@ -131,10 +135,10 @@ img {
 
 /* testing */
 .border-line, .b {
-  /* border: .5px solid rgb(255, 92, 92); */
+  /* border: .5px solid rgb(255, 92, 92) !important; */
 }
 .b2 {
-  /* border: 1px solid blue; */
+  /* border: 1px solid blue !important; */
 }
 
 /*media query*/
