@@ -1,3 +1,6 @@
+import { MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE } from "../../backend/settings.js";
+import { includesSubArr } from "../../backend/utils.js";
+
 const products = [
   {
     id: 1,
@@ -123,14 +126,33 @@ const products = [
 ];
 
   
-export function getData(from=0, to=products.length) {
+export function getProductsList(from=0, to=products.length) {
   if(from > to) [from, to] = [to, from];
   return products.slice(from, to);
 }
 
-export function getDetail(id) {
-  const findIndex = getData().findIndex(item => item.id == id);
-  if(findIndex != -1) return getData()[findIndex];
+export function getProductDetail(id) {
+  const findIndex = getProductsList().findIndex(item => item.id == id);
+  if(findIndex != -1) return getProductsList()[findIndex];
   console.log(`Product with an id ${id} not found!`);
   return findIndex;
+}
+
+
+export function filterProducts(productsList=getProductsList(), value="", categories=[], minPrice=MIN_PRODUCT_PRICE, maxPrice=MAX_PRODUCT_PRICE) { //search engine
+  if(value!="") { //by val
+    productsList = productsList.filter(item => item.name.toLowerCase().includes(value.toLowerCase()));
+    // console.log(`filter val ${value}`);
+  } 
+  
+  if(categories.length > 0) { //by category
+    if(minPrice > maxPrice) [minPrice, maxPrice] = [maxPrice, minPrice];
+    productsList = productsList.filter(item => includesSubArr(item.types, categories));
+    // console.log(`filter categories ${categories}`);
+  }
+
+  productsList = productsList.filter(item => (item.price>=minPrice && item.price<=maxPrice)); //by price
+  // console.log(`filter price range ${minPrice}, ${maxPrice}`);
+
+  return productsList;
 }

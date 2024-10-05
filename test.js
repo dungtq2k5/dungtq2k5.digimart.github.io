@@ -10,5 +10,9 @@ function toggle(arr, ele) {
   else arr.push(ele);
 }
 
-toggle(list, 10);
-console.log(list);
+function capitalizeFirstLetter(string) { //ai generate
+  return string.replace(/\b\w+/g, function(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  });
+}
+console.log(capitalizeFirstLetter("hello world, nice to meet you!"));

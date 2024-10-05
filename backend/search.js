@@ -1,13 +1,12 @@
 import { 
   IMG_ROOT_PATH, 
-  MIN_PRODUCT_PRICE, 
-  MAX_PRODUCT_PRICE, 
   MAX_ITEM_SUGGESTION,
   CLASSNAME
 } from "./settings.js";
-import { getCategories } from "../assets/data/categories.js";
-import { includesSubArr, toggleEleInArr } from "./utils.js";
-import { getData } from "../assets/data/products.js";
+import { getCategoriesList } from "../assets/data/categories.js";
+import { toggleEleInArr } from "./utils.js";
+import { getProductsList, filterProducts } from "../assets/data/products.js";
+import renderProducts from "./product.js";
 
 
 //price-slider
@@ -21,7 +20,8 @@ const searchField = document.getElementById("search-field");
 const filterSearch = document.getElementById("filter-search");
 const filterSearchResult = document.getElementById("filter-search-result");
 const filterSearchCategory = document.getElementById("filter-search-category");
-let valueLookup;
+//filtering searching
+let valueLookup = "";
 let categoriesLookup = [];
 
 renderCategory();
@@ -30,16 +30,20 @@ export default function responsiveSearch() {
   searchField.addEventListener("input", (e) => {
     valueLookup = e.target.value;
     renderProductSuggest(
-      filterProduct(valueLookup, categoriesLookup, minVal.innerHTML, maxVal.innerHTML).slice(0, MAX_ITEM_SUGGESTION)
+      filterProducts(getProductsList(), valueLookup, categoriesLookup, minVal.innerHTML, maxVal.innerHTML).slice(0, MAX_ITEM_SUGGESTION)
     );
+
   });
 
   responsiveSearchSuggestionPopUp();
 }
 
+
 function responsiveSearchSuggestionPopUp() {
   searchBtn.addEventListener("click", () => {
-    searchField.focus();
+    // console.log("execute search");
+    renderProducts(filterProducts(getProductsList(), valueLookup, categoriesLookup, minVal.innerHTML, maxVal.innerHTML));
+    if(filterSearch.classList.contains("hide")) filterSearch.classList.add("hide");
   });
   
   searchField.addEventListener("focus", () => {
@@ -51,7 +55,7 @@ function responsiveSearchSuggestionPopUp() {
   });
 
   document.addEventListener("click", e => {
-    if(!searchBtn.contains(e.target) && !searchField.contains(e.target) && !filterSearch.contains(e.target)) {
+    if(!searchField.contains(e.target) && !filterSearch.contains(e.target)) {
       filterSearch.classList.add("hide");
       // console.log("unfocus");
     }
@@ -61,31 +65,28 @@ function responsiveSearchSuggestionPopUp() {
   responsivePriceSlider();
 }
 
-function filterProduct(value, categories, minPrice=MIN_PRODUCT_PRICE, maxPrice=MAX_PRODUCT_PRICE) { //search engine
-  let products = getData();
-
-  if(value != undefined || value === "") { //by val
-    products = products.filter(item => item.name.toLowerCase().includes(value.toLowerCase()));
-    // console.log(`filter val ${value}`);
-  } 
+// function filterProducts(productsList=getProductsList(), value="", categories=[], minPrice=MIN_PRODUCT_PRICE, maxPrice=MAX_PRODUCT_PRICE) { //search engine
+//   if(value!="") { //by val
+//     productsList = productsList.filter(item => item.name.toLowerCase().includes(value.toLowerCase()));
+//     // console.log(`filter val ${value}`);
+//   } 
   
-  if(categories != undefined && categories.length > 0) { //by category
-    if(minPrice > maxPrice) [minPrice, maxPrice] = [maxPrice, minPrice];
-    products = products.filter(item => includesSubArr(item.types, categories));
-    // console.log(`filter categories ${categories}`);
-  }
+//   if(categories.length > 0) { //by category
+//     if(minPrice > maxPrice) [minPrice, maxPrice] = [maxPrice, minPrice];
+//     productsList = productsList.filter(item => includesSubArr(item.types, categories));
+//     // console.log(`filter categories ${categories}`);
+//   }
 
-  products = products.filter(item => (item.price>=minPrice && item.price<=maxPrice)); //by price
-  // console.log(`filter price range ${minPrice}, ${maxPrice}`);
+//   productsList = productsList.filter(item => (item.price>=minPrice && item.price<=maxPrice)); //by price
+//   // console.log(`filter price range ${minPrice}, ${maxPrice}`);
 
-  
-  return products;
-}
+//   return productsList;
+// }
 
-function renderProductSuggest(products) { 
+function renderProductSuggest(productsList) { 
   let htmlDoc = ``;
-  if(products.length > 0) {
-    products.forEach(item => {
+  if(productsList.length > 0) {
+    productsList.forEach(item => {
       htmlDoc += `
         <li class="filter-search-result-item b">
           <img class="b" src="${IMG_ROOT_PATH}/${item.img}.webp" alt="">
@@ -100,13 +101,13 @@ function renderProductSuggest(products) {
   filterSearchResult.innerHTML = htmlDoc;
 }
 
-function renderCategory() {
-  console.log("render category");
+function renderCategory(categoriesList=getCategoriesList()) {
+  // console.log("render category");
   let htmlDoc = ``;
-  getCategories().forEach(item => {
+  categoriesList.forEach(e => {
     htmlDoc += `
       <li class="filter-search-category-item b">
-        <p>${item}</p>
+        <p>${e}</p>
         <i class="uil uil-check hide"></i>
       </li>
     `;
@@ -122,7 +123,7 @@ function renderCategory() {
       toggleEleInArr(categoriesLookup, item.querySelector("p").innerHTML);
       // console.log(categoriesLookup);
       renderProductSuggest(
-        filterProduct(valueLookup, categoriesLookup, minVal.innerHTML, maxVal.innerHTML).slice(0, MAX_ITEM_SUGGESTION)
+        filterProducts(getProductsList(), valueLookup, categoriesLookup, minVal.innerHTML, maxVal.innerHTML).slice(0, MAX_ITEM_SUGGESTION)
       );
     });
   });
@@ -153,6 +154,6 @@ function validateRange() {
 
   // console.log("price range");
   renderProductSuggest(
-    filterProduct(valueLookup, categoriesLookup, minPrice, maxPrice).slice(0, MAX_ITEM_SUGGESTION)
+    filterProducts(getProductsList(), valueLookup, categoriesLookup, minPrice, maxPrice).slice(0, MAX_ITEM_SUGGESTION)
   );
 }

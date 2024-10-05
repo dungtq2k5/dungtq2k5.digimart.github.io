@@ -109,6 +109,9 @@ img {
   background-color: var(--blue);
   color: var(--white);
 }
+.bg-active {
+  background-color: var(--lightblue);
+}
 
 .backdrop {
   position: fixed;  

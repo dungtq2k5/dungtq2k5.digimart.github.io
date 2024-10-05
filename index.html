@@ -80,10 +80,8 @@
       <!-- <a href="#logout" class="btn2">Logout</a> -->
     </div>
 
-
-
     <!-- filter-search -->
-    <div id="filter-search" class="filter-search b">
+    <div id="filter-search" class="filter-search hide b">
       <ul id="filter-search-category" class="filter-search-category b">
         <li class="filter-search-category-item b">
           <p>category</p>
@@ -107,8 +105,8 @@
 
         <div class="filter-search-slider-range b">
           <div id="filter-search-slider-range-fill" class="filter-search-slider-range-fill"></div>
-          <input id="filter-search-slider-range-min" class="filter-search-slider-range-input" type="range" value="100" min="0" max="500" step="10">
-          <input id="filter-search-slider-range-max" class="filter-search-slider-range-input" type="range" value="250" min="0" max="500" step="10">
+          <input id="filter-search-slider-range-min" class="filter-search-slider-range-input" type="range" value="0" min="0" max="500" step="10">
+          <input id="filter-search-slider-range-max" class="filter-search-slider-range-input" type="range" value="500" min="0" max="500" step="10">
         </div>
       </div>
 
@@ -123,35 +121,18 @@
 
   <!--content section-->
   <div class="content b">
-    <aside class="content-menu b"><ul>
+    <aside class="content-menu b">
+      <ul id="content-menu">
         <li>
           <a href="#smartphone">
-            <div class="content-menu-item b">
+            <div class="content-menu-item b bg-active">
               <p>Smartphone</p>
-              <i class="uil uil-arrow-right"></i>
+              <i class="uil uil-check hide"></i>
             </div>
           </a>
         </li>
-
-        <li>
-          <a href="#smartphone">
-            <div class="content-menu-item b">
-              <p>Smartphone</p>
-              <i class="uil uil-arrow-right"></i>
-            </div>
-          </a>
-        </li>
-        
-        <li>
-          <a href="#smartphone">
-            <div class="content-menu-item b">
-              <p>Smartphone</p>
-              <i class="uil uil-arrow-right"></i>
-            </div>
-          </a>
-        </li>
-
-    </ul></aside>
+      </ul>
+    </aside>
 
     <main id="products-container" class="main b">
       <div class="main-card b">

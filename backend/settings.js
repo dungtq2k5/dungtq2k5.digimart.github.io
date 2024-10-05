@@ -7,4 +7,7 @@ export const MIN_PRODUCT_PRICE = 0, MAX_PRODUCT_PRICE = 500;
 export const CLASSNAME = {
   hide: "hide",
   checked: "checked",
+  bgActive: "bg-active",
 }
+
+export const MAX_RENDER_PRODUCTS = 5;
