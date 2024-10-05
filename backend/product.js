@@ -1,10 +1,10 @@
+import { IMG_ROOT_PATH } from "./settings.js";
 import { 
   getData as getProductData,
   getDetail as getProductDetail
 } from "../assets/data/products.js";
 
-const maxItem = 1;
-const imgLinkPath = "assets/img/products"; //relative to index.html
+const maxItem = 10;
 const productContainer = document.getElementById("products-container");
 const backDrop = document.getElementById("backdrop"); //fixed at index.html
 const navBackBtn = document.getElementById("content-nav-back");
@@ -19,13 +19,13 @@ export default function renderProducts(from=maxItem*(navIndex.innerHTML-1), to=m
         <div class="main-card-img-box b">
           <img
             class="b"
-            src="${imgLinkPath}/${item.img}.webp"
+            src="${IMG_ROOT_PATH}/${item.img}.webp"
             alt="watch/band-img"
           />
         </div>
   
         <div class="main-card-info b">
-          <p>${item.name} - ${item.size}mm</p>
+          <p class="main-card-info-title">${item.name} - ${item.size}mm</p>
           <span class="main-card-info-price">$${item.price}</span>
         </div>
       </div>
@@ -48,7 +48,7 @@ function renderProductDetail(item) {
       <button id="detail-product-close" class="detail-close close-btn b" title="close">
         <i class="uil uil-times detail-close-icon b"></i>
       </button>
-      <img src="${imgLinkPath}/${item.img}.webp" alt="watch/band-img" class="b">
+      <img src="${imgRootPath}/${item.img}.webp" alt="watch/band-img" class="b">
 
       <div class="detail-right">
         <div class="detail-right-info b">

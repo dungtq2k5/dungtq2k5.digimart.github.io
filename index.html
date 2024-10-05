@@ -15,8 +15,9 @@
   <link rel="stylesheet" href="styles/track.css">
   <title>Document</title>
 </head>
-<body>
-  <!-- header -->
+<body id="root">
+
+  <!--header-->
   <header class="header">
     <a href="#home" class="b" title="home">
       <div class="header-logo">
@@ -47,13 +48,13 @@
         
             <ul>
               <li class="cart-popup-section b">
-                <img class="b" src="assets/products/image.png" alt="">
+                <img class="b" src="assets/img/products/samsung-galaxy-watch6.webp" alt="">
                 <p class="b">Samsung Galaxy watch6</p>
                 <p class="cart-popup-section-price b">$190</p>
               </li>
             </ul>
 
-            <a href="#cart" class="btn1">Viewing my shop cart</a>
+            <a id="viewing-cart-btn" href="#cart" class="btn1">Viewing my shop cart</a>
           </div>
         </div>
       </div>
@@ -94,7 +95,7 @@
           <p>category</p>
         </li>
       </ul>
-  
+
       <div class="filter-search-slider b">
         <div class="filter-search-slider-content b">
           <div class="b">
@@ -108,24 +109,24 @@
             </label>
           </div>
         </div>
-  
+
         <div class="filter-search-slider-range b">
           <div id="filter-search-slider-range-fill" class="filter-search-slider-range-fill"></div>
           <input id="filter-search-slider-range-min" class="filter-search-slider-range-input" type="range" value="100" min="0" max="500" step="10">
           <input id="filter-search-slider-range-max" class="filter-search-slider-range-input" type="range" value="250" min="0" max="500" step="10">
         </div>
       </div>
-  
-      <ul class="filter-search-result b">
+
+      <ul id="filter-search-result" class="filter-search-result b">
         <li class="filter-search-result-item b">
-          <img class="b" src="assets/products/image.png" alt="">
+          <img class="b" src="assets/img/products/samsung-galaxy-watch6.webp" alt="">
           <p class="b">SamSung Galaxy watch6</p>
         </li>
       </ul>
     </div>
   </header>
 
-  <!-- content -->
+  <!--content section-->
   <div class="content b">
     <aside class="content-menu b"><ul>
         <li>
@@ -167,9 +168,9 @@
             alt="Red black gaming hand console"
           />
         </div>
-  
+
         <div class="main-card-info b">
-          <p>Samsung Galaxy watch6 44mm</p>
+          <p class="main-card-info-title">Samsung Galaxy watch6 44mm</p>
           <div class="b">   
             <span class="main-card-info-price">$120</span>
             <s class="main-card-info-plain-price">$140</s>
@@ -184,14 +185,15 @@
       <i class="uil uil-arrow-left" title="prev"></i>
     </button>
     <div class="content-nav-index b">
-      <span id="content-nav-index">1</span>
+      <p id="content-nav-index">1</p>
     </div>
     <button id="content-nav-forward" class="btn2">
       <i class="uil uil-arrow-right" title="next"></i>
     </button>
   </nav>
 
-  <!-- detail product-->
+
+  <!--detail product popup-->
   <div id="backdrop" class="backdrop hide b2">
     <!-- <div class="detail b">
       <button id="detail-product-close" class="detail-close close-btn b" title="close">
@@ -218,7 +220,7 @@
     </div> -->
   </div>
 
-  <!-- login form -->
+  <!--login form popup-->
   <div id="login-form" class="backdrop hide b">
     <form class="login-form b">
       <button id="login-form-close" class="form-close close-btn b">
@@ -228,7 +230,7 @@
       <h1>Login</h1>
 
       <div class="login-form-field b">
-        <label htmlFor="login-form-field-email">Email</label>
+        <label for="login-form-field-email">Email</label>
         <input
           id="login-form-field-email"
           type="email"
@@ -236,7 +238,7 @@
         />
       </div>
       <div class="login-form-field b">
-        <label htmlFor="login-form-field-password">Password</label>
+        <label for="login-form-field-password">Password</label>
         <input id="login-form-field-password" type="password" placeholder="password123" />
       </div>
 
@@ -250,7 +252,7 @@
   </div>
 
 
-  <!-- register form -->
+  <!--register form popup-->
   <div id="register-form" class="backdrop hide b">
     <form class="login-form border-line">
       <button id="register-form-close" class="form-close close-btn b">
@@ -260,7 +262,7 @@
       <h1>Register</h1>
 
       <div class="login-form-field border-line">
-        <label htmlFor="register-form-field-email">Email</label>
+        <label for="register-form-field-email">Email</label>
         <input
           id="register-form-field-email"
           type="email"
@@ -268,11 +270,11 @@
         />
       </div>
       <div class="login-form-field border-line">
-        <label htmlFor="register-form-field-phone">Phone number</label>
+        <label for="register-form-field-phone">Phone number</label>
         <input id="register-form-field-phone" type="tel" placeholder="+123456789"/>
       </div>
       <div class="login-form-field border-line">
-        <label htmlFor="register-form-field-password">Password</label>
+        <label for="register-form-field-password">Password</label>
         <input id="register-form-field-password" type="password" placeholder="password123"/>
       </div>
 
@@ -285,13 +287,14 @@
     </form>
   </div>
 
+
+
   <!-- footer -->
-  <footer class="footer b">
+  <footer id="footer" class="footer b">
     <div class="footer-copyright b">
       <p>&copy; Copyright DungTran 2024. All rigth reserved.</p>
     </div>
   </footer>
-
 
   <script type="module" src="backend/main.js"></script>
 </body>
