@@ -11,3 +11,10 @@ export const CLASSNAME = {
 }
 
 export const MAX_RENDER_PRODUCTS = 5;
+
+export const MSG = {
+  emailInvalid: "Invalid email.",
+  phoneInvalid: "Invalid phone number.",
+  emailTaken: "This email is already taken.",
+  phoneTaken: "This phone number is already taken.",
+}

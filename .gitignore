@@ -1,3 +1,6 @@
-notes.txt
+*.txt
 assets/img
-test.js
+notes/
+test.*
+storage.html
+index.html

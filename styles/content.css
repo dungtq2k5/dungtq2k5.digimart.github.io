@@ -115,8 +115,12 @@
   .content {
     flex-direction: column;
   }
+  .content-menu {
+    padding: 0;
+    border-right: 0;
+  }
   .content-menu ul {
-    flex-direction: row;
+    flex-direction: row
   }
 }
 @media (max-width: 700px) {

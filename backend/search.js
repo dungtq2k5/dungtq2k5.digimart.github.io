@@ -24,9 +24,9 @@ const filterSearchCategory = document.getElementById("filter-search-category");
 let valueLookup = "";
 let categoriesLookup = [];
 
-renderCategory();
 
 export default function responsiveSearch() {
+  renderCategory();
   searchField.addEventListener("input", (e) => {
     valueLookup = e.target.value;
     renderProductSuggest(

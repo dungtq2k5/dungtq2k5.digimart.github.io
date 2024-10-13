@@ -132,10 +132,10 @@ export function getProductsList(from=0, to=products.length) {
 }
 
 export function getProductDetail(id) {
-  const findIndex = getProductsList().findIndex(item => item.id == id);
-  if(findIndex != -1) return getProductsList()[findIndex];
-  console.log(`Product with an id ${id} not found!`);
-  return findIndex;
+  const findIndex = getProductsList().findIndex(item => item.id === Number(id));
+  if(findIndex !== -1) return getProductsList()[findIndex];
+  console.error(`Product with an id ${id} not found!`);
+  return -1;
 }
 
 

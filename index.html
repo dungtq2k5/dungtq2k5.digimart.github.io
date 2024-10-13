@@ -77,7 +77,7 @@
         <button class="btn1 header-auth-profile-popup-login login-btn-js">Login</button>
         <button class="btn2 header-auth-profile-popup-logout register-btn-js">Register</button>
       </div>
-      <!-- <a href="#logout" class="btn2">Logout</a> -->
+      <a id="logout-btn" href="#logout" class="btn2 hide">Logout</a>
     </div>
 
     <!-- filter-search -->
@@ -218,7 +218,7 @@
         <input id="login-form-field-password" type="password" placeholder="password123" />
       </div>
 
-      <button class="btn1">Login in</button>
+      <button id="login-form-btn" class="btn1">Login in</button>
 
       <p class="login-form-question">
         Don't have an account?
@@ -230,31 +230,53 @@
 
   <!--register form popup-->
   <div id="register-form" class="backdrop hide b">
-    <form class="login-form border-line">
+    <form class="register-form border-line">
       <button id="register-form-close" class="form-close close-btn b">
         <i class="uil uil-times"></i>
       </button>
 
       <h1>Register</h1>
 
-      <div class="login-form-field border-line">
+      <div class="register-form-field border-line">
         <label for="register-form-field-email">Email</label>
         <input
           id="register-form-field-email"
-          type="email"
+          type="text"
           placeholder="nikola.tesla@gmail.com"
         />
+        <span id="login-form-field-invalid-email" class="invalid-msg hide b">
+          <i class="uil uil-exclamation-triangle"></i>
+          <p id="login-form-field-invalid-email-msg"></p>
+        </span>
       </div>
+
       <div class="login-form-field border-line">
         <label for="register-form-field-phone">Phone number</label>
-        <input id="register-form-field-phone" type="tel" placeholder="+123456789"/>
+        <input id="register-form-field-phone" type="tel" placeholder="0123456789"/>
+        <span id="login-form-field-invalid-phone" class="invalid-msg hide">
+          <i class="uil uil-exclamation-triangle"></i>
+          <p id="login-form-field-invalid-phone-msg"></p>
+        </span>
       </div>
+
       <div class="login-form-field border-line">
         <label for="register-form-field-password">Password</label>
         <input id="register-form-field-password" type="password" placeholder="password123"/>
+        <span id="login-form-field-invalid-password" class="invalid-msg hide">
+          <ul class="b">
+            <div>
+              <i class="uil uil-exclamation-triangle b"></i>
+              Password must have 8 characters long and include at least:
+            </div>
+            <li>one number [0-9].</li>
+            <li>one uppercase letter [a-z].</li>
+            <li>one lowercase letter [A-Z].</li>
+            <li>one special letter [(!-)].</li>
+          </ul>
+        </span>
       </div>
 
-      <button class="btn1">Login in</button>
+      <button id="register-form-btn" class="btn1">Login in</button>
 
       <p class="login-form-question">
         ALready have an account?

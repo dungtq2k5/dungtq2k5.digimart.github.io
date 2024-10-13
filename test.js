@@ -1,18 +1,34 @@
-const list = [1,2,3,4,5,6,7,8,9];
+/*
+const fs = require("fs"); //file system module in NodeJS
 
-function getPage(from, to) {
-  return list.slice(from, to);
+// fs.readFile("text.txt", "utf8", (err, data) => {
+//   if(err) {
+//     console.error(err);
+//     return;
+//   }
+
+//   console.log(data);
+// });
+
+const content = "Lorem ipsum!";
+// fs.writeFile("text.txt", content, err => {
+//   if(err) console.error(err);
+// })
+
+fs.appendFile("text.txt", content, err => {
+  if(err) console.error(err);
+})
+*/
+
+
+function test({id, email, phone, pass}) {
+  console.log(id, email, phone, pass);
 }
 
-function toggle(arr, ele) {
-  const findIndex = arr.findIndex(e => e === ele);
-  if(findIndex!==-1) arr.splice(findIndex, 1);
-  else arr.push(ele);
-}
-
-function capitalizeFirstLetter(string) { //ai generate
-  return string.replace(/\b\w+/g, function(word) {
-    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-  });
-}
-console.log(capitalizeFirstLetter("hello world, nice to meet you!"));
+test(
+  {
+    email: "1",
+    phone: "2",
+    pass: "#",
+  }
+)
