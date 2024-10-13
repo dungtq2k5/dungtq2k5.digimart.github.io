@@ -7,7 +7,7 @@ import {
   responsiveRegisterBtn as resigsterBtn, 
   responsiveLoginBtn as loginBtn,
   responsiveLogoutBtn as logoutBtn,
-  registerUser,
+  registerUser, loginUser
 } from "./auth.js";
 // import { getData } from "../assets/data/products.js";
 
@@ -20,6 +20,7 @@ loginBtn();
 logoutBtn();
 resigsterBtn();
 registerUser();
+loginUser();
 
 renderCategories();
 renderProducts();

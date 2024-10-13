@@ -1,3 +1,5 @@
+import { CLASSNAME } from "./settings.js";
+
 export function includesSubArr(parentArr, subArr) {
   /**
    * capitalize is matter.
@@ -85,4 +87,43 @@ function encryptString(string, offset=1) {
   }
 
   return encryptedString;
+}
+
+
+export function showElements(eles, className=CLASSNAME.hide) {
+  if(!Array.isArray(eles)) { //handle single ele
+    eles = [eles];
+  } else { //handle nested arr
+    eles = eles.flat();
+  }
+
+  eles.forEach(ele => {
+    if(ele.classList.contains(className)) ele.classList.remove(className);
+  });
+}
+
+export function hideElements(eles, className=CLASSNAME.hide) {
+  if(!Array.isArray(eles)) { //handle single ele
+    eles = [eles];
+  } else { //handle nested arr
+    eles = eles.flat();
+  }
+
+  eles.forEach(ele => {
+    if(!ele.classList.contains(className)) ele.classList.add(className);
+  })
+  // console.log("clear invalid msgs");
+}
+
+export function clearFormInputs(inputs) {
+  if(!Array.isArray(inputs)) { //handle single ele
+    inputs = [inputs];
+  } else { //handle nested arr
+    inputs = inputs.flat();
+  }
+
+  inputs.forEach(e => {
+    e.value = "";
+  });
+  // console.log("clear inputs");
 }

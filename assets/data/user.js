@@ -76,7 +76,7 @@ export function getUser(id) {
 }
 
 export function addUser({email, phone, password}) {
-  const existingUser = users.find(user => user.email === email || user.phone === phone);
+  const existingUser = getUsersList().find(user => user.email === email || user.phone === phone);
   if(existingUser) {
     console.error(existingUser.email === email ? "Email already exists!" : "Phone number already exists!");
     return false;
@@ -93,12 +93,17 @@ export function addUser({email, phone, password}) {
 }
 
 export function checkEmailExist(email) {
-  const existingEmail = users.find(user => user.email === email);
-  if(existingEmail) return true;
-  return false;
+  const existingEmail = getUsersList().find(user => user.email === email);
+  return existingEmail !== undefined;
 }
 export function checkPhoneExist(phone) {
-  const existingPhone = users.find(user => user.phone === phone);
-  if(existingPhone) return true;
-  return false;
+  const existingPhone = getUsersList().find(user => user.phone === phone);
+  return existingPhone !== undefined;
 }
+
+export function checkUserExist({email, password}) {
+  password = hashPassword(password);
+  const existingUser = getUsersList().find(user => user.email === email && user.password === password);
+  return existingUser !== undefined;
+}
+

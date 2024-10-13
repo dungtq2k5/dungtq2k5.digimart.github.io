@@ -1,6 +1,16 @@
 import { CLASSNAME, MSG } from "./settings.js";
-import { isValidEmail, isValidPassword, isValidVietnamesePhoneNumber } from "./utils.js";
-import { addUser, checkEmailExist, checkPhoneExist } from "../assets/data/user.js";
+import { 
+  isValidEmail, 
+  isValidPassword, 
+  isValidVietnamesePhoneNumber, 
+  showElements, 
+  hideElements, 
+  clearFormInputs } from "./utils.js";
+import { 
+  addUser, 
+  checkEmailExist, 
+  checkPhoneExist, 
+  checkUserExist } from "../assets/data/user.js";
 
 
 //auth-profile
@@ -18,28 +28,30 @@ const registerCloseBtn = document.getElementById("register-form-close");
 const emailLoginField = document.getElementById("login-form-field-email");
 const passwordLoginField = document.getElementById("login-form-field-password");
 const loginBtn = document.getElementById("login-form-btn");
+const invalidCredentialPopup = document.getElementById("login-form-field-invalid-email");
+const invalidCredentialMsg = document.getElementById("login-form-field-invalid-email-msg");
 //auth-register
 const emailRegisterField = document.getElementById("register-form-field-email");
 const phoneRegisterField = document.getElementById("register-form-field-phone");
 const passwordRegisterField = document.getElementById("register-form-field-password");
 const registerBtn = document.getElementById("register-form-btn");
-const invalidEmailPopup = document.getElementById("login-form-field-invalid-email");
-const invalidPhonePopup = document.getElementById("login-form-field-invalid-phone");
-const invalidPasswordPopup = document.getElementById("login-form-field-invalid-password");
-const invalidEmailMsg = document.getElementById("login-form-field-invalid-email-msg");
-const invalidPhoneMsg = document.getElementById("login-form-field-invalid-phone-msg");
+const invalidEmailPopup = document.getElementById("register-form-field-invalid-email");
+const invalidPhonePopup = document.getElementById("register-form-field-invalid-phone");
+const invalidPasswordPopup = document.getElementById("register-form-field-invalid-password");
+const invalidEmailMsg = document.getElementById("register-form-field-invalid-email-msg");
+const invalidPhoneMsg = document.getElementById("register-form-field-invalid-phone-msg");
 //logout
 const logoutBtn = document.getElementById("logout-btn");
 
 
 export function responsiveAuthBtn() {
   authIcon.addEventListener("click", () => {
-    authPopup.classList.toggle("hide");
+    authPopup.classList.toggle(CLASSNAME.hide);
     // console.log("toggle");
   });
   document.addEventListener("click", e => {
-    if(!authIcon.contains(e.target) && !authPopup.classList.contains("hide")) {
-      authPopup.classList.add("hide");
+    if(!authIcon.contains(e.target) && !authPopup.classList.contains(CLASSNAME.hide)) {
+      authPopup.classList.add(CLASSNAME.hide);
       // console.log("hidden");
     }
   });
@@ -49,13 +61,15 @@ export function responsiveLoginBtn() {
   loginBtns.forEach(btn => {
     btn.addEventListener("click", e => {
       e.preventDefault();
-      loginForm.classList.remove("hide");
+      clearFormInputs([emailLoginField, passwordLoginField]);
+      hideElements(invalidCredentialPopup);
+      showElements(loginForm);
       // console.log("show-login");
     })
   });
   loginCloseBtn.addEventListener("click", e => {
     e.preventDefault();
-    loginForm.classList.add("hide");
+    hideElements(loginForm);
     // console.log("hide-login");
   });
 }
@@ -66,24 +80,35 @@ export function responsiveRegisterBtn() {
       e.preventDefault();
       clearFormInputs([emailRegisterField, phoneRegisterField, passwordRegisterField]);  
       hideElements([invalidEmailPopup, invalidPasswordPopup, invalidPhonePopup]);
-      registerForm.classList.remove("hide");
+      showElements(registerForm);
       // console.log("show-register");
     })
   });
   registerCloseBtn.addEventListener("click", e => {
     e.preventDefault();
-    registerForm.classList.add("hide");
+    hideElements(registerForm);
     // console.log("hide-register");
   });
 }
 
-// export function loginUser() {
-//   loginBtn.addEventListener("click", () => {
-//     const email = emailLoginField.value;
-//     const password = passwordLoginField.value;
-//     console.log(email, password);
-//   });
-// }
+export function loginUser() {
+  loginBtn.addEventListener("click", e => {
+    e.preventDefault();
+    const email = emailLoginField.value;
+    const password = passwordLoginField.value;
+    
+    if(checkUserExist({email, password})) {
+      hideElements([authIcon, [...loginBtns], [...registerBtns]]);
+      showElements(logoutBtn);
+      hideElements(loginForm);
+      console.log("user login success");
+    } else {
+      showElements(invalidCredentialPopup);
+      invalidCredentialMsg.innerHTML = MSG.invalidCredential;
+      console.log("Invalid credentials");
+    }
+  });
+}
 
 export function registerUser() {
   registerBtn.addEventListener("click", e => {
@@ -96,12 +121,10 @@ export function registerUser() {
 
     if(validateRegisterForm(user) && validateAddingUser(user)) {
       addUser(user);
-
-      authIcon.classList.add(CLASSNAME.hide);
-      loginBtns.forEach(btn => btn.classList.add(CLASSNAME.hide));
-      registerBtns.forEach(btn => btn.classList.add(CLASSNAME.hide));
-      logoutBtn.classList.remove(CLASSNAME.hide);
-      registerForm.classList.add(CLASSNAME.hide);
+      
+      hideElements([authIcon, [...loginBtns], [...registerBtns]]);
+      showElements(logoutBtn);
+      hideElements(registerForm);
       
       console.log("register successfully - user login");
     }
@@ -110,10 +133,8 @@ export function registerUser() {
 
 export function responsiveLogoutBtn() {
   logoutBtn.addEventListener("click", () => {
-    authIcon.classList.remove(CLASSNAME.hide);
-    loginBtns.forEach(btn => btn.classList.remove(CLASSNAME.hide));
-    registerBtns.forEach(btn => btn.classList.remove(CLASSNAME.hide));
-    logoutBtn.classList.add(CLASSNAME.hide);
+    showElements([authIcon, [...loginBtns], [...registerBtns]]);
+    hideElements(logoutBtn);
 
     console.log("user logout");
   })
@@ -123,29 +144,29 @@ function validateRegisterForm({email, phone, password}) {
   let result = true;
 
   if(!isValidEmail(email)) {
-    if(invalidEmailPopup.classList.contains(CLASSNAME.hide)) invalidEmailPopup.classList.remove(CLASSNAME.hide);
+    showElements(invalidEmailPopup);
     invalidEmailMsg.innerHTML = MSG.emailInvalid;
     result = false;
     // console.log("Invalid email");
-  } else if(!invalidEmailPopup.classList.contains(CLASSNAME.hide)) {
-    invalidEmailPopup.classList.add(CLASSNAME.hide);
+  } else {
+    hideElements(invalidEmailPopup);
   }
 
   if(!isValidVietnamesePhoneNumber(phone)) {
-    if(invalidPhonePopup.classList.contains(CLASSNAME.hide)) invalidPhonePopup.classList.remove(CLASSNAME.hide);
+    showElements(invalidPhonePopup);
     invalidPhoneMsg.innerHTML = MSG.phoneInvalid;
     result = false;
     // console.log("Invalid phone");
-  } else if(!invalidPhonePopup.classList.contains(CLASSNAME.hide)) {
-    invalidPhonePopup.classList.add(CLASSNAME.hide);
+  } else {
+    hideElements(invalidPhonePopup);
   }
 
   if(!isValidPassword(password)) {
-    if(invalidPasswordPopup.classList.contains(CLASSNAME.hide)) invalidPasswordPopup.classList.remove(CLASSNAME.hide);
+    showElements(invalidPasswordPopup);
     result = false;
     // console.log("Invalid pass");
-  } else if(!invalidPasswordPopup.classList.contains(CLASSNAME.hide)) {
-    invalidPasswordPopup.classList.add(CLASSNAME.hide);
+  } else {
+    hideElements(invalidPasswordPopup);
   }
 
   return result;
@@ -155,36 +176,23 @@ function validateAddingUser({email, phone}) {
   let result = true;
 
   if(checkEmailExist(email)) {
-    if(invalidEmailPopup.classList.contains(CLASSNAME.hide)) invalidEmailPopup.classList.remove(CLASSNAME.hide);
+    showElements(invalidEmailPopup);
     invalidEmailMsg.innerHTML = MSG.emailTaken;
     result = false;
     // console.log("Taken email");
-  } else if(!invalidEmailPopup.classList.contains(CLASSNAME.hide)) {
-    invalidEmailPopup.classList.add(CLASSNAME.hide);
+  } else {
+    hideElements(invalidEmailPopup);
   }
 
   if(checkPhoneExist(phone)) {
-    if(invalidPhonePopup.classList.contains(CLASSNAME.hide)) invalidPhonePopup.classList.remove(CLASSNAME.hide);
+    showElements(invalidPhonePopup)
     invalidPhoneMsg.innerHTML = MSG.phoneTaken;
     result = false;
     // console.log("Taken phone");
-  } else if(!invalidPhonePopup.classList.contains(CLASSNAME.hide)) {
-    invalidPhonePopup.classList.add(CLASSNAME.hide);
+  } else {
+    hideElements(invalidPhonePopup);
   }
   
   return result;
 }
 
-function clearFormInputs(inputs) {
-  inputs.forEach(e => {
-    e.value = "";
-  });
-  // console.log("clear inputs");
-}
-
-function hideElements(eles) {
-  eles.forEach(ele => {
-    if(!ele.classList.contains(CLASSNAME.hide)) ele.classList.add(CLASSNAME.hide);
-  })
-  // console.log("clear invalid msgs");
-}
