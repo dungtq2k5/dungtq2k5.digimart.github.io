@@ -1,8 +1,8 @@
-import { CLASSNAME } from "./settings.js";
-import { capitalizeFirstLetter as capFirstLetter, toggleEleInArr } from "./utils.js";
+import { CLASSNAME, LOCALSTORAGE } from "./settings.js";
+import { capitalizeFirstLetter as capFirstLetter, toggleEleInArr, saveToStorage } from "./utils.js";
 import { getCategoriesList } from "../assets/data/categories.js";
-import { getProductsList, filterProducts } from "../assets/data/products.js";
-import renderProducts from "./product.js";
+import { filterProducts, getPlainProductsList } from "../assets/data/products.js";
+import renderProducts, { resetNavProductIndex } from "./product.js";
 
 
 const menu = document.getElementById("content-menu");
@@ -24,13 +24,20 @@ export function renderCategories(categoriesList=getCategoriesList()) {
   });
 
   menu.innerHTML = htmlDoc;
+
   document.querySelectorAll(".content-menu-item").forEach(item => {
     item.addEventListener("click", () => {
       item.classList.toggle(CLASSNAME.bgActive);
-      item.querySelector("i").classList.toggle(CLASSNAME.hide);
-      
+      item.querySelector("i").classList.toggle(CLASSNAME.hide);    
+
       toggleEleInArr(categoriesLookup, item.querySelector("p").innerHTML.toLowerCase());
-      renderProducts(filterProducts(getProductsList(), "", categoriesLookup));
+
+      const productsListFiltered = filterProducts(getPlainProductsList(), "", categoriesLookup);
+      saveToStorage(LOCALSTORAGE.productsList, productsListFiltered); //for page navigation
+      resetNavProductIndex(); //reset page index
+      renderProducts(productsListFiltered);
+
+      //reset page index to begin
       // console.log(item);
     });
   });

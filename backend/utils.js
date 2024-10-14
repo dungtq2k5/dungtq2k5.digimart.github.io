@@ -127,3 +127,17 @@ export function clearFormInputs(inputs) {
   });
   // console.log("clear inputs");
 }
+
+export function calculatePages(totalProducts, maxProductsPerPage) {
+  return Math.ceil(totalProducts / maxProductsPerPage);
+}
+
+export function saveToStorage(storage, data) {
+  localStorage.setItem(storage, JSON.stringify(data));
+  // console.log(`Storage ${storage} saved`);
+}
+
+export function getFromStorage(storage) {
+  // console.log(`Storage ${storage} get`);
+  return JSON.parse(localStorage.getItem(storage));
+}

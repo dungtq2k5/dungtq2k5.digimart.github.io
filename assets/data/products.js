@@ -1,7 +1,7 @@
-import { MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE } from "../../backend/settings.js";
-import { includesSubArr } from "../../backend/utils.js";
+import { MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE, LOCALSTORAGE } from "../../backend/settings.js";
+import { getFromStorage, includesSubArr, saveToStorage } from "../../backend/utils.js";
 
-const products = [
+const products = [ //11 items
   {
     id: 1,
     name: "Apple Watch Series 8",
@@ -125,10 +125,20 @@ const products = [
   },
 ];
 
+saveToStorage(LOCALSTORAGE.productsList, products);
+
+export function getProductAmount() {
+  return  getFromStorage(LOCALSTORAGE.productsList).length;
+}
   
-export function getProductsList(from=0, to=products.length) {
+export function getPlainProductsList(from=0, to=products.length) {
   if(from > to) [from, to] = [to, from];
   return products.slice(from, to);
+}
+
+export function getProductsList(from=0, to=products.length) {
+  if(from > to) [from, to] = [to, from];
+  return getFromStorage(LOCALSTORAGE.productsList).slice(from, to);
 }
 
 export function getProductDetail(id) {
@@ -138,8 +148,7 @@ export function getProductDetail(id) {
   return -1;
 }
 
-
-export function filterProducts(productsList=getProductsList(), value="", categories=[], minPrice=MIN_PRODUCT_PRICE, maxPrice=MAX_PRODUCT_PRICE) { //search engine
+export function filterProducts(productsList=getPlainProductsList(), value="", categories=[], minPrice=MIN_PRODUCT_PRICE, maxPrice=MAX_PRODUCT_PRICE) { //search engine
   if(value!="") { //by val
     productsList = productsList.filter(item => item.name.toLowerCase().includes(value.toLowerCase()));
     // console.log(`filter val ${value}`);

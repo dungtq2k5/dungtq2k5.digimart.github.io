@@ -16,30 +16,38 @@ import {
 //auth-profile
 const authIcon = document.getElementById("header-auth-profile");
 const authPopup = document.getElementById("header-auth-profile-popup");
+
 //form-login
 const loginBtns = document.querySelectorAll(".login-btn-js");
 const loginForm = document.getElementById("login-form");
 const loginCloseBtn = document.getElementById("login-form-close");
+
 //form-register
 const registerBtns = document.querySelectorAll(".register-btn-js");
 const registerForm = document.getElementById("register-form");
 const registerCloseBtn = document.getElementById("register-form-close");
+
 //auth-login
 const emailLoginField = document.getElementById("login-form-field-email");
 const passwordLoginField = document.getElementById("login-form-field-password");
-const loginBtn = document.getElementById("login-form-btn");
+const loginSubmitBtn = document.getElementById("login-form-btn");
+
+
 const invalidCredentialPopup = document.getElementById("login-form-field-invalid-email");
 const invalidCredentialMsg = document.getElementById("login-form-field-invalid-email-msg");
+
 //auth-register
 const emailRegisterField = document.getElementById("register-form-field-email");
 const phoneRegisterField = document.getElementById("register-form-field-phone");
 const passwordRegisterField = document.getElementById("register-form-field-password");
-const registerBtn = document.getElementById("register-form-btn");
+const registerSubmitBtn = document.getElementById("register-form-btn");
+
 const invalidEmailPopup = document.getElementById("register-form-field-invalid-email");
 const invalidPhonePopup = document.getElementById("register-form-field-invalid-phone");
 const invalidPasswordPopup = document.getElementById("register-form-field-invalid-password");
 const invalidEmailMsg = document.getElementById("register-form-field-invalid-email-msg");
 const invalidPhoneMsg = document.getElementById("register-form-field-invalid-phone-msg");
+
 //logout
 const logoutBtn = document.getElementById("logout-btn");
 
@@ -92,7 +100,7 @@ export function responsiveRegisterBtn() {
 }
 
 export function loginUser() {
-  loginBtn.addEventListener("click", e => {
+  loginSubmitBtn.addEventListener("click", e => {
     e.preventDefault();
     const email = emailLoginField.value;
     const password = passwordLoginField.value;
@@ -101,17 +109,17 @@ export function loginUser() {
       hideElements([authIcon, [...loginBtns], [...registerBtns]]);
       showElements(logoutBtn);
       hideElements(loginForm);
-      console.log("user login success");
+      // console.log("user login success");
     } else {
       showElements(invalidCredentialPopup);
       invalidCredentialMsg.innerHTML = MSG.invalidCredential;
-      console.log("Invalid credentials");
+      // console.log("Invalid credentials");
     }
   });
 }
 
 export function registerUser() {
-  registerBtn.addEventListener("click", e => {
+  registerSubmitBtn.addEventListener("click", e => {
     e.preventDefault();
     const user = {
       email: emailRegisterField.value,
@@ -126,17 +134,17 @@ export function registerUser() {
       showElements(logoutBtn);
       hideElements(registerForm);
       
-      console.log("register successfully - user login");
+      // console.log("register successfully - user login");
     }
   });
 }
 
-export function responsiveLogoutBtn() {
+export function logoutUser() {
   logoutBtn.addEventListener("click", () => {
     showElements([authIcon, [...loginBtns], [...registerBtns]]);
     hideElements(logoutBtn);
 
-    console.log("user logout");
+    // console.log("user logout");
   })
 }
 

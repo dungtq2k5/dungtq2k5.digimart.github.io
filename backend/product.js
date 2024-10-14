@@ -1,16 +1,23 @@
-import { IMG_ROOT_PATH, CLASSNAME, MAX_RENDER_PRODUCTS } from "./settings.js";
+import { showElements, hideElements, calculatePages } from "./utils.js";
+import { IMG_ROOT_PATH, MAX_PRODUCT_RENDERED } from "./settings.js";
 import { 
   getProductsList,
-  getProductDetail
+  getProductDetail,
+  getProductAmount,
 } from "../assets/data/products.js";
+
 
 const productContainer = document.getElementById("products-container");
 const backDrop = document.getElementById("backdrop"); //fixed at index.html
-const navBackBtn = document.getElementById("content-nav-back");
-const navForwardBtn = document.getElementById("content-nav-forward");
-const navIndex = document.getElementById("content-nav-index");
+const navProductBackBtn = document.getElementById("content-nav-back");
+const navProductForwardBtn = document.getElementById("content-nav-forward");
+const navProductIndex = document.getElementById("content-nav-index");
 
-export default function renderProducts(productsList=getProductsList()) {
+export default function renderProducts(productsList) {
+  const start = (navProductIndex.innerHTML-1) * MAX_PRODUCT_RENDERED;
+  const end = navProductIndex.innerHTML * MAX_PRODUCT_RENDERED;
+  productsList = productsList ? productsList.slice(start, end) : getProductsList(start, end);
+
   let htmlDoc = ``;
   productsList.forEach(item => {
     htmlDoc += `
@@ -42,6 +49,31 @@ export default function renderProducts(productsList=getProductsList()) {
   // console.log("render-products");
 }
 
+export function navigationProducts() {
+  navProductBackBtn.addEventListener("click", () => {
+    if(navProductIndex.innerHTML > 1) {
+      navProductIndex.innerHTML--;
+      renderProducts();
+      
+      // console.log("back");
+    }
+  });
+  
+  navProductForwardBtn.addEventListener("click", () => {
+    if(navProductIndex.innerHTML < calculatePages(getProductAmount(), MAX_PRODUCT_RENDERED)) {
+      navProductIndex.innerHTML++;
+      renderProducts();
+      
+      // console.log("forward");
+    }
+  });
+}
+
+export function resetNavProductIndex() {
+  navProductIndex.innerHTML = 1;
+  // console.log("reset page index");
+}
+
 function renderProductDetailPopUp(product) {
   backDrop.innerHTML = `
     <div class="detail b">
@@ -66,34 +98,11 @@ function renderProductDetailPopUp(product) {
   `;
 
   document.getElementById("detail-product-close").addEventListener("click", () => {
-    backDrop.innerHTML = "";
-    backDrop.classList.add(CLASSNAME.hide);
+    backDrop.innerHTML = "";  
+    hideElements(backDrop);
     // console.log("close-detail-products");
   });
 
-  backDrop.classList.remove(CLASSNAME.hide);
+  showElements(backDrop);
   // console.log("detail-product");
 }
-
-/*
-function activeProductNav(productsList=getProductData(MAX_RENDER_PRODUCTS*(navIndex.innerHTML-1), MAX_RENDER_PRODUCTS*navIndex.innerHTML)) {
-  navBackBtn.addEventListener("click", () => {
-    if(navIndex.innerHTML > 1) {
-      navIndex.innerHTML--;
-      renderProducts(productsList);
-      // console.log(MAX_RENDER_PRODUCTS*(navIndex.innerHTML-1), MAX_RENDER_PRODUCTS*navIndex.innerHTML);
-      // console.log("back");
-    }
-  });
-
-  navForwardBtn.addEventListener("click", () => {
-    if(MAX_RENDER_PRODUCTS*(navIndex.innerHTML) < productsList.length) {
-      navIndex.innerHTML++;
-      renderProducts(productsList);
-      // console.log(MAX_RENDER_PRODUCTS*(navIndex.innerHTML-1), MAX_RENDER_PRODUCTS*navIndex.innerHTML);
-      // console.log("forward");
-    }
-  }); 
-}
-*/
- 

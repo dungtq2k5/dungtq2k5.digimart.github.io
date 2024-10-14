@@ -1,28 +1,23 @@
 import { default as activateResAll } from "./responsive.js";
-import { default as renderProducts } from "./product.js";
-import { default  as search } from "./search.js";
+import { navigationProducts, default as renderProducts } from "./product.js";
+import { default  as resSearch } from "./search.js";
 import { renderCategories } from "./categories.js";
 import { 
-  responsiveAuthBtn as authBtn, 
-  responsiveRegisterBtn as resigsterBtn, 
-  responsiveLoginBtn as loginBtn,
-  responsiveLogoutBtn as logoutBtn,
-  registerUser, loginUser
+  responsiveAuthBtn as resAuthBtn, 
+  responsiveRegisterBtn as resResgisterBtn, 
+  responsiveLoginBtn as resLoginBtn,
+  logoutUser,
+  registerUser, 
+  loginUser
 } from "./auth.js";
 // import { getData } from "../assets/data/products.js";
 
 
 // activateResAll();
-search();
+// resSearch();
 
-authBtn();
-loginBtn();
-logoutBtn();
-resigsterBtn();
-registerUser();
-loginUser();
 
 renderCategories();
 renderProducts();
-
+navigationProducts();
 
