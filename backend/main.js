@@ -14,7 +14,7 @@ import {
 
 
 // activateResAll();
-// resSearch();
+resSearch();
 
 
 renderCategories();

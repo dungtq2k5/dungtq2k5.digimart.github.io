@@ -1,11 +1,12 @@
 import { 
   IMG_ROOT_PATH, 
   MAX_ITEM_SUGGESTION,
-  CLASSNAME
+  CLASSNAME,
+  LOCALSTORAGE
 } from "./settings.js";
 import { getCategoriesList } from "../assets/data/categories.js";
-import { toggleEleInArr } from "./utils.js";
-import { getProductsList, filterProducts } from "../assets/data/products.js";
+import { toggleEleInArr, showElements, hideElements, saveToStorage } from "./utils.js";
+import { filterProducts, getPlainProductsList } from "../assets/data/products.js";
 import renderProducts from "./product.js";
 
 
@@ -27,11 +28,11 @@ let categoriesLookup = [];
 
 export default function responsiveSearch() {
   renderCategory();
+
   searchField.addEventListener("input", (e) => {
     valueLookup = e.target.value;
-    renderProductSuggest(
-      filterProducts(getProductsList(), valueLookup, categoriesLookup, minVal.innerHTML, maxVal.innerHTML).slice(0, MAX_ITEM_SUGGESTION)
-    );
+    const productsListFilter = filterProducts(getPlainProductsList(), valueLookup, categoriesLookup, minVal.innerHTML, maxVal.innerHTML);
+    renderProductSuggest(productsListFilter);
 
   });
 
@@ -41,22 +42,23 @@ export default function responsiveSearch() {
 
 function responsiveSearchSuggestionPopUp() {
   searchBtn.addEventListener("click", () => {
-    // console.log("execute search");
-    renderProducts(filterProducts(getProductsList(), valueLookup, categoriesLookup, minVal.innerHTML, maxVal.innerHTML));
-    if(filterSearch.classList.contains("hide")) filterSearch.classList.add("hide");
+    console.log("execute search");
+    const productsListFilter = filterProducts(getPlainProductsList(), valueLookup, categoriesLookup, minVal.innerHTML, maxVal.innerHTML);
+    saveToStorage(LOCALSTORAGE.productsList, productsListFilter);
+    renderProducts(productsListFilter);
+
+    hideElements(filterSearch);
   });
   
   searchField.addEventListener("focus", () => {
-    if(filterSearch.classList.contains("hide")) {
-      filterSearch.classList.remove("hide");
+    showElements(filterSearch);
       // renderCategory();
       // console.log("focus");
-    }
   });
 
   document.addEventListener("click", e => {
     if(!searchField.contains(e.target) && !filterSearch.contains(e.target)) {
-      filterSearch.classList.add("hide");
+      filterSearch.classList.add(CLASSNAME.hide);
       // console.log("unfocus");
     }
     // console.log("click");
@@ -65,27 +67,11 @@ function responsiveSearchSuggestionPopUp() {
   responsivePriceSlider();
 }
 
-// function filterProducts(productsList=getProductsList(), value="", categories=[], minPrice=MIN_PRODUCT_PRICE, maxPrice=MAX_PRODUCT_PRICE) { //search engine
-//   if(value!="") { //by val
-//     productsList = productsList.filter(item => item.name.toLowerCase().includes(value.toLowerCase()));
-//     // console.log(`filter val ${value}`);
-//   } 
-  
-//   if(categories.length > 0) { //by category
-//     if(minPrice > maxPrice) [minPrice, maxPrice] = [maxPrice, minPrice];
-//     productsList = productsList.filter(item => includesSubArr(item.types, categories));
-//     // console.log(`filter categories ${categories}`);
-//   }
 
-//   productsList = productsList.filter(item => (item.price>=minPrice && item.price<=maxPrice)); //by price
-//   // console.log(`filter price range ${minPrice}, ${maxPrice}`);
-
-//   return productsList;
-// }
-
-function renderProductSuggest(productsList) { 
+function renderProductSuggest(productsList, start=0, end=MAX_ITEM_SUGGESTION) { 
   let htmlDoc = ``;
   if(productsList.length > 0) {
+    productsList = productsList.slice(start, end);
     productsList.forEach(item => {
       htmlDoc += `
         <li class="filter-search-result-item b">
@@ -122,9 +108,8 @@ function renderCategory(categoriesList=getCategoriesList()) {
 
       toggleEleInArr(categoriesLookup, item.querySelector("p").innerHTML);
       // console.log(categoriesLookup);
-      renderProductSuggest(
-        filterProducts(getProductsList(), valueLookup, categoriesLookup, minVal.innerHTML, maxVal.innerHTML).slice(0, MAX_ITEM_SUGGESTION)
-      );
+      const productsListFilter = filterProducts(getPlainProductsList(), valueLookup, categoriesLookup, minVal.innerHTML, maxVal.innerHTML);
+      renderProductSuggest(productsListFilter);
     });
   });
 }
@@ -153,7 +138,6 @@ function validateRange() {
   maxVal.innerHTML = maxPrice;
 
   // console.log("price range");
-  renderProductSuggest(
-    filterProducts(getProductsList(), valueLookup, categoriesLookup, minPrice, maxPrice).slice(0, MAX_ITEM_SUGGESTION)
-  );
+  const productsListFilter = filterProducts(getPlainProductsList(), valueLookup, categoriesLookup, minPrice, maxPrice);
+  renderProductSuggest(productsListFilter);
 }
