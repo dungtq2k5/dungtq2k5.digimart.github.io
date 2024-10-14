@@ -125,6 +125,27 @@ const products = [ //11 items
   },
 ];
 
+const categories = [
+  "smartwatch", 
+  "smartband", 
+  "sporty", 
+  "fashion", 
+  "business"
+];
+
+const brands = [
+  "apple",
+  "samsung",
+  "garmin",
+  "asus",
+  "fitbit",
+  "huawei",
+  "polar",
+  "amazfit",
+  "mobvoi",
+  "withings",
+]
+
 saveToStorage(LOCALSTORAGE.productsList, products);
 
 export function getProductAmount() {
@@ -149,13 +170,14 @@ export function getProductDetail(id) {
 }
 
 export function filterProducts(productsList=getPlainProductsList(), value="", categories=[], minPrice=MIN_PRODUCT_PRICE, maxPrice=MAX_PRODUCT_PRICE) { //search engine
+  if(minPrice > maxPrice) [minPrice, maxPrice] = [maxPrice, minPrice];
+
   if(value!="") { //by val
     productsList = productsList.filter(item => item.name.toLowerCase().includes(value.toLowerCase()));
     // console.log(`filter val ${value}`);
   } 
   
-  if(categories.length > 0) { //by category
-    if(minPrice > maxPrice) [minPrice, maxPrice] = [maxPrice, minPrice];
+  if(categories.length > 0) { //by category & brand
     productsList = productsList.filter(item => includesSubArr(item.types, categories));
     // console.log(`filter categories ${categories}`);
   }
@@ -164,4 +186,17 @@ export function filterProducts(productsList=getPlainProductsList(), value="", ca
   // console.log(`filter price range ${minPrice}, ${maxPrice}`);
 
   return productsList;
+}
+
+export function filterProductsByBrand(productsList=getPlainProductsList(), brand) {
+  brand = brand.toLowerCase();
+  return productsList.filter(item => item.brand.toLowerCase() === brand);
+}
+
+export function getCategoriesList() {
+  return categories;
+}
+
+export function getBrandsList() {
+  return brands;
 }

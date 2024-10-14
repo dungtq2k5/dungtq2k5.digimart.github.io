@@ -4,9 +4,8 @@ import {
   CLASSNAME,
   LOCALSTORAGE
 } from "./settings.js";
-import { getCategoriesList } from "../assets/data/categories.js";
 import { toggleEleInArr, showElements, hideElements, saveToStorage } from "./utils.js";
-import { filterProducts, getPlainProductsList } from "../assets/data/products.js";
+import { filterProducts, getPlainProductsList, getCategoriesList } from "../assets/data/products.js";
 import renderProducts from "./product.js";
 
 
@@ -31,8 +30,8 @@ export default function responsiveSearch() {
 
   searchField.addEventListener("input", (e) => {
     valueLookup = e.target.value;
-    const productsListFilter = filterProducts(getPlainProductsList(), valueLookup, categoriesLookup, minVal.innerHTML, maxVal.innerHTML);
-    renderProductSuggest(productsListFilter);
+    const productsListFiltered = filterProducts(getPlainProductsList(), valueLookup, categoriesLookup, minVal.innerHTML, maxVal.innerHTML);
+    renderProductSuggest(productsListFiltered);
 
   });
 
@@ -43,9 +42,9 @@ export default function responsiveSearch() {
 function responsiveSearchSuggestionPopUp() {
   searchBtn.addEventListener("click", () => {
     console.log("execute search");
-    const productsListFilter = filterProducts(getPlainProductsList(), valueLookup, categoriesLookup, minVal.innerHTML, maxVal.innerHTML);
-    saveToStorage(LOCALSTORAGE.productsList, productsListFilter);
-    renderProducts(productsListFilter);
+    const productsListFiltered = filterProducts(getPlainProductsList(), valueLookup, categoriesLookup, minVal.innerHTML, maxVal.innerHTML);
+    saveToStorage(LOCALSTORAGE.productsList, productsListFiltered);
+    renderProducts(productsListFiltered);
 
     hideElements(filterSearch);
   });
@@ -108,8 +107,8 @@ function renderCategory(categoriesList=getCategoriesList()) {
 
       toggleEleInArr(categoriesLookup, item.querySelector("p").innerHTML);
       // console.log(categoriesLookup);
-      const productsListFilter = filterProducts(getPlainProductsList(), valueLookup, categoriesLookup, minVal.innerHTML, maxVal.innerHTML);
-      renderProductSuggest(productsListFilter);
+      const productsListFiltered = filterProducts(getPlainProductsList(), valueLookup, categoriesLookup, minVal.innerHTML, maxVal.innerHTML);
+      renderProductSuggest(productsListFiltered);
     });
   });
 }
@@ -138,6 +137,6 @@ function validateRange() {
   maxVal.innerHTML = maxPrice;
 
   // console.log("price range");
-  const productsListFilter = filterProducts(getPlainProductsList(), valueLookup, categoriesLookup, minPrice, maxPrice);
-  renderProductSuggest(productsListFilter);
+  const productsListFiltered = filterProducts(getPlainProductsList(), valueLookup, categoriesLookup, minPrice, maxPrice);
+  renderProductSuggest(productsListFiltered);
 }

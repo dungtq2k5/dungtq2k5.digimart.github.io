@@ -1,44 +1,45 @@
-import { CLASSNAME, LOCALSTORAGE } from "./settings.js";
-import { capitalizeFirstLetter as capFirstLetter, toggleEleInArr, saveToStorage } from "./utils.js";
-import { getCategoriesList } from "../assets/data/categories.js";
-import { filterProducts, getPlainProductsList } from "../assets/data/products.js";
+import { LOCALSTORAGE } from "./settings.js";
+import { 
+  capitalizeFirstLetter as capFirstLetter, 
+  saveToStorage 
+} from "./utils.js";
+import { 
+  getPlainProductsList, 
+  getBrandsList, 
+  filterProductsByBrand,
+} from "../assets/data/products.js";
 import renderProducts, { resetNavProductIndex } from "./product.js";
 
 
 const menu = document.getElementById("content-menu");
-let categoriesLookup = [];
 
-export function renderCategories(categoriesList=getCategoriesList()) {
+export function renderCategories(categoriesList=getBrandsList()) {
   let htmlDoc = ``;
   categoriesList.forEach(e => {
     htmlDoc += `
-      <li >
-        <a href="#${e}">
-          <div class="content-menu-item b">
-            <p>${capFirstLetter(e)}</p>
-            <i class="uil uil-check hide"></i>
-          </div>
-        </a>
+      <li class="content-menu-item b" data-brand-name="${e}">
+        <input id="content-menu-item-${e}" type="radio" name="content-menu-item-radio">
+        <label for="content-menu-item-${e}">${capFirstLetter(e)}</label>
       </li>
     `;
   });
 
-  menu.innerHTML = htmlDoc;
+  menu.innerHTML += htmlDoc;
 
   document.querySelectorAll(".content-menu-item").forEach(item => {
-    item.addEventListener("click", () => {
-      item.classList.toggle(CLASSNAME.bgActive);
-      item.querySelector("i").classList.toggle(CLASSNAME.hide);    
+    item.addEventListener("change", () => {
 
-      toggleEleInArr(categoriesLookup, item.querySelector("p").innerHTML.toLowerCase());
-
-      const productsListFiltered = filterProducts(getPlainProductsList(), "", categoriesLookup);
+      const brand = item.dataset.brandName || "all";
+      const productsListFiltered = 
+        brand === "all" 
+          ? getPlainProductsList() 
+          : filterProductsByBrand(getPlainProductsList(), brand);
+        
       saveToStorage(LOCALSTORAGE.productsList, productsListFiltered); //for page navigation
       resetNavProductIndex(); //reset page index
       renderProducts(productsListFiltered);
 
-      //reset page index to begin
-      // console.log(item);
+      // console.log(`filter ${brand}`);
     });
   });
 }
