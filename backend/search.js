@@ -89,10 +89,10 @@ function renderProductSuggest(productsList, start=0, end=MAX_ITEM_SUGGESTION) {
 function renderCategory(categoriesList=getCategoriesList()) {
   // console.log("render category");
   let htmlDoc = ``;
-  categoriesList.forEach(e => {
+  categoriesList.forEach(item => {
     htmlDoc += `
-      <li class="filter-search-category-item b">
-        <p>${e}</p>
+      <li class="filter-search-category-item b" data-category-id="${item.id}">
+        <p>${item.name}</p>
         <i class="uil uil-check hide"></i>
       </li>
     `;
@@ -105,8 +105,9 @@ function renderCategory(categoriesList=getCategoriesList()) {
       item.classList.toggle(CLASSNAME.checked);
       item.querySelector("i").classList.toggle(CLASSNAME.hide);
 
-      toggleEleInArr(categoriesLookup, item.querySelector("p").innerHTML);
-      // console.log(categoriesLookup);
+      const categoryId = item.dataset.categoryId;
+      toggleEleInArr(categoriesLookup, categoryId);
+      console.log(categoriesLookup);
       const productsListFiltered = filterProducts(getPlainProductsList(), valueLookup, categoriesLookup, minVal.innerHTML, maxVal.innerHTML);
       renderProductSuggest(productsListFiltered);
     });

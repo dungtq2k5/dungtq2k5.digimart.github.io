@@ -15,11 +15,11 @@ const menu = document.getElementById("content-menu");
 
 export function renderCategories(categoriesList=getBrandsList()) {
   let htmlDoc = ``;
-  categoriesList.forEach(e => {
+  categoriesList.forEach(item => {
     htmlDoc += `
-      <li class="content-menu-item b" data-brand-name="${e}">
-        <input id="content-menu-item-${e}" type="radio" name="content-menu-item-radio">
-        <label for="content-menu-item-${e}">${capFirstLetter(e)}</label>
+      <li class="content-menu-item b" data-brand-id="${item.id}">
+        <input id="content-menu-item-${item.id}" type="radio" name="content-menu-item-radio">
+        <label for="content-menu-item-${item.id}">${capFirstLetter(item.name)}</label>
       </li>
     `;
   });
@@ -29,11 +29,11 @@ export function renderCategories(categoriesList=getBrandsList()) {
   document.querySelectorAll(".content-menu-item").forEach(item => {
     item.addEventListener("change", () => {
 
-      const brand = item.dataset.brandName || "all";
+      const brandId = item.dataset.brandId || "all";
       const productsListFiltered = 
-        brand === "all" 
+        brandId === "all" 
           ? getPlainProductsList() 
-          : filterProductsByBrand(getPlainProductsList(), brand);
+          : filterProductsByBrand(getPlainProductsList(), brandId);
         
       saveToStorage(LOCALSTORAGE.productsList, productsListFiltered); //for page navigation
       resetNavProductIndex(); //reset page index
