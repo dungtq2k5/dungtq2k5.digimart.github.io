@@ -26,7 +26,7 @@ export function renderCategories(categoriesList=getBrandsList()) {
 
   menu.innerHTML += htmlDoc;
 
-  document.querySelectorAll(".content-menu-item").forEach(item => {
+  menu.querySelectorAll(".content-menu-item").forEach(item => {
     item.addEventListener("change", () => {
 
       const brandId = item.dataset.brandId || "all";

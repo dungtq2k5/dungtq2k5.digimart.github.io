@@ -5,10 +5,12 @@ import {
   getProductDetail,
   getProductAmount,
 } from "../assets/data/products.js";
+import { userAuthenticated } from "../assets/data/user.js";
+import { addToCart } from "../assets/data/cart.js";
 
 
 const productContainer = document.getElementById("products-container");
-const backDrop = document.getElementById("backdrop"); //fixed at index.html
+const detailProduct = document.getElementById("detail-product"); //fixed at index.html
 const navProductBackBtn = document.getElementById("content-nav-back");
 const navProductForwardBtn = document.getElementById("content-nav-forward");
 const navProductIndex = document.getElementById("content-nav-index");
@@ -39,7 +41,7 @@ export default function renderProducts(productsList) {
   });
 
   productContainer.innerHTML = htmlDoc;
-  document.querySelectorAll(".main-card").forEach(card => {
+  productContainer.querySelectorAll(".main-card").forEach(card => {
     card.addEventListener("click", () => {
       const productId = card.dataset.productId;
       renderProductDetailPopUp(getProductDetail(productId));
@@ -75,11 +77,12 @@ export function resetNavProductIndex() {
 }
 
 function renderProductDetailPopUp(product) {
-  backDrop.innerHTML = `
+  detailProduct.innerHTML = `
     <div class="detail b">
       <button id="detail-product-close" class="detail-close close-btn b" title="close">
         <i class="uil uil-times detail-close-icon b"></i>
       </button>
+
       <img src="${IMG_ROOT_PATH}/${product.img}.webp" alt="watch/band-img" class="b">
 
       <div class="detail-right">
@@ -91,18 +94,31 @@ function renderProductDetailPopUp(product) {
     
         <div class="detail-right-btns">
           <button class="btn1">Buy now</button>
-          <button class="btn2">Add to cart</button>
+          <button class="btn2" id="detail-right-btns-add">Add to cart</button>
         </div>
       </div>
     </div>
   `;
 
-  document.getElementById("detail-product-close").addEventListener("click", () => {
-    backDrop.innerHTML = "";  
-    hideElements(backDrop);
+
+  detailProduct.querySelector("#detail-product-close").addEventListener("click", () => {
+    detailProduct.innerHTML = "";  
+    hideElements(detailProduct);
     // console.log("close-detail-products");
   });
 
-  showElements(backDrop);
-  // console.log("detail-product");
+  detailProduct.querySelector("#detail-right-btns-add").addEventListener("click", () => {
+    const user = userAuthenticated();
+
+    if(user) {
+      addToCart(user.id, product.id);
+      console.log("add to cart");
+    } else {
+      //direct to login page
+      console.log("login to add!");
+    }
+  });
+
+  showElements(detailProduct);
+  // console.log(`detail-product ${product.id}`);
 }

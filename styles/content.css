@@ -36,6 +36,7 @@
 /*product card*/
 .main {
   width: 100%;
+  height: max-content;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: .5em;
@@ -43,8 +44,6 @@
 .main-card {
   display: flex;
   flex-direction: column;
-  /* height: 100%; */
-  height: max-content;
   padding: 1em;
   gap: .5em;
   border: 1px solid var(--lightgrey);

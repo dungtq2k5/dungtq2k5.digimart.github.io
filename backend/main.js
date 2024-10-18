@@ -8,7 +8,8 @@ import {
   responsiveLoginBtn as resLoginBtn,
   logoutUser,
   registerUser, 
-  loginUser
+  loginUser,
+  responsiveAuthBtn
 } from "./auth.js";
 // import { getData } from "../assets/data/products.js";
 
@@ -16,6 +17,14 @@ import {
 // activateResAll();
 resSearch();
 
+resAuthBtn();
+resResgisterBtn();
+responsiveAuthBtn();
+resLoginBtn();
+
+registerUser();
+logoutUser();
+loginUser();
 
 renderCategories();
 renderProducts();

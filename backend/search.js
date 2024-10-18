@@ -100,7 +100,7 @@ function renderCategory(categoriesList=getCategoriesList()) {
 
   filterSearchCategory.innerHTML = htmlDoc;
 
-  document.querySelectorAll(".filter-search-category-item").forEach(item => {
+  filterSearchCategory.querySelectorAll(".filter-search-category-item").forEach(item => {
     item.addEventListener("click", () => {
       item.classList.toggle(CLASSNAME.checked);
       item.querySelector("i").classList.toggle(CLASSNAME.hide);

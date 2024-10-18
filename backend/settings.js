@@ -22,4 +22,7 @@ export const MSG = {
 
 export const LOCALSTORAGE = {
   productsList: "productsList",
+  usersList: "usersList",
+  cartList: "cartList",
+  userAuth: "userAuth",
 }

@@ -6,7 +6,6 @@ import {
 import {
   getFromStorage,
   includesSubArr,
-  saveToStorage,
 } from "../../backend/utils.js";
 
 
@@ -212,10 +211,10 @@ const brands = [
   },
 ];
 
-saveToStorage(LOCALSTORAGE.productsList, products);
 
-export function getProductAmount() {
-  return getFromStorage(LOCALSTORAGE.productsList).length;
+export function getProductsList(from = 0, to = products.length) { //potential bugs
+  if (from > to) [from, to] = [to, from];
+  return (getFromStorage(LOCALSTORAGE.productsList) || getPlainProductsList()).slice(from, to);
 }
 
 export function getPlainProductsList(from = 0, to = products.length) {
@@ -223,9 +222,8 @@ export function getPlainProductsList(from = 0, to = products.length) {
   return products.slice(from, to);
 }
 
-export function getProductsList(from = 0, to = products.length) {
-  if (from > to) [from, to] = [to, from];
-  return getFromStorage(LOCALSTORAGE.productsList).slice(from, to);
+export function getProductAmount() {
+  return getProductsList().length;
 }
 
 export function getProductDetail(id) {
@@ -235,6 +233,11 @@ export function getProductDetail(id) {
   if (findIndex !== -1) return getProductsList()[findIndex];
   console.error(`Product with an id ${id} not found!`);
   return -1;
+}
+
+export function checkProductExist(id) {
+  const existingProduct = getProductsList().find(item => item.id === id);
+  return existingProduct !== undefined;
 }
 
 export function filterProducts(
@@ -295,3 +298,4 @@ export function getBrandDetail(id) {
   console.error(`Brand with an id ${id} not found!`);
   return -1;
 }
+

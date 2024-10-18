@@ -1,10 +1,8 @@
+const auth = undefined;
 
-fetch("test.JSON", { method: "GET" })
-  .then(response => response.json())
-  .then(data => {
-    // Process the fetched data here
-    console.log(data);
-  })
-  .catch(error => {
-    console.error('Error fetching data:', error);
-  });
+
+if(auth) {
+  console.log("ok");
+} else {
+  console.log("no ok");
+}
