@@ -5,7 +5,7 @@ import {
   isValidVietnamesePhoneNumber, 
   showElements, 
   hideElements, 
-  clearFormInputs } from "./utils.js";
+} from "./utils.js";
 import { 
   addUser, 
   checkEmailExist, 
@@ -20,36 +20,37 @@ import {
 const authIcon = document.getElementById("header-auth-profile");
 const authPopup = document.getElementById("header-auth-profile-popup");
 
-//form-login
-const loginBtns = document.querySelectorAll(".login-btn-js");
-const loginForm = document.getElementById("login-form");
-const loginCloseBtn = document.getElementById("login-form-close");
+//login-form
+const loginBtns = document.body.querySelectorAll(".login-btn-js");
+const loginFormContainer = document.getElementById("login-form-container");
+const loginForm = loginFormContainer.querySelector(".login-form");
+const loginCloseBtn = loginForm.querySelector(".form-close");
 
-//form-register
-const registerBtns = document.querySelectorAll(".register-btn-js");
-const registerForm = document.getElementById("register-form");
-const registerCloseBtn = document.getElementById("register-form-close");
+//register-form
+const registerBtns = document.body.querySelectorAll(".register-btn-js");
+const registerFormContainer = document.getElementById("register-form-container");
+const registerForm = registerFormContainer.querySelector(".register-form");
+const registerCloseBtn = registerForm.querySelector(".form-close");
 
-//auth-login
-const emailLoginField = document.getElementById("login-form-field-email");
-const passwordLoginField = document.getElementById("login-form-field-password");
-const loginSubmitBtn = document.getElementById("login-form-btn");
+//login-auth
+const emailLoginField = loginForm.querySelector("#login-form-field-email");
+const passwordLoginField = loginForm.querySelector("#login-form-field-password");
+const loginSubmitBtn = loginForm.querySelector(".login-form-submit-btn-js");
 
+const invalidCredentialPopup = loginForm.querySelector(".login-form-field-invalid-email-js");
+const invalidCredentialMsg = loginForm.querySelector(".login-form-field-invalid-email-msg-js");
 
-const invalidCredentialPopup = document.getElementById("login-form-field-invalid-email");
-const invalidCredentialMsg = document.getElementById("login-form-field-invalid-email-msg");
+//register-auth
+const emailRegisterField = registerForm.querySelector("#register-form-field-email");
+const phoneRegisterField = registerForm.querySelector("#register-form-field-phone");
+const passwordRegisterField = registerForm.querySelector("#register-form-field-password");
+const registerSubmitBtn = registerForm.querySelector(".register-form-btn-js");
 
-//auth-register
-const emailRegisterField = document.getElementById("register-form-field-email");
-const phoneRegisterField = document.getElementById("register-form-field-phone");
-const passwordRegisterField = document.getElementById("register-form-field-password");
-const registerSubmitBtn = document.getElementById("register-form-btn");
-
-const invalidEmailPopup = document.getElementById("register-form-field-invalid-email");
-const invalidPhonePopup = document.getElementById("register-form-field-invalid-phone");
-const invalidPasswordPopup = document.getElementById("register-form-field-invalid-password");
-const invalidEmailMsg = document.getElementById("register-form-field-invalid-email-msg");
-const invalidPhoneMsg = document.getElementById("register-form-field-invalid-phone-msg");
+const invalidEmailPopup = registerForm.querySelector(".register-form-field-invalid-email-js");
+const invalidPhonePopup = registerForm.querySelector(".register-form-field-invalid-phone-js");
+const invalidPasswordPopup = registerForm.querySelector(".register-form-field-invalid-password-js");
+const invalidEmailMsg = registerForm.querySelector(".register-form-field-invalid-email-msg-js");
+const invalidPhoneMsg = registerForm.querySelector(".register-form-field-invalid-phone-msg-js");
 
 //logout
 const logoutBtn = document.getElementById("logout-btn");
@@ -81,16 +82,15 @@ export function responsiveLoginBtn() {
     btn.addEventListener("click", e => {
       e.preventDefault();
       loginForm.reset();
-      // clearFormInputs([emailLoginField, passwordLoginField]);
       hideElements(invalidCredentialPopup);
-      showElements(loginForm);
+      showElements(loginFormContainer);
       // console.log("show-login");
     })
   });
 
   loginCloseBtn.addEventListener("click", e => {
     e.preventDefault();
-    hideElements(loginForm);
+    hideElements(loginFormContainer);
     // console.log("hide-login");
   });
 }
@@ -100,15 +100,15 @@ export function responsiveRegisterBtn() {
     btn.addEventListener("click", e => {
       e.preventDefault();
       registerForm.reset();
-      // clearFormInputs([emailRegisterField, phoneRegisterField, passwordRegisterField]);
       hideElements([invalidEmailPopup, invalidPasswordPopup, invalidPhonePopup]);
-      showElements(registerForm);
+      showElements(registerFormContainer);
       // console.log("show-register");
     })
   });
+
   registerCloseBtn.addEventListener("click", e => {
     e.preventDefault();
-    hideElements(registerForm);
+    hideElements(registerFormContainer);
     // console.log("hide-register");
   });
 }
@@ -123,7 +123,7 @@ export function loginUser() {
       if(login(email, password)) {
         hideElements([authIcon, [...loginBtns], [...registerBtns]]);
         showElements(logoutBtn);
-        hideElements(loginForm);
+        hideElements(loginFormContainer);
         console.log("user login success");
       } else {
         showElements(invalidCredentialPopup);
@@ -152,7 +152,7 @@ export function registerUser() {
         
         hideElements([authIcon, [...loginBtns], [...registerBtns]]);
         showElements(logoutBtn);
-        hideElements(registerForm);
+        hideElements(registerFormContainer);
         
         login(user.email, user.password);
         console.log("register successfully - user login");

@@ -10,7 +10,7 @@ import { addToCart } from "../assets/data/cart.js";
 
 
 const productContainer = document.getElementById("products-container");
-const detailProduct = document.getElementById("detail-product"); //fixed at index.html
+const productDetailBackDrop = document.getElementById("product-detail-backdrop"); //fixed at index.html
 const navProductBackBtn = document.getElementById("content-nav-back");
 const navProductForwardBtn = document.getElementById("content-nav-forward");
 const navProductIndex = document.getElementById("content-nav-index");
@@ -77,9 +77,9 @@ export function resetNavProductIndex() {
 }
 
 function renderProductDetailPopUp(product) {
-  detailProduct.innerHTML = `
+  productDetailBackDrop.innerHTML = `
     <div class="detail b">
-      <button id="detail-product-close" class="detail-close close-btn b" title="close">
+      <button class="detail-close close-btn b" title="close">
         <i class="uil uil-times detail-close-icon b"></i>
       </button>
 
@@ -94,20 +94,20 @@ function renderProductDetailPopUp(product) {
     
         <div class="detail-right-btns">
           <button class="btn1">Buy now</button>
-          <button class="btn2" id="detail-right-btns-add">Add to cart</button>
+          <button class="add-btn-js btn2">Add to cart</button>
         </div>
       </div>
     </div>
   `;
 
 
-  detailProduct.querySelector("#detail-product-close").addEventListener("click", () => {
-    detailProduct.innerHTML = "";  
-    hideElements(detailProduct);
+  productDetailBackDrop.querySelector(".detail-close").addEventListener("click", () => {
+    productDetailBackDrop.innerHTML = "";  
+    hideElements(productDetailBackDrop);
     // console.log("close-detail-products");
   });
 
-  detailProduct.querySelector("#detail-right-btns-add").addEventListener("click", () => {
+  productDetailBackDrop.querySelector(".add-btn-js").addEventListener("click", () => {
     const user = userAuthenticated();
 
     if(user) {
@@ -119,6 +119,6 @@ function renderProductDetailPopUp(product) {
     }
   });
 
-  showElements(detailProduct);
+  showElements(productDetailBackDrop);
   // console.log(`detail-product ${product.id}`);
 }

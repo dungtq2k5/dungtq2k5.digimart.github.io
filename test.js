@@ -1,8 +1,6 @@
-const auth = undefined;
+const myArray = [1, 2, 3, 4, 5];
 
+// Remove the element at index 2 (which is 3)
+myArray.splice(2, 1);
 
-if(null) {
-  console.log("ok");
-} else {
-  console.log("no ok");
-}
+console.log(myArray); // Output: [1, 2, 4, 5]

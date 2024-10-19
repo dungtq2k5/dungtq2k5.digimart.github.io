@@ -11,7 +11,7 @@ import {
 import renderProducts, { resetNavProductIndex } from "./product.js";
 
 
-const menu = document.getElementById("content-menu");
+const menuContainer = document.getElementById("content-menu");
 
 export function renderCategories(categoriesList=getBrandsList()) {
   let htmlDoc = ``;
@@ -24,9 +24,9 @@ export function renderCategories(categoriesList=getBrandsList()) {
     `;
   });
 
-  menu.innerHTML += htmlDoc;
+  menuContainer.innerHTML += htmlDoc;
 
-  menu.querySelectorAll(".content-menu-item").forEach(item => {
+  menuContainer.querySelectorAll(".content-menu-item").forEach(item => {
     item.addEventListener("change", () => {
 
       const brandId = item.dataset.brandId || "all";

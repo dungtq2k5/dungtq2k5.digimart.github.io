@@ -1,18 +1,7 @@
 /*header*/
-/* .header {
-  position: fixed;
-  width: 100%;
-  margin: 0 auto;
-  max-width: var(--max-screen-size);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 1em .5em;
-  gap: 1em;
-  border-bottom: 1px solid var(--lightgrey);
-  background-color: var(--white);
-  z-index: 99;
-} */
+.header {
+  justify-content: space-evenly;
+}
 
 /* .header-logo {
   font-size: 2rem;

@@ -1,5 +1,5 @@
 import { IMG_ROOT_PATH, IMG_TYPE } from "./settings.js";
-import { getCart, increaseProductQuant } from "../assets/data/cart.js";
+import { getCart, increaseProductQuant, removeFromCart } from "../assets/data/cart.js";
 import { userAuthenticated } from "../assets/data/user.js";
 import { getProductDetail } from "../assets/data/products.js";
 
@@ -30,7 +30,7 @@ export function renderProducts() {
     const product = getProductDetail(cart.productId);
 
     htmlDoc += `
-      <li class="content-product-section b" data-cart-id="${cart.productId}">
+      <li class="content-product-section b" data-cart-id="${cart.id}">
         <img src="${IMG_ROOT_PATH}/${product.img}.${IMG_TYPE}" alt="">
 
         <p class="b">$${product.price}</p>
@@ -51,18 +51,19 @@ export function renderProducts() {
   productContainer.innerHTML = htmlDoc;
 
   productContainer.querySelectorAll(".content-product-section").forEach(section => {
-    const productId = section.dataset.cartId;
+    const cartId = section.dataset.cartId;
 
     //quant decs
     section.querySelector(".decs-quant-js").addEventListener("click", () => {
-      increaseProductQuant(user.id, productId, -1);
+      increaseProductQuant(cartId, -1);
       renderProducts();
 
       console.log("decs quant");
     });
+
     //quant incs
     section.querySelector(".incs-quant-js").addEventListener("click", () => {
-      increaseProductQuant(user.id, productId);
+      increaseProductQuant(cartId);
       renderProducts();
 
       console.log("incs quant");
@@ -70,8 +71,9 @@ export function renderProducts() {
 
     //del btn
     section.querySelector(".del").addEventListener("click", () => {
-  
-      console.log(`del product ${productId} in cart`);
+      removeFromCart(cartId);
+      renderProducts();
+      console.log(`del product ${cartId} in cart`);
     });
   });
 

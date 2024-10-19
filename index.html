@@ -79,35 +79,36 @@
 
     <!-- filter search -->
     <div id="filter-search" class="filter-search hide b">
-      <ul id="filter-search-category" class="filter-search-category b">
+      <ul class="filter-search-category b">
         <li class="filter-search-category-item b">
           <p>category</p>
           <i class="uil uil-check hide"></i>
         </li>
       </ul>
 
+      
       <div class="filter-search-slider b">
         <div class="filter-search-slider-content b">
           <div class="b">
             <label for="filter-search-slider-range-max">
-              Min: $<span id="min-value">10</span>
+              Min: $<span class="min-value-js">10</span>
             </label>
           </div>
           <div class="b">
             <label for="filter-search-slider-range-min">
-              Max: $<span id="max-value">500</span>
+              Max: $<span class="max-value-js">500</span>
             </label>
           </div>
         </div>
 
         <div class="filter-search-slider-range b">
-          <div id="filter-search-slider-range-fill" class="filter-search-slider-range-fill"></div>
-          <input id="filter-search-slider-range-min" class="filter-search-slider-range-input" type="range" value="0" min="0" max="500" step="10">
-          <input id="filter-search-slider-range-max" class="filter-search-slider-range-input" type="range" value="500" min="0" max="500" step="10">
+          <div class="filter-search-slider-range-fill"></div>
+          <input id="filter-search-slider-range-max" class="filter-search-slider-range-input" type="range" value="0" min="0" max="500" step="10">
+          <input id="filter-search-slider-range-min" class="filter-search-slider-range-input" type="range" value="500" min="0" max="500" step="10">
         </div>
       </div>
 
-      <ul id="filter-search-result" class="filter-search-result b">
+      <ul class="filter-search-result b">
         <li class="filter-search-result-item b">
           <img class="b" src="assets/img/products/samsung-galaxy-watch6.webp" alt="">
           <p class="b">SamSung Galaxy watch6</p>
@@ -163,9 +164,9 @@
 
 
   <!--detail product popup-->
-  <div id="detail-product" class="backdrop hide b2">
+  <div id="product-detail-backdrop" class="backdrop hide b2">
     <div class="detail b">
-      <button id="detail-product-close" class="detail-close close-btn b" title="close">
+      <button class="detail-close close-btn b" title="close">
         <i class="uil uil-times detail-close-icon b"></i>
       </button>
       <img src="assets/img/products/samsung-galaxy-watch6.webp" alt="" class="b">
@@ -190,9 +191,9 @@
   </div>
 
   <!--login form popup-->
-  <div id="login-form" class="backdrop hide b">
+  <div id="login-form-container" class="backdrop hide b">
     <form class="login-form b">
-      <button id="login-form-close" class="form-close close-btn b">
+      <button class="form-close close-btn b">
         <i class="uil uil-times"></i>
       </button>
 
@@ -211,12 +212,12 @@
         <input id="login-form-field-password" type="password" placeholder="password123" />
       </div>
 
-      <div id="login-form-field-invalid-email" class="invalid-msg hide b">
+      <div class="login-form-field-invalid-email-js invalid-msg hide b">
         <i class="uil uil-exclamation-triangle b"></i>
-        <p id="login-form-field-invalid-email-msg"></p>
+        <p class="login-form-field-invalid-email-msg-js"></p>
       </div>
 
-      <button id="login-form-btn" class="btn1">Login in</button>
+      <button class="login-form-submit-btn-js btn1">Login in</button>
 
       <p class="login-form-question">
         Don't have an account?
@@ -227,9 +228,9 @@
 
 
   <!--register form popup-->
-  <div id="register-form" class="backdrop hide b">
+  <div id="register-form-container" class="backdrop hide b">
     <form class="register-form border-line">
-      <button id="register-form-close" class="form-close close-btn b">
+      <button class="form-close close-btn b">
         <i class="uil uil-times"></i>
       </button>
 
@@ -242,25 +243,25 @@
           type="text"
           placeholder="nikola.tesla@gmail.com"
         />
-        <span id="register-form-field-invalid-email" class="invalid-msg hide b">
+        <span class="register-form-field-invalid-email-js invalid-msg hide b">
           <i class="uil uil-exclamation-triangle"></i>
-          <p id="register-form-field-invalid-email-msg"></p>
+          <p class="register-form-field-invalid-email-msg-js"></p>
         </span>
       </div>
 
       <div class="register-form-field border-line">
         <label for="register-form-field-phone">Phone number</label>
         <input id="register-form-field-phone" type="tel" placeholder="0123456789"/>
-        <span id="register-form-field-invalid-phone" class="invalid-msg hide">
+        <span class="register-form-field-invalid-phone-js invalid-msg hide">
           <i class="uil uil-exclamation-triangle"></i>
-          <p id="register-form-field-invalid-phone-msg"></p>
+          <p class="register-form-field-invalid-phone-msg-js"></p>
         </span>
       </div>
 
       <div class="register-form-field border-line">
         <label for="register-form-field-password">Password</label>
         <input id="register-form-field-password" type="password" placeholder="password123"/>
-        <span id="register-form-field-invalid-password" class="invalid-msg hide">
+        <span class="register-form-field-invalid-password-js invalid-msg hide">
           <ul class="b">
             <div>
               <i class="uil uil-exclamation-triangle b"></i>
@@ -274,7 +275,7 @@
         </span>
       </div>
 
-      <button id="register-form-btn" class="btn1">Login in</button>
+      <button class="register-form-btn-js btn1">Login in</button>
 
       <p class="register-form-question">
         Already have an account?
@@ -284,7 +285,7 @@
   </div>
 
   <!-- footer -->
-  <footer id="footer" class="footer b">
+  <footer class="footer b">
     <div class="footer-copyright b">
       <p>&copy; Copyright DungTran 2024. All rigth reserved.</p>
     </div>

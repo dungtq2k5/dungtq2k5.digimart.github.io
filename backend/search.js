@@ -6,20 +6,23 @@ import {
 } from "./settings.js";
 import { toggleEleInArr, showElements, hideElements, saveToStorage } from "./utils.js";
 import { filterProducts, getPlainProductsList, getCategoriesList } from "../assets/data/products.js";
-import renderProducts from "./product.js";
+import renderProducts, { resetNavProductIndex } from "./product.js";
 
+//search
+const searchField = document.getElementById("search-field");
+const searchBtn = document.getElementById("search-btn");
+
+//search popup
+const searchPopupContainer = document.getElementById("filter-search");
+const filterSearchCategoryContainer = searchPopupContainer.querySelector(".filter-search-category");
+const filterSearchResultContainer = searchPopupContainer.querySelector(".filter-search-result");
 
 //price-slider
-let minVal = document.getElementById("min-value");
-let maxVal = document.getElementById("max-value");
-const rangeFill = document.getElementById("filter-search-slider-range-fill");
-const inputEles = document.querySelectorAll(".filter-search-slider-range-input");
-//search
-const searchBtn = document.getElementById("search-btn");
-const searchField = document.getElementById("search-field");
-const filterSearch = document.getElementById("filter-search");
-const filterSearchResult = document.getElementById("filter-search-result");
-const filterSearchCategory = document.getElementById("filter-search-category");
+let minVal = searchPopupContainer.querySelector(".min-value-js");
+let maxVal = searchPopupContainer.querySelector(".max-value-js");
+const rangeFill = searchPopupContainer.querySelector(".filter-search-slider-range-fill");
+const inputEles = searchPopupContainer.querySelectorAll(".filter-search-slider-range-input");
+
 //filtering searching
 let valueLookup = "";
 let categoriesLookup = [];
@@ -43,21 +46,22 @@ function responsiveSearchSuggestionPopUp() {
   searchBtn.addEventListener("click", () => {
     console.log("execute search");
     const productsListFiltered = filterProducts(getPlainProductsList(), valueLookup, categoriesLookup, minVal.innerHTML, maxVal.innerHTML);
-    saveToStorage(LOCALSTORAGE.productsList, productsListFiltered);
-    renderProducts(productsListFiltered);
 
-    hideElements(filterSearch);
+    saveToStorage(LOCALSTORAGE.productsList, productsListFiltered);
+    resetNavProductIndex();
+    renderProducts(productsListFiltered);
+    hideElements(searchPopupContainer);
   });
   
   searchField.addEventListener("focus", () => {
-    showElements(filterSearch);
+    showElements(searchPopupContainer);
       // renderCategory();
       // console.log("focus");
   });
 
   document.addEventListener("click", e => {
-    if(!searchField.contains(e.target) && !filterSearch.contains(e.target)) {
-      filterSearch.classList.add(CLASSNAME.hide);
+    if(!searchField.contains(e.target) && !searchPopupContainer.contains(e.target)) {
+      searchPopupContainer.classList.add(CLASSNAME.hide);
       // console.log("unfocus");
     }
     // console.log("click");
@@ -83,7 +87,7 @@ function renderProductSuggest(productsList, start=0, end=MAX_ITEM_SUGGESTION) {
     htmlDoc = "<p>No items found!</p>";
   }
 
-  filterSearchResult.innerHTML = htmlDoc;
+  filterSearchResultContainer.innerHTML = htmlDoc;
 }
 
 function renderCategory(categoriesList=getCategoriesList()) {
@@ -98,9 +102,9 @@ function renderCategory(categoriesList=getCategoriesList()) {
     `;
   });
 
-  filterSearchCategory.innerHTML = htmlDoc;
+  filterSearchCategoryContainer.innerHTML = htmlDoc;
 
-  filterSearchCategory.querySelectorAll(".filter-search-category-item").forEach(item => {
+  filterSearchCategoryContainer.querySelectorAll(".filter-search-category-item").forEach(item => {
     item.addEventListener("click", () => {
       item.classList.toggle(CLASSNAME.checked);
       item.querySelector("i").classList.toggle(CLASSNAME.hide);
