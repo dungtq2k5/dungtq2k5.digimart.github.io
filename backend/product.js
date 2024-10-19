@@ -1,5 +1,5 @@
 import { showElements, hideElements, calculatePages } from "./utils.js";
-import { IMG_ROOT_PATH, MAX_PRODUCT_RENDERED } from "./settings.js";
+import { IMG_ROOT_PATH, IMG_TYPE, MAX_PRODUCT_RENDERED } from "./settings.js";
 import { 
   getProductsList,
   getProductDetail,
@@ -27,7 +27,7 @@ export default function renderProducts(productsList) {
         <div class="main-card-img-box b">
           <img
             class="b"
-            src="${IMG_ROOT_PATH}/${item.img}.webp"
+            src="${IMG_ROOT_PATH}/${item.img}.${IMG_TYPE}"
             alt="watch/band-img"
           />
         </div>

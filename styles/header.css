@@ -1,5 +1,5 @@
 /*header*/
-.header {
+/* .header {
   position: fixed;
   width: 100%;
   margin: 0 auto;
@@ -12,11 +12,11 @@
   border-bottom: 1px solid var(--lightgrey);
   background-color: var(--white);
   z-index: 99;
-}
+} */
 
-.header-logo {
+/* .header-logo {
   font-size: 2rem;
-}
+} */
 
 .header-ulti {
   display: flex;

@@ -58,8 +58,29 @@ img {
   object-position: center;
 }
 
+
 /*general classes*/
-.btn1, .btn2 {
+.header {
+  position: fixed;
+  width: 100%;
+  margin: 0 auto;
+  max-width: var(--max-screen-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em .5em;
+  gap: 1em;
+  border-bottom: 1px solid var(--lightgrey);
+  background-color: var(--white);
+  z-index: 99;
+}
+.header-title {
+  font-size: 2rem;
+}
+.content {
+  padding-top: 6em !important; 
+}
+.btn1, .btn2{
   border: 1px solid transparent;
   padding: .5em 1em;
   border-radius: var(--border-radius);
@@ -154,6 +175,13 @@ img {
 }
 .close-btn:hover {
   opacity: .6;
+}
+.del {
+  border: none;
+  background: none;
+  width: max-content;
+  color: var(--red);
+  text-decoration: underline;
 }
 
 /* testing */

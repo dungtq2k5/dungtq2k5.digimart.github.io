@@ -4,8 +4,8 @@ export function includesSubArr(parentArr, subArr) {
   /**
    * capitalize is matter.
    */
-  for(let i=0; i<subArr.length; i++) {
-    if(!parentArr.includes(subArr[i])) return false;
+  for(const element of subArr) {
+    if(!parentArr.includes(element)) return false;
   }
 
   return true;

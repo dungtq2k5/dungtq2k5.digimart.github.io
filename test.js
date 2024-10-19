@@ -1,7 +1,7 @@
 const auth = undefined;
 
 
-if(auth) {
+if(null) {
   console.log("ok");
 } else {
   console.log("no ok");

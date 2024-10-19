@@ -80,10 +80,11 @@ export function responsiveLoginBtn() {
   loginBtns.forEach(btn => {
     btn.addEventListener("click", e => {
       e.preventDefault();
-        clearFormInputs([emailLoginField, passwordLoginField]);
-        hideElements(invalidCredentialPopup);
-        showElements(loginForm);
-        // console.log("show-login");
+      loginForm.reset();
+      // clearFormInputs([emailLoginField, passwordLoginField]);
+      hideElements(invalidCredentialPopup);
+      showElements(loginForm);
+      // console.log("show-login");
     })
   });
 
@@ -98,10 +99,11 @@ export function responsiveRegisterBtn() {
   registerBtns.forEach(btn => {
     btn.addEventListener("click", e => {
       e.preventDefault();
-        clearFormInputs([emailRegisterField, phoneRegisterField, passwordRegisterField]);  
-        hideElements([invalidEmailPopup, invalidPasswordPopup, invalidPhonePopup]);
-        showElements(registerForm);
-        // console.log("show-register");
+      registerForm.reset();
+      // clearFormInputs([emailRegisterField, phoneRegisterField, passwordRegisterField]);
+      hideElements([invalidEmailPopup, invalidPasswordPopup, invalidPhonePopup]);
+      showElements(registerForm);
+      // console.log("show-register");
     })
   });
   registerCloseBtn.addEventListener("click", e => {

@@ -5,54 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
   <link rel="stylesheet" href="styles/general.css">
-  <link rel="stylesheet" href="styles/header.css">
-  <link rel="stylesheet" href="styles/footer.css">
-  <link rel="stylesheet" href="styles/content.css">
-  <link rel="stylesheet" href="styles/detail.css">
-  <link rel="stylesheet" href="styles/form.css">
   <link rel="stylesheet" href="styles/cart.css">
-  <link rel="stylesheet" href="styles/orders.css">
-  <link rel="stylesheet" href="styles/track.css">
+  <link rel="stylesheet" href="styles/footer.css">
   <title>Document</title>
 </head>
 <body id="root">
 
   <!--header-->
-  <header class="header">
-    <a href="#home" class="b" title="home">
-      <div class="header-logo">
-        <p>Logo / Cart</p>
+  <header class="header b">
+    <a href="index.html" class="b" title="home">
+      <div class="header-title">
+        <p>Logo - Home /</p>
+      </div>
+    </a>
+    <a href="cart.html" class="b" title="cart">
+      <div class="header-title">
+        <p>Cart</p>
       </div>
     </a>
   </header>
 
 
  <!-- cart page -->
- <div class="cart b2">
-    <h1 class="cart-title b">
-      <a href="#home">Home</a> / 
-      <a href="#cart">Cart</a>
-    </h1>
+ <div class="content b2">
 
-    <main class="cart-product b">
-      <div class="cart-product-header b">
+    <main class="content-product b">
+      <div class="content-product-header b">
         <p class="b">Product</p>
         <p class="b">Price</p>
         <p class="b">Quantity</p>
         <p class="b">Subtotal</p>
       </div>
 
-      <ul>
-        <li class="cart-product-section b">
+      <ul id="products-container">
+        <li class="content-product-section b">
           <img src="assets/img/products/samsung-galaxy-watch6.webp" alt="">
+
           <p class="b">$190</p>
-          <input class="cart-product-section-quantity" type="number" min="1" max="99" value="1"/>
+
+          <div class="content-product-section-quantity b">
+            <i id="decrease-quantity" class="uil uil-arrow-left b" title="decrease quantity"></i>
+            <span class="b">1</span>
+            <i id="increase-quantity" class="uil uil-arrow-right b" title="increase quantity"></i>
+          </div>
+
           <p class="b">$190</p>
+
+          <button class="del">Delete</button>
         </li>
       </ul>
     </main>
 
-    <div class="cart-checkout b">
+    <div class="content-checkout b">
       <h2>Cart total</h2>
       <div>
         <p>Subtotal: </p>
@@ -69,6 +73,7 @@
 
       <button class="btn1">Process to checkout</button>
     </div>
+
   </div>
 
   <!-- footer -->
@@ -78,6 +83,6 @@
     </div>
   </footer>
 
-  <!-- <script type="module" src="backend/main.js"></script> -->
+  <script type="module" src="backend/main-cart.js"></script>
 </body>
 </html>   

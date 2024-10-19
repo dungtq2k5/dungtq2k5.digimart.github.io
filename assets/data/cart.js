@@ -20,13 +20,13 @@ export function getCartList() {
 export function addToCart(userId, productId, quantity=1) {
   if(checkUserExist(userId) && checkProductExistFromProducts(productId)) {
 
-    const cartListUpdate = getCartList();
-    const findIndex = getCartList().findIndex(cart => cart.userId === userId && cart.productId === productId);
+    const cartList = getCartList();
+    const findIndex = cartList.findIndex(cart => cart.userId === userId && cart.productId === productId);
 
     if(findIndex !== -1) { //already in cart => quantity++
-      cartListUpdate[findIndex].quantity++;
+      cartList[findIndex].quantity++;
     } else { 
-      cartListUpdate.push({
+      cartList.push({
         id: generateUID(),
         userId,
         productId,
@@ -34,7 +34,7 @@ export function addToCart(userId, productId, quantity=1) {
       });
     }
 
-    saveToStorage(LOCALSTORAGE.cartList, cartListUpdate);
+    saveToStorage(LOCALSTORAGE.cartList, cartList);
     // console.log("added");
   } else {
     console.error(`User with an id ${userId} or product with an id ${productId} not exist!`);
@@ -46,9 +46,9 @@ export function removeFromCart(userId, productId) {
     const findIndex = getCartList().findIndex(cart => cart.userId === userId && cart.productId === productId);
     
     if(findIndex !== -1) { //in cart => remove
-      const cartListUpdate = getCartList();
-      cartListUpdate.splice(0, findIndex);
-      saveToStorage(LOCALSTORAGE.cartList, cartListUpdate);
+      const cartList = getCartList();
+      cartList.splice(0, findIndex);
+      saveToStorage(LOCALSTORAGE.cartList, cartList);
       console.log(`Remove product with an id ${productId} from cart`);
     }
   } else {
@@ -56,4 +56,33 @@ export function removeFromCart(userId, productId) {
   }
 }
 
+export function getCart(userId) {
+  return getCartList().filter(cart => cart.userId === userId);
+}
 
+export function increaseProductQuant(userId, productId, amount=1) {
+  /**
+   * update and return quant
+   */
+  if(checkUserExist(userId) && checkProductExistFromProducts(productId)) {
+    const cartList = getCartList();
+    const findIndex = cartList.findIndex(cart => cart.userId === userId && cart.productId === productId);
+
+    if(findIndex !== -1) {
+      cartList[findIndex].quantity += amount;
+      saveToStorage(LOCALSTORAGE.cartList, cartList);
+      return cartList[findIndex].quantity;
+    }
+
+    console.error(`User with an id ${userId} and product with an id ${productId} not exist in cart list!`);
+    return 0;
+
+  }
+
+  console.error(`User with an id ${userId} or product with an id ${productId} not exist!`);
+  return 0;
+}
+
+// export function delProductInCart(userId, productId) {
+
+// }

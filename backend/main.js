@@ -11,6 +11,7 @@ import {
   loginUser,
   responsiveAuthBtn
 } from "./auth.js";
+import { renderCartPopUp } from "./cart.js";
 // import { getData } from "../assets/data/products.js";
 
 
@@ -25,6 +26,8 @@ resLoginBtn();
 registerUser();
 logoutUser();
 loginUser();
+
+// renderCartPopUp();
 
 renderCategories();
 renderProducts();
