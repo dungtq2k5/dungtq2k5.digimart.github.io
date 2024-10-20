@@ -25,9 +25,8 @@
     </a>
   </header>
 
-
- <!-- cart page -->
- <div class="content b2">
+  <!-- cart page -->
+  <div class="content b2">
 
     <main class="content-product b">
       <div class="content-product-header b">
@@ -41,7 +40,7 @@
         <li class="content-product-section b">
           <img src="assets/img/products/samsung-galaxy-watch6.webp" alt="">
 
-          <p class="b">$190</p>
+          <p class="b">$191</p>
 
           <div class="content-product-section-quantity b">
             <i id="decrease-quantity" class="uil uil-arrow-left b" title="decrease quantity"></i>
@@ -56,22 +55,28 @@
       </ul>
     </main>
 
-    <div class="content-checkout b">
+    <div id="checkout-form" class="content-checkout b">
       <h2>Cart total</h2>
       <div>
         <p>Subtotal: </p>
-        <p>$1750</p>
+        <p>
+          $<span class="content-checkout-subtotal-js">150</span>
+        </p>
       </div>
       <div>
         <p>Shipping: </p>
-        <p>Free</p>
+        <p>
+          $<span class="content-checkout-shipfee-js">Free</span>
+        </p>
       </div>
       <div>
         <p>Total: </p>
-        <p>$1750</p>
+        <p>
+          $<span class="content-checkout-total-js">Free</span>
+        </p>
       </div>
 
-      <button class="btn1">Process to checkout</button>
+      <button class="content-checkout-btn btn1">Process to checkout</button>
     </div>
 
   </div>
@@ -82,6 +87,26 @@
       <p>&copy; Copyright DungTran 2024. All rigth reserved.</p>
     </div>
   </footer>
+
+  <!-- remove item backdrop -->
+  <div id="remove-item-container" class="backdrop hide b">
+    <!-- <div class="remove-item b">
+      <button class="remove-item-close" title="close">
+        <i class="uil uil-times detail-close-icon b"></i>
+      </button>
+
+      <h2>Do you want to remove this item?</h2>
+
+      <p>
+        <span class="product-name-js">Samsung Galaxy Watch6</span>
+      </p>
+
+      <div class="remove-item-btns">
+        <button class="submit-btn-js btn1 b">Yes</button>
+        <button class="cancel-btn-js btn2 b">No</button>
+      </div>
+    </div> -->
+  </div>
 
   <script type="module" src="backend/main-cart.js"></script>
 </body>

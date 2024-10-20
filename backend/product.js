@@ -20,6 +20,7 @@ export default function renderProducts(productsList) {
   const end = navProductIndex.innerHTML * MAX_PRODUCT_RENDERED;
   productsList = productsList ? productsList.slice(start, end) : getProductsList(start, end);
 
+  //view
   let htmlDoc = ``;
   productsList.forEach(item => {
     htmlDoc += `
@@ -41,6 +42,9 @@ export default function renderProducts(productsList) {
   });
 
   productContainer.innerHTML = htmlDoc;
+
+
+  //controller
   productContainer.querySelectorAll(".main-card").forEach(card => {
     card.addEventListener("click", () => {
       const productId = card.dataset.productId;
@@ -77,6 +81,7 @@ export function resetNavProductIndex() {
 }
 
 function renderProductDetailPopUp(product) {
+  //view
   productDetailBackDrop.innerHTML = `
     <div class="detail b">
       <button class="detail-close close-btn b" title="close">
@@ -100,7 +105,7 @@ function renderProductDetailPopUp(product) {
     </div>
   `;
 
-
+  //controller
   productDetailBackDrop.querySelector(".detail-close").addEventListener("click", () => {
     productDetailBackDrop.innerHTML = "";  
     hideElements(productDetailBackDrop);

@@ -4,12 +4,12 @@ import { checkProductExist as checkProductExistFromProducts } from "./products.j
 import { checkUserExist } from "./user.js";
 
 const cart = [
-  {
-    "id": "123",
-    "userId": "1",
-    "productId": "1",
-    "quantity": "1",
-  }
+  // {
+  //   "id": "123",
+  //   "userId": "1",
+  //   "productId": "1",
+  //   "quantity": "1",
+  // }
 ];
 
 
@@ -17,10 +17,17 @@ export function getCartList() {
   return getFromStorage(LOCALSTORAGE.cartList) || cart;
 }
 
-export function getCart(userId) {
+export function getUserCart(userId) {
   return getCartList().filter(cart => cart.userId === userId);
 }
 
+export function getCartDetail(id) {
+  const findIndex = getCartList().findIndex(cart => cart.id === id);
+  if(findIndex !== -1) return getCartList()[findIndex];
+  
+  console.error(`Cart with an id ${id} not found!`);
+  return -1;
+}
 
 export function addToCart(userId, productId, quantity=1) {
   if(checkUserExist(userId) && checkProductExistFromProducts(productId)) {

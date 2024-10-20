@@ -227,16 +227,16 @@ export function getProductAmount() {
 }
 
 export function getProductDetail(id) {
-  const findIndex = getProductsList().findIndex(
+  const findIndex = getPlainProductsList().findIndex(
     (item) => item.id === id
   );
-  if (findIndex !== -1) return getProductsList()[findIndex];
+  if (findIndex !== -1) return getPlainProductsList()[findIndex];
   console.error(`Product with an id ${id} not found!`);
   return -1;
 }
 
 export function checkProductExist(id) {
-  const existingProduct = getProductsList().find(item => item.id === id);
+  const existingProduct = getPlainProductsList().find(item => item.id === id);
   return existingProduct !== undefined;
 }
 

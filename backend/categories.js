@@ -14,6 +14,7 @@ import renderProducts, { resetNavProductIndex } from "./product.js";
 const menuContainer = document.getElementById("content-menu");
 
 export function renderCategories(categoriesList=getBrandsList()) {
+  //view
   let htmlDoc = ``;
   categoriesList.forEach(item => {
     htmlDoc += `
@@ -26,6 +27,7 @@ export function renderCategories(categoriesList=getBrandsList()) {
 
   menuContainer.innerHTML += htmlDoc;
 
+  //controller
   menuContainer.querySelectorAll(".content-menu-item").forEach(item => {
     item.addEventListener("change", () => {
 
