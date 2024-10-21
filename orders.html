@@ -5,29 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
   <link rel="stylesheet" href="styles/general.css">
-  <link rel="stylesheet" href="styles/header.css">
-  <link rel="stylesheet" href="styles/footer.css">
-  <link rel="stylesheet" href="styles/content.css">
-  <link rel="stylesheet" href="styles/detail.css">
-  <link rel="stylesheet" href="styles/form.css">
-  <link rel="stylesheet" href="styles/cart.css">
   <link rel="stylesheet" href="styles/orders.css">
   <link rel="stylesheet" href="styles/track.css">
+  <link rel="stylesheet" href="styles/footer.css">
   <title>Document</title>
 </head>
 <body id="root">
 
   <!--header-->
-  <header class="header">
-    <a href="#home" class="b" title="home">
-      <div class="header-logo">
-        <p>Logo | Cart</p>
+  <header class="header b">
+    <a href="index.html" class="b" title="home">
+      <div class="header-title">
+        <p>Logo - Home /</p>
+      </div>
+    </a>
+    <a href="orders.html" class="b" title="cart">
+      <div class="header-title">
+        <p>Orders</p>
       </div>
     </a>
   </header>
 
-
-
+  <!-- orders -->
+  <main>
+    <ul id="orders-container" class="content b">
+      <li class="order-container b">
+          <div class="order-container-title b">
+            <p class="b">Order placed: Sep 24</p>
+            <p class="b">Total: $190</p>
+            <p class="b">Order ID: 27cba69d-4c3d-4098-b42d-ac7fa62b7664</p>
+          </div>
+    
+          <ul class="order-container-section">
+            <li class="order-container-section-product">
+              <img src="assets/img/products/samsung-galaxy-watch6.webp" alt="">
+              <div class="order-container-section-product-info">
+                <p>Samsung Galaxy watch6</p>
+                <p>Arriving on: Sep 27</p>
+                <p>Quantity: 1</p>
+                <button class="btn2">
+                  <i class="uil uil-shopping-bag"></i>
+                  Buy it again
+                </button>
+              </div>
+              <button class="btn1">Track package</button>
+            </li>
+            <!-- ... -->
+          </ul>
+      </li>
+      <!-- ... -->
+    </ul>
+  </main>
 
   <!-- footer -->
   <footer id="footer" class="footer b">
@@ -36,6 +64,30 @@
     </div>
   </footer>
 
-  <!-- <script type="module" src="backend/main.js"></script> -->
+  <!--track page-->
+  <div id="track-container" class="backdrop hide b">
+    <div class="track b">
+      <button class="track-close close-btn b" title="close">
+        <i class="uil uil-times b"></i>
+      </button>
+
+      <h2>Arriving on Fri, Sep 27</h2>
+      <p>Samsung Galaxy watch6</p>
+      <p>Quantity: 1</p>
+      <img src="assets/img/products/samsung-galaxy-watch6.webp" alt="">
+
+      <div class="track-bar b">
+        <div class="track-bar-title b">
+          <p class="b">Preparing</p>
+          <p class="b">Shipped</p>
+          <p class="b">Delivered</p>
+        </div>
+        <div class="track-bar-progress b"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <script type="module" src="backend/main-orders.js"></script>
 </body>
 </html>   

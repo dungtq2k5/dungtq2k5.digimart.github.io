@@ -85,7 +85,7 @@ function renderProductDetailPopUp(product) {
   productDetailBackDrop.innerHTML = `
     <div class="detail b">
       <button class="detail-close close-btn b" title="close">
-        <i class="uil uil-times detail-close-icon b"></i>
+        <i class="uil uil-times b"></i>
       </button>
 
       <img src="${IMG_ROOT_PATH}/${product.img}.webp" alt="watch/band-img" class="b">

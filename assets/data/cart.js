@@ -3,7 +3,7 @@ import { generateUID, getFromStorage, saveToStorage } from "../../backend/utils.
 import { checkProductExist as checkProductExistFromProducts } from "./products.js";
 import { checkUserExist } from "./user.js";
 
-const cart = [
+const carts = [
   // {
   //   "id": "123",
   //   "userId": "1",
@@ -13,17 +13,17 @@ const cart = [
 ];
 
 
-export function getCartList() {
-  return getFromStorage(LOCALSTORAGE.cartList) || cart;
+export function getCartsList() {
+  return getFromStorage(LOCALSTORAGE.cartsList) || carts;
 }
 
 export function getUserCart(userId) {
-  return getCartList().filter(cart => cart.userId === userId);
+  return getCartsList().filter(cart => cart.userId === userId);
 }
 
 export function getCartDetail(id) {
-  const findIndex = getCartList().findIndex(cart => cart.id === id);
-  if(findIndex !== -1) return getCartList()[findIndex];
+  const findIndex = getCartsList().findIndex(cart => cart.id === id);
+  if(findIndex !== -1) return getCartsList()[findIndex];
   
   console.error(`Cart with an id ${id} not found!`);
   return -1;
@@ -32,7 +32,7 @@ export function getCartDetail(id) {
 export function addToCart(userId, productId, quantity=1) {
   if(checkUserExist(userId) && checkProductExistFromProducts(productId)) {
 
-    const cartList = getCartList();
+    const cartList = getCartsList();
     const findIndex = cartList.findIndex(cart => cart.userId === userId && cart.productId === productId);
 
     if(findIndex !== -1) { //already in cart => quantity++
@@ -46,7 +46,7 @@ export function addToCart(userId, productId, quantity=1) {
       });
     }
 
-    saveToStorage(LOCALSTORAGE.cartList, cartList);
+    saveToStorage(LOCALSTORAGE.cartsList, cartList);
     // console.log("added");
   } else {
     console.error(`User with an id ${userId} or product with an id ${productId} not exist!`);
@@ -55,12 +55,12 @@ export function addToCart(userId, productId, quantity=1) {
 
 export function removeFromCart(id) {
 
-  const cartList = getCartList();
+  const cartList = getCartsList();
   const findIndex = cartList.findIndex(cart => cart.id === id);
   
   if(findIndex !== -1) {
     cartList.splice(findIndex, 1);
-    saveToStorage(LOCALSTORAGE.cartList, cartList);
+    saveToStorage(LOCALSTORAGE.cartsList, cartList);
     console.log(`Remove products in cart of an id ${id}`);
     return true;
   }
@@ -69,17 +69,22 @@ export function removeFromCart(id) {
   return false;
 }
 
+export function removeUserCart(userId) {
+  const cartList = getCartsList().filter(cart => cart.userId !== userId);
+  saveToStorage(LOCALSTORAGE.cartsList, cartList);
+  console.log("erase user cart");
+}
 
 export function increaseProductQuant(id, amount=1) {
   /**
    * update and return quant
    */
-  const cartList = getCartList();
+  const cartList = getCartsList();
   const findIndex = cartList.findIndex(cart => cart.id === id);
 
   if(findIndex !== -1) {
     cartList[findIndex].quantity += amount;
-    saveToStorage(LOCALSTORAGE.cartList, cartList);
+    saveToStorage(LOCALSTORAGE.cartsList, cartList);
     return cartList[findIndex].quantity;
   }
 

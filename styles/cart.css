@@ -55,7 +55,7 @@
 /*remove item popup*/
 .remove-item {
   position: relative;
-  padding: 2em;
+  padding: var(--section-padding);
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -67,8 +67,6 @@
   position: absolute;
   top: 0;
   right: 0;
-  border: none;
-  background: none;
 }
 .remove-item-btns {
   display: flex;

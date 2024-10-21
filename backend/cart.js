@@ -1,8 +1,9 @@
 import { IMG_ROOT_PATH, IMG_TYPE } from "./settings.js";
-import { getCartDetail, getUserCart, increaseProductQuant, removeFromCart } from "../assets/data/cart.js";
+import { getCartDetail, getUserCart, increaseProductQuant, removeFromCart, removeUserCart } from "../assets/data/cart.js";
 import { userAuthenticated } from "../assets/data/user.js";
 import { getProductDetail } from "../assets/data/products.js";
 import { hideElements, showElements } from "./utils.js";
+import { addOrders } from "../assets/data/orders.js";
 
 //items
 const cartIcon = document.getElementById("cart");
@@ -23,39 +24,39 @@ const removeItemContainer = document.getElementById("remove-item-container");
 
 const user = userAuthenticated() || console.error("user not auth but cartpage is rendered");
 
-export function renderCartPopUp() {
-  cartIcon.addEventListener("mouseover", () => {
-    if(cartPopup.classList.contains("hide")) {
-      cartPopup.classList.remove("hide");
-      // console.log("over");
-    }
-  });
-  cartIcon.addEventListener("mouseleave", () => {
-    cartPopup.classList.add("hide");
-    // console.log("out");
-  });
-}
+// export function renderCartPopUp() {
+//   cartIcon.addEventListener("mouseover", () => {
+//     if(cartPopup.classList.contains("hide")) {
+//       cartPopup.classList.remove("hide");
+//       // console.log("over");
+//     }
+//   });
+//   cartIcon.addEventListener("mouseleave", () => {
+//     cartPopup.classList.add("hide");
+//     // console.log("out");
+//   });
+// }
 
 export function renderProducts() {
   let htmlDoc = ``;
 
   //view
-  getUserCart(user.id).forEach(cart => {
-    const product = getProductDetail(cart.productId);
+  getUserCart(user.id).forEach(item => {
+    const product = getProductDetail(item.productId);
 
     htmlDoc += `
-      <li class="content-product-section b" data-cart-id="${cart.id}">
+      <li class="content-product-section b" data-cart-id="${item.id}">
         <img src="${IMG_ROOT_PATH}/${product.img}.${IMG_TYPE}" alt="">
 
         <p class="b">$${product.price}</p>
 
         <div class="content-product-section-quantity b">
           <i class="uil uil-arrow-left decs-quant-js b" title="decrease quantity"></i>
-          <span class="product-quant-js b">${cart.quantity}</span>
+          <span class="product-quant-js b">${item.quantity}</span>
           <i class="uil uil-arrow-right incs-quant-js b" title="increase quantity"></i>
         </div>
 
-        <p class="b">$${cart.quantity*product.price}</p>
+        <p class="b">$${item.quantity*product.price}</p>
 
         <button class="del">Delete</button>
       </li>
@@ -88,7 +89,6 @@ export function renderProducts() {
   updateCheckoutForm();
 }
 
-
 function handleDecsItemQuant(cartId) {
   const currentQuant = getCartDetail(cartId).quantity;
 
@@ -116,9 +116,9 @@ function handleDelItem(cartId) {
 function updateCheckoutForm() {
   let subtotal = 0, shippingFee = 0, total = 0;
 
-  getUserCart(user.id).forEach(cart => {
-    const product = getProductDetail(cart.productId);
-    const quantity = cart.quantity;
+  getUserCart(user.id).forEach(item => {
+    const product = getProductDetail(item.productId);
+    const quantity = item.quantity;
 
     subtotal += product.price * quantity;
   });
@@ -138,8 +138,8 @@ function renderRemoveItemPopup(cartId) {
   
   removeItemContainer.innerHTML = `
     <div class="remove-item b">
-      <button class="remove-item-close" title="close">
-        <i class="uil uil-times detail-close-icon b"></i>
+      <button class="remove-item-close close-btn" title="close">
+        <i class="uil uil-times b"></i>
       </button>
 
       <h2>Do you want to remove this item?</h2>
@@ -172,4 +172,53 @@ function renderRemoveItemPopup(cartId) {
   });
 
   showElements(removeItemContainer);
+}
+
+function getTotal() {
+  let subtotal = 0, shippingFee = 0;
+
+  getUserCart(user.id).forEach(item => {
+    const product = getProductDetail(item.productId);
+    const quantity = item.quantity;
+
+    subtotal += product.price * quantity;
+  });
+
+  return subtotal + shippingFee;
+}
+
+// {
+//   "userId": "1",
+//   "total": "199",
+//   "placed": "datetime",
+//   "items": [
+//     {
+//       "productId": "1",
+//       "quantity": "1",
+//     },
+//   ],
+// },
+
+export function responsiveCheckoutBtn() {
+  /**
+   * add data to orders and remove data from cart
+   */  
+  const time = new Date();
+  
+  checkoutBtn.addEventListener("click", () => {
+    const items = getUserCart(user.id).map(item => ({
+      productId: item.productId,
+      quantity: item.quantity
+    }));
+    
+    addOrders(
+      user.id, 
+      getTotal(), 
+      time, 
+      items
+    );
+
+    removeUserCart(user.id);
+    console.log("process checkout");
+  });
 }

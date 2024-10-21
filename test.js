@@ -1,6 +1,35 @@
-const myArray = [1, 2, 3, 4, 5];
+// let list = [
+//   {
+//     number: 1,
+//     state: false,
+//     active: true
+//   },
+//   {
+//     number: 2,
+//     state: true,
+//     active: true
+//   },
+//   {
+//     number: 3,
+//     state: false,
+//     active: true
+//   },
+//   {
+//     number: 4,
+//     state: true,
+//     active: true
+//   },
+// ];
 
-// Remove the element at index 2 (which is 3)
-myArray.splice(2, 1);
+// console.log(list.map(ele => ({
+//   number: ele.number,
+//   active: ele.active
+// })));
 
-console.log(myArray); // Output: [1, 2, 4, 5]
+function func() {
+  const time = new Date();
+
+  console.log(time);
+}
+
+console.log(func());

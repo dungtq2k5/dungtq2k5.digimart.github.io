@@ -141,3 +141,16 @@ export function getFromStorage(storage) {
   // console.log(`Storage ${storage} get`);
   return JSON.parse(localStorage.getItem(storage));
 }
+
+export function dateFormatted(time) {
+  const monthsName = [
+    "January", "February", "March",
+    "April", "May", "June",
+    "July", "August", "September",
+    "October", "November", "December"
+  ];
+  
+  const date = `${monthsName[time.getMonth()]} ${time.getDate()}`; //month date
+  
+  return date;
+}

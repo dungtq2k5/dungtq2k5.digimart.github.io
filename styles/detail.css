@@ -5,8 +5,8 @@
   gap: 1em;
   border: 1px solid var(--lightgrey);
   border-radius: var(--border-radius);
-  padding: 1em;
-  width: 95%;
+  padding: var(--section-padding);
+  width: 100%;
   max-width: 1200px;
   background-color: var(--white);
 }
@@ -42,9 +42,10 @@
   top: 2px;
 }
 
-@media (max-width: 840px) {
+@media (max-width: 544px) {
   .detail {
     flex-direction: column;
+    width: max-content;
   }
   .detail img {
     max-width: 300px;

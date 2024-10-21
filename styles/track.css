@@ -1,19 +1,19 @@
 .track {
-  display: flex;
-  flex-direction: column;
-  gap: var(--section-gap);
-  max-width: 1200px;
-  margin: 0 auto;
+  position: relative;
   padding: var(--section-padding);
-}
-
-.track-main {
-  border: 1px solid var(--lightgrey);
-  padding: 1em;
   border-radius: var(--border-radius);
+  background-color: var(--white);
+  width: 100%;
+  max-width: 1000px;
 }
 
-.track-main img {
+.track-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.track img {
   width: 50%;
   max-width: 320px;
   background-color: var(--darkwhite);
@@ -21,12 +21,12 @@
   margin: 1em 0;
 }
 
-.track-main-bar-title {
+.track-bar-title {
   display: flex;
   justify-content: space-between;
 }
-.track-main-bar-progress {
-  height: 3vh;
+.track-bar-progress {
+  height: 1.5em;
   border-radius: 15px;
   border: 1px solid var(--lightgrey);
   background: linear-gradient(to right, var(--blue) 50%, white 50%);

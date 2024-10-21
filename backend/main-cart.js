@@ -1,3 +1,4 @@
-import { renderProducts } from "./cart.js";
+import { renderProducts, responsiveCheckoutBtn } from "./cart.js";
 
 renderProducts();
+responsiveCheckoutBtn();
