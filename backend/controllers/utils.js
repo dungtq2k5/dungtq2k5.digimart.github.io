@@ -1,4 +1,4 @@
-import { CLASSNAME } from "./settings.js";
+import { CLASSNAME } from "../views/settings.js";
 
 export function includesSubArr(parentArr, subArr) {
   /**

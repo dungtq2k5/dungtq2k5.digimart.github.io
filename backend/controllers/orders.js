@@ -1,23 +1,8 @@
-import { LOCALSTORAGE } from "../../backend/settings.js";
-import { getFromStorage, saveToStorage, generateUID } from "../../backend/utils.js";
-import { getDefaultDeliveryStateId } from "./delivery-state.js";
-import { checkUserExist } from "./user.js";
-
-const orders = [
-  // {
-  //   "id": "1",
-  //   "userId": "1",
-  //   "total": "199",
-  //   "placed": "datetime",
-  //   "packages": [
-  //     {
-  //       "productId": "1",
-  //       "quantity": "1",
-  //       "deliveryStateId": "1",
-  //     },
-  //   ],
-  // },
-];
+import orders from "../../assets/models/orders.js";
+import { LOCALSTORAGE } from "../views/settings.js";
+import { getFromStorage, saveToStorage, generateUID } from "./utils.js";
+import { getDefaultDeliveryStateId } from "./delivery-states.js";
+import { checkUserExist } from "./users.js";
 
 
 export function getOrdersList() {

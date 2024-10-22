@@ -1,9 +1,9 @@
 import { IMG_ROOT_PATH, IMG_TYPE } from "./settings.js";
-import { getCartDetail, getUserCart, increaseProductQuant, removeFromCart, removeUserCart } from "../assets/data/cart.js";
-import { userAuthenticated } from "../assets/data/user.js";
-import { getProductDetail } from "../assets/data/products.js";
-import { hideElements, showElements } from "./utils.js";
-import { addOrders } from "../assets/data/orders.js";
+import { getCartDetail, getUserCart, increaseProductQuant, removeFromCart, removeUserCart } from "../controllers/carts.js";
+import { userAuthenticated } from "../controllers/users.js";
+import { getProductDetail } from "../controllers/products.js";
+import { hideElements, showElements } from "../controllers/utils.js";
+import { addOrders } from "../controllers/orders.js";
 
 //items
 const cartIcon = document.getElementById("cart");
@@ -37,7 +37,7 @@ const user = userAuthenticated() || console.error("user not auth but cartpage is
 //   });
 // }
 
-export function renderProducts() {
+export default function renderProducts() {
   let htmlDoc = ``;
 
   //view

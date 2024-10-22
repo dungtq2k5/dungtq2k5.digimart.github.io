@@ -1,34 +1,31 @@
-import { LOCALSTORAGE } from "../../backend/settings.js";
-import { 
-  generateUID, 
-  getFromStorage, 
-  hashPassword, 
-  saveToStorage 
-} from "../../backend/utils.js";
-
-const users = [
-  {
-    "id": "1",
-    "email": "dmenham0@adobe.com", //unique
-    "phone": "9528025822",
-    "password": "zD7$v0u9M",
-  }
-];
-
+import users from "../../assets/models/users.js";
+import { LOCALSTORAGE } from "../views/settings.js";
+import {
+  generateUID,
+  getFromStorage,
+  hashPassword,
+  saveToStorage,
+} from "./utils.js";
 
 export function getUsersList() {
   return getFromStorage(LOCALSTORAGE.usersList) || users;
 }
 
 export function checkUserExist(id) {
-  const exstingUser = getUsersList().find(user => user.id === id);
+  const exstingUser = getUsersList().find((user) => user.id === id);
   return exstingUser !== undefined;
 }
 
-export function addUser({email, phone, password}) {
-  const existingUser = getUsersList().find(user => user.email === email || user.phone === phone);
-  if(existingUser) {
-    console.error(existingUser.email === email ? "Email already exists!" : "Phone number already exists!");
+export function addUser({ email, phone, password }) {
+  const existingUser = getUsersList().find(
+    (user) => user.email === email || user.phone === phone
+  );
+  if (existingUser) {
+    console.error(
+      existingUser.email === email
+        ? "Email already exists!"
+        : "Phone number already exists!"
+    );
     return false;
   }
 
@@ -37,7 +34,7 @@ export function addUser({email, phone, password}) {
     id: generateUID(),
     email,
     phone,
-    password: hashPassword(password)
+    password: hashPassword(password),
   });
   saveToStorage(LOCALSTORAGE.usersList, updateUsersList);
 
@@ -45,22 +42,23 @@ export function addUser({email, phone, password}) {
 }
 
 export function checkEmailExist(email) {
-  const existingEmail = getUsersList().find(user => user.email === email);
+  const existingEmail = getUsersList().find((user) => user.email === email);
   return existingEmail !== undefined;
 }
 
 export function checkPhoneExist(phone) {
-  const existingPhone = getUsersList().find(user => user.phone === phone);
+  const existingPhone = getUsersList().find((user) => user.phone === phone);
   return existingPhone !== undefined;
 }
 
-
 export function loginUser(email, password) {
   password = hashPassword(password);
-  const existingUser = getUsersList().find(user => user.email === email && user.password === password);
+  const existingUser = getUsersList().find(
+    (user) => user.email === email && user.password === password
+  );
   // console.log(getFromStorage(LOCALSTORAGE.usersList),existingUser);
 
-  if(existingUser) {
+  if (existingUser) {
     saveToStorage(LOCALSTORAGE.userAuth, existingUser);
     return true;
   }
@@ -72,7 +70,7 @@ export function logoutUser() {
   // console.log("Remove user");
 }
 
-export function userAuthenticated() { 
+export function userAuthenticated() {
   /**
    * return user if user is auth otherwise return undefined
    */

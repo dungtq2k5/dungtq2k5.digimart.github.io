@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-  <link rel="stylesheet" href="styles/general.css">
-  <link rel="stylesheet" href="styles/cart.css">
-  <link rel="stylesheet" href="styles/footer.css">
-  <title>Document</title>
-</head>
-<body id="root">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+    />
+    <link rel="stylesheet" href="styles/general.css" />
+    <link rel="stylesheet" href="styles/cart.css" />
+    <link rel="stylesheet" href="styles/footer.css" />
+    <title>Document</title>
+  </head>
+  <body id="root">
+    <!--header-->
+    <header class="header b">
+      <a href="index.html" class="b" title="home">
+        <div class="header-title">
+          <p>Logo - Home /</p>
+        </div>
+      </a>
+      <a href="cart.html" class="b" title="cart">
+        <div class="header-title">
+          <p>Cart</p>
+        </div>
+      </a>
+    </header>
 
-  <!--header-->
-  <header class="header b">
-    <a href="index.html" class="b" title="home">
-      <div class="header-title">
-        <p>Logo - Home /</p>
-      </div>
-    </a>
-    <a href="cart.html" class="b" title="cart">
-      <div class="header-title">
-        <p>Cart</p>
-      </div>
-    </a>
-  </header>
+    <!-- cart -->
+    <div class="content b2">
+      <main class="content-product b">
+        <div class="content-product-header b">
+          <p class="b">Product</p>
+          <p class="b">Price</p>
+          <p class="b">Quantity</p>
+          <p class="b">Subtotal</p>
+        </div>
 
-  <!-- cart -->
-  <div class="content b2">
-
-    <main class="content-product b">
-      <div class="content-product-header b">
-        <p class="b">Product</p>
-        <p class="b">Price</p>
-        <p class="b">Quantity</p>
-        <p class="b">Subtotal</p>
-      </div>
-
-      <ul id="products-container">
-        <li class="content-product-section b">
+        <ul id="products-container">
+          <!-- <li class="content-product-section b">
           <img src="assets/img/products/samsung-galaxy-watch6.webp" alt="">
 
           <p class="b">$191</p>
@@ -51,46 +52,41 @@
           <p class="b">$190</p>
 
           <button class="del">Delete</button>
-        </li>
-      </ul>
-    </main>
+        </li> -->
+        </ul>
+      </main>
 
-    <div id="checkout-form" class="content-checkout b">
-      <h2>Cart total</h2>
-      <div>
-        <p>Subtotal: </p>
-        <p>
-          $<span class="content-checkout-subtotal-js">150</span>
-        </p>
-      </div>
-      <div>
-        <p>Shipping: </p>
-        <p>
-          $<span class="content-checkout-shipfee-js">Free</span>
-        </p>
-      </div>
-      <div>
-        <p>Total: </p>
-        <p>
-          $<span class="content-checkout-total-js">Free</span>
-        </p>
-      </div>
+      <div id="checkout-form" class="content-checkout b">
+        <h2>Cart total</h2>
+        <div>
+          <p>Subtotal:</p>
+          <p>$<span class="content-checkout-subtotal-js">150</span></p>
+        </div>
+        <div>
+          <p>Shipping:</p>
+          <p>$<span class="content-checkout-shipfee-js">Free</span></p>
+        </div>
+        <div>
+          <p>Total:</p>
+          <p>$<span class="content-checkout-total-js">Free</span></p>
+        </div>
 
-      <button class="content-checkout-btn-js btn1">Process to checkout</button>
+        <button class="content-checkout-btn-js btn1">
+          Process to checkout
+        </button>
+      </div>
     </div>
 
-  </div>
+    <!-- footer -->
+    <footer id="footer" class="footer b">
+      <div class="footer-copyright b">
+        <p>&copy; Copyright DungTran 2024. All rigth reserved.</p>
+      </div>
+    </footer>
 
-  <!-- footer -->
-  <footer id="footer" class="footer b">
-    <div class="footer-copyright b">
-      <p>&copy; Copyright DungTran 2024. All rigth reserved.</p>
-    </div>
-  </footer>
-
-  <!-- remove item backdrop -->
-  <div id="remove-item-container" class="backdrop hide b">
-    <!-- <div class="remove-item b">
+    <!-- remove item backdrop -->
+    <div id="remove-item-container" class="backdrop hide b">
+      <!-- <div class="remove-item b">
       <button class="remove-item-close close-btn" title="close">
         <i class="uil uil-times detail-close-icon b"></i>
       </button>
@@ -106,8 +102,9 @@
         <button class="cancel-btn-js btn2 b">No</button>
       </div>
     </div> -->
-  </div>
+    </div>
 
-  <script type="module" src="backend/main-cart.js"></script>
-</body>
-</html>   
+    <!-- <script type="module" src="./backend/views/main-cart.js"></script> -->
+    <script type="module" src="./backend/views/pages/cart.js"></script>
+  </body>
+</html>

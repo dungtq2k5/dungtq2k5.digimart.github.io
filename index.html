@@ -1,45 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-  <link rel="stylesheet" href="styles/general.css">
-  <link rel="stylesheet" href="styles/header.css">
-  <link rel="stylesheet" href="styles/content.css">
-  <link rel="stylesheet" href="styles/detail.css">
-  <link rel="stylesheet" href="styles/form.css">
-  <link rel="stylesheet" href="styles/footer.css">
-  <title>Document</title>
-</head>
-<body id="root">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+    />
+    <link rel="stylesheet" href="styles/general.css" />
+    <link rel="stylesheet" href="styles/header.css" />
+    <link rel="stylesheet" href="styles/content.css" />
+    <link rel="stylesheet" href="styles/detail.css" />
+    <link rel="stylesheet" href="styles/form.css" />
+    <link rel="stylesheet" href="styles/footer.css" />
+    <title>Document</title>
+  </head>
+  <body id="root">
+    <!--header-->
+    <header class="header">
+      <a href="index.html" class="b" title="home">
+        <div class="header-title">
+          <p>Logo</p>
+        </div>
+      </a>
 
-  <!--header-->
-  <header class="header">
-    <a href="index.html" class="b" title="home">
-      <div class="header-title">
-        <p>Logo</p>
-      </div>
-    </a>
+      <div class="header-ulti b">
+        <div class="header-ulti-search-box b2">
+          <input
+            id="search-field"
+            type="text"
+            placeholder="What are you looking for?"
+          />
 
-    <div class="header-ulti b">
-      <div class="header-ulti-search-box b2">
-        <input id="search-field" type="text" placeholder="What are you looking for?"/>
-        
-        <button id="search-btn" class="header-ulti-search-box-btn" title="search">
-          <i class="uil uil-search"></i>
-        </button>
+          <button
+            id="search-btn"
+            class="header-ulti-search-box-btn"
+            title="search"
+          >
+            <i class="uil uil-search"></i>
+          </button>
+        </div>
 
-      </div>
-            
-      <div id="cart" class="header-ulti-cart b" title="cart">
-        <a href="cart.html" aria-label="cart">
-          <span class="red-dot"></span>
-          <i class="uil uil-shopping-cart"></i>
-        </a>
-        
-        <!-- cart popup -->
-        <!-- <div id="cart-popup" class="pop-up hide b" title="">
+        <div id="cart" class="header-ulti-cart b" title="cart">
+          <a href="cart.html" aria-label="cart">
+            <span class="red-dot"></span>
+            <i class="uil uil-shopping-cart"></i>
+          </a>
+
+          <!-- cart popup -->
+          <!-- <div id="cart-popup" class="pop-up hide b" title="">
           <div class="cart-popup">
             <p class="cart-popup-title b">Recently added products</p>
         
@@ -54,118 +63,154 @@
             <a id="viewing-cart-btn" href="#cart" class="btn1">Viewing my shop cart</a>
           </div>
         </div> -->
+        </div>
+
+        <a
+          href="orders.html"
+          class="header-ulti-return b"
+          title="return&orders"
+          aria-label="return&orders"
+        >
+          <i class="uil uil-package"></i>
+          <span class="red-dot"></span>
+        </a>
       </div>
 
-      <a href="orders.html" class="header-ulti-return b" title="return&orders" aria-label="return&orders">
-        <i class="uil uil-package"></i>
-        <span class="red-dot"></span>
-      </a>
-    </div>
+      <div class="header-auth b">
+        <button class="btn1 header-auth-login login-btn-js">Login</button>
+        <button class="btn2 header-auth-logout register-btn-js">
+          Register
+        </button>
 
-    <div class="header-auth b">
-      <button class="btn1 header-auth-login login-btn-js">Login</button>
-      <button class="btn2 header-auth-logout register-btn-js">Register</button>
-
-      <button id="header-auth-profile" class="header-auth-profile b" title="auth">
-        <i class="uil uil-user-square"></i>
-      </button>
-      <!-- auth popup -->
-      <div id="header-auth-profile-popup" class="header-auth-profile-popup hide b"> 
-        <button class="btn1 header-auth-profile-popup-login login-btn-js">Login</button>
-        <button class="btn2 header-auth-profile-popup-logout register-btn-js">Register</button>
+        <button
+          id="header-auth-profile"
+          class="header-auth-profile b"
+          title="auth"
+        >
+          <i class="uil uil-user-square"></i>
+        </button>
+        <!-- auth popup -->
+        <div
+          id="header-auth-profile-popup"
+          class="header-auth-profile-popup hide b"
+        >
+          <button class="btn1 header-auth-profile-popup-login login-btn-js">
+            Login
+          </button>
+          <button class="btn2 header-auth-profile-popup-logout register-btn-js">
+            Register
+          </button>
+        </div>
+        <a id="logout-btn" href="#logout" class="btn2 hide">Logout</a>
       </div>
-      <a id="logout-btn" href="#logout" class="btn2 hide">Logout</a>
-    </div>
 
-    <!-- filter search -->
-    <div id="filter-search" class="filter-search hide b">
-      <ul class="filter-search-category b">
-        <li class="filter-search-category-item b">
-          <p>category</p>
-          <i class="uil uil-check hide"></i>
-        </li>
-      </ul>
+      <!-- filter search -->
+      <div id="filter-search" class="filter-search hide b">
+        <ul class="filter-search-category b">
+          <li class="filter-search-category-item b">
+            <p>category</p>
+            <i class="uil uil-check hide"></i>
+          </li>
+        </ul>
 
-      
-      <div class="filter-search-slider b">
-        <div class="filter-search-slider-content b">
-          <div class="b">
-            <label for="filter-search-slider-range-max">
-              Min: $<span class="min-value-js">10</span>
-            </label>
+        <div class="filter-search-slider b">
+          <div class="filter-search-slider-content b">
+            <div class="b">
+              <label for="filter-search-slider-range-max">
+                Min: $<span class="min-value-js">10</span>
+              </label>
+            </div>
+            <div class="b">
+              <label for="filter-search-slider-range-min">
+                Max: $<span class="max-value-js">500</span>
+              </label>
+            </div>
           </div>
-          <div class="b">
-            <label for="filter-search-slider-range-min">
-              Max: $<span class="max-value-js">500</span>
-            </label>
+
+          <div class="filter-search-slider-range b">
+            <div class="filter-search-slider-range-fill"></div>
+            <input
+              id="filter-search-slider-range-max"
+              class="filter-search-slider-range-input"
+              type="range"
+              value="0"
+              min="0"
+              max="500"
+              step="10"
+            />
+            <input
+              id="filter-search-slider-range-min"
+              class="filter-search-slider-range-input"
+              type="range"
+              value="500"
+              min="0"
+              max="500"
+              step="10"
+            />
           </div>
         </div>
 
-        <div class="filter-search-slider-range b">
-          <div class="filter-search-slider-range-fill"></div>
-          <input id="filter-search-slider-range-max" class="filter-search-slider-range-input" type="range" value="0" min="0" max="500" step="10">
-          <input id="filter-search-slider-range-min" class="filter-search-slider-range-input" type="range" value="500" min="0" max="500" step="10">
-        </div>
+        <ul class="filter-search-result b">
+          <li class="filter-search-result-item b">
+            <img
+              class="b"
+              src="assets/img/products/samsung-galaxy-watch6.webp"
+              alt=""
+            />
+            <p class="b">SamSung Galaxy watch6</p>
+          </li>
+        </ul>
       </div>
+    </header>
 
-      <ul class="filter-search-result b">
-        <li class="filter-search-result-item b">
-          <img class="b" src="assets/img/products/samsung-galaxy-watch6.webp" alt="">
-          <p class="b">SamSung Galaxy watch6</p>
-        </li>
-      </ul>
-    </div>
-  </header>
-
-  <!--content section-->
-  <div class="content b">
-    <aside class="content-menu b">
-      <ul id="content-menu">
-        <li class="content-menu-item b">
+    <!--content section-->
+    <div class="content b">
+      <aside class="content-menu b">
+        <ul id="content-menu">
+          <li class="content-menu-item b">
           <input id="content-menu-item-all" type="radio" name="content-menu-item-radio" checked>
           <label for="content-menu-item-all">All</label>
         </li>
-      </ul>
-    </aside>
+        </ul>
+      </aside>
 
-    <main id="products-container" class="main b">
-      <div class="main-card b">
-        <div class="main-card-img-box b">
-          <span class="main-card-img-box-tag b">-20%</span>
-          <img
-            class="b"
-            src="assets/img/products/samsung-galaxy-watch6.webp"
-            alt="Red black gaming hand console"
-          />
-        </div>
-
-        <div class="main-card-info b">
-          <p class="main-card-info-title">Samsung Galaxy watch6 44mm</p>
-          <div class="b">   
-            <span class="main-card-info-price">$120</span>
-            <s class="main-card-info-plain-price">$140</s>
+      <main id="products-container" class="main b">
+        <!-- <div class="main-card b">
+          <div class="main-card-img-box b">
+            <span class="main-card-img-box-tag b">-20%</span>
+            <img
+              class="b"
+              src="../assets//img/products/samsung-galaxy-watch6.webp"
+              alt="Red black gaming hand console"
+            />
           </div>
-        </div>
-      </div>
-    </main>
-  </div>
 
-  <nav class="content-nav b2">
-    <button id="content-nav-back" class="btn2">
-      <i class="uil uil-arrow-left" title="prev"></i>
-    </button>
-    <div class="content-nav-index b">
-      <p id="content-nav-index">1</p>
+          <div class="main-card-info b">
+            <p class="main-card-info-title">Samsung Galaxy watch6 44mm</p>
+            <div class="b">
+              <span class="main-card-info-price">$120</span>
+              <s class="main-card-info-plain-price">$140</s>
+            </div>
+          </div>
+        </div> -->
+      </main>
     </div>
-    <button id="content-nav-forward" class="btn2">
-      <i class="uil uil-arrow-right" title="next"></i>
-    </button>
-  </nav>
 
+    <nav class="content-nav b2">
+      <button id="content-nav-back" class="btn2">
+        <i class="uil uil-arrow-left" title="prev"></i>
+      </button>
+      <div class="content-nav-index b">
+        <p id="content-nav-index">1</p>
+      </div>
+      <button id="content-nav-forward" class="btn2">
+        <i class="uil uil-arrow-right" title="next"></i>
+      </button>
+    </nav>
 
-  <!--detail product popup-->
-  <div id="product-detail-backdrop" class="backdrop hide b2">
-    <div class="detail b">
+    <!--detail product popup-->
+    <div id="product-detail-backdrop" class="backdrop hide b2">
+      <!-- <div class="detail b">
       <button class="detail-close close-btn b" title="close">
         <i class="uil uil-times b"></i>
       </button>
@@ -187,110 +232,124 @@
           <button class="btn2 add-btn-js">Add to cart</button>
         </div>
       </div>
+    </div> -->
     </div>
-  </div>
 
-  <!--login form popup-->
-  <div id="login-form-container" class="backdrop hide b">
-    <form class="login-form b">
-      <button class="form-close close-btn b">
-        <i class="uil uil-times"></i>
-      </button>
+    <!--login form popup-->
+    <div id="login-form-container" class="backdrop hide b">
+      <form class="login-form b">
+        <button class="form-close close-btn b">
+          <i class="uil uil-times"></i>
+        </button>
 
-      <h1>Login</h1>
+        <h1>Login</h1>
 
-      <div class="login-form-field b">
-        <label for="login-form-field-email">Email</label>
-        <input
-          id="login-form-field-email"
-          type="email"
-          placeholder="nikola.tesla@gmail.com"
-        />
-      </div>
-      <div class="login-form-field b">
-        <label for="login-form-field-password">Password</label>
-        <input id="login-form-field-password" type="password" placeholder="password123" />
-      </div>
+        <div class="login-form-field b">
+          <label for="login-form-field-email">Email</label>
+          <input
+            id="login-form-field-email"
+            type="email"
+            placeholder="nikola.tesla@gmail.com"
+          />
+        </div>
+        <div class="login-form-field b">
+          <label for="login-form-field-password">Password</label>
+          <input
+            id="login-form-field-password"
+            type="password"
+            placeholder="password123"
+          />
+        </div>
 
-      <div class="login-form-field-invalid-email-js invalid-msg hide b">
-        <i class="uil uil-exclamation-triangle b"></i>
-        <p class="login-form-field-invalid-email-msg-js"></p>
-      </div>
+        <div class="login-form-field-invalid-email-js invalid-msg hide b">
+          <i class="uil uil-exclamation-triangle b"></i>
+          <p class="login-form-field-invalid-email-msg-js"></p>
+        </div>
 
-      <button class="login-form-submit-btn-js btn1">Login in</button>
+        <button class="login-form-submit-btn-js btn1">Login in</button>
 
-      <p class="login-form-question">
-        Don't have an account?
-        <a href="#register" class="link">Register now.</a>
-      </p>
-    </form>
-  </div>
-
-
-  <!--register form popup-->
-  <div id="register-form-container" class="backdrop hide b">
-    <form class="register-form border-line">
-      <button class="form-close close-btn b">
-        <i class="uil uil-times"></i>
-      </button>
-
-      <h1>Register</h1>
-
-      <div class="register-form-field border-line">
-        <label for="register-form-field-email">Email</label>
-        <input
-          id="register-form-field-email"
-          type="text"
-          placeholder="nikola.tesla@gmail.com"
-        />
-        <span class="register-form-field-invalid-email-js invalid-msg hide b">
-          <i class="uil uil-exclamation-triangle"></i>
-          <p class="register-form-field-invalid-email-msg-js"></p>
-        </span>
-      </div>
-
-      <div class="register-form-field border-line">
-        <label for="register-form-field-phone">Phone number</label>
-        <input id="register-form-field-phone" type="tel" placeholder="0123456789"/>
-        <span class="register-form-field-invalid-phone-js invalid-msg hide">
-          <i class="uil uil-exclamation-triangle"></i>
-          <p class="register-form-field-invalid-phone-msg-js"></p>
-        </span>
-      </div>
-
-      <div class="register-form-field border-line">
-        <label for="register-form-field-password">Password</label>
-        <input id="register-form-field-password" type="password" placeholder="password123"/>
-        <span class="register-form-field-invalid-password-js invalid-msg hide">
-          <ul class="b">
-            <div>
-              <i class="uil uil-exclamation-triangle b"></i>
-              Password must have 8 characters long and include at least:
-            </div>
-            <li>one number [0-9].</li>
-            <li>one uppercase letter [a-z].</li>
-            <li>one lowercase letter [A-Z].</li>
-            <li>one special letter [(!-)].</li>
-          </ul>
-        </span>
-      </div>
-
-      <button class="register-form-btn-js btn1">Login in</button>
-
-      <p class="register-form-question">
-        Already have an account?
-        <a href="#login" class="link">Login now.</a>
-      </p>
-    </form>
-  </div>
-
-  <!-- footer -->
-  <footer class="footer b">
-    <div class="footer-copyright b">
-      <p>&copy; Copyright DungTran 2024. All rigth reserved.</p>
+        <p class="login-form-question">
+          Don't have an account?
+          <a href="#register" class="link">Register now.</a>
+        </p>
+      </form>
     </div>
-  </footer>
 
-  <script type="module" src="backend/main.js"></script>
-</body>
-</html>   
+    <!--register form popup-->
+    <div id="register-form-container" class="backdrop hide b">
+      <form class="register-form border-line">
+        <button class="form-close close-btn b">
+          <i class="uil uil-times"></i>
+        </button>
+
+        <h1>Register</h1>
+
+        <div class="register-form-field border-line">
+          <label for="register-form-field-email">Email</label>
+          <input
+            id="register-form-field-email"
+            type="text"
+            placeholder="nikola.tesla@gmail.com"
+          />
+          <span class="register-form-field-invalid-email-js invalid-msg hide b">
+            <i class="uil uil-exclamation-triangle"></i>
+            <p class="register-form-field-invalid-email-msg-js"></p>
+          </span>
+        </div>
+
+        <div class="register-form-field border-line">
+          <label for="register-form-field-phone">Phone number</label>
+          <input
+            id="register-form-field-phone"
+            type="tel"
+            placeholder="0123456789"
+          />
+          <span class="register-form-field-invalid-phone-js invalid-msg hide">
+            <i class="uil uil-exclamation-triangle"></i>
+            <p class="register-form-field-invalid-phone-msg-js"></p>
+          </span>
+        </div>
+
+        <div class="register-form-field border-line">
+          <label for="register-form-field-password">Password</label>
+          <input
+            id="register-form-field-password"
+            type="password"
+            placeholder="password123"
+          />
+          <span
+            class="register-form-field-invalid-password-js invalid-msg hide"
+          >
+            <ul class="b">
+              <div>
+                <i class="uil uil-exclamation-triangle b"></i>
+                Password must have 8 characters long and include at least:
+              </div>
+              <li>one number [0-9].</li>
+              <li>one uppercase letter [a-z].</li>
+              <li>one lowercase letter [A-Z].</li>
+              <li>one special letter [(!-)].</li>
+            </ul>
+          </span>
+        </div>
+
+        <button class="register-form-btn-js btn1">Login in</button>
+
+        <p class="register-form-question">
+          Already have an account?
+          <a href="#login" class="link">Login now.</a>
+        </p>
+      </form>
+    </div>
+
+    <!-- footer -->
+    <footer class="footer b">
+      <div class="footer-copyright b">
+        <p>&copy; Copyright DungTran 2024. All rigth reserved.</p>
+      </div>
+    </footer>
+
+    <!-- <script type="module" src="./backend/views/main.js"></script> -->
+    <script type="module" src="./backend/views/pages/home.js"></script>
+  </body>
+</html>

@@ -1,12 +1,12 @@
-import { showElements, hideElements, calculatePages } from "./utils.js";
+import { showElements, hideElements, calculatePages } from "../controllers/utils.js";
 import { IMG_ROOT_PATH, IMG_TYPE, MAX_PRODUCT_RENDERED } from "./settings.js";
 import { 
   getProductsList,
   getProductDetail,
   getProductAmount,
-} from "../assets/data/products.js";
-import { userAuthenticated } from "../assets/data/user.js";
-import { addToCart } from "../assets/data/cart.js";
+} from "../controllers/products.js";
+import { userAuthenticated } from "../controllers/users.js";
+import { addToCart } from "../controllers/carts.js";
 
 
 const productContainer = document.getElementById("products-container");
@@ -55,7 +55,7 @@ export default function renderProducts(productsList) {
   // console.log("render-products");
 }
 
-export function navigationProducts() {
+export function responsiveNavigationProducts() {
   navProductBackBtn.addEventListener("click", () => {
     if(navProductIndex.innerHTML > 1) {
       navProductIndex.innerHTML--;

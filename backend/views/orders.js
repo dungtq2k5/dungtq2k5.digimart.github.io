@@ -1,9 +1,9 @@
 import { IMG_ROOT_PATH, IMG_TYPE } from "./settings.js";
-import { getPackage, getUserOrders } from "../assets/data/orders.js";
-import { getProductDetail } from "../assets/data/products.js";
-import { userAuthenticated } from "../assets/data/user.js";
-import { dateFormatted, hideElements, showElements } from "./utils.js";
-import { getDeliveryState } from "../assets/data/delivery-state.js";
+import { getPackage, getUserOrders } from "../controllers/orders.js";
+import { getProductDetail } from "../controllers/products.js";
+import { userAuthenticated } from "../controllers/users.js";
+import { dateFormatted, hideElements, showElements } from "../controllers/utils.js";
+import { getDeliveryState } from "../controllers/delivery-states.js";
 
 const user = userAuthenticated() || console.error("user not auth but order-page is render");
 
@@ -13,7 +13,7 @@ const ordersContainer = document.getElementById("orders-container");
 //track package
 const trackContainer = document.getElementById("track-container");
 
-export function renderOrder() {
+export default function renderOrders() {
   let htmlDoc = ``;
 
   //view
