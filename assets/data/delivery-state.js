@@ -1,26 +1,34 @@
-const deliveryState = [
+const deliveryStates = [
   {
     "id": "1",
-    "state": "preparing"
+    "name": "preparing",
+    "completeLevel": "1"
   },
   {
     "id": "2",
-    "state": "shipping"
+    "name": "shipping",
+    "completeLevel": "2"
   },
   {
     "id": "3",
-    "state": "delivered"
+    "name": "delivered",
+    "completeLevel": "3"
   },
   {
     "id": "4",
-    "state": "cancel"
+    "name": "cancel",
+    "completeLevel": "-1"
   }
 ];
 
-export function getDeliveryState() {
-  return deliveryState;
+export function getDeliveryStatesList() {
+  return deliveryStates;
 };
 
 export function getDefaultDeliveryStateId() {
-  return getDeliveryState()[0].id;
+  return getDeliveryStatesList()[0].id;
+}
+
+export function getDeliveryState(id) {
+  return getDeliveryStatesList().find(state => state.id === id);
 }

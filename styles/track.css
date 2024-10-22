@@ -26,8 +26,16 @@
   justify-content: space-between;
 }
 .track-bar-progress {
+  position: relative;
   height: 1.5em;
   border-radius: 15px;
   border: 1px solid var(--lightgrey);
-  background: linear-gradient(to right, var(--blue) 50%, white 50%);
+  overflow: hidden;
+}
+.track-bar-progress-fill {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  /* width: 90%; */
+  background-color: var(--blue);
 }

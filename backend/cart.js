@@ -206,7 +206,7 @@ export function responsiveCheckoutBtn() {
   const time = new Date();
   
   checkoutBtn.addEventListener("click", () => {
-    const items = getUserCart(user.id).map(item => ({
+    const packages = getUserCart(user.id).map(item => ({
       productId: item.productId,
       quantity: item.quantity
     }));
@@ -215,7 +215,7 @@ export function responsiveCheckoutBtn() {
       user.id, 
       getTotal(), 
       time, 
-      items
+      packages
     );
 
     removeUserCart(user.id);

@@ -9,7 +9,7 @@ const orders = [
   //   "userId": "1",
   //   "total": "199",
   //   "placed": "datetime",
-  //   "items": [
+  //   "packages": [
   //     {
   //       "productId": "1",
   //       "quantity": "1",
@@ -28,9 +28,9 @@ export function getUserOrders(userId) {
   return getOrdersList().filter(order => order.userId === userId);
 }
 
-export function addOrders(userId, total, placed, items) {
+export function addOrders(userId, total, placed, packages) {
   if(checkUserExist(userId)) {
-    const itemsMod = items.forEach(item => {
+    const packagesMod = packages.forEach(item => {
       item.deliveryStateId = getDefaultDeliveryStateId();
     });
 
@@ -40,13 +40,31 @@ export function addOrders(userId, total, placed, items) {
       userId,
       total,
       placed,
-      items
+      packages
     });
 
     saveToStorage(LOCALSTORAGE.ordersList, ordersList);
 
   } else {
     console.error(`User with an id ${userId} not found!`);
+  }
+}
+
+export function getPackage(orderId, productId) {
+  const existingOrder = getOrdersList().find(order => order.id === orderId);
+
+  if(existingOrder) {
+    const packagesList = existingOrder.packages;
+    const existingPackage = packagesList.find(pack => pack.productId === productId);
+
+    if(existingPackage) {
+      return existingPackage;
+    } else {
+      console.error(`Product with an id ${productId} not found in order ${orderId}`);
+    }
+    
+  } else {
+    console.error(`Order with an id ${orderId} not found!`);
   }
 }
 
