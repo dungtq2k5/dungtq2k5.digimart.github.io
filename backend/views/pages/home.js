@@ -14,10 +14,16 @@ import {
   loginUser,
   responsiveAuthBtn
 } from "../auth.js";
+import { 
+  responsiveLogo, 
+  renderCartAndOrdersNotifications,
+} from "../main-header.js";
 // import { renderCartPopUp } from "./cart.js";
 // import { getData } from "../assets/data/products.js";
 
-
+//header
+responsiveLogo();
+renderCartAndOrdersNotifications();
 
 // activateResAll();
 resSearch();

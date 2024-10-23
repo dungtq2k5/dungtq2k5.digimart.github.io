@@ -5,9 +5,10 @@ import { getProductDetail } from "../controllers/products.js";
 import { hideElements, showElements } from "../controllers/utils.js";
 import { addOrders } from "../controllers/orders.js";
 
+//user auth
+const user = userAuthenticated() || console.error("user not auth but cartpage is rendered");
+
 //items
-const cartIcon = document.getElementById("cart");
-const cartPopup = document.getElementById("cart-popup");
 // const viewCartBtn = document.getElementById("viewing-cart-btn");
 const productContainer = document.getElementById("products-container");
 
@@ -22,20 +23,6 @@ const checkoutBtn = checkoutForm.querySelector(".content-checkout-btn-js");
 const removeItemContainer = document.getElementById("remove-item-container");
 
 
-const user = userAuthenticated() || console.error("user not auth but cartpage is rendered");
-
-// export function renderCartPopUp() {
-//   cartIcon.addEventListener("mouseover", () => {
-//     if(cartPopup.classList.contains("hide")) {
-//       cartPopup.classList.remove("hide");
-//       // console.log("over");
-//     }
-//   });
-//   cartIcon.addEventListener("mouseleave", () => {
-//     cartPopup.classList.add("hide");
-//     // console.log("out");
-//   });
-// }
 
 export default function renderProducts() {
   let htmlDoc = ``;

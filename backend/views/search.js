@@ -15,7 +15,8 @@ import {
   getPlainProductsList,
 } from "../controllers/products.js";
 import { getCategoriesList } from "../controllers/categories.js";
-import renderProducts, { resetNavProductIndex } from "./product.js";
+import renderProducts, { resetPaginationProduct } from "./product.js";
+import { hideCategories } from "./categories.js";
 
 //search
 const searchField = document.getElementById("search-field");
@@ -74,7 +75,8 @@ function responsiveSearchSuggestionPopUp() {
     );
 
     saveToStorage(LOCALSTORAGE.productsList, productsListFiltered);
-    resetNavProductIndex();
+    hideCategories();
+    resetPaginationProduct();
     renderProducts(productsListFiltered);
     hideElements(searchPopupContainer);
   });

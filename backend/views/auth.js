@@ -79,9 +79,9 @@ const invalidPhoneMsg = registerForm.querySelector(
 const logoutBtn = document.getElementById("logout-btn");
 
 //display buttons when refresh
-if (userAuthenticated()) {
-  loginBtns.forEach((btn) => hideElements(btn));
-  registerBtns.forEach((btn) => hideElements(btn));
+if(userAuthenticated()) {
+  loginBtns.forEach(btn => hideElements(btn));
+  registerBtns.forEach(btn => hideElements(btn));
   hideElements(authIcon);
   showElements(logoutBtn);
   console.log("Page refresh but user is already login");

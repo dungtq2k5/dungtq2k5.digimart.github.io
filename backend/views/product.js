@@ -1,5 +1,5 @@
-import { showElements, hideElements, calculatePages } from "../controllers/utils.js";
-import { IMG_ROOT_PATH, IMG_TYPE, MAX_PRODUCT_RENDERED } from "./settings.js";
+import { showElements, hideElements, calculatePages, getFromStorage, saveToStorage } from "../controllers/utils.js";
+import { IMG_ROOT_PATH, IMG_TYPE, LOCALSTORAGE, MAX_PRODUCT_RENDERED } from "./settings.js";
 import { 
   getProductsList,
   getProductDetail,
@@ -7,20 +7,26 @@ import {
 } from "../controllers/products.js";
 import { userAuthenticated } from "../controllers/users.js";
 import { addToCart } from "../controllers/carts.js";
+import { renderCartAndOrdersNotifications } from "./main-header.js";
 
 
+//products
 const productContainer = document.getElementById("products-container");
 const productDetailBackDrop = document.getElementById("product-detail-backdrop"); //fixed at index.html
+
+//pagination
 const navProductBackBtn = document.getElementById("content-nav-back");
 const navProductForwardBtn = document.getElementById("content-nav-forward");
-const navProductIndex = document.getElementById("content-nav-index");
+const paginationProduct = document.getElementById("content-nav-index");
+
+let currentPagination = getFromStorage(LOCALSTORAGE.currentProductPagination) || 1; //keep when page refresh
+paginationProduct.innerHTML = currentPagination;
 
 export default function renderProducts(productsList) {
-  const start = (navProductIndex.innerHTML-1) * MAX_PRODUCT_RENDERED;
-  const end = navProductIndex.innerHTML * MAX_PRODUCT_RENDERED;
+  const start = (currentPagination-1) * MAX_PRODUCT_RENDERED;
+  const end = currentPagination * MAX_PRODUCT_RENDERED;
   productsList = productsList ? productsList.slice(start, end) : getProductsList(start, end);
 
-  //view
   let htmlDoc = ``;
   productsList.forEach(item => {
     htmlDoc += `
@@ -43,8 +49,6 @@ export default function renderProducts(productsList) {
 
   productContainer.innerHTML = htmlDoc;
 
-
-  //controller
   productContainer.querySelectorAll(".main-card").forEach(card => {
     card.addEventListener("click", () => {
       const productId = card.dataset.productId;
@@ -57,8 +61,10 @@ export default function renderProducts(productsList) {
 
 export function responsiveNavigationProducts() {
   navProductBackBtn.addEventListener("click", () => {
-    if(navProductIndex.innerHTML > 1) {
-      navProductIndex.innerHTML--;
+    if(currentPagination > 1) {
+      currentPagination--
+      paginationProduct.innerHTML = currentPagination;
+      saveToStorage(LOCALSTORAGE.currentProductPagination, currentPagination);
       renderProducts();
       
       // console.log("back");
@@ -66,8 +72,10 @@ export function responsiveNavigationProducts() {
   });
   
   navProductForwardBtn.addEventListener("click", () => {
-    if(navProductIndex.innerHTML < calculatePages(getProductAmount(), MAX_PRODUCT_RENDERED)) {
-      navProductIndex.innerHTML++;
+    if(currentPagination < calculatePages(getProductAmount(), MAX_PRODUCT_RENDERED)) {
+      currentPagination++;
+      paginationProduct.innerHTML = currentPagination;
+      saveToStorage(LOCALSTORAGE.currentProductPagination, currentPagination);
       renderProducts();
       
       // console.log("forward");
@@ -75,8 +83,10 @@ export function responsiveNavigationProducts() {
   });
 }
 
-export function resetNavProductIndex() {
-  navProductIndex.innerHTML = 1;
+export function resetPaginationProduct() {
+  currentPagination = 1;
+  paginationProduct.innerHTML = currentPagination;
+  localStorage.removeItem(LOCALSTORAGE.currentProductPagination);
   // console.log("reset page index");
 }
 
@@ -117,6 +127,7 @@ function renderProductDetailPopUp(product) {
 
     if(user) {
       addToCart(user.id, product.id);
+      renderCartAndOrdersNotifications();
       console.log("add to cart");
     } else {
       //direct to login page
