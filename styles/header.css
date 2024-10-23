@@ -205,9 +205,6 @@
   border-radius: var(--border-radius);
   padding: .5em;
 }
-.filter-search-result-item:hover {
-  background-color: var(--darkwhite);
-}
 .filter-search-result-item img {
   max-width: 84px;
   background-color: var(--darkwhite);

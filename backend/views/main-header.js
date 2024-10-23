@@ -1,9 +1,11 @@
-import { LOCALSTORAGE, IMG_ROOT_PATH, IMG_TYPE, MAX_ITEM_CART_POPUP_RENDERED } from "./settings.js";
+import { 
+  LOCALSTORAGE, 
+  CLASSNAME
+} from "./settings.js";
 import { userAuthenticated } from "../controllers/users.js";
 import { getUserCart } from "../controllers/carts.js";
 import { hideElements, showElements } from "../controllers/utils.js";
 import { getUserOrders } from "../controllers/orders.js";
-import { getProductDetail } from "../controllers/products.js";
 
 
 const user = userAuthenticated() || console.log("user not auth but main-header rendered");
@@ -15,11 +17,33 @@ const logo = header.querySelector(".header-logo-js");
 const cart = header.querySelector(".header-ulti-cart");
 const cartNotification = cart.querySelector(".red-dot");
 const cartPopupContainer = cart.querySelector(".pop-up");
-const cartPopupItemsContainer = cartPopupContainer.querySelector(".cart-popup-items-container");
+// const cartPopupItemsContainer = cartPopupContainer.querySelector(".cart-popup-items-container");
 
 //orders
 const orders = header.querySelector(".header-ulti-orders");
 const ordersNotification = orders.querySelector(".red-dot");
+
+//auth
+const authIcon = document.getElementById("header-auth-profile");
+const authPopup = document.getElementById("header-auth-profile-popup");
+//login
+const loginBtns = document.body.querySelectorAll(".login-btn-js");
+const loginFormContainer = document.getElementById("login-form-container");
+const loginForm = loginFormContainer.querySelector(".login-form");
+const loginCloseBtn = loginForm.querySelector(".form-close");
+const invalidCredentialPopup = loginForm.querySelector(".login-form-field-invalid-email-js");
+const invalidCredentialMsg = loginForm.querySelector(".login-form-field-invalid-email-msg-js");
+//register
+const registerBtns = document.body.querySelectorAll(".register-btn-js");
+const registerFormContainer = document.getElementById("register-form-container");
+const registerForm = registerFormContainer.querySelector(".register-form");
+const registerCloseBtn = registerForm.querySelector(".form-close");
+const invalidEmailPopup = registerForm.querySelector(".register-form-field-invalid-email-js");
+const invalidPhonePopup = registerForm.querySelector(".register-form-field-invalid-phone-js");
+const invalidPasswordPopup = registerForm.querySelector(".register-form-field-invalid-password-js");
+//logout
+const logoutBtn = document.getElementById("logout-btn");
+
 
 export function responsiveLogo() {
   logo.addEventListener("click", () => {
@@ -82,3 +106,71 @@ export function responsiveCartPopUp() {
 //   cartPopupItemsContainer.innerHTML = htmlDoc;
 //   console.log("render cart popup items");
 // }
+
+
+export function responsiveAuthBtn() {
+  authIcon.addEventListener("click", () => {
+    authPopup.classList.toggle(CLASSNAME.hide);
+    // console.log("toggle");
+  });
+  document.addEventListener("click", (e) => {
+    if (
+      !authIcon.contains(e.target) &&
+      !authPopup.classList.contains(CLASSNAME.hide)
+    ) {
+      authPopup.classList.add(CLASSNAME.hide);
+      // console.log("hidden");
+    }
+  });
+}
+
+export function responsiveLoginBtn() {
+  loginBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      loginForm.reset();
+      hideElements(invalidCredentialPopup);
+      showElements(loginFormContainer);
+      // console.log("show-login");
+    });
+  });
+
+  loginCloseBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    hideElements(loginFormContainer);
+    // console.log("hide-login");
+  });
+}
+
+export function responsiveRegisterBtn() {
+  registerBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      registerForm.reset();
+      hideElements([
+        invalidEmailPopup,
+        invalidPasswordPopup,
+        invalidPhonePopup,
+      ]);
+      showElements(registerFormContainer);
+      // console.log("show-register");
+    });
+  });
+
+  registerCloseBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    hideElements(registerFormContainer);
+    // console.log("hide-register");
+  });
+}
+
+export function responsiveLogoutBtn() {
+  //user login but page refresh
+  if(user) {
+    loginBtns.forEach(btn => hideElements(btn));
+    registerBtns.forEach(btn => hideElements(btn));
+    hideElements(authIcon);
+    showElements(logoutBtn);
+    console.log("Page refresh but user is already login");
+  }
+}

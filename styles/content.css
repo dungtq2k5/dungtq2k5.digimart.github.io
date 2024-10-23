@@ -46,9 +46,6 @@
   border-radius: var(--border-radius);
   cursor: pointer;
 }
-.main-card:hover {
-  background-color: var(--darkwhite);
-}
 .main-card-img-box {
   position: relative;
   /* border: 1px solid black; */

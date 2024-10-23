@@ -6,39 +6,38 @@ import {
 import { default  as resSearch } from "../search.js";
 import { renderCategories } from "../categories.js";
 import { 
-  responsiveAuthBtn as resAuthBtn, 
-  responsiveRegisterBtn as resResgisterBtn, 
-  responsiveLoginBtn as resLoginBtn,
   logoutUser,
   registerUser, 
   loginUser,
-  responsiveAuthBtn
 } from "../auth.js";
 import { 
   responsiveLogo, 
   renderCartAndOrdersNotifications,
+  responsiveAuthBtn,
+  responsiveRegisterBtn,
+  responsiveLoginBtn,
+  responsiveLogoutBtn,
 } from "../main-header.js";
-// import { renderCartPopUp } from "./cart.js";
-// import { getData } from "../assets/data/products.js";
 
 //header
 responsiveLogo();
 renderCartAndOrdersNotifications();
+responsiveAuthBtn();
+responsiveRegisterBtn();
+responsiveLoginBtn();
+responsiveLogoutBtn();
 
-// activateResAll();
+
+//searching
 resSearch();
 
-resAuthBtn();
-resResgisterBtn();
-responsiveAuthBtn();
-resLoginBtn();
-
+//auth
+loginUser();
 registerUser();
 logoutUser();
-loginUser();
 
-// renderCartPopUp();
 
+//homepage content
 renderCategories();
 renderProducts();
 resNavProducts();
