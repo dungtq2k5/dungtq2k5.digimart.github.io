@@ -1,4 +1,4 @@
-import { IMG_ROOT_PATH, IMG_TYPE } from "./settings.js";
+import { IMG_ROOT_PATH, IMG_TYPE, MSG } from "./settings.js";
 import { getPackage, getUserOrders } from "../controllers/orders.js";
 import { getProductDetail } from "../controllers/products.js";
 import { userAuthenticated } from "../controllers/users.js";
@@ -8,6 +8,7 @@ import { getDeliveryState } from "../controllers/delivery-states.js";
 const user = userAuthenticated() || console.error("user not auth but order-page is render");
 
 //orders
+const mainContainer = document.getElementById("main-container");
 const ordersContainer = document.getElementById("orders-container");
 
 //track package
@@ -69,6 +70,16 @@ export default function renderOrders() {
 
   console.log("render user orders");
 }
+
+export function renderEmptyOrders() {
+  mainContainer.innerHTML = `
+    <div class="orders-empty b">
+      <p>${MSG.nothingInOrders}</p>
+      <a href="index.html" class="btn2">Go shopping now</a>
+    </div>
+  `;
+}
+
 
 function renderTrackPackage(orderId, productId) {
   const pack = getPackage(orderId, productId);

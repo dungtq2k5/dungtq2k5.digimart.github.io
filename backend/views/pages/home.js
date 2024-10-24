@@ -1,4 +1,3 @@
-// import { default as activateResAll } from "./responsive.js";
 import { 
   default as renderProducts,
   responsiveNavigationProducts as resNavProducts
@@ -16,25 +15,37 @@ import {
   responsiveAuthBtn,
   responsiveRegisterBtn,
   responsiveLoginBtn,
-  responsiveLogoutBtn,
+  renderLogoutBtn,
+  responsiveCart,
+  responsiveOrders,
 } from "../main-header.js";
+import { userAuthenticated } from "../../controllers/users.js";
+
+
+const user = userAuthenticated();
 
 //header
 responsiveLogo();
-renderCartAndOrdersNotifications();
-responsiveAuthBtn();
-responsiveRegisterBtn();
-responsiveLoginBtn();
-responsiveLogoutBtn();
+responsiveCart();
+responsiveOrders();
+if(user) {
+  renderCartAndOrdersNotifications();
+  renderLogoutBtn();
+  //auth
+  logoutUser();
+
+} else {
+  responsiveLoginBtn();
+  responsiveRegisterBtn();
+  responsiveAuthBtn();
+  //auth
+  loginUser();
+  registerUser();
+}
 
 
 //searching
 resSearch();
-
-//auth
-loginUser();
-registerUser();
-logoutUser();
 
 
 //homepage content

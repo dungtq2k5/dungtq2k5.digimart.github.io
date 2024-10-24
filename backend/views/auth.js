@@ -22,11 +22,14 @@ const authIcon = document.getElementById("header-auth-profile");
 const loginBtns = document.body.querySelectorAll(".login-btn-js");
 const loginFormContainer = document.getElementById("login-form-container");
 const loginForm = loginFormContainer.querySelector(".login-form");
+const registerLink = loginForm.querySelector(".register-link-js");
 
 //register-form
 const registerBtns = document.body.querySelectorAll(".register-btn-js");
 const registerFormContainer = document.getElementById("register-form-container");
 const registerForm = registerFormContainer.querySelector(".register-form");
+const loginLink = registerForm.querySelector(".login-link-js");
+
 
 //login-auth
 const emailLoginField = loginForm.querySelector("#login-form-field-email");
@@ -76,10 +79,7 @@ export function loginUser() {
       const password = passwordLoginField.value;
 
       if (login(email, password)) {
-        hideElements([authIcon, [...loginBtns], [...registerBtns]]);
-        showElements(logoutBtn);
-        hideElements(loginFormContainer);
-        console.log("user login success");
+        loginForm.submit();
       } else {
         showElements(invalidCredentialPopup);
         invalidCredentialMsg.innerHTML = MSG.invalidCredential;
@@ -88,6 +88,12 @@ export function loginUser() {
     } else {
       console.error("User is already login!");
     }
+  });
+
+  registerLink.addEventListener("click", e => {
+    e.preventDefault();
+    hideElements(loginFormContainer);
+    showElements(registerFormContainer);
   });
 }
 
@@ -101,29 +107,28 @@ export function registerUser() {
         password: passwordRegisterField.value,
       };
 
-      if (validateRegisterForm(user) && validateAddingUser(user)) {
+      if(validateRegisterForm(user) && validateAddingUser(user)) {
         addUser(user);
-
-        hideElements([authIcon, [...loginBtns], [...registerBtns]]);
-        showElements(logoutBtn);
-        hideElements(registerFormContainer);
-
         login(user.email, user.password);
-        console.log("register successfully - user login");
+        registerForm.submit();
       }
     } else {
       console.error("User is already login!");
     }
+  });
+
+  loginLink.addEventListener("click", e => {
+    e.preventDefault();
+    hideElements(registerFormContainer);
+    showElements(loginFormContainer);
   });
 }
 
 export function logoutUser() {
   logoutBtn.addEventListener("click", () => {
     if (userAuthenticated()) {
-      showElements([authIcon, [...loginBtns], [...registerBtns]]);
-      hideElements(logoutBtn);
+      // logoutBtn is a link when click page refresh
       logout();
-      console.log("user logout");
     } else {
       console.error("User not login yet!");
     }

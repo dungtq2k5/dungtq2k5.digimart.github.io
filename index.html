@@ -42,7 +42,7 @@
         </div>
 
         <div id="cart" class="header-ulti-cart b" title="cart">
-          <a href="cart.html" aria-label="cart">
+          <a href="#cart.html" aria-label="cart">
             <span class="red-dot hide"></span>
             <i class="uil uil-shopping-cart"></i>
           </a>
@@ -66,7 +66,7 @@
         </div>
 
         <a
-          href="orders.html"
+          href="#orders.html"
           class="header-ulti-orders b"
           title="orders"
           aria-label="orders"
@@ -78,9 +78,7 @@
 
       <div class="header-auth b">
         <button class="btn1 header-auth-login login-btn-js">Login</button>
-        <button class="btn2 header-auth-logout register-btn-js">
-          Register
-        </button>
+        <button class="btn2 header-auth-logout register-btn-js">Register</button>
 
         <button
           id="header-auth-profile"
@@ -101,7 +99,9 @@
             Register
           </button>
         </div>
-        <button id="logout-btn" class="btn2 hide">Logout</button>
+        
+        <!-- <button id="logout-btn" class="btn2 hide">Logout</button> -->
+        <a href="index.html" id="logout-btn" class="btn2 hide">Logout</a>
       </div>
 
       <!-- filter search -->
@@ -208,6 +208,13 @@
         <i class="uil uil-arrow-right" title="next"></i>
       </button>
     </nav>
+  
+    <!-- footer -->
+    <footer class="footer b">
+      <div class="footer-copyright b">
+        <p>&copy; Copyright DungTran 2024. All rigth reserved.</p>
+      </div>
+    </footer>
 
     <!--detail product popup-->
     <div id="product-detail-backdrop" class="backdrop hide b2">
@@ -271,21 +278,21 @@
 
         <p class="login-form-question">
           Don't have an account?
-          <a href="#register" class="link">Register now.</a>
+          <a href="#register" class="register-link-js link">Register now.</a>
         </p>
       </form>
     </div>
 
     <!--register form popup-->
     <div id="register-form-container" class="backdrop hide b">
-      <form class="register-form border-line">
+      <form class="register-form b">
         <button class="form-close close-btn b">
           <i class="uil uil-times"></i>
         </button>
 
         <h1>Register</h1>
 
-        <div class="register-form-field border-line">
+        <div class="register-form-field b">
           <label for="register-form-field-email">Email</label>
           <input
             id="register-form-field-email"
@@ -298,7 +305,7 @@
           </span>
         </div>
 
-        <div class="register-form-field border-line">
+        <div class="register-form-field b">
           <label for="register-form-field-phone">Phone number</label>
           <input
             id="register-form-field-phone"
@@ -311,7 +318,7 @@
           </span>
         </div>
 
-        <div class="register-form-field border-line">
+        <div class="register-form-field b">
           <label for="register-form-field-password">Password</label>
           <input
             id="register-form-field-password"
@@ -338,17 +345,10 @@
 
         <p class="register-form-question">
           Already have an account?
-          <a href="#login" class="link">Login now.</a>
+          <a href="#login" class="login-link-js link">Login now.</a>
         </p>
       </form>
     </div>
-
-    <!-- footer -->
-    <footer class="footer b">
-      <div class="footer-copyright b">
-        <p>&copy; Copyright DungTran 2024. All rigth reserved.</p>
-      </div>
-    </footer>
 
     <!-- <script type="module" src="./backend/views/main.js"></script> -->
     <script type="module" src="./backend/views/pages/home.js"></script>

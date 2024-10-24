@@ -1,6 +1,8 @@
 import { 
   LOCALSTORAGE, 
-  CLASSNAME
+  CLASSNAME,
+  LOCALHOST,
+  PAGES
 } from "./settings.js";
 import { userAuthenticated } from "../controllers/users.js";
 import { getUserCart } from "../controllers/carts.js";
@@ -16,7 +18,7 @@ const logo = header.querySelector(".header-logo-js");
 //cart
 const cart = header.querySelector(".header-ulti-cart");
 const cartNotification = cart.querySelector(".red-dot");
-const cartPopupContainer = cart.querySelector(".pop-up");
+// const cartPopupContainer = cart.querySelector(".pop-up");
 // const cartPopupItemsContainer = cartPopupContainer.querySelector(".cart-popup-items-container");
 
 //orders
@@ -54,6 +56,32 @@ export function responsiveLogo() {
   });
 }
 
+export function responsiveCart() {
+  cart.addEventListener("click", e => {
+    e.preventDefault();
+
+    if(user) {
+      window.location.href = `${LOCALHOST}/${PAGES.cart}`;
+    } else {
+      showElements(loginFormContainer);
+      console.log("Login first to go to cart page");
+    }
+  });
+}
+
+export function responsiveOrders() {
+  orders.addEventListener("click", e => {
+    e.preventDefault();
+
+    if(user) {
+      window.location.href = `${LOCALHOST}/${PAGES.orders}`;
+    } else {
+      showElements(loginFormContainer);
+      console.log("Login first to go to orders page");
+    }
+  });
+}
+
 export function renderCartAndOrdersNotifications() {
   if(user) {
     if(getUserCart(user.id).length >= 1) {
@@ -72,16 +100,16 @@ export function renderCartAndOrdersNotifications() {
   }
 }
 
-export function responsiveCartPopUp() {
-  cart.addEventListener("mouseover", () => {
-   showElements(cartPopupContainer);
-  });
+// export function responsiveCartPopUp() {
+//   cart.addEventListener("mouseover", () => {
+//    showElements(cartPopupContainer);
+//   });
 
-  cart.addEventListener("mouseleave", () => {
-    hideElements(cartPopupContainer);
-    // console.log("out");
-  });
-}
+//   cart.addEventListener("mouseleave", () => {
+//     hideElements(cartPopupContainer);
+//     // console.log("out");
+//   });
+// }
 
 // export function renderCartPopupItems() { //future dev
 //   let htmlDoc = ``;
@@ -153,7 +181,7 @@ export function responsiveRegisterBtn() {
         invalidPhonePopup,
       ]);
       showElements(registerFormContainer);
-      // console.log("show-register");
+      console.log("show-register");
     });
   });
 
@@ -164,13 +192,11 @@ export function responsiveRegisterBtn() {
   });
 }
 
-export function responsiveLogoutBtn() {
+export function renderLogoutBtn() {
   //user login but page refresh
-  if(user) {
-    loginBtns.forEach(btn => hideElements(btn));
-    registerBtns.forEach(btn => hideElements(btn));
-    hideElements(authIcon);
-    showElements(logoutBtn);
-    console.log("Page refresh but user is already login");
-  }
+  loginBtns.forEach(btn => hideElements(btn));
+  registerBtns.forEach(btn => hideElements(btn));
+  hideElements(authIcon);
+  showElements(logoutBtn);
+  console.log("Page refresh but user is already login");
 }

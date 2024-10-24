@@ -174,9 +174,6 @@ img {
   background-color: transparent;
   border-radius: var(--border-radius);
 }
-.close-btn:hover {
-  opacity: .6;
-}
 .del {
   border: none;
   background: none;
