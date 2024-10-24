@@ -34,7 +34,6 @@ const loginFormContainer = document.getElementById("login-form-container");
 const loginForm = loginFormContainer.querySelector(".login-form");
 const loginCloseBtn = loginForm.querySelector(".form-close");
 const invalidCredentialPopup = loginForm.querySelector(".login-form-field-invalid-email-js");
-const invalidCredentialMsg = loginForm.querySelector(".login-form-field-invalid-email-msg-js");
 //register
 const registerBtns = document.body.querySelectorAll(".register-btn-js");
 const registerFormContainer = document.getElementById("register-form-container");

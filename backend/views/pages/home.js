@@ -29,18 +29,20 @@ responsiveLogo();
 responsiveCart();
 responsiveOrders();
 if(user) {
-  renderCartAndOrdersNotifications();
-  renderLogoutBtn();
   //auth
   logoutUser();
+  //UI
+  renderCartAndOrdersNotifications();
+  renderLogoutBtn();
 
 } else {
-  responsiveLoginBtn();
-  responsiveRegisterBtn();
-  responsiveAuthBtn();
   //auth
   loginUser();
   registerUser();
+  //UI
+  responsiveLoginBtn();
+  responsiveRegisterBtn();
+  responsiveAuthBtn();
 }
 
 

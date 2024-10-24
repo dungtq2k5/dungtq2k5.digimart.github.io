@@ -19,6 +19,10 @@ const navProductBackBtn = document.getElementById("content-nav-back");
 const navProductForwardBtn = document.getElementById("content-nav-forward");
 const paginationProduct = document.getElementById("content-nav-index");
 
+//auth
+const loginFormContainer = document.getElementById("login-form-container");
+
+
 let currentPagination = getFromStorage(LOCALSTORAGE.currentProductPagination) || 1; //keep when page refresh
 paginationProduct.innerHTML = currentPagination;
 
@@ -135,7 +139,7 @@ function renderProductDetailPopUp(product) {
       handleAddProductToCart(user.id, product.id);
       window.location.href = `${LOCALHOST}/${PAGES.cart}`;
     } else {
-      console.log("Direct to login");
+      showElements(loginFormContainer);
     } 
   });
 
@@ -146,7 +150,7 @@ function renderProductDetailPopUp(product) {
       handleAddProductToCart(user.id, product.id);
       renderCartAndOrdersNotifications();
     } else {
-      console.log("Direct to login");
+      showElements(loginFormContainer);
     }
   });
 

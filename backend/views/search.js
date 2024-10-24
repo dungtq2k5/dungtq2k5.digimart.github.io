@@ -45,11 +45,15 @@ const inputEles = searchPopupContainer.querySelectorAll(
 let valueLookup = "";
 let categoriesLookup = [];
 
+//FIXME: execute search and hit refresh
+
+
 export default function responsiveSearch() {
   renderCategory();
 
   searchField.addEventListener("input", (e) => {
     valueLookup = e.target.value;
+
     const productsListFiltered = filterProducts(
       getPlainProductsList(),
       valueLookup,
@@ -66,6 +70,8 @@ export default function responsiveSearch() {
 function responsiveSearchSuggestionPopUp() {
   searchBtn.addEventListener("click", () => {
     console.log("execute search");
+    valueLookup = searchField.value;
+
     const productsListFiltered = filterProducts(
       getPlainProductsList(),
       valueLookup,
@@ -74,6 +80,7 @@ function responsiveSearchSuggestionPopUp() {
       maxVal.innerHTML
     );
 
+    renderProductSuggest(productsListFiltered);
     saveToStorage(LOCALSTORAGE.productsList, productsListFiltered);
     hideCategories();
     resetPaginationProduct();
@@ -107,13 +114,15 @@ function renderProductSuggest(
   end = MAX_ITEM_SUGGESTION
 ) {
   let htmlDoc = ``;
+
   if (productsList.length > 0) {
     productsList = productsList.slice(start, end);
-    productsList.forEach((item) => {
+
+    productsList.forEach(product => {
       htmlDoc += `
-        <li class="filter-search-result-item b">
-          <img class="b" src="${IMG_ROOT_PATH}/${item.img}.webp" alt="">
-          <p class="b">${item.name}</p>
+        <li class="filter-search-result-item b" data-product-plain-name="${product.name}">
+          <img class="b" src="${IMG_ROOT_PATH}/${product.img}.webp" alt="">
+          <p class="b">${product.name}</p>
         </li>
       `;
     });
@@ -122,6 +131,18 @@ function renderProductSuggest(
   }
 
   filterSearchResultContainer.innerHTML = htmlDoc;
+
+  //assign search input with product name and execute search
+  filterSearchResultContainer.querySelectorAll(".filter-search-result-item").forEach(section => {
+    section.addEventListener("click", () => {
+      const productName = section.dataset.productPlainName;
+
+      searchField.value = productName;
+      searchBtn.click();
+    });
+  });
+
+  console.log("render product suggest");
 }
 
 function renderCategory(categoriesList = getCategoriesList()) {

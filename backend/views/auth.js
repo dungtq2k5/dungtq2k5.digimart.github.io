@@ -15,17 +15,12 @@ import {
   logoutUser as logout,
 } from "../controllers/users.js";
 
-//auth-profile
-const authIcon = document.getElementById("header-auth-profile");
-
 //login-form
-const loginBtns = document.body.querySelectorAll(".login-btn-js");
 const loginFormContainer = document.getElementById("login-form-container");
 const loginForm = loginFormContainer.querySelector(".login-form");
 const registerLink = loginForm.querySelector(".register-link-js");
 
 //register-form
-const registerBtns = document.body.querySelectorAll(".register-btn-js");
 const registerFormContainer = document.getElementById("register-form-container");
 const registerForm = registerFormContainer.querySelector(".register-form");
 const loginLink = registerForm.querySelector(".login-link-js");
