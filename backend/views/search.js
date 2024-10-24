@@ -9,6 +9,7 @@ import {
   showElements,
   hideElements,
   saveToStorage,
+  getFromStorage,
 } from "../controllers/utils.js";
 import {
   filterProducts,
@@ -45,8 +46,10 @@ const inputEles = searchPopupContainer.querySelectorAll(
 let valueLookup = "";
 let categoriesLookup = [];
 
-//FIXME: execute search and hit refresh
-
+if(getFromStorage(LOCALSTORAGE.categoryHidden)) { //avoid category menu show but filter still applied when refresh page
+  hideCategories();
+  console.log("Page refresh but category menu still hidden");
+}
 
 export default function responsiveSearch() {
   renderCategory();
@@ -80,9 +83,9 @@ function responsiveSearchSuggestionPopUp() {
       maxVal.innerHTML
     );
 
-    renderProductSuggest(productsListFiltered);
+    renderProductSuggest(productsListFiltered); //make sure suggestion up to date
     saveToStorage(LOCALSTORAGE.productsList, productsListFiltered);
-    hideCategories();
+    if(!getFromStorage(LOCALSTORAGE.categoryHidden)) hideCategories();
     resetPaginationProduct();
     renderProducts(productsListFiltered);
     hideElements(searchPopupContainer);

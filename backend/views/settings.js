@@ -1,3 +1,4 @@
+
 export const LOCALHOST = "http://127.0.0.1:5500";
 export const IMG_ROOT_PATH = "../assets/img/products"; //relative to index.html
 export const IMG_TYPE = "webp";
@@ -33,7 +34,8 @@ export const LOCALSTORAGE = {
   userAuth: "userAuth",
   ordersList: "ordersList",
   categoryCheckedIndex: "categoryCheckedIndex",
-  currentProductPagination: "currentProductPagination"
+  currentProductPagination: "currentProductPagination",
+  categoryHidden: "categoryHidden",
 }
 
 export const PAGES = {
