@@ -1,5 +1,5 @@
 import { showElements, hideElements, calculatePages, getFromStorage, saveToStorage } from "../controllers/utils.js";
-import { IMG_ROOT_PATH, IMG_TYPE, LOCALSTORAGE, MAX_PRODUCT_RENDERED, MSG } from "./settings.js";
+import { IMG_ROOT_PATH, IMG_TYPE, LOCALSTORAGE, MAX_PRODUCT_RENDERED, MSG, LOCALHOST, PAGES } from "./settings.js";
 import { 
   getProductsList,
   getProductDetail,
@@ -55,6 +55,7 @@ export default function renderProducts(productsList) {
 
   productContainer.querySelectorAll(".main-card").forEach(card => {
     card.addEventListener("click", () => {
+      // console.log("show product detail");
       const productId = card.dataset.productId;
       renderProductDetailPopUp(getProductDetail(productId));
     });
@@ -112,7 +113,7 @@ function renderProductDetailPopUp(product) {
         </div>
     
         <div class="detail-right-btns">
-          <button class="btn1">Buy now</button>
+          <button class="buy-btn-js btn1">Buy now</button>
           <button class="add-btn-js btn2">Add to cart</button>
         </div>
       </div>
@@ -126,19 +127,34 @@ function renderProductDetailPopUp(product) {
     // console.log("close-detail-products");
   });
 
+  productDetailBackDrop.querySelector(".buy-btn-js").addEventListener("click", () => {
+    const user = userAuthenticated();
+
+    if(user) {
+      //add to cart -> go directly to cart page
+      handleAddProductToCart(user.id, product.id);
+      window.location.href = `${LOCALHOST}/${PAGES.cart}`;
+    } else {
+      console.log("Direct to login");
+    } 
+  });
+
   productDetailBackDrop.querySelector(".add-btn-js").addEventListener("click", () => {
     const user = userAuthenticated();
 
     if(user) {
-      addToCart(user.id, product.id);
+      handleAddProductToCart(user.id, product.id);
       renderCartAndOrdersNotifications();
-      console.log("add to cart");
     } else {
-      //direct to login page
-      console.log("login to add!");
+      console.log("Direct to login");
     }
   });
 
   showElements(productDetailBackDrop);
   // console.log(`detail-product ${product.id}`);
 }
+
+function handleAddProductToCart(userId, productId) {
+  addToCart(userId, productId);
+  console.log("add to cart");
+};

@@ -1,4 +1,4 @@
-import { IMG_ROOT_PATH, IMG_TYPE } from "./settings.js";
+import { IMG_ROOT_PATH, IMG_TYPE, PAGES, MSG } from "./settings.js";
 import { getCartDetail, getUserCart, increaseProductQuant, removeFromCart, removeUserCart } from "../controllers/carts.js";
 import { userAuthenticated } from "../controllers/users.js";
 import { getProductDetail } from "../controllers/products.js";
@@ -9,6 +9,7 @@ import { addOrders } from "../controllers/orders.js";
 const user = userAuthenticated() || console.error("user not auth but cartpage is rendered");
 
 //items
+const mainContainer = document.getElementById("content-container");
 const productContainer = document.getElementById("products-container");
 
 //checkout
@@ -22,9 +23,10 @@ const checkoutBtn = checkoutForm.querySelector(".content-checkout-btn-js");
 const removeItemContainer = document.getElementById("remove-item-container");
 
 export default function renderProducts() {
+  const userCart = getUserCart(user.id);
   let htmlDoc = ``;
 
-  getUserCart(user.id).forEach(item => {
+  userCart.forEach(item => {
     const product = getProductDetail(item.productId);
 
     htmlDoc += `
@@ -93,7 +95,11 @@ function handleIncsItemQuant(cartId) {
 function handleDelItem(cartId) {
   console.log(`del product ${cartId} in cart`);
   removeFromCart(cartId);
-  renderProducts();
+
+  const userCart = getUserCart(user.id);
+  userCart.length >= 1 
+    ? renderProducts() 
+    : renderEmptyCart();
 }
 
 function updateCheckoutForm() {
@@ -149,8 +155,7 @@ function renderRemoveItemPopup(cartId) {
 
   removeItemContainer.querySelector(".submit-btn-js").addEventListener("click", () => {
     console.log("submit remove");
-    removeFromCart(cartId);
-    renderProducts();
+    handleDelItem(cartId);
     hideElements(removeItemContainer);
   });
 
@@ -205,4 +210,13 @@ export function responsiveCheckoutBtn() {
     removeUserCart(user.id);
     console.log("process checkout");
   });
+}
+
+export function renderEmptyCart() {
+  mainContainer.innerHTML = `
+    <div class="content-empty-cart">
+      <p>${MSG.nothingInCart}</p>
+      <a href="${PAGES.home}" class="btn2">Go shopping now</a>
+    </div>
+  `;
 }
