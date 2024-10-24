@@ -28,8 +28,8 @@
     </header>
 
     <!-- cart -->
-    <div class="content b2">
-      <main class="content-product b">
+    <main id="content-container" class="content b2">
+      <div class="content-product b">
         <div class="content-product-header b">
           <p class="b">Product</p>
           <p class="b">Price</p>
@@ -54,7 +54,7 @@
           <button class="del">Delete</button>
         </li> -->
         </ul>
-      </main>
+      </div>
 
       <div id="checkout-form" class="content-checkout b">
         <h2>Cart total</h2>
@@ -71,11 +71,10 @@
           <p>$<span class="content-checkout-total-js">Free</span></p>
         </div>
 
-        <button class="content-checkout-btn-js btn1">
-          Process to checkout
-        </button>
+        <a href="orders.html" class="content-checkout-btn-js btn1">Process to checkout</a>
       </div>
-    </div>
+    
+    </main>
 
     <!-- footer -->
     <footer id="footer" class="footer b">

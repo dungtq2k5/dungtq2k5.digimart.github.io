@@ -1,5 +1,5 @@
 import { showElements, hideElements, calculatePages, getFromStorage, saveToStorage } from "../controllers/utils.js";
-import { IMG_ROOT_PATH, IMG_TYPE, LOCALSTORAGE, MAX_PRODUCT_RENDERED } from "./settings.js";
+import { IMG_ROOT_PATH, IMG_TYPE, LOCALSTORAGE, MAX_PRODUCT_RENDERED, MSG } from "./settings.js";
 import { 
   getProductsList,
   getProductDetail,
@@ -28,24 +28,28 @@ export default function renderProducts(productsList) {
   productsList = productsList ? productsList.slice(start, end) : getProductsList(start, end);
 
   let htmlDoc = ``;
-  productsList.forEach(item => {
-    htmlDoc += `
-      <div class="main-card b" data-product-id="${item.id}">
-        <div class="main-card-img-box b">
-          <img
-            class="b"
-            src="${IMG_ROOT_PATH}/${item.img}.${IMG_TYPE}"
-            alt="watch/band-img"
-          />
+  if(productsList.length >= 1) {
+    productsList.forEach(item => {
+      htmlDoc += `
+        <div class="main-card b" data-product-id="${item.id}">
+          <div class="main-card-img-box b">
+            <img
+              class="b"
+              src="${IMG_ROOT_PATH}/${item.img}.${IMG_TYPE}"
+              alt="watch/band-img"
+            />
+          </div>
+    
+          <div class="main-card-info b">
+            <p class="main-card-info-title">${item.name} - ${item.size}mm</p>
+            <span class="main-card-info-price">$${item.price}</span>
+          </div>
         </div>
-  
-        <div class="main-card-info b">
-          <p class="main-card-info-title">${item.name} - ${item.size}mm</p>
-          <span class="main-card-info-price">$${item.price}</span>
-        </div>
-      </div>
-    `;
-  });
+      `;
+    });
+  } else {
+    htmlDoc = `<p class="no-product-msg">${MSG.noProductFound}</p>`;
+  }
 
   productContainer.innerHTML = htmlDoc;
 

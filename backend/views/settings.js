@@ -20,6 +20,9 @@ export const MSG = {
   emailTaken: "This email is already taken.",
   phoneTaken: "This phone number is already taken.",
   invalidCredential: "Invalid credentials, can't login!",
+  noProductFound: "Sorry, no products found!",
+  nothingInCart: "Your shopping cart is empty",
+  nothingInOrders: "No orders yet!",
 }
 
 export const LOCALSTORAGE = {

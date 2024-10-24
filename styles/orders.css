@@ -6,6 +6,20 @@
   margin: 0 auto;
   padding: var(--section-padding);
 }
+
+.orders-empty {
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+  align-items: center;
+}
+
+.orders-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
 .order-container-title, .order-container-section-product {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

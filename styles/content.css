@@ -4,6 +4,11 @@
   padding: .5em;
 }
 
+/*no products found msg*/
+.no-product-msg {
+  white-space: nowrap;
+}
+
 /*categories*/
 .content-categories {
   display: flex;
@@ -21,13 +26,6 @@
   border-radius: var(--border-radius);
   padding: .25em .5em;
 }
-
-/* .content-categories-item:hover {
-  border-color: var(--lightgrey);
-}
-.content-categories-item:active {
-  border-color: var(--blue);
-} */
 
 /*product card*/
 .main {

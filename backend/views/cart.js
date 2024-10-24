@@ -9,7 +9,6 @@ import { addOrders } from "../controllers/orders.js";
 const user = userAuthenticated() || console.error("user not auth but cartpage is rendered");
 
 //items
-// const viewCartBtn = document.getElementById("viewing-cart-btn");
 const productContainer = document.getElementById("products-container");
 
 //checkout
@@ -22,12 +21,9 @@ const checkoutBtn = checkoutForm.querySelector(".content-checkout-btn-js");
 //remove item popup
 const removeItemContainer = document.getElementById("remove-item-container");
 
-
-
 export default function renderProducts() {
   let htmlDoc = ``;
 
-  //view
   getUserCart(user.id).forEach(item => {
     const product = getProductDetail(item.productId);
 
@@ -189,6 +185,7 @@ function getTotal() {
 export function responsiveCheckoutBtn() {
   /**
    * add data to orders and remove data from cart
+   * go to orders page
    */  
   const time = new Date();
   

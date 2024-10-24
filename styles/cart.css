@@ -6,6 +6,14 @@
   margin: 0 auto;
   padding: var(--section-padding);
 }
+
+.content-empty-cart {
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+  align-items: center;
+}
+
 .content-product li {
   margin-top: .5em;
 }
