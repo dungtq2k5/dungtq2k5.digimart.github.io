@@ -1,4 +1,4 @@
-.login-form, .register-form {
+.login-form, .register-form, .address-form {
   position: relative;
   width: 100%;
   max-width: 440px;
@@ -17,12 +17,12 @@
   top: 2px;
   right: 2px;
 }
-.login-form-field, .register-form-field {
+.login-form-field, .register-form-field, .address-form-field {
   display: flex;
   flex-direction: column;
   gap: .25em;
 }
-.login-form-field input, .register-form-field input {
+.login-form-field input, .register-form-field input, .address-form-field input {
   padding: .5em;
 }
 

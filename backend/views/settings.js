@@ -1,4 +1,3 @@
-
 export const LOCALHOST = "http://127.0.0.1:5500";
 export const IMG_ROOT_PATH = "../assets/img/products"; //relative to index.html
 export const IMG_TYPE = "webp";
@@ -19,9 +18,11 @@ export const MAX_PRODUCT_RENDERED = 5;
 export const MSG = {
   emailInvalid: "Invalid email.",
   phoneInvalid: "Invalid phone number.",
+  invalidCredential: "Invalid credentials, can't login!",
+
   emailTaken: "This email is already taken.",
   phoneTaken: "This phone number is already taken.",
-  invalidCredential: "Invalid credentials, can't login!",
+  
   noProductFound: "Sorry, no products found!",
   nothingInCart: "Your shopping cart is empty",
   nothingInOrders: "No orders yet!",
@@ -31,8 +32,10 @@ export const LOCALSTORAGE = {
   productsList: "productsList",
   usersList: "usersList",
   cartsList: "cartsList",
-  userAuth: "userAuth",
   ordersList: "ordersList",
+  deliveryAddressList: "deliveryAddressList",
+
+  userAuth: "userAuth",
   categoryCheckedIndex: "categoryCheckedIndex",
   currentProductPagination: "currentProductPagination",
   categoryHidden: "categoryHidden",

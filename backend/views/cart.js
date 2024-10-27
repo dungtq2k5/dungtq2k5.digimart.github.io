@@ -1,9 +1,11 @@
 import { IMG_ROOT_PATH, IMG_TYPE, PAGES, MSG } from "./settings.js";
-import { getCartDetail, getUserCart, increaseProductQuant, removeFromCart, removeUserCart } from "../controllers/carts.js";
+import { getCartDetail, getUserCart, increaseProductQuant, removeCart, removeUserCart, updateDeliveryAddress } from "../controllers/carts.js";
 import { userAuthenticated } from "../controllers/users.js";
 import { getProductDetail } from "../controllers/products.js";
-import { hideElements, showElements } from "../controllers/utils.js";
+import { hideElements, isValidDeliveryAddress, showElements } from "../controllers/utils.js";
 import { addOrders } from "../controllers/orders.js";
+import { addDeliveryAddress, getUserDeliveryAddress } from "../controllers/delivery-address.js";
+
 
 //user auth
 const user = userAuthenticated() || console.error("user not auth but cartpage is rendered");
@@ -22,12 +24,26 @@ const checkoutBtn = checkoutForm.querySelector(".content-checkout-btn-js");
 //remove item popup
 const removeItemContainer = document.getElementById("remove-item-container");
 
+//delivery address
+const addDelAddrBtn = mainContainer.querySelector(".add-del-addr-btn-js");
+
+const addrContainer = document.getElementById("del-addr-container");
+const addrForm = addrContainer.querySelector(".address-form");
+const addrFormCloseBtn = addrForm.querySelector(".form-close");
+const addrFormInput = addrForm.querySelector("#address-form-field-address");
+const addrFormSubmitBtn = addrForm.querySelector(".address-form-btn-js");
+
+
+
 export default function renderProducts() {
   const userCart = getUserCart(user.id);
+  const userDelAddrList = getUserDeliveryAddress(user.id);
   let htmlDoc = ``;
+
 
   userCart.forEach(item => {
     const product = getProductDetail(item.productId);
+    const delAddrList = orderDelAddrList(userDelAddrList, item.deliveryAddressId);
 
     htmlDoc += `
       <li class="content-product-section b" data-cart-id="${item.id}">
@@ -43,6 +59,13 @@ export default function renderProducts() {
 
         <p class="b">$${item.quantity*product.price}</p>
 
+        <div>
+          <label for="del-addr-${item.id}"></label>
+          <select id="del-addr-${item.id}" class="content-product-section-address b">
+            ${genDelAddrOptionsDoc(delAddrList)}
+          </select>
+        </div>
+
         <button class="del">Delete</button>
       </li>
     `;
@@ -50,9 +73,9 @@ export default function renderProducts() {
 
   productContainer.innerHTML = htmlDoc;
 
-  //controller
   productContainer.querySelectorAll(".content-product-section").forEach(section => {
     const cartId = section.dataset.cartId;
+    const delAddrSelect = section.querySelector(".content-product-section-address");
 
     //quant decs
     section.querySelector(".decs-quant-js").addEventListener("click", () => {
@@ -64,6 +87,12 @@ export default function renderProducts() {
       handleIncsItemQuant(cartId);
     });
 
+    //select address
+    delAddrSelect.addEventListener("change", () => {
+      const delAddrId = delAddrSelect.value;
+      updateDeliveryAddress(cartId, delAddrId);
+    });
+
     //del btn
     section.querySelector(".del").addEventListener("click", () => {
       handleDelItem(cartId);
@@ -73,6 +102,65 @@ export default function renderProducts() {
   // console.log("render products in cart");
   updateCheckoutForm();
 }
+
+export function responsiveCheckoutBtn() {
+  /**
+   * add data to orders and remove data from cart
+   * go to orders page
+   */  
+  
+  checkoutBtn.addEventListener("click", () => {
+    const packages = getUserCart(user.id).map(item => ({
+      productId: item.productId,
+      deliveryAddressId: item.deliveryAddressId,
+      quantity: item.quantity,
+    }));
+    
+    addOrders(
+      user.id, 
+      getTotal(), 
+      packages
+    );
+
+    removeUserCart(user.id);
+    console.log("process checkout");
+  });
+}
+
+export function renderEmptyCart() {
+  mainContainer.innerHTML = `
+    <div class="content-empty-cart">
+      <p>${MSG.nothingInCart}</p>
+      <a href="${PAGES.home}" class="btn2">Go shopping now</a>
+    </div>
+  `;
+}
+
+export function responsiveAddDelAddr() {
+  addDelAddrBtn.addEventListener("click", () => {
+    showElements(addrContainer);
+  });
+
+  addrFormCloseBtn.addEventListener("click", e => {
+    e.preventDefault();
+    hideElements(addrContainer);
+  });
+
+  addrFormSubmitBtn.addEventListener("click", e => {
+    e.preventDefault();
+    const delAddr = addrFormInput.value;
+
+    if(isValidDeliveryAddress(delAddr)) {
+      addDeliveryAddress(user.id, delAddr);
+      hideElements(addrContainer);
+      addrForm.submit();
+      console.log("address added");
+    } else {
+      console.log("unvalid address");
+    }
+  });
+}
+
 
 function handleDecsItemQuant(cartId) {
   const currentQuant = getCartDetail(cartId).quantity;
@@ -94,7 +182,7 @@ function handleIncsItemQuant(cartId) {
 
 function handleDelItem(cartId) {
   console.log(`del product ${cartId} in cart`);
-  removeFromCart(cartId);
+  removeCart(cartId);
 
   const userCart = getUserCart(user.id);
   userCart.length >= 1 
@@ -175,48 +263,27 @@ function getTotal() {
   return subtotal + shippingFee;
 }
 
-// {
-//   "userId": "1",
-//   "total": "199",
-//   "placed": "datetime",
-//   "items": [
-//     {
-//       "productId": "1",
-//       "quantity": "1",
-//     },
-//   ],
-// },
-
-export function responsiveCheckoutBtn() {
-  /**
-   * add data to orders and remove data from cart
-   * go to orders page
-   */  
-  const time = new Date();
-  
-  checkoutBtn.addEventListener("click", () => {
-    const packages = getUserCart(user.id).map(item => ({
-      productId: item.productId,
-      quantity: item.quantity
-    }));
-    
-    addOrders(
-      user.id, 
-      getTotal(), 
-      time, 
-      packages
-    );
-
-    removeUserCart(user.id);
-    console.log("process checkout");
+function genDelAddrOptionsDoc(list) {
+  return list.map(item => {
+    return `<option value="${item.id}">${item.address}</option>`;
   });
 }
 
-export function renderEmptyCart() {
-  mainContainer.innerHTML = `
-    <div class="content-empty-cart">
-      <p>${MSG.nothingInCart}</p>
-      <a href="${PAGES.home}" class="btn2">Go shopping now</a>
-    </div>
-  `;
+function orderDelAddrList(userDelAddrList, productDelAddrId) {
+  /**
+   * order list with product del addr first then orther from user
+   */
+
+  const findIndex = userDelAddrList.findIndex(addr => addr.id === productDelAddrId);
+  if(findIndex !== -1){
+    //swap to first if not already at first
+    if(findIndex !== 0) {
+      [userDelAddrList[0], userDelAddrList[findIndex]] = [userDelAddrList[findIndex], userDelAddrList[0]];
+    }
+    return userDelAddrList;
+  } 
+
+  console.error(`Product del addr with an id ${productDelAddrId} not found!`);
+  return null;
 }
+

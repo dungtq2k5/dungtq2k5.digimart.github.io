@@ -136,18 +136,19 @@ function renderProductDetailPopUp(product) {
 
     if(user) {
       //add to cart -> go directly to cart page
-      handleAddProductToCart(user.id, product.id);
+      addToCart(user, product.id);
       window.location.href = `${LOCALHOST}/${PAGES.cart}`;
     } else {
       showElements(loginFormContainer);
     } 
   });
 
+  //TODO: announce when added success.
   productDetailBackDrop.querySelector(".add-btn-js").addEventListener("click", () => {
     const user = userAuthenticated();
 
     if(user) {
-      handleAddProductToCart(user.id, product.id);
+      addToCart(user, product.id);
       renderCartAndOrdersNotifications();
     } else {
       showElements(loginFormContainer);
@@ -157,8 +158,3 @@ function renderProductDetailPopUp(product) {
   showElements(productDetailBackDrop);
   // console.log(`detail-product ${product.id}`);
 }
-
-function handleAddProductToCart(userId, productId) {
-  addToCart(userId, productId);
-  console.log("add to cart");
-};

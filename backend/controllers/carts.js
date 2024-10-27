@@ -20,21 +20,24 @@ export function getCartDetail(id) {
   return -1;
 }
 
-export function addToCart(userId, productId, quantity = 1) {
+export function addToCart(user, productId, quantity = 1) {
+  const userId = user.id;
+
   if (checkUserExist(userId) && checkProductExistFromProducts(productId)) {
+    const deliveryAddressId = user.deliveryAddressId;
     const cartList = getCartsList();
     const findIndex = cartList.findIndex(
       (cart) => cart.userId === userId && cart.productId === productId
     );
 
-    if (findIndex !== -1) {
-      //already in cart => quantity++
+    if (findIndex !== -1) { //already in cart => quantity++
       cartList[findIndex].quantity++;
     } else {
       cartList.push({
         id: generateUID(),
         userId,
         productId,
+        deliveryAddressId,
         quantity,
       });
     }
@@ -48,7 +51,22 @@ export function addToCart(userId, productId, quantity = 1) {
   }
 }
 
-export function removeFromCart(id) {
+export function updateDeliveryAddress(cartId, delAddrId) {
+  const cartsList = getCartsList();
+  const cartIndex = cartsList.findIndex(cart => cart.id === cartId);
+
+  if(cartIndex !== -1) {
+    cartsList[cartIndex].deliveryAddressId = delAddrId;
+    saveToStorage(LOCALSTORAGE.cartsList, cartsList);
+    console.log("update del addr");
+    return true;
+  }
+
+  console.error(`Cart with an id ${id} not found!`);
+  return false;
+}
+
+export function removeCart(id) {
   const cartList = getCartsList();
   const findIndex = cartList.findIndex((cart) => cart.id === id);
 

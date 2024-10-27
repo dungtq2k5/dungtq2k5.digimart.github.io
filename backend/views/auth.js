@@ -14,6 +14,7 @@ import {
   loginUser as login,
   logoutUser as logout,
 } from "../controllers/users.js";
+import deliveryAddress from "../../assets/models/delivery-address.js";
 
 //login-form
 const loginFormContainer = document.getElementById("login-form-container");
@@ -44,6 +45,7 @@ const phoneRegisterField = registerForm.querySelector(
 const passwordRegisterField = registerForm.querySelector(
   "#register-form-field-password"
 );
+const deliveryAddressRegisterField = registerForm.querySelector("#register-form-field-address");
 const registerSubmitBtn = registerForm.querySelector(".register-form-btn-js");
 
 const invalidEmailPopup = registerForm.querySelector(
@@ -100,6 +102,7 @@ export function registerUser() {
         email: emailRegisterField.value,
         phone: phoneRegisterField.value,
         password: passwordRegisterField.value,
+        deliveryAddress: deliveryAddressRegisterField.value,
       };
 
       if(validateRegisterForm(user) && validateAddingUser(user)) {

@@ -13,7 +13,7 @@ export function getUserOrders(userId) {
   return getOrdersList().filter(order => order.userId === userId);
 }
 
-export function addOrders(userId, total, placed, packages) {
+export function addOrders(userId, total, packages, placed = new Date()) {
   if(checkUserExist(userId)) {
     const packagesMod = packages.forEach(item => {
       item.deliveryStateId = getDefaultDeliveryStateId();

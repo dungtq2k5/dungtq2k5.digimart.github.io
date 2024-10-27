@@ -9,6 +9,7 @@
     />
     <link rel="stylesheet" href="styles/general.css" />
     <link rel="stylesheet" href="styles/cart.css" />
+    <link rel="stylesheet" href="styles/form.css"/>
     <link rel="stylesheet" href="styles/footer.css" />
     <title>Document</title>
   </head>
@@ -35,24 +36,38 @@
           <p class="b">Price</p>
           <p class="b">Quantity</p>
           <p class="b">Subtotal</p>
+          <div>
+            <p class="b">Delivery Address</p>
+            <button class="add-del-addr-btn-js link"><p>Add new</p></button>
+          </div>
         </div>
 
         <ul id="products-container">
           <!-- <li class="content-product-section b">
-          <img src="assets/img/products/samsung-galaxy-watch6.webp" alt="">
+            <img src="assets/img/products/samsung-galaxy-watch6.webp" alt="">
 
-          <p class="b">$191</p>
+            <p class="b">$191</p>
 
-          <div class="content-product-section-quantity b">
-            <i id="decrease-quantity" class="uil uil-arrow-left b" title="decrease quantity"></i>
-            <span class="b">1</span>
-            <i id="increase-quantity" class="uil uil-arrow-right b" title="increase quantity"></i>
-          </div>
+            <div class="content-product-section-quantity b">
+              <i id="decrease-quantity" class="uil uil-arrow-left b" title="decrease quantity"></i>
+              <span class="b">1</span>
+              <i id="increase-quantity" class="uil uil-arrow-right b" title="increase quantity"></i>
+            </div>
 
-          <p class="b">$190</p>
+            <p class="b">$190</p>
 
-          <button class="del">Delete</button>
-        </li> -->
+            <div>
+              <label for="del-addr"></label>
+              <select id="del-addr" class="content-product-section-address b">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="new">create new</option>
+              </select>
+            </div>
+
+            <button class="del">Delete</button>
+          </li> -->
         </ul>
       </div>
 
@@ -82,6 +97,28 @@
         <p>&copy; Copyright DungTran 2024. All rigth reserved.</p>
       </div>
     </footer>
+
+    <!-- add delivery address form backdrop -->
+    <div id="del-addr-container" class="backdrop hide b">
+      <form class="address-form b">
+        <button class="form-close close-btn b">
+          <i class="uil uil-times"></i>
+        </button>
+
+        <h2>New delivery address</h2>
+
+        <div class="address-form-field b">
+          <label for="address-form-field-address">Delivery address</label>
+          <input
+            id="address-form-field-address"
+            type="text"
+            placeholder="123 Wall Street, Los"
+          />
+        </div>
+
+        <button class="address-form-btn-js btn1">Add</button>
+      </form>
+    </div>
 
     <!-- remove item backdrop -->
     <div id="remove-item-container" class="backdrop hide b">

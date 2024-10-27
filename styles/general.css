@@ -117,12 +117,14 @@ img {
   border-radius: 50%;
 }
 
-.link {
+.link, .del {
   color: var(--blue);
   text-decoration: underline;
+  border: none;
+  background: none;
 }
-.link:hover {
-  color: var(--darkblue);
+.del {
+  color: var(--red);
 }
 
 .hide {
@@ -173,13 +175,6 @@ img {
   border: none;
   background-color: transparent;
   border-radius: var(--border-radius);
-}
-.del {
-  border: none;
-  background: none;
-  width: max-content;
-  color: var(--red);
-  text-decoration: underline;
 }
 
 /* testing */

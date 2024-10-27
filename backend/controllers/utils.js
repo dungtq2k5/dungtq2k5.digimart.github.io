@@ -61,6 +61,11 @@ export function isValidVietnamesePhoneNumber(phoneNumber) { //AI generate
   return vietnamPhoneNumberRegex.test(phoneNumber);
 }
 
+export function isValidDeliveryAddress(delAddr) {
+  //TODO: modify to be a real address
+  return delAddr.length >= 1;
+}
+
 export function generateUID() { //algorithm on stackoverflow
   return Date.now().toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9*Math.pow(10, 12)).toString(36);
 }

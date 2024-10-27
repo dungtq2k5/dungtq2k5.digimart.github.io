@@ -1,5 +1,6 @@
 import users from "../../assets/models/users.js";
 import { LOCALSTORAGE } from "../views/settings.js";
+import { addDeliveryAddress, getUserDeliveryAddress } from "./delivery-address.js";
 import {
   generateUID,
   getFromStorage,
@@ -16,7 +17,7 @@ export function checkUserExist(id) {
   return exstingUser !== undefined;
 }
 
-export function addUser({ email, phone, password }) {
+export function addUser({ email, phone, password, deliveryAddress }) {
   const existingUser = getUsersList().find(
     (user) => user.email === email || user.phone === phone
   );
@@ -30,11 +31,17 @@ export function addUser({ email, phone, password }) {
   }
 
   const updateUsersList = getUsersList();
+  const userId = generateUID();
+
+  addDeliveryAddress(userId, deliveryAddress);
+  const deliveryAddressId = getUserDeliveryAddress(userId).id;
+
   updateUsersList.push({
-    id: generateUID(),
+    id: userId,
     email,
     phone,
     password: hashPassword(password),
+    deliveryAddressId,
   });
   saveToStorage(LOCALSTORAGE.usersList, updateUsersList);
 

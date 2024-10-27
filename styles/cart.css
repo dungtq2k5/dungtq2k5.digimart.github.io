@@ -20,11 +20,12 @@
 
 .content-product-header, .content-product-section {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 1em;
   padding: 1em;
   border: 1px solid var(--lightgrey);
   border-radius: var(--border-radius);
+  white-space: nowrap;
 }
 
 .content-product-section {
@@ -39,6 +40,10 @@
   display: flex;
   align-items: center;
   gap: .5em;
+}
+.content-product-section-address {
+  border-radius: var(--border-radius);
+  width: 100%;
 }
 
 /*checkout form*/
