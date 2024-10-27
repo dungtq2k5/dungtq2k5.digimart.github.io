@@ -26,6 +26,9 @@ export const MSG = {
   noProductFound: "Sorry, no products found!",
   nothingInCart: "Your shopping cart is empty",
   nothingInOrders: "No orders yet!",
+
+  addToCartSuccess: "Added success",
+  addToCart: "Add to cart",
 }
 
 export const LOCALSTORAGE = {

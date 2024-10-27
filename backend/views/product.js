@@ -23,8 +23,13 @@ const paginationProduct = document.getElementById("content-nav-index");
 const loginFormContainer = document.getElementById("login-form-container");
 
 
-let currentPagination = getFromStorage(LOCALSTORAGE.currentProductPagination) || 1; //keep when page refresh
+let currentPagination = getFromStorage(LOCALSTORAGE.currentProductPagination) || 1; //keep when page refreshed
 paginationProduct.innerHTML = currentPagination;
+
+
+//timeout event
+let addToCartBtnTimeout;
+
 
 export default function renderProducts(productsList) {
   const start = (currentPagination-1) * MAX_PRODUCT_RENDERED;
@@ -100,7 +105,8 @@ export function resetPaginationProduct() {
 }
 
 function renderProductDetailPopUp(product) {
-  //view
+  const user = userAuthenticated();
+
   productDetailBackDrop.innerHTML = `
     <div class="detail b">
       <button class="detail-close close-btn b" title="close">
@@ -124,7 +130,8 @@ function renderProductDetailPopUp(product) {
     </div>
   `;
 
-  //controller
+  const addBtn = productDetailBackDrop.querySelector(".add-btn-js");
+
   productDetailBackDrop.querySelector(".detail-close").addEventListener("click", () => {
     productDetailBackDrop.innerHTML = "";  
     hideElements(productDetailBackDrop);
@@ -132,8 +139,6 @@ function renderProductDetailPopUp(product) {
   });
 
   productDetailBackDrop.querySelector(".buy-btn-js").addEventListener("click", () => {
-    const user = userAuthenticated();
-
     if(user) {
       //add to cart -> go directly to cart page
       addToCart(user, product.id);
@@ -143,13 +148,12 @@ function renderProductDetailPopUp(product) {
     } 
   });
 
-  //TODO: announce when added success.
-  productDetailBackDrop.querySelector(".add-btn-js").addEventListener("click", () => {
-    const user = userAuthenticated();
-
+  addBtn.addEventListener("click", () => {
     if(user) {
       addToCart(user, product.id);
+      addToCartSignal(addBtn);
       renderCartAndOrdersNotifications();
+
     } else {
       showElements(loginFormContainer);
     }
@@ -157,4 +161,16 @@ function renderProductDetailPopUp(product) {
 
   showElements(productDetailBackDrop);
   // console.log(`detail-product ${product.id}`);
+}
+
+
+function addToCartSignal(btn, timeout=800) {
+  if(btn.innerHTML !== MSG.addToCartSuccess) btn.innerHTML = MSG.addToCartSuccess;
+
+  if(addToCartBtnTimeout) clearTimeout(addToCartBtnTimeout);
+
+  addToCartBtnTimeout = setTimeout(() => {
+    btn.innerHTML = MSG.addToCart;
+    // console.log("reset btn");
+  }, timeout);
 }
