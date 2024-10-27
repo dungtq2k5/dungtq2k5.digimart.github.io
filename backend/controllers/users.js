@@ -30,20 +30,21 @@ export function addUser({ email, phone, password, deliveryAddress }) {
     return false;
   }
 
-  const updateUsersList = getUsersList();
+  const usersList = getUsersList();
   const userId = generateUID();
 
   addDeliveryAddress(userId, deliveryAddress);
-  const deliveryAddressId = getUserDeliveryAddress(userId).id;
+  const deliveryAddressId = getUserDeliveryAddress(userId)[0].id;
 
-  updateUsersList.push({
+  usersList.push({
     id: userId,
     email,
     phone,
     password: hashPassword(password),
     deliveryAddressId,
   });
-  saveToStorage(LOCALSTORAGE.usersList, updateUsersList);
+  console.log(usersList);
+  saveToStorage(LOCALSTORAGE.usersList, usersList);
 
   return true;
 }
