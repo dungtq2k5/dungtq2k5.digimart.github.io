@@ -39,6 +39,7 @@ export function addToCart(user, productId, quantity = 1) {
         productId,
         deliveryAddressId,
         quantity,
+        isSelected: false, //for selecting item to checkout
       });
     }
 
@@ -51,14 +52,18 @@ export function addToCart(user, productId, quantity = 1) {
   }
 }
 
-export function updateDeliveryAddress(cartId, delAddrId) {
+
+export function updateCart(cartId, {quantAccum, delAddrId, isSelected}) {
   const cartsList = getCartsList();
   const cartIndex = cartsList.findIndex(cart => cart.id === cartId);
-
+ 
   if(cartIndex !== -1) {
-    cartsList[cartIndex].deliveryAddressId = delAddrId;
+    if(quantAccum) cartsList[cartIndex].quantity += quantAccum;
+    if(delAddrId) cartsList[cartIndex].deliveryAddressId = delAddrId;
+    if(isSelected !== undefined) cartsList[cartIndex].isSelected = isSelected;
+
     saveToStorage(LOCALSTORAGE.cartsList, cartsList);
-    console.log("update del addr");
+    console.log("update cart");
     return true;
   }
 
@@ -87,19 +92,19 @@ export function removeUserCart(userId) {
   console.log("erase user cart");
 }
 
-export function increaseProductQuant(id, amount = 1) {
-  /**
-   * update and return quant
-   */
-  const cartList = getCartsList();
-  const findIndex = cartList.findIndex((cart) => cart.id === id);
+// export function increaseProductQuant(id, amount = 1) {
+//   /**
+//    * update and return quant
+//    */
+//   const cartList = getCartsList();
+//   const findIndex = cartList.findIndex((cart) => cart.id === id);
 
-  if (findIndex !== -1) {
-    cartList[findIndex].quantity += amount;
-    saveToStorage(LOCALSTORAGE.cartsList, cartList);
-    return cartList[findIndex].quantity;
-  }
+//   if (findIndex !== -1) {
+//     cartList[findIndex].quantity += amount;
+//     saveToStorage(LOCALSTORAGE.cartsList, cartList);
+//     return cartList[findIndex].quantity;
+//   }
 
-  console.error(`Cart with an id ${id} not found`);
-  return 0;
-}
+//   console.error(`Cart with an id ${id} not found`);
+//   return 0;
+// }

@@ -119,6 +119,7 @@ img {
 
 .link, .del {
   color: var(--blue);
+  width: max-content;
   text-decoration: underline;
   border: none;
   background: none;

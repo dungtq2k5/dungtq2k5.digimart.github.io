@@ -1,10 +1,8 @@
-import { IMG_ROOT_PATH, IMG_TYPE, PAGES, MSG } from "./settings.js";
-import { getCartDetail, getUserCart, increaseProductQuant, removeCart, removeUserCart, updateDeliveryAddress } from "../controllers/carts.js";
+import { IMG_ROOT_PATH, IMG_TYPE, PAGES, MSG, LOCALSTORAGE } from "./settings.js";
+import { getCartDetail, getUserCart, removeCart, updateCart } from "../controllers/carts.js";
 import { userAuthenticated } from "../controllers/users.js";
 import { getProductDetail } from "../controllers/products.js";
-import { hideElements, isValidDeliveryAddress, showElements } from "../controllers/utils.js";
-import { addOrders } from "../controllers/orders.js";
-import { addDeliveryAddress, getUserDeliveryAddress } from "../controllers/delivery-address.js";
+import { getFromStorage, hideElements, saveToStorage, showElements } from "../controllers/utils.js";
 
 
 //user auth
@@ -12,42 +10,39 @@ const user = userAuthenticated() || console.error("user not auth but cartpage is
 
 //items
 const mainContainer = document.getElementById("content-container");
-const productContainer = document.getElementById("products-container");
+const itemContainer = document.getElementById("products-container");
 
-//checkout
-const checkoutForm = document.getElementById("checkout-form");
-const subtotalEle = checkoutForm.querySelector(".content-checkout-subtotal-js");
-const shippingFeeEle = checkoutForm.querySelector(".content-checkout-shipfee-js");
-const totalEle = checkoutForm.querySelector(".content-checkout-total-js");
-const checkoutBtn = checkoutForm.querySelector(".content-checkout-btn-js");
+//select item
+const selectAllItem = document.getElementById("select-all-product");
 
 //remove item popup
 const removeItemContainer = document.getElementById("remove-item-container");
 
 //delivery address
-const addDelAddrBtn = mainContainer.querySelector(".add-del-addr-btn-js");
-
+/*
 const addrContainer = document.getElementById("del-addr-container");
 const addrForm = addrContainer.querySelector(".address-form");
 const addrFormCloseBtn = addrForm.querySelector(".form-close");
 const addrFormInput = addrForm.querySelector("#address-form-field-address");
 const addrFormSubmitBtn = addrForm.querySelector(".address-form-btn-js");
+*/
 
 
-
-export default function renderProducts() {
-  const userCart = getUserCart(user.id);
-  const userDelAddrList = getUserDeliveryAddress(user.id);
+export default function renderItems() {
   let htmlDoc = ``;
 
-
-  userCart.forEach(item => {
+  getUserCart(user.id).forEach(item => {
     const product = getProductDetail(item.productId);
-    const delAddrList = orderDelAddrList(userDelAddrList, item.deliveryAddressId);
 
     htmlDoc += `
       <li class="content-product-section b" data-cart-id="${item.id}">
-        <img src="${IMG_ROOT_PATH}/${product.img}.${IMG_TYPE}" alt="">
+        <div class="content-product-section-product b">
+          <input type="checkbox" id="product-${item.id}" class="select-item-js" ${item.isSelected ? "checked" : ""}>
+          <label for="product-${item.id}">
+            <img src="${IMG_ROOT_PATH}/${product.img}.${IMG_TYPE}" alt="" class="content-product-section-product-img">
+            <p class="content-product-section-product-name b">${product.name}</p>
+          </label>
+        </div>
 
         <p class="b">$${product.price}</p>
 
@@ -59,23 +54,30 @@ export default function renderProducts() {
 
         <p class="b">$${item.quantity*product.price}</p>
 
-        <div>
-          <label for="del-addr-${item.id}"></label>
-          <select id="del-addr-${item.id}" class="content-product-section-address b">
-            ${genDelAddrOptionsDoc(delAddrList)}
-          </select>
-        </div>
-
         <button class="del">Delete</button>
       </li>
     `;
   });
 
-  productContainer.innerHTML = htmlDoc;
+  itemContainer.innerHTML = htmlDoc;
 
-  productContainer.querySelectorAll(".content-product-section").forEach(section => {
+  itemContainer.querySelectorAll(".content-product-section").forEach(section => {
     const cartId = section.dataset.cartId;
-    const delAddrSelect = section.querySelector(".content-product-section-address");
+    const selectItem = section.querySelector(".select-item-js");
+
+    //select
+    selectItem.addEventListener("change", () => {
+      const isSelected = selectItem.checked;
+      updateCart(cartId, {isSelected});
+
+      if(!isSelected && selectAllItem.checked) {
+        selectAllItem.checked = false;
+      } else if(isAllItemSelected()) {
+        selectAllItem.checked = true;
+      }
+      
+      saveToStorage(LOCALSTORAGE.allItemSelected, selectAllItem.checked);
+    }); 
 
     //quant decs
     section.querySelector(".decs-quant-js").addEventListener("click", () => {
@@ -87,44 +89,13 @@ export default function renderProducts() {
       handleIncsItemQuant(cartId);
     });
 
-    //select address
-    delAddrSelect.addEventListener("change", () => {
-      const delAddrId = delAddrSelect.value;
-      updateDeliveryAddress(cartId, delAddrId);
-    });
-
     //del btn
     section.querySelector(".del").addEventListener("click", () => {
       handleDelItem(cartId);
     });
   });
 
-  // console.log("render products in cart");
-  updateCheckoutForm();
-}
-
-export function responsiveCheckoutBtn() {
-  /**
-   * add data to orders and remove data from cart
-   * go to orders page
-   */  
-  
-  checkoutBtn.addEventListener("click", () => {
-    const packages = getUserCart(user.id).map(item => ({
-      productId: item.productId,
-      deliveryAddressId: item.deliveryAddressId,
-      quantity: item.quantity,
-    }));
-    
-    addOrders(
-      user.id, 
-      getTotal(), 
-      packages
-    );
-
-    removeUserCart(user.id);
-    console.log("process checkout");
-  });
+  console.log("render products in cart");
 }
 
 export function renderEmptyCart() {
@@ -136,31 +107,37 @@ export function renderEmptyCart() {
   `;
 }
 
-export function responsiveAddDelAddr() {
-  addDelAddrBtn.addEventListener("click", () => {
-    showElements(addrContainer);
-  });
+export function responsiveSelectAllItem() {
+  selectAllItem.checked = getFromStorage(LOCALSTORAGE.allItemSelected) || false; //still keep when page refreshed
 
-  addrFormCloseBtn.addEventListener("click", e => {
-    e.preventDefault();
-    hideElements(addrContainer);
-  });
+  selectAllItem.addEventListener("change", () => {
+    const items = itemContainer.querySelectorAll(".content-product-section");
+    
+    items.forEach(item => {
+      const cartId = item.dataset.cartId;
+      const isSelected = selectAllItem.checked;
+      
+      updateCart(cartId, {isSelected});
+      item.querySelector(".select-item-js").checked = isSelected;
 
-  addrFormSubmitBtn.addEventListener("click", e => {
-    e.preventDefault();
-    const delAddr = addrFormInput.value;
+    });
 
-    if(isValidDeliveryAddress(delAddr)) {
-      addDeliveryAddress(user.id, delAddr);
-      hideElements(addrContainer);
-      addrForm.submit();
-      console.log("address added");
-    } else {
-      console.log("unvalid address");
-    }
+    // console.log("select/unselect all");
+    saveToStorage(LOCALSTORAGE.allItemSelected, selectAllItem.checked);
   });
 }
 
+export function responsiveCheckoutBtn() {
+  //TODO: checkout
+  //TODO: if 0 selected -> btn faded
+}
+
+function isAllItemSelected() {
+  const userCart = getUserCart(user.id);
+  const itemsSelected = userCart.filter(item => item.isSelected);
+
+  return userCart.length === itemsSelected.length;
+}
 
 function handleDecsItemQuant(cartId) {
   const currentQuant = getCartDetail(cartId).quantity;
@@ -168,45 +145,28 @@ function handleDecsItemQuant(cartId) {
   if(currentQuant === 1) {
     renderRemoveItemPopup(cartId);
   } else {
-    increaseProductQuant(cartId, -1);
-    renderProducts();
-    console.log("decs quant");
+    const quantAccum = -1;
+    updateCart(cartId, {quantAccum});
+    renderItems();
+    // console.log("decs quant");
   }
 }
 
 function handleIncsItemQuant(cartId) {
-  increaseProductQuant(cartId);
-  renderProducts();
+  const quantAccum = 1;
+  updateCart(cartId, {quantAccum});
+  renderItems();
   // console.log("incs quant");
 }
 
 function handleDelItem(cartId) {
-  console.log(`del product ${cartId} in cart`);
+  // console.log(`del product ${cartId} in cart`);
   removeCart(cartId);
 
   const userCart = getUserCart(user.id);
   userCart.length >= 1 
-    ? renderProducts() 
+    ? renderItems() 
     : renderEmptyCart();
-}
-
-function updateCheckoutForm() {
-  let subtotal = 0, shippingFee = 0, total = 0;
-
-  getUserCart(user.id).forEach(item => {
-    const product = getProductDetail(item.productId);
-    const quantity = item.quantity;
-
-    subtotal += product.price * quantity;
-  });
-
-  total = subtotal + shippingFee;
-
-  subtotalEle.innerHTML = subtotal;
-  shippingFeeEle.innerHTML = shippingFee;
-  totalEle.innerHTML = total;
-
-  // console.log("update checkout form");
 }
 
 function renderRemoveItemPopup(cartId) {
@@ -249,41 +209,3 @@ function renderRemoveItemPopup(cartId) {
 
   showElements(removeItemContainer);
 }
-
-function getTotal() {
-  let subtotal = 0, shippingFee = 0;
-
-  getUserCart(user.id).forEach(item => {
-    const product = getProductDetail(item.productId);
-    const quantity = item.quantity;
-
-    subtotal += product.price * quantity;
-  });
-
-  return subtotal + shippingFee;
-}
-
-function genDelAddrOptionsDoc(list) {
-  return list.map(item => {
-    return `<option value="${item.id}">${item.address}</option>`;
-  });
-}
-
-function orderDelAddrList(userDelAddrList, productDelAddrId) {
-  /**
-   * order list with product del addr first then orther from user
-   */
-
-  const findIndex = userDelAddrList.findIndex(addr => addr.id === productDelAddrId);
-  if(findIndex !== -1){
-    //swap to first if not already at first
-    if(findIndex !== 0) {
-      [userDelAddrList[0], userDelAddrList[findIndex]] = [userDelAddrList[findIndex], userDelAddrList[0]];
-    }
-    return userDelAddrList;
-  } 
-
-  console.error(`Product del addr with an id ${productDelAddrId} not found!`);
-  return null;
-}
-

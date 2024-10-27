@@ -31,20 +31,28 @@
     <!-- cart -->
     <main id="content-container" class="content b2">
       <div class="content-product b">
+        <!-- title -->
         <div class="content-product-header b">
-          <p class="b">Product</p>
-          <p class="b">Price</p>
-          <p class="b">Quantity</p>
-          <p class="b">Subtotal</p>
-          <div>
-            <p class="b">Delivery Address</p>
-            <button class="add-del-addr-btn-js link"><p>Add new</p></button>
+          <div class="content-product-header-product">
+            <input type="checkbox" id="select-all-product">
+            <label for="select-all-product">Product</label>
           </div>
+          <p class="b">Unit Price</p>
+          <p class="b">Quantity</p>
+          <p class="b">Total Price</p>
+          <p class="b">Action</p>
         </div>
 
+        <!-- products list -->
         <ul id="products-container">
           <!-- <li class="content-product-section b">
-            <img src="assets/img/products/samsung-galaxy-watch6.webp" alt="">
+            <div class="content-product-section-product b">
+              <input type="checkbox" id="product-id" class="select-item-js">
+              <label for="product-id">
+                <img src="assets/img/products/samsung-galaxy-watch6.webp" alt="" class="content-product-section-product-img">
+                <p class="content-product-section-product-name b">Samsung Galaxy Watch6</p>
+              </label>
+            </div>
 
             <p class="b">$191</p>
 
@@ -56,37 +64,14 @@
 
             <p class="b">$190</p>
 
-            <div>
-              <label for="del-addr"></label>
-              <select id="del-addr" class="content-product-section-address b">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="new">create new</option>
-              </select>
-            </div>
-
-            <button class="del">Delete</button>
+            <button class="del b">Delete</button>
           </li> -->
         </ul>
       </div>
 
-      <div id="checkout-form" class="content-checkout b">
-        <h2>Cart total</h2>
-        <div>
-          <p>Subtotal:</p>
-          <p>$<span class="content-checkout-subtotal-js">150</span></p>
-        </div>
-        <div>
-          <p>Shipping:</p>
-          <p>$<span class="content-checkout-shipfee-js">Free</span></p>
-        </div>
-        <div>
-          <p>Total:</p>
-          <p>$<span class="content-checkout-total-js">Free</span></p>
-        </div>
-
-        <a href="orders.html" class="content-checkout-btn-js btn1">Process to checkout</a>
+      <!-- process checkout -->
+      <div class="content-checkout b">
+        <a href="#checkout" class="content-checkout-btn-js btn1">Process To Checkout</a>
       </div>
     
     </main>
@@ -98,7 +83,7 @@
       </div>
     </footer>
 
-    <!-- add delivery address form backdrop -->
+    <!-- del addr backdrop -->
     <div id="del-addr-container" class="backdrop hide b">
       <form class="address-form b">
         <button class="form-close close-btn b">
@@ -120,7 +105,7 @@
       </form>
     </div>
 
-    <!-- remove item backdrop -->
+    <!-- confirm remove item backdrop -->
     <div id="remove-item-container" class="backdrop hide b">
       <!-- <div class="remove-item b">
       <button class="remove-item-close close-btn" title="close">

@@ -42,6 +42,7 @@ export const LOCALSTORAGE = {
   categoryCheckedIndex: "categoryCheckedIndex",
   currentProductPagination: "currentProductPagination",
   categoryHidden: "categoryHidden",
+  allItemSelected: "allItemSelected",
 }
 
 export const PAGES = {
