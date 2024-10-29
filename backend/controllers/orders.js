@@ -15,7 +15,7 @@ export function getUserOrders(userId) {
 
 export function addOrders(userId, total, packages, placed = new Date()) {
   if(checkUserExist(userId)) {
-    const packagesMod = packages.forEach(item => {
+    packages.forEach(item => {
       item.deliveryStateId = getDefaultDeliveryStateId();
     });
 

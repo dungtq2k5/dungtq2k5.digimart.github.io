@@ -24,7 +24,6 @@ export function addToCart(user, productId, quantity = 1) {
   const userId = user.id;
 
   if (checkUserExist(userId) && checkProductExistFromProducts(productId)) {
-    const deliveryAddressId = user.deliveryAddressId;
     const cartList = getCartsList();
     const findIndex = cartList.findIndex(
       (cart) => cart.userId === userId && cart.productId === productId
@@ -37,7 +36,6 @@ export function addToCart(user, productId, quantity = 1) {
         id: generateUID(),
         userId,
         productId,
-        deliveryAddressId,
         quantity,
         isSelected: false, //for selecting item to checkout
       });
@@ -53,17 +51,16 @@ export function addToCart(user, productId, quantity = 1) {
 }
 
 
-export function updateCart(cartId, {quantAccum, delAddrId, isSelected}) {
+export function updateCart(cartId, {quantAccum, isSelected}) {
   const cartsList = getCartsList();
   const cartIndex = cartsList.findIndex(cart => cart.id === cartId);
  
   if(cartIndex !== -1) {
     if(quantAccum) cartsList[cartIndex].quantity += quantAccum;
-    if(delAddrId) cartsList[cartIndex].deliveryAddressId = delAddrId;
     if(isSelected !== undefined) cartsList[cartIndex].isSelected = isSelected;
 
     saveToStorage(LOCALSTORAGE.cartsList, cartsList);
-    console.log("update cart");
+    // console.log("update cart");
     return true;
   }
 

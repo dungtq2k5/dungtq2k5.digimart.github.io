@@ -43,7 +43,7 @@
           <p class="b">Action</p>
         </div>
 
-        <!-- products list -->
+        <!-- items list -->
         <ul id="products-container">
           <!-- <li class="content-product-section b">
             <div class="content-product-section-product b">
@@ -69,12 +69,50 @@
         </ul>
       </div>
 
-      <!-- process checkout -->
-      <div class="content-checkout b">
-        <a href="#checkout" class="content-checkout-btn-js btn1">Process To Checkout</a>
+      <!-- checkout form -->
+      <div class="checkout-form b">
+        <h2>Order Summary</h2>
+        <div class="checkout-form-info">
+          <div>
+            <p>Items(<span class="items-js">0</span>): </p>
+            <p>$<span class="items-total-js">0</span></p>
+          </div>
+          <div>
+            <p>Shipping & handling: </p>
+            <p>$<span class="shipping-js">0</span></p>
+          </div>
+          <div>
+            <p>Total before tax:</p>
+            <p>$<span class="bftax-js">0</span></p>
+          </div>
+          <div>
+            <p>Estimated tax (<span>10%</span>): </p>
+            <p>$<span class="estax-js">0</span></p>
+          </div>
+          <div>
+            <p>Order total: </p>
+            <p>$<span class="total-js">0.00</span></p>
+          </div>
+        </div>
+
+        <div class="checkout-form-address b">
+          <div>
+            <label for="del-addr">Delivery to:</label>
+            <button class="add-del-addr-btn link">Add new</button>
+          </div>
+          <select id="del-addr">
+            <option value="1">Address 1</option>
+            <option value="2">Address 2</option>
+            <option value="3">Address 3</option>
+            <option value="4">Address 4</option>
+          </select>
+        </div>
+
+        <a href="#checkout" class="checkout-form-btn btn1">Process To Checkout</a>
       </div>
-    
+
     </main>
+
 
     <!-- footer -->
     <footer id="footer" class="footer b">

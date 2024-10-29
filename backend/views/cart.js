@@ -1,8 +1,10 @@
-import { IMG_ROOT_PATH, IMG_TYPE, PAGES, MSG, LOCALSTORAGE } from "./settings.js";
+import { IMG_ROOT_PATH, IMG_TYPE, PAGES, MSG, LOCALSTORAGE, LOCALHOST } from "./settings.js";
 import { getCartDetail, getUserCart, removeCart, updateCart } from "../controllers/carts.js";
 import { userAuthenticated } from "../controllers/users.js";
 import { getProductDetail } from "../controllers/products.js";
 import { getFromStorage, hideElements, saveToStorage, showElements } from "../controllers/utils.js";
+import { getUserDeliveryAddress } from "../controllers/delivery-address.js";
+import { addOrders } from "../controllers/orders.js";
 
 
 //user auth
@@ -15,17 +17,14 @@ const itemContainer = document.getElementById("products-container");
 //select item
 const selectAllItem = document.getElementById("select-all-product");
 
+//checkout form
+const checkoutForm = mainContainer.querySelector(".checkout-form");
+const checkoutBtn = checkoutForm.querySelector(".checkout-form-btn");
+
 //remove item popup
 const removeItemContainer = document.getElementById("remove-item-container");
 
-//delivery address
-/*
-const addrContainer = document.getElementById("del-addr-container");
-const addrForm = addrContainer.querySelector(".address-form");
-const addrFormCloseBtn = addrForm.querySelector(".form-close");
-const addrFormInput = addrForm.querySelector("#address-form-field-address");
-const addrFormSubmitBtn = addrForm.querySelector(".address-form-btn-js");
-*/
+
 
 
 export default function renderItems() {
@@ -77,6 +76,7 @@ export default function renderItems() {
       }
       
       saveToStorage(LOCALSTORAGE.allItemSelected, selectAllItem.checked);
+      updateCheckoutForm();
     }); 
 
     //quant decs
@@ -95,7 +95,9 @@ export default function renderItems() {
     });
   });
 
-  console.log("render products in cart");
+  updateCheckoutForm();
+
+  // console.log("render products in cart");
 }
 
 export function renderEmptyCart() {
@@ -124,19 +126,45 @@ export function responsiveSelectAllItem() {
 
     // console.log("select/unselect all");
     saveToStorage(LOCALSTORAGE.allItemSelected, selectAllItem.checked);
+    updateCheckoutForm();
   });
 }
 
 export function responsiveCheckoutBtn() {
-  //TODO: checkout
-  //TODO: if 0 selected -> btn faded
+  //userId, total, packages
+  checkoutBtn.addEventListener("click", () => {
+    if(getItemsSelected().length == 0) { 
+      console.error("no product selected"); //TODO: UI for this.
+    } else {
+      handleCheckout();
+      console.log("Order added");
+      window.location.href = `${LOCALHOST}/${PAGES.orders}`;
+    }
+  });
+}
+
+function handleCheckout() {
+  if(selectAllItem.checked) saveToStorage(LOCALSTORAGE.allItemSelected, false);
+
+  const itemsSelected = getItemsSelected();
+  const total = getTotalItemsSelected();
+  const packages = itemsSelected.map(item => {
+    removeCart(item.id);
+
+    return {
+      productId: item.productId,
+      deliveryAddressId: "1", //TODO function to get DelAddr
+      quantity: item.quantity
+    }
+  });
+
+  addOrders(user.id, total, packages);
 }
 
 function isAllItemSelected() {
   const userCart = getUserCart(user.id);
-  const itemsSelected = userCart.filter(item => item.isSelected);
 
-  return userCart.length === itemsSelected.length;
+  return userCart.length === getItemsSelected().length;
 }
 
 function handleDecsItemQuant(cartId) {
@@ -167,6 +195,45 @@ function handleDelItem(cartId) {
   userCart.length >= 1 
     ? renderItems() 
     : renderEmptyCart();
+}
+
+function updateCheckoutForm() {
+  const total = getTotalItemsSelected();
+  checkoutForm.querySelector(".items-js").innerHTML = getItemsSelected().length;
+  checkoutForm.querySelector(".items-total-js").innerHTML = total;
+  checkoutForm.querySelector("#del-addr").innerHTML = genDelAddrOptionHTML();
+  checkoutForm.querySelector(".total-js").innerHTML = total;
+
+  console.log("checkout form update");
+}
+
+function genDelAddrOptionHTML() {
+  let htmlDoc = ``;
+
+  getUserDeliveryAddress(user.id).forEach(item => {
+    htmlDoc += `
+      <option value="${item.id}">${item.address}</option>
+    `;
+  });
+
+  return htmlDoc;
+}
+
+function getItemsSelected() {
+  const userCart = getUserCart(user.id);
+  return userCart.filter(item => item.isSelected);
+}
+
+function getTotalItemsSelected() {
+  const itemsSelected = getItemsSelected();
+
+  let total = 0 ;
+  itemsSelected.map(item => {
+    const productPrice = getProductDetail(item.productId).price;
+    total += productPrice * item.quantity;
+  });
+
+  return total;
 }
 
 function renderRemoveItemPopup(cartId) {
