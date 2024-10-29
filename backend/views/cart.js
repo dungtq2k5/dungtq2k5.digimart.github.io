@@ -1,9 +1,9 @@
 import { IMG_ROOT_PATH, IMG_TYPE, PAGES, MSG, LOCALSTORAGE, LOCALHOST } from "./settings.js";
 import { getCartDetail, getUserCart, removeCart, updateCart } from "../controllers/carts.js";
-import { userAuthenticated } from "../controllers/users.js";
+import { getUser, updateUser, userAuthenticated } from "../controllers/users.js";
 import { getProductDetail } from "../controllers/products.js";
-import { getFromStorage, hideElements, saveToStorage, showElements } from "../controllers/utils.js";
-import { getUserDeliveryAddress } from "../controllers/delivery-address.js";
+import { getFromStorage, hideElements, isValidDeliveryAddress, saveToStorage, showElements } from "../controllers/utils.js";
+import { addDelAddr, getDeliveryAddress, getUserDelAddrList } from "../controllers/delivery-address.js";
 import { addOrders } from "../controllers/orders.js";
 
 
@@ -20,11 +20,18 @@ const selectAllItem = document.getElementById("select-all-product");
 //checkout form
 const checkoutForm = mainContainer.querySelector(".checkout-form");
 const checkoutBtn = checkoutForm.querySelector(".checkout-form-btn");
+const addDelAddrBtn = checkoutForm.querySelector(".add-del-addr-btn");
+const selectDelAddr = checkoutForm.querySelector("#select-del-addr");
 
 //remove item popup
 const removeItemContainer = document.getElementById("remove-item-container");
 
-
+//delivery address
+const delAddrContainer = document.getElementById("del-addr-container");
+const delAddrForm = delAddrContainer.querySelector(".address-form");
+const delAddrCloseBtn = delAddrForm.querySelector(".form-close");
+const delAddrInput = delAddrForm.querySelector("#address-form-field-address");
+const delAddSummitBtn = delAddrForm.querySelector(".address-form-btn-js");
 
 
 export default function renderItems() {
@@ -130,7 +137,44 @@ export function responsiveSelectAllItem() {
   });
 }
 
-export function responsiveCheckoutBtn() {
+export function responsiveDelAddrForm() {
+  addDelAddrBtn.addEventListener("click", () => {
+    showElements(delAddrContainer);
+  });
+
+  delAddrCloseBtn.addEventListener("click", e => {
+    e.preventDefault();
+    hideElements(delAddrContainer);
+  });
+
+  delAddSummitBtn.addEventListener("click", e => {
+    e.preventDefault();
+    const delAddr = delAddrInput.value;
+
+    if(isValidDeliveryAddress(delAddr)) {
+      addDelAddr(user.id, delAddr);
+      updateCheckoutForm();
+      hideElements(delAddrContainer);
+    } else {
+      console.error("Unvalid delivery address");
+    }
+  });
+}
+
+export function responsiveCheckoutForm() {
+  responsiveSelectDelAddr();
+  responsiveCheckoutBtn();
+}
+
+function responsiveSelectDelAddr() {
+  selectDelAddr.addEventListener("change", () => {
+    const deliveryAddressId = selectDelAddr.value;
+    updateUser(user.id, {deliveryAddressId});
+    updateCheckoutForm();
+  });
+}
+
+function responsiveCheckoutBtn() {
   //userId, total, packages
   checkoutBtn.addEventListener("click", () => {
     if(getItemsSelected().length == 0) { 
@@ -143,6 +187,7 @@ export function responsiveCheckoutBtn() {
   });
 }
 
+
 function handleCheckout() {
   if(selectAllItem.checked) saveToStorage(LOCALSTORAGE.allItemSelected, false);
 
@@ -153,7 +198,7 @@ function handleCheckout() {
 
     return {
       productId: item.productId,
-      deliveryAddressId: "1", //TODO function to get DelAddr
+      deliveryAddressId: getUser(user.id).deliveryAddressId,
       quantity: item.quantity
     }
   });
@@ -201,16 +246,19 @@ function updateCheckoutForm() {
   const total = getTotalItemsSelected();
   checkoutForm.querySelector(".items-js").innerHTML = getItemsSelected().length;
   checkoutForm.querySelector(".items-total-js").innerHTML = total;
-  checkoutForm.querySelector("#del-addr").innerHTML = genDelAddrOptionHTML();
+  selectDelAddr.innerHTML = genDelAddrOptionHTML();
   checkoutForm.querySelector(".total-js").innerHTML = total;
+  checkoutForm.querySelector(".delivery-to-js").innerHTML = getDeliveryAddress(getUser(user.id).deliveryAddressId).address;
 
-  console.log("checkout form update");
+  console.log("update checkout form");
 }
 
 function genDelAddrOptionHTML() {
-  let htmlDoc = ``;
+  let htmlDoc = `
+    <option value="" disabled selected>select</option>
+  `;
 
-  getUserDeliveryAddress(user.id).forEach(item => {
+  getUserDelAddrList(user.id).forEach(item => {
     htmlDoc += `
       <option value="${item.id}">${item.address}</option>
     `;

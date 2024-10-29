@@ -97,15 +97,14 @@
 
         <div class="checkout-form-address b">
           <div>
-            <label for="del-addr">Delivery to:</label>
-            <button class="add-del-addr-btn link">Add new</button>
+            <p>Delivery to:</p>
+            <address class="delivery-to-js"></address>
           </div>
-          <select id="del-addr">
-            <option value="1">Address 1</option>
-            <option value="2">Address 2</option>
-            <option value="3">Address 3</option>
-            <option value="4">Address 4</option>
-          </select>
+          <div>
+            <label for="select-del-addr">Select another:</label>
+            <select id="select-del-addr"></select>
+          </div>
+          <button class="add-del-addr-btn link">Add new</button>
         </div>
 
         <a href="#checkout" class="checkout-form-btn btn1">Process To Checkout</a>
@@ -161,6 +160,28 @@
         <button class="cancel-btn-js btn2 b">No</button>
       </div>
     </div> -->
+    </div>
+
+    <!-- add delivery address form backdrop -->
+    <div id="del-addr-container" class="backdrop hide b">
+      <form class="address-form b">
+        <button class="form-close close-btn b">
+          <i class="uil uil-times"></i>
+        </button>
+
+        <h2>New delivery address</h2>
+
+        <div class="address-form-field b">
+          <label for="address-form-field-address">Delivery address</label>
+          <input
+            id="address-form-field-address"
+            type="text"
+            placeholder="123 Wall Street, Los"
+          />
+        </div>
+
+        <button class="address-form-btn-js btn1">Add</button>
+      </form>
     </div>
 
     <!-- <script type="module" src="./backend/views/main-cart.js"></script> -->

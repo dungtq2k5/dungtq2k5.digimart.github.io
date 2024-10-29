@@ -1,6 +1,6 @@
 import users from "../../assets/models/users.js";
 import { LOCALSTORAGE } from "../views/settings.js";
-import { addDeliveryAddress, getUserDeliveryAddress } from "./delivery-address.js";
+import { addDelAddr, getUserDelAddrList } from "./delivery-address.js";
 import {
   generateUID,
   getFromStorage,
@@ -8,20 +8,20 @@ import {
   saveToStorage,
 } from "./utils.js";
 
+
 export function getUsersList() {
   return getFromStorage(LOCALSTORAGE.usersList) || users;
 }
 
 export function checkUserExist(id) {
-  const exstingUser = getUsersList().find((user) => user.id === id);
-  return exstingUser !== undefined;
+  return getUser(id) !== undefined;
 }
 
 export function addUser({ email, phone, password, deliveryAddress }) {
   const existingUser = getUsersList().find(
     (user) => user.email === email || user.phone === phone
   );
-  if (existingUser) {
+  if(existingUser) {
     console.error(
       existingUser.email === email
         ? "Email already exists!"
@@ -33,8 +33,8 @@ export function addUser({ email, phone, password, deliveryAddress }) {
   const usersList = getUsersList();
   const userId = generateUID();
 
-  addDeliveryAddress(userId, deliveryAddress);
-  const deliveryAddressId = getUserDeliveryAddress(userId)[0].id;
+  addDelAddr(userId, deliveryAddress);
+  const deliveryAddressId = getUserDelAddrList(userId)[0].id;
 
   usersList.push({
     id: userId,
@@ -47,6 +47,26 @@ export function addUser({ email, phone, password, deliveryAddress }) {
   saveToStorage(LOCALSTORAGE.usersList, usersList);
 
   return true;
+}
+
+export function updateUser(id, {deliveryAddressId}) {
+  const usersList = getUsersList();
+  const findIndex = usersList.findIndex(user => user.id === id);
+
+  if(findIndex !== -1) {
+    if(deliveryAddressId) usersList[findIndex].deliveryAddressId = deliveryAddressId;
+    saveToStorage(LOCALSTORAGE.usersList, usersList);
+    
+    return true;
+  }
+
+  console.error(`User with an id ${id} not found!`);
+  return false;
+}
+
+export function getUser(id) {
+  const user = getUsersList().find(user => user.id === id);
+  return user;
 }
 
 export function checkEmailExist(email) {

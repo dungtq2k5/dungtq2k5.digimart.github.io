@@ -107,12 +107,13 @@
 
 .checkout-form-address {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: .5em;
 }
-.checkout-form-address label {
-  white-space: nowrap;
+.checkout-form-address div {
+  display: flex;
+  justify-content: space-between;
 }
-.checkout-form-address select {
-  width: 100%;
+#select-del-addr {
+  width: 80px;
 }
