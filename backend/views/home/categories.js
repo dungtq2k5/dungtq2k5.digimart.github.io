@@ -1,22 +1,23 @@
-import { LOCALSTORAGE } from "./settings.js";
+import { LOCALSTORAGE } from "../settings.js";
 import {
   capitalizeFirstLetter as capFirstLetter,
   getFromStorage,
   hideElements,
   saveToStorage,
-} from "../controllers/utils.js";
+} from "../../controllers/utils.js";
 import {
   getPlainProductsList,
   filterProductsByBrand,
-} from "../controllers/products.js";
-import { getBrandsList } from "../controllers/brands.js";
-import renderProducts, { resetPaginationProduct } from "./product.js";
+} from "../../controllers/products.js";
+import { getBrandsList } from "../../controllers/brands.js";
+import renderProducts, { resetPaginatProduct } from "./product.js";
 
 const categoriesContainer = document.getElementById("content-categories");
 
 let checkedIndex = getFromStorage(LOCALSTORAGE.categoryCheckedIndex) || 0; //still checked when page refreshed
 
-export function renderCategories(categoriesList = getBrandsList()) {
+
+function renderCategories(categoriesList = getBrandsList()) {
   let htmlDoc = `
     <li class="content-categories-item b">
       <input 
@@ -55,7 +56,7 @@ export function renderCategories(categoriesList = getBrandsList()) {
       
       saveToStorage(LOCALSTORAGE.productsList, productsListFiltered); //for pagination product
       saveToStorage(LOCALSTORAGE.categoryCheckedIndex, index); //save current checked index
-      resetPaginationProduct(); //reset page index
+      resetPaginatProduct(); //reset page index
       renderProducts(productsListFiltered);
 
       // console.log(`filter ${brand}`);
@@ -65,9 +66,10 @@ export function renderCategories(categoriesList = getBrandsList()) {
   // console.log("render categories");
 }
 
-export function hideCategories() {
+function hideCategories() {
   saveToStorage(LOCALSTORAGE.categoryHidden, true);
   hideElements(categoriesContainer);
   console.log("hide categories");
 }
 
+export { renderCategories, hideCategories };

@@ -1,40 +1,41 @@
-import { IMG_ROOT_PATH, IMG_TYPE, PAGES, MSG, LOCALSTORAGE, LOCALHOST } from "./settings.js";
-import { getCartDetail, getUserCart, removeCart, updateCart } from "../controllers/carts.js";
-import { getUser, updateUser, userAuthenticated } from "../controllers/users.js";
-import { getProductDetail } from "../controllers/products.js";
-import { getFromStorage, hideElements, isValidDeliveryAddress, saveToStorage, showElements } from "../controllers/utils.js";
-import { addDelAddr, getDeliveryAddress, getUserDelAddrList } from "../controllers/delivery-address.js";
-import { addOrders } from "../controllers/orders.js";
+import { 
+  IMG_ROOT_PATH, 
+  IMG_TYPE, 
+  LOCALSTORAGE,
+  MSG,
+  PAGES
+} from "../settings.js";
+import { 
+  getCartDetail, 
+  getUserCart, 
+  removeCart, 
+  updateCart 
+} from "../../controllers/carts.js";
+import { userAuthenticated } from "../../controllers/users.js";
+import { getProductDetail } from "../../controllers/products.js";
+import { 
+  getFromStorage, 
+  hideElements, 
+  saveToStorage, 
+  showElements 
+} from "../../controllers/utils.js";
+import { updateCheckoutForm } from "./checkout-form.js";
 
 
-//user auth
 const user = userAuthenticated() || console.error("user not auth but cartpage is rendered");
 
-//items
 const mainContainer = document.getElementById("content-container");
+
 const itemContainer = document.getElementById("products-container");
 
-//select item
 const selectAllItem = document.getElementById("select-all-product");
+//FIXME check and uncheck display bugs
+selectAllItem.checked = getFromStorage(LOCALSTORAGE.allItemSelected) || false; //still keep when page refreshed
 
-//checkout form
-const checkoutForm = mainContainer.querySelector(".checkout-form");
-const checkoutBtn = checkoutForm.querySelector(".checkout-form-btn");
-const addDelAddrBtn = checkoutForm.querySelector(".add-del-addr-btn");
-const selectDelAddr = checkoutForm.querySelector("#select-del-addr");
-
-//remove item popup
 const removeItemContainer = document.getElementById("remove-item-container");
 
-//delivery address
-const delAddrContainer = document.getElementById("del-addr-container");
-const delAddrForm = delAddrContainer.querySelector(".address-form");
-const delAddrCloseBtn = delAddrForm.querySelector(".form-close");
-const delAddrInput = delAddrForm.querySelector("#address-form-field-address");
-const delAddSummitBtn = delAddrForm.querySelector(".address-form-btn-js");
 
-
-export default function renderItems() {
+function renderItems() {
   let htmlDoc = ``;
 
   getUserCart(user.id).forEach(item => {
@@ -107,24 +108,13 @@ export default function renderItems() {
   // console.log("render products in cart");
 }
 
-export function renderEmptyCart() {
-  mainContainer.innerHTML = `
-    <div class="content-empty-cart">
-      <p>${MSG.nothingInCart}</p>
-      <a href="${PAGES.home}" class="btn2">Go shopping now</a>
-    </div>
-  `;
-}
-
-export function responsiveSelectAllItem() {
-  selectAllItem.checked = getFromStorage(LOCALSTORAGE.allItemSelected) || false; //still keep when page refreshed
-
+function responsiveSelectAllItem() {
   selectAllItem.addEventListener("change", () => {
+    const isSelected = selectAllItem.checked;
     const items = itemContainer.querySelectorAll(".content-product-section");
     
     items.forEach(item => {
       const cartId = item.dataset.cartId;
-      const isSelected = selectAllItem.checked;
       
       updateCart(cartId, {isSelected});
       item.querySelector(".select-item-js").checked = isSelected;
@@ -132,84 +122,9 @@ export function responsiveSelectAllItem() {
     });
 
     // console.log("select/unselect all");
-    saveToStorage(LOCALSTORAGE.allItemSelected, selectAllItem.checked);
+    saveToStorage(LOCALSTORAGE.allItemSelected, isSelected);
     updateCheckoutForm();
   });
-}
-
-export function responsiveDelAddrForm() {
-  addDelAddrBtn.addEventListener("click", () => {
-    showElements(delAddrContainer);
-  });
-
-  delAddrCloseBtn.addEventListener("click", e => {
-    e.preventDefault();
-    hideElements(delAddrContainer);
-  });
-
-  delAddSummitBtn.addEventListener("click", e => {
-    e.preventDefault();
-    const delAddr = delAddrInput.value;
-
-    if(isValidDeliveryAddress(delAddr)) {
-      addDelAddr(user.id, delAddr);
-      updateCheckoutForm();
-      hideElements(delAddrContainer);
-    } else {
-      console.error("Unvalid delivery address");
-    }
-  });
-}
-
-export function responsiveCheckoutForm() {
-  responsiveSelectDelAddr();
-  responsiveCheckoutBtn();
-}
-
-function responsiveSelectDelAddr() {
-  selectDelAddr.addEventListener("change", () => {
-    const deliveryAddressId = selectDelAddr.value;
-    updateUser(user.id, {deliveryAddressId});
-    updateCheckoutForm();
-  });
-}
-
-function responsiveCheckoutBtn() {
-  //userId, total, packages
-  checkoutBtn.addEventListener("click", () => {
-    if(getItemsSelected().length == 0) { 
-      console.error("no product selected"); //TODO: UI for this.
-    } else {
-      handleCheckout();
-      console.log("Order added");
-      window.location.href = `${LOCALHOST}/${PAGES.orders}`;
-    }
-  });
-}
-
-
-function handleCheckout() {
-  if(selectAllItem.checked) saveToStorage(LOCALSTORAGE.allItemSelected, false);
-
-  const itemsSelected = getItemsSelected();
-  const total = getTotalItemsSelected();
-  const packages = itemsSelected.map(item => {
-    removeCart(item.id);
-
-    return {
-      productId: item.productId,
-      deliveryAddressId: getUser(user.id).deliveryAddressId,
-      quantity: item.quantity
-    }
-  });
-
-  addOrders(user.id, total, packages);
-}
-
-function isAllItemSelected() {
-  const userCart = getUserCart(user.id);
-
-  return userCart.length === getItemsSelected().length;
 }
 
 function handleDecsItemQuant(cartId) {
@@ -237,39 +152,21 @@ function handleDelItem(cartId) {
   removeCart(cartId);
 
   const userCart = getUserCart(user.id);
-  userCart.length >= 1 
-    ? renderItems() 
-    : renderEmptyCart();
+  if(getUserCart(user.id) > 0) {
+    renderItems();
+  } else {
+    renderEmptyCart();
+    selectAllItem.check = false;
+    saveToStorage(LOCALSTORAGE.allItemSelected, selectAllItem.check);
+  }
 }
 
-function updateCheckoutForm() {
-  const total = getTotalItemsSelected();
-  checkoutForm.querySelector(".items-js").innerHTML = getItemsSelected().length;
-  checkoutForm.querySelector(".items-total-js").innerHTML = total;
-  selectDelAddr.innerHTML = genDelAddrOptionHTML();
-  checkoutForm.querySelector(".total-js").innerHTML = total;
-  checkoutForm.querySelector(".delivery-to-js").innerHTML = getDeliveryAddress(getUser(user.id).deliveryAddressId).address;
-
-  console.log("update checkout form");
-}
-
-function genDelAddrOptionHTML() {
-  let htmlDoc = `
-    <option value="" disabled selected>select</option>
-  `;
-
-  getUserDelAddrList(user.id).forEach(item => {
-    htmlDoc += `
-      <option value="${item.id}">${item.address}</option>
-    `;
-  });
-
-  return htmlDoc;
+function isAllItemSelected() {
+  return getUserCart(user.id).length === getItemsSelected().length;
 }
 
 function getItemsSelected() {
-  const userCart = getUserCart(user.id);
-  return userCart.filter(item => item.isSelected);
+  return getUserCart(user.id).filter(item => item.isSelected);
 }
 
 function getTotalItemsSelected() {
@@ -324,3 +221,25 @@ function renderRemoveItemPopup(cartId) {
 
   showElements(removeItemContainer);
 }
+
+function selectAllItemIsCheck() {
+  return selectAllItem.check;
+}
+
+function renderEmptyCart() {
+  mainContainer.innerHTML = `
+    <div class="content-empty-cart">
+      <p>${MSG.nothingInCart}</p>
+      <a href="${PAGES.home}" class="btn2">Go shopping now</a>
+    </div>
+  `;
+}
+
+export { 
+  renderItems, 
+  responsiveSelectAllItem, 
+  getItemsSelected, 
+  getTotalItemsSelected, 
+  selectAllItemIsCheck ,
+  renderEmptyCart
+};

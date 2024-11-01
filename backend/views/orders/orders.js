@@ -1,23 +1,22 @@
-import { IMG_ROOT_PATH, IMG_TYPE, MSG } from "./settings.js";
-import { getPackage, getUserOrders } from "../controllers/orders.js";
-import { getProductDetail } from "../controllers/products.js";
-import { userAuthenticated } from "../controllers/users.js";
-import { dateFormatted, hideElements, showElements } from "../controllers/utils.js";
-import { getDeliveryState } from "../controllers/delivery-states.js";
+import { IMG_ROOT_PATH, IMG_TYPE, MSG } from "../settings.js";
+import { getPackage, getUserOrders } from "../../controllers/orders.js";
+import { getProductDetail } from "../../controllers/products.js";
+import { userAuthenticated } from "../../controllers/users.js";
+import { dateFormatted, hideElements, showElements } from "../../controllers/utils.js";
+import { getDeliveryState } from "../../controllers/delivery-states.js";
 
 const user = userAuthenticated() || console.error("user not auth but order-page is render");
 
-//orders
 const mainContainer = document.getElementById("main-container");
+
 const ordersContainer = document.getElementById("orders-container");
 
-//track package
 const trackContainer = document.getElementById("track-container");
 
-export default function renderOrders() {
+
+function renderOrders() {
   let htmlDoc = ``;
 
-  //view
   getUserOrders(user.id).forEach(order => {
     let packagesDoc = ``;
     const placed = new Date(order.placed);
@@ -57,21 +56,20 @@ export default function renderOrders() {
 
   ordersContainer.innerHTML = htmlDoc;
 
-  //controller
   ordersContainer.querySelectorAll(".order-container-section-product").forEach(section => {
     const orderId = section.dataset.orderId;
     const productId = section.dataset.productId;
 
     section.querySelector(".track-btn-js").addEventListener("click", () => {
       // console.log(`Track product ${productId} of an order ${orderId}`);
-      renderTrackPackage(orderId, productId);
+      renderTrackPackagePopup(orderId, productId);
     });
   });
 
   console.log("render user orders");
 }
 
-export function renderEmptyOrders() {
+function renderEmptyOrders() {
   mainContainer.innerHTML = `
     <div class="orders-empty b">
       <p>${MSG.nothingInOrders}</p>
@@ -81,12 +79,11 @@ export function renderEmptyOrders() {
 }
 
 
-function renderTrackPackage(orderId, productId) {
+function renderTrackPackagePopup(orderId, productId) {
   const pack = getPackage(orderId, productId);
   const product = getProductDetail(productId);
   const deliveryState = getDeliveryState(pack.deliveryStateId);
 
-  //view
   trackContainer.innerHTML = `
     <div class="track b">
       <button class="track-close close-btn b" title="close">
@@ -111,7 +108,6 @@ function renderTrackPackage(orderId, productId) {
     </div>
   `;
 
-
   let deliverPercentage;
   switch(Number(deliveryState.completeLevel)) {
     case 1:
@@ -134,3 +130,5 @@ function renderTrackPackage(orderId, productId) {
   // console.log("render track package");
 
 }
+
+export { renderOrders, renderEmptyOrders };

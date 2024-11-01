@@ -88,20 +88,3 @@ export function removeUserCart(userId) {
   saveToStorage(LOCALSTORAGE.cartsList, cartList);
   console.log("erase user cart");
 }
-
-// export function increaseProductQuant(id, amount = 1) {
-//   /**
-//    * update and return quant
-//    */
-//   const cartList = getCartsList();
-//   const findIndex = cartList.findIndex((cart) => cart.id === id);
-
-//   if (findIndex !== -1) {
-//     cartList[findIndex].quantity += amount;
-//     saveToStorage(LOCALSTORAGE.cartsList, cartList);
-//     return cartList[findIndex].quantity;
-//   }
-
-//   console.error(`Cart with an id ${id} not found`);
-//   return 0;
-// }

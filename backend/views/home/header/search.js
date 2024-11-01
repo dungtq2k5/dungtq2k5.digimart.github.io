@@ -3,21 +3,21 @@ import {
   MAX_ITEM_SUGGESTION,
   CLASSNAME,
   LOCALSTORAGE,
-} from "./settings.js";
+} from "../../settings.js";
 import {
   toggleEleInArr,
   showElements,
   hideElements,
   saveToStorage,
   getFromStorage,
-} from "../controllers/utils.js";
+} from "../../../controllers/utils.js";
 import {
   filterProducts,
   getPlainProductsList,
-} from "../controllers/products.js";
-import { getCategoriesList } from "../controllers/categories.js";
-import renderProducts, { resetPaginationProduct } from "./product.js";
-import { hideCategories } from "./categories.js";
+} from "../../../controllers/products.js";
+import { getCategoriesList } from "../../../controllers/categories.js";
+import renderProducts, { resetPaginatProduct } from "../product.js";
+import { hideCategories } from "../categories.js";
 
 //search
 const searchField = document.getElementById("search-field");
@@ -25,22 +25,14 @@ const searchBtn = document.getElementById("search-btn");
 
 //search popup
 const searchPopupContainer = document.getElementById("filter-search");
-const filterSearchCategoryContainer = searchPopupContainer.querySelector(
-  ".filter-search-category"
-);
-const filterSearchResultContainer = searchPopupContainer.querySelector(
-  ".filter-search-result"
-);
+const filterSearchCategoryContainer = searchPopupContainer.querySelector(".filter-search-category");
+const filterSearchResultContainer = searchPopupContainer.querySelector(".filter-search-result");
 
 //price-slider
 let minVal = searchPopupContainer.querySelector(".min-value-js");
 let maxVal = searchPopupContainer.querySelector(".max-value-js");
-const rangeFill = searchPopupContainer.querySelector(
-  ".filter-search-slider-range-fill"
-);
-const inputEles = searchPopupContainer.querySelectorAll(
-  ".filter-search-slider-range-input"
-);
+const rangeFill = searchPopupContainer.querySelector(".filter-search-slider-range-fill");
+const inputEles = searchPopupContainer.querySelectorAll(".filter-search-slider-range-input");
 
 //filtering searching
 let valueLookup = "";
@@ -51,9 +43,14 @@ if(getFromStorage(LOCALSTORAGE.categoryHidden)) { //avoid category menu show but
   console.log("Page refresh but category menu still hidden");
 }
 
-export default function responsiveSearch() {
+function responsiveSearch() {
+  responsiveSearchField();
   renderCategory();
+  responsivePriceSlider();
+  responsiveSearchSuggestPopup();
+}
 
+function responsiveSearchField() {
   searchField.addEventListener("input", (e) => {
     valueLookup = e.target.value;
 
@@ -64,13 +61,11 @@ export default function responsiveSearch() {
       minVal.innerHTML,
       maxVal.innerHTML
     );
-    renderProductSuggest(productsListFiltered);
+    renderSuggestProduct(productsListFiltered);
   });
-
-  responsiveSearchSuggestionPopUp();
 }
 
-function responsiveSearchSuggestionPopUp() {
+function responsiveSearchSuggestPopup() {
   searchBtn.addEventListener("click", () => {
     console.log("execute search");
     valueLookup = searchField.value;
@@ -83,10 +78,10 @@ function responsiveSearchSuggestionPopUp() {
       maxVal.innerHTML
     );
 
-    renderProductSuggest(productsListFiltered); //make sure suggestion up to date
+    renderSuggestProduct(productsListFiltered); //make sure suggestion up to date
     saveToStorage(LOCALSTORAGE.productsList, productsListFiltered);
     if(!getFromStorage(LOCALSTORAGE.categoryHidden)) hideCategories();
-    resetPaginationProduct();
+    resetPaginatProduct();
     renderProducts(productsListFiltered);
     hideElements(searchPopupContainer);
   });
@@ -107,11 +102,17 @@ function responsiveSearchSuggestionPopUp() {
     }
     // console.log("click");
   });
-
-  responsivePriceSlider();
 }
 
-function renderProductSuggest(
+function responsivePriceSlider() {
+  inputEles.forEach((e) => {
+    e.addEventListener("input", validateRange);
+  });
+
+  validateRange();
+}
+
+function renderSuggestProduct(
   productsList,
   start = 0,
   end = MAX_ITEM_SUGGESTION
@@ -179,17 +180,9 @@ function renderCategory(categoriesList = getCategoriesList()) {
           minVal.innerHTML,
           maxVal.innerHTML
         );
-        renderProductSuggest(productsListFiltered);
+        renderSuggestProduct(productsListFiltered);
       });
     });
-}
-
-function responsivePriceSlider() {
-  inputEles.forEach((e) => {
-    e.addEventListener("input", validateRange);
-  });
-
-  validateRange();
 }
 
 function validateRange() {
@@ -215,5 +208,7 @@ function validateRange() {
     minPrice,
     maxPrice
   );
-  renderProductSuggest(productsListFiltered);
+  renderSuggestProduct(productsListFiltered);
 }
+
+export default responsiveSearch;

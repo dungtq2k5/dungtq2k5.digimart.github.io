@@ -94,7 +94,6 @@ function encryptString(string, offset=1) {
   return encryptedString;
 }
 
-
 export function showElements(eles, className=CLASSNAME.hide) {
   if(!Array.isArray(eles)) { //handle single ele
     eles = [eles];

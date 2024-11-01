@@ -1,38 +1,28 @@
-import { MSG } from "./settings.js";
+import { MSG } from "../../../settings.js";
 import {
   isValidEmail,
   isValidPassword,
   isValidVietnamesePhoneNumber,
   showElements,
   hideElements,
-} from "../controllers/utils.js";
+} from "../../../../controllers/utils.js";
 import {
   addUser,
   checkEmailExist,
   checkPhoneExist,
   userAuthenticated,
-  loginUser as login,
-  logoutUser as logout,
-} from "../controllers/users.js";
+  loginUser,
+} from "../../../../controllers/users.js";
+import { showLoginForm } from "./login.js";
 
-//login-form
-const loginFormContainer = document.getElementById("login-form-container");
-const loginForm = loginFormContainer.querySelector(".login-form");
-const registerLink = loginForm.querySelector(".register-link-js");
+
+const registerBtns = document.body.querySelectorAll(".register-btn-js");
 
 //register-form
 const registerFormContainer = document.getElementById("register-form-container");
 const registerForm = registerFormContainer.querySelector(".register-form");
 const loginLink = registerForm.querySelector(".login-link-js");
-
-
-//login-auth
-const emailLoginField = loginForm.querySelector("#login-form-field-email");
-const passwordLoginField = loginForm.querySelector("#login-form-field-password");
-const loginSubmitBtn = loginForm.querySelector(".login-form-submit-btn-js");
-
-const invalidCredentialPopup = loginForm.querySelector(".login-form-field-invalid-email-js");
-const invalidCredentialMsg = loginForm.querySelector(".login-form-field-invalid-email-msg-js");
+const registerCloseBtn = registerForm.querySelector(".form-close");
 
 //register-auth
 const emailRegisterField = registerForm.querySelector(
@@ -63,73 +53,70 @@ const invalidPhoneMsg = registerForm.querySelector(
   ".register-form-field-invalid-phone-msg-js"
 );
 
-//logout
-const logoutBtn = document.getElementById("logout-btn");
 
+function responsiveRegister() {
+  responsiveRegisterBtn();
+  responsiveRegisterCloseBtn();
+  responsiveRegisterSubmitBtn();
+  responsiveLoginLink();
+}
 
-export function loginUser() {
-  loginSubmitBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    if (!userAuthenticated()) {
-      const email = emailLoginField.value;
-      const password = passwordLoginField.value;
-
-      if (login(email, password)) {
-        loginForm.submit();
-      } else {
-        showElements(invalidCredentialPopup);
-        invalidCredentialMsg.innerHTML = MSG.invalidCredential;
-        console.log("Invalid credentials");
-      }
-    } else {
-      console.error("User is already login!");
-    }
-  });
-
-  registerLink.addEventListener("click", e => {
-    e.preventDefault();
-    hideElements(loginFormContainer);
-    showElements(registerFormContainer);
+function responsiveRegisterBtn() {
+  registerBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      registerForm.reset();
+      hideElements([
+        invalidEmailPopup,
+        invalidPasswordPopup,
+        invalidPhonePopup,
+      ]);
+      showElements(registerFormContainer);
+      console.log("show-register");
+    });
   });
 }
 
-export function registerUser() {
-  registerSubmitBtn.addEventListener("click", (e) => {
+function responsiveRegisterCloseBtn() {
+  registerCloseBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    if (!userAuthenticated()) {
-      const user = {
-        email: emailRegisterField.value,
-        phone: phoneRegisterField.value,
-        password: passwordRegisterField.value,
-        deliveryAddress: delAddrRegisterField.value,
-      };
-
-      if(validateRegisterForm(user) && validateAddingUser(user)) {
-        addUser(user);
-        login(user.email, user.password);
-        registerForm.submit();
-      }
-    } else {
-      console.error("User is already login!");
-    }
+    hideElements(registerFormContainer);
+    // console.log("hide-register");
   });
+}
 
+function responsiveRegisterSubmitBtn() {
+  registerSubmitBtn.addEventListener("click", e => {
+    e.preventDefault();
+    handleRegister();
+  });
+}
+
+function responsiveLoginLink() {
   loginLink.addEventListener("click", e => {
     e.preventDefault();
     hideElements(registerFormContainer);
-    showElements(loginFormContainer);
+    showLoginForm();
   });
 }
 
-export function logoutUser() {
-  logoutBtn.addEventListener("click", () => {
-    if (userAuthenticated()) {
-      // logoutBtn is a link when click page refresh
-      logout();
-    } else {
-      console.error("User not login yet!");
+function handleRegister() {
+  if(!userAuthenticated()) {
+    const user = {
+      email: emailRegisterField.value,
+      phone: phoneRegisterField.value,
+      password: passwordRegisterField.value,
+      deliveryAddress: delAddrRegisterField.value,
+    };
+
+    if(validateRegisterForm(user) && validateAddingUser(user)) {
+      addUser(user);
+      loginUser(user.email, user.password);
+      registerForm.submit();
     }
-  });
+  } else {
+    console.error("User is already login!");
+  }
 }
 
 function validateRegisterForm({ email, phone, password }) {
@@ -187,3 +174,23 @@ function validateAddingUser({ email, phone }) {
 
   return result;
 }
+
+function showRegisterBtn() {
+  showElements([...registerBtns]);
+}
+
+function hideRegisterBtn() {
+  hideElements([...registerBtns]);
+}
+
+function showRegisterForm() {
+  showElements(registerFormContainer);
+}
+
+function hideRegisterForm() {
+  hideElements(registerFormContainer);
+}
+
+
+export default responsiveRegister;
+export { showRegisterBtn, hideRegisterBtn, showRegisterForm, hideRegisterForm };

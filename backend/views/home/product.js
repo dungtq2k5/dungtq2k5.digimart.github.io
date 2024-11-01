@@ -1,13 +1,29 @@
-import { showElements, hideElements, calculatePages, getFromStorage, saveToStorage } from "../controllers/utils.js";
-import { IMG_ROOT_PATH, IMG_TYPE, LOCALSTORAGE, MAX_PRODUCT_RENDERED, MSG, LOCALHOST, PAGES } from "./settings.js";
+import { 
+  showElements, 
+  hideElements, 
+  calculatePages, 
+  getFromStorage, 
+  saveToStorage 
+} from "../../controllers/utils.js";
+import { 
+  IMG_ROOT_PATH, 
+  IMG_TYPE, 
+  LOCALSTORAGE, 
+  MAX_PRODUCT_RENDERED, 
+  MSG, 
+  LOCALHOST, 
+  PAGES 
+} from "../settings.js";
 import { 
   getProductsList,
   getProductDetail,
   getProductAmount,
-} from "../controllers/products.js";
-import { userAuthenticated } from "../controllers/users.js";
-import { addToCart } from "../controllers/carts.js";
-import { renderCartAndOrdersNotifications } from "./main-header.js";
+} from "../../controllers/products.js";
+import { userAuthenticated } from "../../controllers/users.js";
+import { addToCart } from "../../controllers/carts.js";
+import { showLoginForm } from "./header/auth/login.js";
+import { renderCartNotifi } from "./header/cart-icon.js";
+import { renderOrdersNotifi } from "./header/orders-icon.js";
 
 
 //products
@@ -17,21 +33,16 @@ const productDetailBackDrop = document.getElementById("product-detail-backdrop")
 //pagination
 const navProductBackBtn = document.getElementById("content-nav-back");
 const navProductForwardBtn = document.getElementById("content-nav-forward");
-const paginationProduct = document.getElementById("content-nav-index");
-
-//auth
-const loginFormContainer = document.getElementById("login-form-container");
-
 
 let currentPagination = getFromStorage(LOCALSTORAGE.currentProductPagination) || 1; //keep when page refreshed
-paginationProduct.innerHTML = currentPagination;
-
+const paginat = document.getElementById("content-nav-index");
+paginat.innerHTML = currentPagination;
 
 //timeout event
 let addToCartBtnTimeout;
 
 
-export default function renderProducts(productsList) {
+function renderProducts(productsList) {
   const start = (currentPagination-1) * MAX_PRODUCT_RENDERED;
   const end = currentPagination * MAX_PRODUCT_RENDERED;
   productsList = productsList ? productsList.slice(start, end) : getProductsList(start, end);
@@ -73,11 +84,11 @@ export default function renderProducts(productsList) {
   // console.log("render-products");
 }
 
-export function responsiveNavigationProducts() {
+function responsivePaginatProducts() {
   navProductBackBtn.addEventListener("click", () => {
     if(currentPagination > 1) {
       currentPagination--
-      paginationProduct.innerHTML = currentPagination;
+      paginat.innerHTML = currentPagination;
       saveToStorage(LOCALSTORAGE.currentProductPagination, currentPagination);
       renderProducts();
       
@@ -88,7 +99,7 @@ export function responsiveNavigationProducts() {
   navProductForwardBtn.addEventListener("click", () => {
     if(currentPagination < calculatePages(getProductAmount(), MAX_PRODUCT_RENDERED)) {
       currentPagination++;
-      paginationProduct.innerHTML = currentPagination;
+      paginat.innerHTML = currentPagination;
       saveToStorage(LOCALSTORAGE.currentProductPagination, currentPagination);
       renderProducts();
       
@@ -97,9 +108,9 @@ export function responsiveNavigationProducts() {
   });
 }
 
-export function resetPaginationProduct() {
+function resetPaginatProduct() {
   currentPagination = 1;
-  paginationProduct.innerHTML = currentPagination;
+  paginat.innerHTML = currentPagination;
   localStorage.removeItem(LOCALSTORAGE.currentProductPagination);
   // console.log("reset page index");
 }
@@ -131,20 +142,22 @@ function renderProductDetailPopUp(product) {
   `;
 
   const addBtn = productDetailBackDrop.querySelector(".add-btn-js");
+  const closeBtn = productDetailBackDrop.querySelector(".detail-close");
+  const buyBtn = productDetailBackDrop.querySelector(".buy-btn-js");
 
-  productDetailBackDrop.querySelector(".detail-close").addEventListener("click", () => {
+  closeBtn.addEventListener("click", () => {
     productDetailBackDrop.innerHTML = "";  
     hideElements(productDetailBackDrop);
     // console.log("close-detail-products");
   });
 
-  productDetailBackDrop.querySelector(".buy-btn-js").addEventListener("click", () => {
+  buyBtn.addEventListener("click", () => {
     if(user) {
       //add to cart -> go directly to cart page
       addToCart(user, product.id);
       window.location.href = `${LOCALHOST}/${PAGES.cart}`;
     } else {
-      showElements(loginFormContainer);
+      showLoginForm();
     } 
   });
 
@@ -152,17 +165,17 @@ function renderProductDetailPopUp(product) {
     if(user) {
       addToCart(user, product.id);
       addToCartSignal(addBtn);
-      renderCartAndOrdersNotifications();
+      renderCartNotifi();
+      renderOrdersNotifi();
 
     } else {
-      showElements(loginFormContainer);
+      showLoginForm();
     }
   });
 
   showElements(productDetailBackDrop);
   // console.log(`detail-product ${product.id}`);
 }
-
 
 function addToCartSignal(btn, timeout=800) {
   if(btn.innerHTML !== MSG.addToCartSuccess) btn.innerHTML = MSG.addToCartSuccess;
@@ -174,3 +187,7 @@ function addToCartSignal(btn, timeout=800) {
     // console.log("reset btn");
   }, timeout);
 }
+
+export default renderProducts;
+export { responsivePaginatProducts, resetPaginatProduct };
+
