@@ -1,23 +1,23 @@
 const categories = [
   {
     "id": "1",
-    "name": "smartwatch",
+    "name": "flagship",
   },
   {
     "id": "2",
-    "name": "smartband",
+    "name": "general",
   },
   {
     "id": "3",
-    "name": "sporty",
+    "name": "low price",
   },
   {
     "id": "4",
-    "name": "fashion",
+    "name": "performance",
   },
   {
     "id": "5",
-    "name": "business",
+    "name": "fashion",
   },
 ];
 

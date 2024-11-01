@@ -9,35 +9,23 @@ const brands = [
   },
   {
     "id": "3",
-    "name": "garmin",
-  },
-  {
-    "id": "4",
     "name": "asus",
   },
   {
+    "id": "4",
+    "name": "xiaomi",
+  },
+  {
     "id": "5",
-    "name": "fitbit",
+    "name": "oppo",
   },
   {
     "id": "6",
-    "name": "huawei",
+    "name": "realme",
   },
   {
     "id": "7",
-    "name": "polar",
-  },
-  {
-    "id": "8",
-    "name": "amazfit",
-  },
-  {
-    "id": "9",
-    "name": "mobvoi",
-  },
-  {
-    "id": "10",
-    "name": "withings",
+    "name": "nokia",
   },
 ];
 

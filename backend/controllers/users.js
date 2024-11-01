@@ -1,6 +1,6 @@
 import users from "../../assets/models/users.js";
 import { LOCALSTORAGE } from "../views/settings.js";
-import { addDelAddr, getUserDelAddrList } from "./delivery-address.js";
+import { addDelAddr, getUserDelAddrList } from "./delivery/addresses.js";
 import {
   generateUID,
   getFromStorage,

@@ -14,8 +14,8 @@ import {
 import {
   filterProducts,
   getPlainProductsList,
-} from "../../../controllers/products.js";
-import { getCategoriesList } from "../../../controllers/categories.js";
+} from "../../../controllers/products/products.js";
+import { getCategoriesList } from "../../../controllers/products/categories.js";
 import renderProducts, { resetPaginatProduct } from "../product.js";
 import { hideCategories } from "../categories.js";
 

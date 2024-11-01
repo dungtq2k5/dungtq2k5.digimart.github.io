@@ -18,7 +18,7 @@ import {
   getProductsList,
   getProductDetail,
   getProductAmount,
-} from "../../controllers/products.js";
+} from "../../controllers/products/products.js";
 import { userAuthenticated } from "../../controllers/users.js";
 import { addToCart } from "../../controllers/carts.js";
 import { showLoginForm } from "./header/auth/login.js";
@@ -61,7 +61,7 @@ function renderProducts(productsList) {
           </div>
     
           <div class="main-card-info b">
-            <p class="main-card-info-title">${item.name} - ${item.size}mm</p>
+            <p class="main-card-info-title">${item.name} - ${item.ram}GB ${item.rom}GB</p>
             <span class="main-card-info-price">$${item.price}</span>
           </div>
         </div>
@@ -128,7 +128,7 @@ function renderProductDetailPopUp(product) {
 
       <div class="detail-right">
         <div class="detail-right-info b">
-          <h2>${product.name} - ${product.size}mm</h2>
+          <h2>${product.name} - ${product.ram}GB ${product.rom}GB</h2>
           <p class="detail-right-info-price">$${product.price}</p>
           <p>${product.description}</p>
         </div>

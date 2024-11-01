@@ -27,7 +27,7 @@ function showLogoutBtn(username) {
 }
 
 function hideLogoutBtn() {
-  loginAs.innerHTML = "";
+  logoutName.innerHTML = "";
   hideElements(logoutBtn);
 }
 

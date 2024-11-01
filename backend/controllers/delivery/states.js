@@ -1,4 +1,4 @@
-import deliveryStates from "../../assets/models/delivery-states.js";
+import deliveryStates from "../../../assets/models/delivery/states.js";
 
 export function getDeliveryStatesList() {
   return deliveryStates;

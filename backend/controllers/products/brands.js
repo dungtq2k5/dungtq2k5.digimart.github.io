@@ -1,4 +1,4 @@
-import brands from "../../assets/models/brands.js";
+import brands from "../../../assets/models/products/brands.js";
 
 export function getBrandsList() {
   return brands;

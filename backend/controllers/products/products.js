@@ -1,10 +1,10 @@
-import products from "../../assets/models/products.js";
+import products from "../../../assets/models/products/products.js";
 import {
   MIN_PRODUCT_PRICE,
   MAX_PRODUCT_PRICE,
   LOCALSTORAGE,
-} from "../views/settings.js";
-import { getFromStorage, includesSubArr } from "./utils.js";
+} from "../../views/settings.js";
+import { getFromStorage, includesSubArr } from "../utils.js";
 import { getBrandDetail } from "./brands.js";
 
 export function getProductsList(from = 0, to = products.length) {

@@ -12,7 +12,7 @@ import {
   updateCart 
 } from "../../controllers/carts.js";
 import { userAuthenticated } from "../../controllers/users.js";
-import { getProductDetail } from "../../controllers/products.js";
+import { getProductDetail } from "../../controllers/products/products.js";
 import { 
   getFromStorage, 
   hideElements, 

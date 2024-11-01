@@ -34,7 +34,7 @@ export function genEmailToUsername(email) { //AI generate
   // Remove any periods from the username
   const cleanedUsername = username.replace(/\./g, '');
 
-  return cleanedUsername.slice(0, 12);
+  return cleanedUsername.slice(0, 5);
 }
 
 export function isValidEmail(email) { //AI generate

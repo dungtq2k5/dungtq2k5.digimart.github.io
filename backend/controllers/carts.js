@@ -1,7 +1,7 @@
-import carts from "../../assets/models/cart.js";
+import carts from "../../assets/models/carts.js";
 import { LOCALSTORAGE } from "../views/settings.js";
 import { generateUID, getFromStorage, saveToStorage } from "./utils.js";
-import { checkProductExist as checkProductExistFromProducts } from "./products.js";
+import { checkProductExist as checkProductExistFromProducts } from "./products/products.js";
 import { checkUserExist } from "./users.js";
 
 export function getCartsList() {

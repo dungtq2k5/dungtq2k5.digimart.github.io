@@ -19,7 +19,7 @@ import {
   addDelAddr, 
   getDeliveryAddress, 
   getUserDelAddrList 
-} from "../../controllers/delivery-address.js";
+} from "../../controllers/delivery/addresses.js";
 import { addOrders } from "../../controllers/orders.js";
 import { 
   selectAllItemIsCheck, 
