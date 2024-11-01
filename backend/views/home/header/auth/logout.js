@@ -3,12 +3,10 @@ import {
   logoutUser,
 } from "../../../../controllers/users.js";
 import { hideElements, showElements } from "../../../../controllers/utils.js";
-// import { hideAuthBtn } from "./authBtn.js";
-// import { hideLoginBtn } from "./loginBtn.js";
-// import { hideRegisterBtn } from "./registerBtn.js";
 
 
 const logoutBtn = document.getElementById("logout-btn");
+const logoutName = logoutBtn.querySelector(".logout-name-js");
 
 
 function responsiveLogoutBtn() {
@@ -22,12 +20,14 @@ function responsiveLogoutBtn() {
   });
 }
 
-function showLogoutBtn() {
+function showLogoutBtn(username) {
+  logoutName.innerHTML = username;
   showElements(logoutBtn);
   console.log("Page refresh but user is already login");
 }
 
 function hideLogoutBtn() {
+  loginAs.innerHTML = "";
   hideElements(logoutBtn);
 }
 

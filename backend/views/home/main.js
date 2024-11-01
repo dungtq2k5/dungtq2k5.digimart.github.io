@@ -28,10 +28,10 @@ import
 renderProducts, 
 { responsivePaginatProducts } 
 from "./product.js";
+import { genEmailToUsername } from "../../controllers/utils.js";
 
 
 const user = userAuthenticated();
-
 
 //responsive header
 logo();
@@ -47,7 +47,7 @@ if (user) {
   hideLoginBtn();
   hideRegisterBtn();
   hideAuthBtn();
-  showLogoutBtn();
+  showLogoutBtn(genEmailToUsername(user.email));
 } else {
   hideLogoutBtn();
   showLoginBtn();

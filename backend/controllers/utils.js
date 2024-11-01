@@ -27,6 +27,16 @@ export function capitalizeFirstLetter(string) { //AI generate
   });
 }
 
+export function genEmailToUsername(email) { //AI generate
+  // Split the email address by the '@' symbol
+  const [username, domain] = email.split('@');
+
+  // Remove any periods from the username
+  const cleanedUsername = username.replace(/\./g, '');
+
+  return cleanedUsername.slice(0, 12);
+}
+
 export function isValidEmail(email) { //AI generate
   /**
     * Correct email syntax: [username]@[domain name]

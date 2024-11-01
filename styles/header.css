@@ -3,10 +3,6 @@
   justify-content: space-evenly;
 }
 
-/* .header-logo {
-  font-size: 2rem;
-} */
-
 .header-ulti {
   display: flex;
   width: 50%;
@@ -105,7 +101,6 @@
   border-radius: var(--border-radius);
   background-color: var(--white);
 }
-
 
 /*filter-search*/
 .filter-search {
