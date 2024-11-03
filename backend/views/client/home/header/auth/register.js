@@ -1,18 +1,18 @@
-import { MSG } from "../../../settings.js";
+import { MSG } from "../../../../../settings.js";
 import {
   isValidEmail,
   isValidPassword,
   isValidVietnamesePhoneNumber,
   showElements,
   hideElements,
-} from "../../../../controllers/utils.js";
+} from "../../../../../controllers/utils.js";
 import {
   addUser,
   checkEmailExist,
   checkPhoneExist,
   userAuthenticated,
   loginUser,
-} from "../../../../controllers/users.js";
+} from "../../../../../controllers/users.js";
 import { showLoginForm } from "./login.js";
 
 

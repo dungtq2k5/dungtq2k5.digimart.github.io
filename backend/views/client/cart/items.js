@@ -4,21 +4,21 @@ import {
   LOCALSTORAGE,
   MSG,
   PAGES
-} from "../settings.js";
+} from "../../../settings.js";
 import { 
   getCartDetail, 
   getUserCart, 
   removeCart, 
   updateCart 
-} from "../../controllers/carts.js";
-import { userAuthenticated } from "../../controllers/users.js";
-import { getProductDetail } from "../../controllers/products/products.js";
+} from "../../../controllers/carts.js";
+import { userAuthenticated } from "../../../controllers/users.js";
+import { getProductDetail } from "../../../controllers/products/products.js";
 import { 
   getFromStorage, 
   hideElements, 
   saveToStorage, 
   showElements 
-} from "../../controllers/utils.js";
+} from "../../../controllers/utils.js";
 import { updateCheckoutForm } from "./checkout-form.js";
 
 
@@ -29,7 +29,7 @@ const mainContainer = document.getElementById("content-container");
 const itemContainer = document.getElementById("products-container");
 
 const selectAllItem = document.getElementById("select-all-product");
-//FIXME check and uncheck display bugs
+//FIXME check and uncheck display
 selectAllItem.checked = getFromStorage(LOCALSTORAGE.allItemSelected) || false; //still keep when page refreshed
 
 const removeItemContainer = document.getElementById("remove-item-container");

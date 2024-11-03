@@ -1,6 +1,6 @@
 import { renderOrders, renderEmptyOrders } from "./orders.js";
-import { userAuthenticated } from "../../controllers/users.js";
-import { getUserOrders } from "../../controllers/orders.js";
+import { userAuthenticated } from "../../../controllers/users.js";
+import { getUserOrders } from "../../../controllers/orders.js";
 
 
 const user = userAuthenticated();

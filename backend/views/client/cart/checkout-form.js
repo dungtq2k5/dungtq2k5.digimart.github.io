@@ -2,25 +2,25 @@ import {
   PAGES, 
   LOCALSTORAGE, 
   LOCALHOST 
-} from "../settings.js";
-import { removeCart } from "../../controllers/carts.js";
+} from "../../../settings.js";
+import { removeCart } from "../../../controllers/carts.js";
 import { 
   getUser, 
   updateUser, 
   userAuthenticated 
-} from "../../controllers/users.js";
+} from "../../../controllers/users.js";
 import { 
   hideElements, 
   isValidDeliveryAddress, 
   saveToStorage, 
   showElements 
-} from "../../controllers/utils.js";
+} from "../../../controllers/utils.js";
 import { 
   addDelAddr, 
   getDeliveryAddress, 
   getUserDelAddrList 
-} from "../../controllers/delivery/addresses.js";
-import { addOrders } from "../../controllers/orders.js";
+} from "../../../controllers/delivery/addresses.js";
+import { addOrders } from "../../../controllers/orders.js";
 import { 
   selectAllItemIsCheck, 
   getTotalItemsSelected, 

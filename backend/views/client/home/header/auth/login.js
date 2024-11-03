@@ -1,12 +1,12 @@
-import { MSG } from "../../../settings.js";
+import { MSG } from "../../../../../settings.js";
 import {
   showElements,
   hideElements,
-} from "../../../../controllers/utils.js";
+} from "../../../../../controllers/utils.js";
 import {
   userAuthenticated,
   loginUser,
-} from "../../../../controllers/users.js";
+} from "../../../../../controllers/users.js";
 import { showRegisterForm } from "./register.js";
 
 

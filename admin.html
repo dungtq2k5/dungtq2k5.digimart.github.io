@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+  rel="stylesheet"
+  href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+  />
+  
+  <link rel="stylesheet" href="styles/general.css">
+  <link rel="stylesheet" href="styles/form.css">
+  <link rel="stylesheet" href="styles/admin/header.css">
+  <link rel="stylesheet" href="styles/admin/content.css">
+  <title>Document</title>
+</head>
+<body id="root">
+  
+  <!-- login form -->
+  <div class="backdrop hide b">
+    <form class="login-form b">
+      <h1>Login</h1>
+
+      <div class="login-form-field b">
+        <label for="login-form-field-name">Name</label>
+        <input
+          id="login-form-field-name"
+          type="text"
+          placeholder="nikolatesla123"
+        />
+      </div>
+
+      <div class="login-form-field b">
+        <label for="login-form-field-password">Password</label>
+        <input
+          id="login-form-field-password"
+          type="password"
+          placeholder="password123"
+        />
+      </div>
+
+      <button class="btn1">Login in</button>
+    </form>
+  </div>
+
+  <header class="header b">
+    <a href="admin.html" class="b" title="home">
+      <div class="header-title">
+        <p>Admin page</p>
+      </div>
+    </a>
+
+    <nav class="b">
+      <ul>
+        <li>
+          <button>users</button>
+        </li>
+        <li>
+          <button>products</button>
+        </li>
+        <li>
+          <button>orders</button>
+        </li>
+        <li>
+          <button>analysis</button>
+        </li>
+      </ul>
+    </nav>
+
+    <p>Admin: <span>dungtran</span> <button class="link b">logout</button></p>
+  </header>
+
+  <main class="content b">
+    <table class="b">
+      <caption class="b"><h1>Users managment</h1></caption>
+      
+      <thead class="b">
+        <tr>
+          <th class="b">id</th>
+          <th class="b">email</th>
+          <th class="b">phone</th>
+          <th class="b">password</th>
+          <th class="b">delivery address</th> <!-- TODO dropdown to views all del addr -->
+          <th class="b">actions</th>
+        </tr>
+      </thead>
+
+      <tbody class="b">
+        <tr>
+          <td class="b" data-cell="id">123</td>
+          <td class="b" data-cell="name">dungtranquang2005@gmail.com</td>
+          <td class="b" data-cell="phone number">0392018660</td>
+          <td class="b" data-cell="password">password123</td>
+          <td class="b" data-cell="delivery address">abc WallSteer std.</td>
+          <td class="b" data-cell="actions">
+            <div class="btns">
+              <button class="update-btn link">update</button>
+              <button class="del-btn del">delete</button>
+            </div>
+          </td>
+        </tr>
+        <!-- ... -->
+      </tbody>
+    </table>
+  </main>
+
+  <!-- user update form -->
+  <div class="backdrop hide b">
+    <form class="form b">
+
+      <button class="form-close close-btn b">
+        <i class="uil uil-times"></i>
+      </button>
+
+      <h1>Update Users</h1>
+
+      <div class="form-field b">
+        <label for="form-field-email">Email</label>
+        <input
+          id="form-field-email"
+          type="email"
+          placeholder="nikolatesla123"
+        />
+      </div>
+
+      <div class="form-field b">
+        <label for="form-field-phone">Phone</label>
+        <input
+          id="form-field-phone"
+          type="tel"
+          placeholder="+123456789"
+        />
+      </div>
+
+      <div class="form-field b">
+        <label for="form-field-address">Delivery address</label>
+        <input
+          id="form-field-address"
+          type="tel"
+          placeholder="123 Wall Street. std"
+        />
+      </div>
+
+      <div class="form-field b">
+        <label for="form-field-address">State</label>
+        <input
+          id="form-field-address"
+          type="text"
+          placeholder="123 Wall Street. std"
+        />
+      </div>
+
+      <div>
+        <button class="btn1">Update</button>
+        <button class="btn2">Cancel</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

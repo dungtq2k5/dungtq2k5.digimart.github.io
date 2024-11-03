@@ -1,8 +1,8 @@
 import {
   userAuthenticated,
   logoutUser,
-} from "../../../../controllers/users.js";
-import { hideElements, showElements } from "../../../../controllers/utils.js";
+} from "../../../../../controllers/users.js";
+import { hideElements, showElements } from "../../../../../controllers/utils.js";
 
 
 const logoutBtn = document.getElementById("logout-btn");

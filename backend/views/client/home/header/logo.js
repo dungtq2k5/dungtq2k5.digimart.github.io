@@ -1,4 +1,4 @@
-import { LOCALSTORAGE } from "../../settings.js";
+import { LOCALSTORAGE } from "../../../../settings.js";
 
 
 const header = document.getElementById("main-header");

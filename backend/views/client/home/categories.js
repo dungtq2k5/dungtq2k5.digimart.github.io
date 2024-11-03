@@ -1,15 +1,15 @@
-import { LOCALSTORAGE } from "../settings.js";
+import { LOCALSTORAGE } from "../../../settings.js";
 import {
   capitalizeFirstLetter as capFirstLetter,
   getFromStorage,
   hideElements,
   saveToStorage,
-} from "../../controllers/utils.js";
+} from "../../../controllers/utils.js";
 import {
   getPlainProductsList,
   filterProductsByBrand,
-} from "../../controllers/products/products.js";
-import { getBrandsList } from "../../controllers/products/brands.js";
+} from "../../../controllers/products/products.js";
+import { getBrandsList } from "../../../controllers/products/brands.js";
 import renderProducts, { resetPaginatProduct } from "./product.js";
 
 const categoriesContainer = document.getElementById("content-categories");

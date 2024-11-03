@@ -20,8 +20,8 @@ if (getUserCart(user.id).length >= 1) {
 
 import { renderItems, responsiveSelectAllItem, renderEmptyCart } from "./items.js";
 import { default as checkoutForm } from "./checkout-form.js";
-import { userAuthenticated } from "../../controllers/users.js";
-import { getUserCart } from "../../controllers/carts.js";
+import { userAuthenticated } from "../../../controllers/users.js";
+import { getUserCart } from "../../../controllers/carts.js";
 
 //TODO: if user not auth but go here through url -> render Login form instead
 

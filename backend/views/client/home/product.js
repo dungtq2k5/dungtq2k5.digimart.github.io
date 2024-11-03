@@ -4,7 +4,7 @@ import {
   calculatePages, 
   getFromStorage, 
   saveToStorage 
-} from "../../controllers/utils.js";
+} from "../../../controllers/utils.js";
 import { 
   IMG_ROOT_PATH, 
   IMG_TYPE, 
@@ -13,14 +13,14 @@ import {
   MSG, 
   LOCALHOST, 
   PAGES 
-} from "../settings.js";
+} from "../../../settings.js";
 import { 
   getProductsList,
   getProductDetail,
   getProductAmount,
-} from "../../controllers/products/products.js";
-import { userAuthenticated } from "../../controllers/users.js";
-import { addToCart } from "../../controllers/carts.js";
+} from "../../../controllers/products/products.js";
+import { userAuthenticated } from "../../../controllers/users.js";
+import { addToCart } from "../../../controllers/carts.js";
 import { showLoginForm } from "./header/auth/login.js";
 import { renderCartNotifi } from "./header/cart-icon.js";
 import { renderOrdersNotifi } from "./header/orders-icon.js";

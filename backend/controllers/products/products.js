@@ -3,7 +3,7 @@ import {
   MIN_PRODUCT_PRICE,
   MAX_PRODUCT_PRICE,
   LOCALSTORAGE,
-} from "../../views/settings.js";
+} from "../../settings.js";
 import { getFromStorage, includesSubArr } from "../utils.js";
 import { getBrandDetail } from "./brands.js";
 

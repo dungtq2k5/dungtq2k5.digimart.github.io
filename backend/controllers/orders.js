@@ -1,5 +1,5 @@
 import orders from "../../assets/models/orders.js";
-import { LOCALSTORAGE } from "../views/settings.js";
+import { LOCALSTORAGE } from "../settings.js";
 import { getFromStorage, saveToStorage, generateUID } from "./utils.js";
 import { getDefaultDeliveryStateId } from "./delivery/states.js";
 import { checkUserExist } from "./users.js";

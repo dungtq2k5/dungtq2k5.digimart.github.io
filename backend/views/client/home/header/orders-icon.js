@@ -1,10 +1,10 @@
 import { 
   LOCALHOST,
   PAGES
-} from "../../settings.js";
-import { userAuthenticated } from "../../../controllers/users.js";
-import { hideElements, showElements } from "../../../controllers/utils.js";
-import { getUserOrders } from "../../../controllers/orders.js";
+} from "../../../../settings.js";
+import { userAuthenticated } from "../../../../controllers/users.js";
+import { hideElements, showElements } from "../../../../controllers/utils.js";
+import { getUserOrders } from "../../../../controllers/orders.js";
 import { showLoginForm } from "./auth/login.js";
 
 

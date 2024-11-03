@@ -1,0 +1,16 @@
+.header {
+  justify-content: space-between;
+  white-space: nowrap;
+}
+
+nav ul {
+  display: flex;
+  gap: 1em;
+}
+
+nav ul li button {
+  border: none;
+  background: transparent;
+  text-transform: capitalize;
+}
+

@@ -1,4 +1,4 @@
-import { userAuthenticated } from "../../controllers/users.js";
+import { userAuthenticated } from "../../../controllers/users.js";
 import { default as logo } from "./header/logo.js";
 import { default as search } from "./header/search.js";
 import { default as cartIcon } from "./header/cart-icon.js";
@@ -28,7 +28,7 @@ import
 renderProducts, 
 { responsivePaginatProducts } 
 from "./product.js";
-import { genEmailToUsername } from "../../controllers/utils.js";
+import { genEmailToUsername } from "../../../controllers/utils.js";
 
 
 const user = userAuthenticated();

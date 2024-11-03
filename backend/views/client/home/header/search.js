@@ -3,19 +3,19 @@ import {
   MAX_ITEM_SUGGESTION,
   CLASSNAME,
   LOCALSTORAGE,
-} from "../../settings.js";
+} from "../../../../settings.js";
 import {
   toggleEleInArr,
   showElements,
   hideElements,
   saveToStorage,
   getFromStorage,
-} from "../../../controllers/utils.js";
+} from "../../../../controllers/utils.js";
 import {
   filterProducts,
   getPlainProductsList,
-} from "../../../controllers/products/products.js";
-import { getCategoriesList } from "../../../controllers/products/categories.js";
+} from "../../../../controllers/products/products.js";
+import { getCategoriesList } from "../../../../controllers/products/categories.js";
 import renderProducts, { resetPaginatProduct } from "../product.js";
 import { hideCategories } from "../categories.js";
 

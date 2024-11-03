@@ -1,4 +1,4 @@
-import { LOCALSTORAGE } from "../../views/settings.js";
+import { LOCALSTORAGE } from "../../settings.js";
 import { getFromStorage, generateUID, saveToStorage } from "../utils.js";
 import deliveryAddress from "../../../assets/models/delivery/addresses.js";
 

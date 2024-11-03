@@ -80,6 +80,11 @@ img {
 .content {
   padding-top: 6em !important; 
 }
+.text-overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .btn1, .btn2{
   border: 1px solid transparent;
   padding: .5em 1em;

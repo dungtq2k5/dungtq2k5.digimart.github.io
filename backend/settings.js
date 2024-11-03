@@ -43,6 +43,8 @@ export const LOCALSTORAGE = {
   currentProductPagination: "currentProductPagination",
   categoryHidden: "categoryHidden",
   allItemSelected: "allItemSelected",
+
+  adminAuth: "adminAuth",
 }
 
 export const PAGES = {

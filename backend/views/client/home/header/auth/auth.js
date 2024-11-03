@@ -1,5 +1,5 @@
-import { hideElements, showElements } from "../../../../controllers/utils.js";
-import { CLASSNAME } from "../../../settings.js";
+import { hideElements, showElements } from "../../../../../controllers/utils.js";
+import { CLASSNAME } from "../../../../../settings.js";
 
 
 const authBtn = document.getElementById("header-auth-profile");

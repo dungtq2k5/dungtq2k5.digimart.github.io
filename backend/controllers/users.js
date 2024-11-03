@@ -1,5 +1,5 @@
 import users from "../../assets/models/users.js";
-import { LOCALSTORAGE } from "../views/settings.js";
+import { LOCALSTORAGE } from "../settings.js";
 import { addDelAddr, getUserDelAddrList } from "./delivery/addresses.js";
 import {
   generateUID,
