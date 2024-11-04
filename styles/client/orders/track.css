@@ -1,41 +1,35 @@
 .track {
   position: relative;
-  padding: var(--section-padding);
+  padding: 1em;
   border-radius: var(--border-radius);
-  background-color: var(--white);
+  background: var(--white);
   width: 100%;
   max-width: 1000px;
 }
 
-.track-close {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.track img {
+.track__img {
   width: 50%;
   max-width: 320px;
-  background-color: var(--darkwhite);
+  background: var(--darkwhite);
   border-radius: var(--border-radius);
   margin: 1em 0;
 }
 
-.track-bar-title {
+.track__bar__title {
   display: flex;
   justify-content: space-between;
 }
-.track-bar-progress {
+.track__bar__progress {
   position: relative;
   height: 1.5em;
   border-radius: 15px;
   border: 1px solid var(--lightgrey);
   overflow: hidden;
 }
-.track-bar-progress-fill {
+.track__bar__progress__fill {
   position: absolute;
   height: 100%;
   left: 0;
   /* width: 90%; */
-  background-color: var(--blue);
+  background: var(--blue);
 }

@@ -236,7 +236,7 @@ function renderEmptyCart() {
   contentContainer.innerHTML = `
     <div class="content-empty-cart">
       <p>${MSG.nothingInCart}</p>
-      <a href="${PAGES.home}" class="btn--g btn--prim--g">Go shopping now</a>
+      <a href="${PAGES.home}" class="btn--g btn--sec--g">Go shopping now</a>
     </div>
   `;
 }

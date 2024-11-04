@@ -15,10 +15,10 @@
   flex-direction: column;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 1em;
 }
 .content__items, .content__items__header {
-  margin-bottom: 1rem;
+  margin-bottom: 1em;
 }
 .content__items__header, .content__items__item {
   display: grid;
