@@ -7,10 +7,10 @@ export const MAX_ITEM_CART_POPUP_RENDERED = 3;
 export const MIN_PRODUCT_PRICE = 0, MAX_PRODUCT_PRICE = 500;
 
 
-export const CLASSNAME = { //relative to html-css
+export const CLASSNAME = { //relative to css classes
   hide: "hide--g",
-  checked: "checked",
-  bgActive: "bg-active",
+  // checked: "checked",
+  bgBlue: "bg--blue--g",
 }
 
 export const MAX_PRODUCT_RENDERED = 5;

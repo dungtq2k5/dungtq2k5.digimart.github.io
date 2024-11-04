@@ -9,7 +9,6 @@
   />
   
   <link rel="stylesheet" href="styles/general.css">
-  <link rel="stylesheet" href="styles/form.css">
   <link rel="stylesheet" href="styles/admin/header.css">
   <link rel="stylesheet" href="styles/admin/content.css">
   <title>Document</title>
@@ -17,60 +16,64 @@
 <body id="root">
   
   <!-- login form -->
-  <div class="backdrop hide b">
-    <form class="login-form b">
-      <h1>Login</h1>
+  <div class="backdrop--g hide--g b">
+    <form class="form--g b">
+      <h2>Login</h2>
 
-      <div class="login-form-field b">
-        <label for="login-form-field-name">Name</label>
+      <div class="form__field--g b">
+        <label for="login-name">Name</label>
         <input
-          id="login-form-field-name"
+          id="login-name"
           type="text"
           placeholder="nikolatesla123"
+          class="form__field__input--g"
         />
       </div>
 
-      <div class="login-form-field b">
-        <label for="login-form-field-password">Password</label>
+      <div class="form__field--g b">
+        <label for="login-password">Password</label>
         <input
-          id="login-form-field-password"
+          id="login-password"
           type="password"
           placeholder="password123"
+          class="form__field__input--g"
         />
       </div>
 
-      <button class="btn1">Login in</button>
+      <button class="btn--g btn--prim--g btn--mw--g">Login in</button>
     </form>
   </div>
 
-  <header class="header b">
-    <a href="admin.html" class="b" title="home">
-      <div class="header-title">
-        <p>Admin page</p>
-      </div>
-    </a>
-
-    <nav class="b">
-      <ul>
+  <header class="header header--g b">
+    <div class="header__logo">
+      <a href="admin.html" class="b" title="home">Admin page</a>
+    </div>
+  
+    <nav class="header__nav b">
+      <ul class="header__nav__list">
         <li>
-          <button>users</button>
+          <button class="btn--none--g text--cap--g">users</button>
         </li>
         <li>
-          <button>products</button>
+          <button class="btn--none--g text--cap--g">products</button>
         </li>
         <li>
-          <button>orders</button>
+          <button class="btn--none--g text--cap--g">orders</button>
         </li>
         <li>
-          <button>analysis</button>
+          <button class="btn--none--g text--cap--g">analysis</button>
         </li>
       </ul>
     </nav>
-
-    <p>Admin: <span>dungtran</span> <button class="link b">logout</button></p>
+    
+    <div class="header__auth b">
+      <p>Admin: <span>dungtran</span></p>
+      <button class="link--g btn--none--g">logout</button>
+    </div>
   </header>
 
-  <main class="content b">
+  <!-- content -->
+  <main class="content content--g b">
     <table class="b">
       <caption class="b"><h1>Users managment</h1></caption>
       
@@ -81,6 +84,7 @@
           <th class="b">phone</th>
           <th class="b">password</th>
           <th class="b">delivery address</th> <!-- TODO dropdown to views all del addr -->
+          <!-- TODO state -->
           <th class="b">actions</th>
         </tr>
       </thead>
@@ -94,8 +98,8 @@
           <td class="b" data-cell="delivery address">abc WallSteer std.</td>
           <td class="b" data-cell="actions">
             <div class="btns">
-              <button class="update-btn link">update</button>
-              <button class="del-btn del">delete</button>
+              <button class="btn--none--g link--g">update</button>
+              <button class="btn--none--g link--g link--red--g">delete</button>
             </div>
           </td>
         </tr>
@@ -104,57 +108,131 @@
     </table>
   </main>
 
-  <!-- user update form -->
-  <div class="backdrop hide b">
-    <form class="form b">
-
-      <button class="form-close close-btn b">
+  <!-- create user form -->
+  <div class="backdrop--g hide--g b">
+    <div class="form--g b">
+      <button class="form__close-btn--g btn--none--g b">
         <i class="uil uil-times"></i>
       </button>
 
-      <h1>Update Users</h1>
-
-      <div class="form-field b">
-        <label for="form-field-email">Email</label>
+      <h2>Create new user</h2>
+      
+      <!-- name -->
+      <div class="form__field--g b">
+        <label for="create-name">Name</label>
         <input
-          id="form-field-email"
+          id="create-name"
+          type="text"
+          placeholder="nikolatesla123"
+          class="form__field__input--g"
+        />
+      </div>
+
+      <!-- email -->
+      <div class="form__field--g b">
+        <label for="create-email">Email</label>
+        <input
+          id="create-email"
           type="email"
           placeholder="nikolatesla123"
+          class="form__field__input--g"
         />
       </div>
 
-      <div class="form-field b">
-        <label for="form-field-phone">Phone</label>
+      <!-- pass -->
+      <div class="form__field--g b">
+        <label for="create-pass">Password</label>
         <input
-          id="form-field-phone"
+          id="create-pass"
+          type="password"
+          placeholder="nikolatesla123"
+          class="form__field__input--g"
+        />
+      </div>
+
+      <!-- phone -->
+      <div class="form__field--g b">
+        <label for="create-phone">Phone number</label>
+        <input
+          id="create-phone"
+          type="tel"
+          placeholder="nikolatesla123"
+          class="form__field__input--g"
+        />
+      </div>
+
+      <!-- address -->
+      <div class="form__field--g b">
+        <label for="create-addr">Delivery address</label>
+        <input
+          id="create-addr"
+          type="text"
+          placeholder="nikolatesla123"
+          class="form__field__input--g"
+        />
+      </div>
+
+      <!-- TODO state -->
+       
+
+      <button class="btn--g btn--prim--g btn--mw--g">Add</button>
+    </div>
+  </div>
+
+  <!-- update user form-->
+  <div class="backdrop--g hide--g b">
+    <form class="form--g b">
+
+      <button class="form__close-btn--g btn--none--g b">
+        <i class="uil uil-times"></i>
+      </button>
+
+      <h2>Update User</h2>
+
+      <div class="form__field--g b">
+        <label for="update-email">Email</label>
+        <input
+          id="update-email"
+          type="email"
+          placeholder="nikolatesla123"
+          class="form__field__input--g"
+        />
+      </div>
+
+      <div class="form__field--g b">
+        <label for="update-phone">Phone</label>
+        <input
+          id="update-phone"
           type="tel"
           placeholder="+123456789"
+          class="form__field__input--g"
         />
       </div>
 
-      <div class="form-field b">
-        <label for="form-field-address">Delivery address</label>
-        <input
-          id="form-field-address"
-          type="tel"
-          placeholder="123 Wall Street. std"
-        />
-      </div>
+      <!-- TODO state -->
 
-      <div class="form-field b">
-        <label for="form-field-address">State</label>
-        <input
-          id="form-field-address"
-          type="text"
-          placeholder="123 Wall Street. std"
-        />
-      </div>
-
-      <div>
-        <button class="btn1">Update</button>
-        <button class="btn2">Cancel</button>
+      <div class="form__btns">
+        <button class="btn--g btn--prim--g btn--mw--g">Update</button>
+        <button class="btn--g btn--sec--g btn--mw--g">Cancel</button>
       </div>
     </form>
   </div>
+
+  <!-- del user form -->
+  <div class="backdrop--g hide--g b">
+    <div class="form--g b">
+      <button class="form__close-btn--g btn--none--g b">
+        <i class="uil uil-times"></i>
+      </button>
+
+      <h2>You want to remove user [username]&#63;</h2>
+
+      <div class="form__btns">
+        <button class="btn--g btn--del--g btn--mw--g">Remove</button>
+        <button class="btn--g btn--sec--g btn--mw--g">Cancel</button>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>

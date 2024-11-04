@@ -85,7 +85,6 @@ img {
 
 .btn--g {
   text-align: center;
-  font-weight: 500;
   padding: .5em 1em;
   width: max-content;
   height: max-content;
@@ -101,6 +100,10 @@ img {
   color: var(--blue);
   background: transparent;
   border-color: var(--lightgrey);
+}
+.btn--del--g {
+  color: var(--white);
+  background: var(--red);
 }
 .btn--none--g {
   border: none;
@@ -138,6 +141,11 @@ img {
   padding: 1em;
   background: rgba(133, 133, 133, 0.5);
   z-index: 99;
+}
+
+.bg--blue--g {
+  color: var(--white);
+  background: var(--blue);
 }
 
 /*form*/

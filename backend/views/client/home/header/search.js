@@ -174,7 +174,7 @@ function renderCategory(categoriesList = getCategoriesList()) {
     .querySelectorAll(".header__search-popup__categories__item")
     .forEach((item) => {
       item.addEventListener("click", () => {
-        item.classList.toggle(CLASSNAME.checked);
+        item.classList.toggle(CLASSNAME.bgBlue);
         item.querySelector("i").classList.toggle(CLASSNAME.hide);
 
         const categoryId = item.dataset.categoryId;
