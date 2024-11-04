@@ -4,7 +4,7 @@ const products = [
     "brandId": "1",
     "typesId": ["1","3"],
     "chipSetId": "1",
-    "name": "Iphone 16 Promax",
+    "name": "iphone 16 promax",
     "price": "399", //cents
     "quantity": "100",
     "img": "smartphone",

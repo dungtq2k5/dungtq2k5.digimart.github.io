@@ -60,7 +60,7 @@ function renderProducts(productsList) {
           />
 
           <div class="content__products__card__info-box b">
-            <p class="content__products__card__info-box__title">
+            <p class="content__products__card__info-box__title text--cap--g">
               ${item.name} - ${item.ram}GB ${item.rom}GB
             </p>
             <p class="content__products__card__info-box__price">
@@ -130,7 +130,7 @@ function renderProductDetailPopUp(product) {
         <img src="${IMG_ROOT_PATH}/${product.img}.webp" alt="" class="product-detail-box__img b">
 
         <div class="product-detail-box__info-box">
-          <h2 class="b">${product.name} - ${product.ram}GB ${product.rom}GB</h2>
+          <h2 class="text--cap--g b">${product.name} - ${product.ram}GB ${product.rom}GB</h2>
 
           <div class="product-detail-box__info-box__text-box b">
             <p>&dollar;<span>${product.price}</span></p>

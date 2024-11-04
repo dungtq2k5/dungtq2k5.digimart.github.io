@@ -26,6 +26,9 @@ body {
   min-height: 100vh;
   margin: 0 auto;
 }
+button {
+  font-size: 1rem;
+}
 li {
   list-style-type: none;
 }
@@ -59,6 +62,7 @@ img {
   padding: 1em;
   gap: 1em;
   border-bottom: 1px solid var(--lightgrey);
+  background: var(--white);
   z-index: 99;
 }
 .content--g {
@@ -80,7 +84,7 @@ img {
 
 
 .btn--g {
-  font-size: 1rem;
+  text-align: center;
   font-weight: 500;
   padding: .5em 1em;
   width: max-content;
@@ -112,12 +116,9 @@ img {
 
 .link--g {
   color: var(--blue);
-  width: max-content;
   text-decoration: underline;
-  border: none;
-  background: none;
 }
-.link--red {
+.link--red--g {
   color: var(--red);
 }
 
@@ -181,8 +182,6 @@ img {
   right: 0;
   left: 0;
   background: var(--white);
-}
-.footer__copyright--g {
   text-align: center;
   border-top: 1px solid var(--lightgrey);
   padding: 1em 0 1em 0;

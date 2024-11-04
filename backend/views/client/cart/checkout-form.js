@@ -30,26 +30,26 @@ import {
 
 const user = userAuthenticated() || console.error("user not auth but cartpage is rendered");
 
-const mainContainer = document.getElementById("content-container");
+const contentContainer = document.getElementById("container");
 
 //checkout form
-const checkoutForm = mainContainer.querySelector(".checkout-form");
-const checkoutBtn = checkoutForm.querySelector(".checkout-form-btn");
-const addDelAddrBtn = checkoutForm.querySelector(".add-del-addr-btn");
-const selectDelAddr = checkoutForm.querySelector("#select-del-addr");
+const checkoutForm = contentContainer.querySelector(".checkout-form-js");
+const checkoutBtn = checkoutForm.querySelector(".checkout-btn-js");
+const addDelAddrBtn = checkoutForm.querySelector(".add-addr-btn-js");
+const selectDelAddr = checkoutForm.querySelector(".select-addr-js");
 
 //delivery address
-const delAddrContainer = document.getElementById("del-addr-container");
-const delAddrForm = delAddrContainer.querySelector(".address-form");
-const delAddrCloseBtn = delAddrForm.querySelector(".form-close");
-const delAddrInput = delAddrForm.querySelector("#address-form-field-address");
-const delAddSummitBtn = delAddrForm.querySelector(".address-form-btn-js");
+const addAddrBackDrop = document.getElementById("add-addr-backdrop");
+const addrForm = addAddrBackDrop.querySelector(".form-js");
+const addrCloseBtn = addrForm.querySelector(".close-btn-js");
+const addrInput = addrForm.querySelector(".input-js");
+const addrSubmitBtn = addrForm.querySelector(".submit-btn-js");
 
 
 function responsiveCheckoutForm() {
   responsiveSelectDelAddr();
   responsiveAddDelAddrBtn();
-  responsiveDelAddrCloseBtn();
+  responsiveaddrCloseBtn();
   responsiveDelAddrSubmitBtn();
 
   responsiveCheckoutBtn();
@@ -86,40 +86,43 @@ function handleCheckout() {
 }
 
 function updateCheckoutForm() {
+  const itemsSelected = getItemsSelected().length;
   const total = getTotalItemsSelected();
+  const delAddr = getDeliveryAddress(getUser(user.id).deliveryAddressId).address;
 
-  checkoutForm.querySelector(".items-js").innerHTML = getItemsSelected().length;
+  checkoutForm.querySelector(".items-js").innerHTML = itemsSelected;
   checkoutForm.querySelector(".items-total-js").innerHTML = total;
-  selectDelAddr.innerHTML = genDelAddrOptionHTML();
   checkoutForm.querySelector(".total-js").innerHTML = total;
-  checkoutForm.querySelector(".delivery-to-js").innerHTML = getDeliveryAddress(getUser(user.id).deliveryAddressId).address;
+  checkoutForm.querySelector(".del-to-js").innerHTML = delAddr;
+
+  selectDelAddr.innerHTML = genDelAddrOptionHTML();
 
   console.log("update checkout form");
 }
 
 function responsiveAddDelAddrBtn() {
   addDelAddrBtn.addEventListener("click", () => {
-    showElements(delAddrContainer);
+    showElements(addAddrBackDrop);
   });
 }
 
-function responsiveDelAddrCloseBtn() {
-  delAddrCloseBtn.addEventListener("click", e => {
+function responsiveaddrCloseBtn() {
+  addrCloseBtn.addEventListener("click", e => {
     e.preventDefault();
-    hideElements(delAddrContainer);
+    hideElements(addAddrBackDrop);
   });
 }
 
 function responsiveDelAddrSubmitBtn() {
-  delAddSummitBtn.addEventListener("click", e => {
+  addrSubmitBtn.addEventListener("click", e => {
     e.preventDefault();
-    const delAddr = delAddrInput.value;
+    const delAddr = addrInput.value;
 
     if(isValidDeliveryAddress(delAddr)) {
       addDelAddr(user.id, delAddr);
       updateCheckoutForm();
-      hideElements(delAddrContainer);
-      delAddrForm.reset();
+      hideElements(addAddrBackDrop);
+      addrForm.reset();
     } else {
       console.error("Unvalid delivery address");
     }

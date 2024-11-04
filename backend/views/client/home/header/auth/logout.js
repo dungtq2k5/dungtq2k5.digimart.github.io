@@ -5,8 +5,9 @@ import {
 import { hideElements, showElements } from "../../../../../controllers/utils.js";
 
 
-const logoutBtn = document.getElementById("logout-btn");
-const logoutName = logoutBtn.querySelector(".logout-name-js");
+const logoutContainer = document.getElementById("logout");
+const logoutBtn = logoutContainer.querySelector(".logout-btn-js");
+const logoutName = logoutContainer.querySelector(".logout-name-js");
 
 
 function responsiveLogoutBtn() {
@@ -22,13 +23,13 @@ function responsiveLogoutBtn() {
 
 function showLogoutBtn(username) {
   logoutName.innerHTML = username;
-  showElements(logoutBtn);
+  showElements(logoutContainer);
   console.log("Page refresh but user is already login");
 }
 
 function hideLogoutBtn() {
   logoutName.innerHTML = "";
-  hideElements(logoutBtn);
+  hideElements(logoutContainer);
 }
 
 export default responsiveLogoutBtn;

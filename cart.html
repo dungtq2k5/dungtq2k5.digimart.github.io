@@ -3,38 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
-    />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" />
     <link rel="stylesheet" href="styles/general.css" />
     <link rel="stylesheet" href="styles/client/cart/cart.css" />
-    <link rel="stylesheet" href="styles/form.css"/>
-    <link rel="stylesheet" href="styles/footer.css" />
     <title>Document</title>
   </head>
   <body id="root">
+
     <!--header-->
-    <header class="header b">
-      <a href="index.html" class="b" title="home">
-        <div class="header-title">
-          <p>Logo - Home /</p>
-        </div>
-      </a>
-      <a href="cart.html" class="b" title="cart">
-        <div class="header-title">
-          <p>Cart</p>
-        </div>
-      </a>
+    <header id="header" class="header header--g b">
+      <div class="b">
+        <a href="index.html">Logo - Home</a>
+      </div>
+
+      <div>/</div>
+
+      <div class="b">
+        <a href="cart.html">Cart</a>
+      </div>
     </header>
 
-    <!-- cart -->
-    <main id="content-container" class="content b2">
-      <div class="content-product b">
+    <!--content-->
+    <div id="container" class="content content--g b">
+
+      <!-- items -->
+      <main class="content__items b">
+
         <!-- title -->
-        <div class="content-product-header b">
-          <div class="content-product-header-product">
-            <input type="checkbox" id="select-all-product">
+        <div class="content__items__header b">
+          <div class="content__items__header__select">
+            <input type="checkbox" id="select-all-product" class="content__items__header__select__checkbox select-all-js">
             <label for="select-all-product">Product</label>
           </div>
           <p class="b">Unit Price</p>
@@ -44,146 +42,125 @@
         </div>
 
         <!-- items list -->
-        <ul id="products-container">
-          <!-- <li class="content-product-section b">
-            <div class="content-product-section-product b">
-              <input type="checkbox" id="product-id" class="select-item-js">
-              <label for="product-id">
-                <img src="assets/img/products/samsung-galaxy-watch6.webp" alt="" class="content-product-section-product-img">
-                <p class="content-product-section-product-name b">Samsung Galaxy Watch6</p>
-              </label>
+        <ul class="items-container-js">
+          <!-- <li class="content__items__item b">
+            <div class="content__items__item__select b">
+              <input type="checkbox" id="product-id">
+              <img src="assets/img/products/samsung-galaxy-watch6.webp" alt="" class="content__items__item__select__label__img">
+              <label for="product-id" class="content__items__item__select__label text--cap--g">samsung Galaxy watch6</label>
             </div>
 
             <p class="b">$191</p>
 
-            <div class="content-product-section-quantity b">
-              <i id="decrease-quantity" class="uil uil-arrow-left b" title="decrease quantity"></i>
+            <div class="content__items__item__quant b">
+              <i class="uil uil-arrow-left b"></i>
               <span class="b">1</span>
-              <i id="increase-quantity" class="uil uil-arrow-right b" title="increase quantity"></i>
+              <i class="uil uil-arrow-right b"></i>
             </div>
 
             <p class="b">$190</p>
 
-            <button class="del b">Delete</button>
+            <button class="link--g link--red--g btn--none--g b">Delete</button>
           </li> -->
         </ul>
-      </div>
+      </main>
 
       <!-- checkout form -->
-      <div class="checkout-form b">
+      <div class="content__checkout-form checkout-form-js b">
+
         <h2>Order Summary</h2>
-        <div class="checkout-form-info">
+
+        <!-- info -->
+        <div class="content__checkout-form__info">
           <div>
             <p>Items(<span class="items-js">0</span>): </p>
             <p>$<span class="items-total-js">0</span></p>
           </div>
           <div>
             <p>Shipping & handling: </p>
-            <p>$<span class="shipping-js">0</span></p>
+            <p>$<span>0</span></p>
           </div>
           <div>
             <p>Total before tax:</p>
-            <p>$<span class="bftax-js">0</span></p>
+            <p>$<span>0</span></p>
           </div>
           <div>
             <p>Estimated tax (<span>10%</span>): </p>
-            <p>$<span class="estax-js">0</span></p>
+            <p>$<span>0</span></p>
           </div>
           <div>
             <p>Order total: </p>
             <p>$<span class="total-js">0.00</span></p>
           </div>
         </div>
-
-        <div class="checkout-form-address b">
+        
+        <!-- delivery address -->
+        <div class="content__checkout-form__addr b">
           <div>
             <p>Delivery to:</p>
-            <address class="delivery-to-js"></address>
+            <address class="del-to-js"></address>
           </div>
+
           <div>
-            <label for="select-del-addr">Select another:</label>
-            <select id="select-del-addr"></select>
+            <label for="select-addr">Select another:</label>
+            <select id="select-addr" class="select-addr-js"></select>
           </div>
-          <button class="add-del-addr-btn link">Add new</button>
+
+          <button class="link--g btn--none--g add-addr-btn-js">Add new</button>
         </div>
 
-        <a href="#checkout" class="checkout-form-btn btn1">Process To Checkout</a>
+        <a href="#checkout" class="btn--g btn--prim--g btn--mw--g checkout-btn-js">Process To Checkout</a>
       </div>
 
-    </main>
+    </div>
 
+    <!--del addr backdrop-->
+    <div id="add-addr-backdrop" class="backdrop--g hide--g b">
+      <form class="form--g form-js b">
+        <button class="form__close-btn--g btn--none--g close-btn-js b">
+          <i class="uil uil-times"></i>
+        </button>
 
-    <!-- footer -->
-    <footer id="footer" class="footer b">
-      <div class="footer-copyright b">
-        <p>&copy; Copyright DungTran 2024. All rigth reserved.</p>
-      </div>
+        <h2>Add new delivery address</h2>
+
+        <div class="form__field--g b">
+          <label for="del-addr">Your new address</label>
+          <input
+            id="del-addr"
+            type="text"
+            placeholder="123 Wall Street, Los"
+            class="form__field__input--g input-js"
+          />
+        </div>
+
+        <button class="btn--g btn--prim--g btn--mw--g submit-btn-js">Add</button>
+      </form>
+    </div>
+
+    <!--remove item backdrop-->
+    <div id="remove-item-backdrop" class="backdrop--g hide--g b">
+      <!-- <div class="form--g b">
+        <button class="form__close-btn--g btn--none--g  b">
+          <i class="uil uil-times detail-close-icon b"></i>
+        </button>
+
+        <h2>Do you want to remove this item?</h2>
+
+        <span class="text--cap--g">Samsung Galaxy Watch6</span>
+
+        <div class="form__btns">
+          <button class="btn--g btn--prim--g btn--mw--g">Yes</button>
+          <button class="btn--g btn--sec--g btn--mw--g">No</button>
+        </div>
+      </div> -->
+    </div>
+
+    <!--footer-->
+    <footer class="footer--g b">
+      <p>&copy; Copyright DungTran 2024. All right reserved.</p>
     </footer>
 
-    <!-- del addr backdrop -->
-    <div id="del-addr-container" class="backdrop hide b">
-      <form class="address-form b">
-        <button class="form-close close-btn b">
-          <i class="uil uil-times"></i>
-        </button>
+    <script type="module" src="./backend/views/client/cart/main.js"></script>
 
-        <h2>New delivery address</h2>
-
-        <div class="address-form-field b">
-          <label for="address-form-field-address">Delivery address</label>
-          <input
-            id="address-form-field-address"
-            type="text"
-            placeholder="123 Wall Street, Los"
-          />
-        </div>
-
-        <button class="address-form-btn-js btn1">Add</button>
-      </form>
-    </div>
-
-    <!-- confirm remove item backdrop -->
-    <div id="remove-item-container" class="backdrop hide b">
-      <!-- <div class="remove-item b">
-      <button class="remove-item-close close-btn" title="close">
-        <i class="uil uil-times detail-close-icon b"></i>
-      </button>
-
-      <h2>Do you want to remove this item?</h2>
-
-      <p>
-        <span class="product-name-js">Samsung Galaxy Watch6</span>
-      </p>
-
-      <div class="remove-item-btns">
-        <button class="submit-btn-js btn1 b">Yes</button>
-        <button class="cancel-btn-js btn2 b">No</button>
-      </div>
-    </div> -->
-    </div>
-
-    <!-- add delivery address form backdrop -->
-    <div id="del-addr-container" class="backdrop hide b">
-      <form class="address-form b">
-        <button class="form-close close-btn b">
-          <i class="uil uil-times"></i>
-        </button>
-
-        <h2>New delivery address</h2>
-
-        <div class="address-form-field b">
-          <label for="address-form-field-address">Delivery address</label>
-          <input
-            id="address-form-field-address"
-            type="text"
-            placeholder="123 Wall Street, Los"
-          />
-        </div>
-
-        <button class="address-form-btn-js btn1">Add</button>
-      </form>
-    </div>
-
-     <script type="module" src="./backend/views/client/cart/main.js"></script>
   </body>
 </html>

@@ -24,15 +24,16 @@ import { updateCheckoutForm } from "./checkout-form.js";
 
 const user = userAuthenticated() || console.error("user not auth but cartpage is rendered");
 
-const mainContainer = document.getElementById("content-container");
+const contentContainer = document.getElementById("container");
 
-const itemContainer = document.getElementById("products-container");
+const itemContainer = contentContainer.querySelector(".items-container-js");
 
-const selectAllItem = document.getElementById("select-all-product");
+const selectAllItem = contentContainer.querySelector(".select-all-js");
+
 //FIXME check and uncheck display
 selectAllItem.checked = getFromStorage(LOCALSTORAGE.allItemSelected) || false; //still keep when page refreshed
 
-const removeItemContainer = document.getElementById("remove-item-container");
+const removeItemBackDrop = document.getElementById("remove-item-backdrop");
 
 
 function renderItems() {
@@ -42,35 +43,42 @@ function renderItems() {
     const product = getProductDetail(item.productId);
 
     htmlDoc += `
-      <li class="content-product-section b" data-cart-id="${item.id}">
-        <div class="content-product-section-product b">
-          <input type="checkbox" id="product-${item.id}" class="select-item-js" ${item.isSelected ? "checked" : ""}>
-          <label for="product-${item.id}">
-            <img src="${IMG_ROOT_PATH}/${product.img}.${IMG_TYPE}" alt="" class="content-product-section-product-img">
-            <p class="content-product-section-product-name b">${product.name}</p>
-          </label>
+      <li class="content__items__item b" data-cart-id="${item.id}">
+        <div class="content__items__item__select b">
+          <input 
+            type="checkbox" 
+            id="product-${item.id}" 
+            ${item.isSelected ? "checked" : ""} 
+            class="select-js"
+          >
+          <img 
+            src="${IMG_ROOT_PATH}/${product.img}.${IMG_TYPE}" 
+            alt="" 
+            class="content__items__item__select__label__img" 
+          >
+          <label for="product-${item.id}" class="content__items__item__select__label text--cap--g">${product.name}</label>
         </div>
 
         <p class="b">$${product.price}</p>
 
-        <div class="content-product-section-quantity b">
-          <i class="uil uil-arrow-left decs-quant-js b" title="decrease quantity"></i>
-          <span class="product-quant-js b">${item.quantity}</span>
-          <i class="uil uil-arrow-right incs-quant-js b" title="increase quantity"></i>
+        <div class="content__items__item__quant b">
+          <i class="uil uil-arrow-left decs-quant-js b"></i>
+          <span class="b">${item.quantity}</span>
+          <i class="uil uil-arrow-right incs-quant-js b"></i>
         </div>
 
         <p class="b">$${item.quantity*product.price}</p>
 
-        <button class="del">Delete</button>
+        <button class="link--g link--red--g btn--none--g del-btn-js b">Delete</button>
       </li>
     `;
   });
 
   itemContainer.innerHTML = htmlDoc;
 
-  itemContainer.querySelectorAll(".content-product-section").forEach(section => {
+  itemContainer.querySelectorAll(".content__items__item").forEach(section => {
     const cartId = section.dataset.cartId;
-    const selectItem = section.querySelector(".select-item-js");
+    const selectItem = section.querySelector(".select-js");
 
     //select
     selectItem.addEventListener("change", () => {
@@ -98,7 +106,7 @@ function renderItems() {
     });
 
     //del btn
-    section.querySelector(".del").addEventListener("click", () => {
+    section.querySelector(".del-btn-js").addEventListener("click", () => {
       handleDelItem(cartId);
     });
   });
@@ -111,13 +119,13 @@ function renderItems() {
 function responsiveSelectAllItem() {
   selectAllItem.addEventListener("change", () => {
     const isSelected = selectAllItem.checked;
-    const items = itemContainer.querySelectorAll(".content-product-section");
+    const items = itemContainer.querySelectorAll(".content__items__item");
     
     items.forEach(item => {
       const cartId = item.dataset.cartId;
       
       updateCart(cartId, {isSelected});
-      item.querySelector(".select-item-js").checked = isSelected;
+      item.querySelector(".select-js").checked = isSelected;
 
     });
 
@@ -185,41 +193,39 @@ function renderRemoveItemPopup(cartId) {
   const productId = getCartDetail(cartId).productId;
   const product = getProductDetail(productId);
   
-  removeItemContainer.innerHTML = `
-    <div class="remove-item b">
-      <button class="remove-item-close close-btn" title="close">
-        <i class="uil uil-times b"></i>
+  removeItemBackDrop.innerHTML = `
+    <div class="form--g b">
+      <button class="form__close-btn--g btn--none--g close-btn-js b">
+        <i class="uil uil-times detail-close-icon b"></i>
       </button>
 
       <h2>Do you want to remove this item?</h2>
 
-      <p>
-        <span class="product-name-js">${product.name}</span>
-      </p>
+      <span class="text--cap--g">${product.name}</span>
 
-      <div class="remove-item-btns">
-        <button class="submit-btn-js btn1 b">Yes</button>
-        <button class="cancel-btn-js btn2 b">No</button>
+      <div class="form__btns">
+        <button class="btn--g btn--prim--g btn--mw--g submit-btn-js">Yes</button>
+        <button class="btn--g btn--sec--g btn--mw--g cancel-btn-js">No</button>
       </div>
     </div>
   `;
 
   
-  removeItemContainer.querySelector(".remove-item-close").addEventListener("click", () => {
-    hideElements(removeItemContainer);
+  removeItemBackDrop.querySelector(".close-btn-js").addEventListener("click", () => {
+    hideElements(removeItemBackDrop);
   });
   
-  removeItemContainer.querySelector(".cancel-btn-js").addEventListener("click", () => {
-    hideElements(removeItemContainer);
+  removeItemBackDrop.querySelector(".cancel-btn-js").addEventListener("click", () => {
+    hideElements(removeItemBackDrop);
   });
 
-  removeItemContainer.querySelector(".submit-btn-js").addEventListener("click", () => {
+  removeItemBackDrop.querySelector(".submit-btn-js").addEventListener("click", () => {
     console.log("submit remove");
     handleDelItem(cartId);
-    hideElements(removeItemContainer);
+    hideElements(removeItemBackDrop);
   });
 
-  showElements(removeItemContainer);
+  showElements(removeItemBackDrop);
 }
 
 function selectAllItemIsCheck() {
@@ -227,10 +233,10 @@ function selectAllItemIsCheck() {
 }
 
 function renderEmptyCart() {
-  mainContainer.innerHTML = `
+  contentContainer.innerHTML = `
     <div class="content-empty-cart">
       <p>${MSG.nothingInCart}</p>
-      <a href="${PAGES.home}" class="btn2">Go shopping now</a>
+      <a href="${PAGES.home}" class="btn--g btn--prim--g">Go shopping now</a>
     </div>
   `;
 }
