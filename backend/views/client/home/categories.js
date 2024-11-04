@@ -1,6 +1,5 @@
 import { LOCALSTORAGE } from "../../../settings.js";
 import {
-  capitalizeFirstLetter as capFirstLetter,
   getFromStorage,
   hideElements,
   saveToStorage,
@@ -12,41 +11,31 @@ import {
 import { getBrandsList } from "../../../controllers/products/brands.js";
 import renderProducts, { resetPaginatProduct } from "./product.js";
 
-const categoriesContainer = document.getElementById("content-categories");
+const categoriesContainer = document.getElementById("categories");
 
 let checkedIndex = getFromStorage(LOCALSTORAGE.categoryCheckedIndex) || 0; //still checked when page refreshed
 
 
 function renderCategories(categoriesList = getBrandsList()) {
   let htmlDoc = `
-    <li class="content-categories-item b">
-      <input 
-        id="content-categories-item-all" 
-        type="radio" 
-        name="content-categories-item-radio"
-        ${checkedIndex===0 ? "checked" : ""}
-      >
-      <label for="content-categories-item-all">All</label>
+    <li class="content__categories__item b">
+      <input id="category-all" type="radio" name="category" ${checkedIndex===0 ? "checked" : ""}>
+      <label for="category-all" class="text--cap--g">all</label>
     </li>
   `;
 
   categoriesList.forEach((item, index) => { //index start at 0
     htmlDoc += `
-      <li class="content-categories-item b" data-brand-id="${item.id}">
-        <input 
-          id="content-categories-item-${item.id}" 
-          type="radio" 
-          name="content-categories-item-radio"
-          ${index+1===checkedIndex ? "checked" : ""}
-        >
-        <label for="content-categories-item-${item.id}">${capFirstLetter(item.name)}</label>
+      <li class="content__categories__item b" data-brand-id="${item.id}">
+        <input id="category-${item.id}" type="radio" name="category" ${index+1===checkedIndex ? "checked" : ""}>
+        <label for="category-${item.id}" class="text--cap--g">${item.name}</label>
       </li>
     `;
   });
 
   categoriesContainer.innerHTML += htmlDoc;
 
-  categoriesContainer.querySelectorAll(".content-categories-item").forEach((item, index) => { //index start at 1
+  categoriesContainer.querySelectorAll(".content__categories__item").forEach((item, index) => { //index start at 1
     item.addEventListener("change", () => {
       const brandId = item.dataset.brandId;
       const productsListFiltered =

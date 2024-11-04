@@ -3,6 +3,7 @@ import {
   MAX_ITEM_SUGGESTION,
   CLASSNAME,
   LOCALSTORAGE,
+  IMG_TYPE,
 } from "../../../../settings.js";
 import {
   toggleEleInArr,
@@ -19,20 +20,22 @@ import { getCategoriesList } from "../../../../controllers/products/categories.j
 import renderProducts, { resetPaginatProduct } from "../product.js";
 import { hideCategories } from "../categories.js";
 
+const header = document.getElementById("header");
+
 //search
-const searchField = document.getElementById("search-field");
-const searchBtn = document.getElementById("search-btn");
+const searchField = header.querySelector(".search-input-js");
+const searchBtn = header.querySelector(".search-btn-js");
 
 //search popup
-const searchPopupContainer = document.getElementById("filter-search");
-const filterSearchCategoryContainer = searchPopupContainer.querySelector(".filter-search-category");
-const filterSearchResultContainer = searchPopupContainer.querySelector(".filter-search-result");
+const searchPopupContainer = header.querySelector(".filter-search-js");
+const filterSearchCategoryContainer = searchPopupContainer.querySelector(".filter-search-categories-js");
+const filterSearchResultContainer = searchPopupContainer.querySelector(".filter-search-result-js");
 
 //price-slider
-let minVal = searchPopupContainer.querySelector(".min-value-js");
-let maxVal = searchPopupContainer.querySelector(".max-value-js");
-const rangeFill = searchPopupContainer.querySelector(".filter-search-slider-range-fill");
-const inputEles = searchPopupContainer.querySelectorAll(".filter-search-slider-range-input");
+let minVal = searchPopupContainer.querySelector(".min-js");
+let maxVal = searchPopupContainer.querySelector(".max-js");
+const rangeFill = searchPopupContainer.querySelector(".range-fill-js");
+const inputEles = searchPopupContainer.querySelectorAll(".input-js");
 
 //filtering searching
 let valueLookup = "";
@@ -124,8 +127,12 @@ function renderSuggestProduct(
 
     productsList.forEach(product => {
       htmlDoc += `
-        <li class="filter-search-result-item b" data-product-plain-name="${product.name}">
-          <img class="b" src="${IMG_ROOT_PATH}/${product.img}.webp" alt="">
+        <li class="header__search-popup__result__item b" data-product-plain-name="${product.name}">
+          <img
+            src="${IMG_ROOT_PATH}/${product.img}.${IMG_TYPE}"
+            alt=""
+            class="header__search-popup__result__item__img b"
+          />
           <p class="b">${product.name}</p>
         </li>
       `;
@@ -137,7 +144,7 @@ function renderSuggestProduct(
   filterSearchResultContainer.innerHTML = htmlDoc;
 
   //assign search input with product name and execute search
-  filterSearchResultContainer.querySelectorAll(".filter-search-result-item").forEach(section => {
+  filterSearchResultContainer.querySelectorAll(".header__search-popup__result__item").forEach(section => {
     section.addEventListener("click", () => {
       const productName = section.dataset.productPlainName;
 
@@ -154,17 +161,17 @@ function renderCategory(categoriesList = getCategoriesList()) {
   let htmlDoc = ``;
   categoriesList.forEach((item) => {
     htmlDoc += `
-      <li class="filter-search-category-item b" data-category-id="${item.id}">
+      <li class="header__search-popup__categories__item b" data-category-id="${item.id}">
         <p>${item.name}</p>
-        <i class="uil uil-check hide"></i>
+        <i class="uil uil-check icon--small--g hide--g"></i>
       </li>
     `;
-  });
+});
 
   filterSearchCategoryContainer.innerHTML = htmlDoc;
 
   filterSearchCategoryContainer
-    .querySelectorAll(".filter-search-category-item")
+    .querySelectorAll(".header__search-popup__categories__item")
     .forEach((item) => {
       item.addEventListener("click", () => {
         item.classList.toggle(CLASSNAME.checked);

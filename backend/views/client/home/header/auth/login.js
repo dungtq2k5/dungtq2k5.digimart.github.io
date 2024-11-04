@@ -10,21 +10,23 @@ import {
 import { showRegisterForm } from "./register.js";
 
 
-const loginBtns = document.body.querySelectorAll(".login-btn-js");
+const header = document.getElementById("header");
+
+const loginBtns = header.querySelectorAll(".login-btn-js");
 
 //login-form
-const loginFormContainer = document.getElementById("login-form-container");
-const loginForm = loginFormContainer.querySelector(".login-form");
-const loginCloseBtn = loginForm.querySelector(".form-close");
+const backDrop = document.getElementById("login-backdrop");
+const loginForm = backDrop.querySelector(".login-form-js");
+const loginCloseBtn = loginForm.querySelector(".close-btn-js");
 const registerLink = loginForm.querySelector(".register-link-js");
 
 //login-auth
-const emailLoginField = loginForm.querySelector("#login-form-field-email");
-const passwordLoginField = loginForm.querySelector("#login-form-field-password");
-const loginSubmitBtn = loginForm.querySelector(".login-form-submit-btn-js");
+const emailLoginField = loginForm.querySelector("#login-email");
+const passwordLoginField = loginForm.querySelector("#login-pass");
+const loginSubmitBtn = loginForm.querySelector(".submit-btn-js");
 
-const invalidCredentialPopup = loginForm.querySelector(".login-form-field-invalid-email-js");
-const invalidCredentialMsg = loginForm.querySelector(".login-form-field-invalid-email-msg-js");
+const invalidCredentialPopup = loginForm.querySelector(".invalid-box-js");
+const invalidCredentialMsg = loginForm.querySelector(".invalid-msg-js");
 
 
 function responsiveLogin() {
@@ -40,7 +42,7 @@ function responsiveLoginBtn() {
       e.preventDefault();
       loginForm.reset();
       hideElements(invalidCredentialPopup);
-      showElements(loginFormContainer);
+      showElements(backDrop);
       // console.log("show-login");
     });
   });
@@ -49,17 +51,17 @@ function responsiveLoginBtn() {
 function responsiveLoginCloseBtn() {
   loginCloseBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    hideElements(loginFormContainer);
+    hideElements(backDrop);
     // console.log("hide-login");
   });
 }
 
 function showLoginForm() {
-  showElements(loginFormContainer);
+  showElements(backDrop);
 }
 
 function hideLoginForm() {
-  hideElements(loginFormContainer);
+  hideElements(backDrop);
 }
 
 function showLoginBtn() {
@@ -80,7 +82,7 @@ function responsiveLoginSubmitBtn() {
 function responsiveRegisterLink() {
   registerLink.addEventListener("click", e => {
     e.preventDefault();
-    hideElements(loginFormContainer);
+    hideElements(backDrop);
     showRegisterForm();
   });
 }

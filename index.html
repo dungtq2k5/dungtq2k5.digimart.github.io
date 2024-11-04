@@ -3,365 +3,351 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
-    />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" />
     <link rel="stylesheet" href="styles/general.css" />
     <link rel="stylesheet" href="styles/client/home/header.css" />
     <link rel="stylesheet" href="styles/client/home/content.css" />
     <link rel="stylesheet" href="styles/client/home/detail.css" />
-    <link rel="stylesheet" href="styles/form.css" />
-    <link rel="stylesheet" href="styles/footer.css" />
     <title>Document</title>
   </head>
   <body id="root">
+    <!-- 
+      .block
+      .block__element
+      .block--modifier 
+    -->
+
     <!--header-->
-    <header id="main-header" class="header">
-      <a href="index.html" class="b" title="home">
-        <div class="header-title header-logo-js">
-          <p>Logo</p>
-        </div>
-      </a>
+    <header id="header" class="header header--g b">
 
-      <div class="header-ulti b">
-        <div class="header-ulti-search-box b2">
-          <input
-            id="search-field"
-            type="text"
-            placeholder="What are you looking for?"
-          />
+      <!-- logo -->
+      <div class="header__logo logo-js b">
+        <a href="index.html">Logo</a>
+      </div>
 
-          <button
-            id="search-btn"
-            class="header-ulti-search-box-btn"
-            title="search"
-          >
+      <!-- utils -->
+      <div class="header__utils b">
+        <!-- search bar -->
+        <div class="header__utils__search b">
+          <input type="text" placeholder="What are you looking for&#63;" class="header__utils__search__input search-input-js"/>
+
+          <button class="header__utils__search__btn search-btn-js">
             <i class="uil uil-search"></i>
           </button>
-        </div>
 
-        <div id="cart" class="header-ulti-cart b" title="cart">
-          <a href="#cart.html" aria-label="cart">
-            <span class="red-dot hide"></span>
-            <i class="uil uil-shopping-cart"></i>
-          </a>
+          <!-- filter search popup -->
+          <div class="header__search-popup hide--g filter-search-js b">
+            <!-- categories -->
+            <ul class="header__search-popup__categories filter-search-categories-js b">
+              <!-- <li class="header__search-popup__categories__item b">
+                <p>category</p>
+                <i class="uil uil-check icon--small--g hide--g"></i>
+              </li> -->
+              <!-- ... -->
+            </ul>
 
-          <!-- cart popup -->
-          <div class="pop-up hide b" title="">
-            <div class="cart-popup">
-              <p class="cart-popup-title b">Recently added products</p>
-          
-              <ul class="cart-popup-items-container">
-                <!-- <li class="cart-popup-item b">
-                  <img class="b" src="assets/img/products/samsung-galaxy-watch6.webp" alt="">
-                  <p class="b">Samsung Galaxy watch6</p>
-                  <p class="cart-popup-item-price b">$190</p>
-                </li> -->
-              </ul>
+            <!-- slider -->
+            <div class="header__search-popup__slider b">
+              <!-- title -->
+              <div class="header__search-popup__slider__title b">
+                <label for="header__search-popup__slider__bar__min">
+                  Min: $<span class="min-js">10</span>
+                </label>
 
-              <a href="cart.html" class="btn1">Viewing my shop cart</a>
+                <label for="header__search-popup__slider__bar__max">
+                  Max: $<span class="max-js">500</span>
+                </label>
+              </div>
+
+              <!-- bar -->
+              <div class="header__search-popup__slider__bar b">
+                <div class="header__search-popup__slider__bar__fill range-fill-js"></div>
+
+                <input
+                  id="header__search-popup__slider__bar__min"
+                  type="range"
+                  value="0"
+                  min="0"
+                  max="500"
+                  step="10"
+                  class="header__search-popup__slider__bar__range input-js"
+                />
+
+                <input
+                  id="header__search-popup__slider__bar__max"
+                  type="range"
+                  value="500"
+                  min="0"
+                  max="500"
+                  step="10"
+                  class="header__search-popup__slider__bar__range input-js"
+                />
+              </div>
             </div>
+
+            <!-- result -->
+            <ul class="header__search-popup__result filter-search-result-js b">
+              <li class="header__search-popup__result__item b">
+                <img
+                  src="assets/img/products/samsung-galaxy-watch6.webp"
+                  alt=""
+                  class="header__search-popup__result__item__img b"
+                />
+                <p class="b">SamSung Galaxy watch6</p>
+              </li>
+              <!-- ... -->
+            </ul>
           </div>
         </div>
 
-        <a
-          href="#orders.html"
-          class="header-ulti-orders b"
-          title="orders"
-          aria-label="orders"
-        >
-          <i class="uil uil-package"></i>
-          <span class="red-dot hide"></span>
-        </a>
+        <!-- cart -->
+        <div class="header__utils__cart cart-icon-js b">   
+          <a href="#cart.html">
+            <i class="uil uil-shopping-cart"></i>
+            <span class="red-dot hide--g red-dot-js"></span>
+          </a>
+        </div>
+
+        <!-- orders -->
+        <div class="header_utils__orders orders-icon-js b">
+          <a href="#orders.html">
+            <i class="uil uil-package"></i>
+            <span class="red-dot hide--g red-dot-js"></span>
+          </a>
+        </div>
       </div>
 
-      <div class="header-auth b">
-        <button class="btn1 header-auth-login login-btn-js">Login</button>
-        <button class="btn2 header-auth-logout register-btn-js">Register</button>
+      <!-- auth -->
+      <div class="header__auth b">
+        <button class="header__auth__btn btn--g btn--prim--g login-btn-js">Login</button>
+        <button class="header__auth__btn btn--g btn--sec--g register-btn-js">Register</button>
 
-        <button
-          id="header-auth-profile"
-          class="header-auth-profile b"
-          title="auth"
-        >
+        <!-- auth -->
+        <button class="header__auth__icon auth-icon-js b">
           <i class="uil uil-user-square"></i>
         </button>
-        <!-- auth popup -->
-        <div
-          id="header-auth-profile-popup"
-          class="header-auth-profile-popup hide b"
-        >
-          <button class="btn1 header-auth-profile-popup-login login-btn-js">
-            Login
-          </button>
-          <button class="btn2 header-auth-profile-popup-logout register-btn-js">
-            Register
-          </button>
-        </div>
-        
-        <a href="index.html" id="logout-btn" class="link hide">
-          Logout: 
-          <span class="logout-name-js"></span>
+        <div class="header__auth__popup auth-popup-js hide--g b">
+          <button class="btn--g btn--prim--g login-btn-js">Login</button>
+          <button class="btn--g btn--sec--g register-btn-js">Register</button>
+        </div>  
+      </div>
+      
+      <!-- logout -->
+      <div class="hide--g">
+        <a href="index.html" id="logout-btn" class="link--g">
+          Logout: <span class="logout-name-js"></span>
         </a>
       </div>
 
-      <!-- filter search -->
-      <div id="filter-search" class="filter-search hide b">
-        <ul class="filter-search-category b">
-          <!-- <li class="filter-search-category-item b">
-            <p>category</p>
-            <i class="uil uil-check hide"></i>
-          </li> -->
-        </ul>
-
-        <div class="filter-search-slider b">
-          <div class="filter-search-slider-content b">
-            <div class="b">
-              <label for="filter-search-slider-range-max">
-                Min: $<span class="min-value-js">10</span>
-              </label>
-            </div>
-            <div class="b">
-              <label for="filter-search-slider-range-min">
-                Max: $<span class="max-value-js">500</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="filter-search-slider-range b">
-            <div class="filter-search-slider-range-fill"></div>
-            <input
-              id="filter-search-slider-range-max"
-              class="filter-search-slider-range-input"
-              type="range"
-              value="0"
-              min="0"
-              max="500"
-              step="10"
-            />
-            <input
-              id="filter-search-slider-range-min"
-              class="filter-search-slider-range-input"
-              type="range"
-              value="500"
-              min="0"
-              max="500"
-              step="10"
-            />
-          </div>
-        </div>
-
-        <ul class="filter-search-result b">
-          <!-- <li class="filter-search-result-item b">
-            <img
-              class="b"
-              src="assets/img/products/samsung-galaxy-watch6.webp"
-              alt=""
-            />
-            <p class="b">SamSung Galaxy watch6</p>
-          </li> -->
-        </ul>
-      </div>
     </header>
 
-    <!--content section-->
-    <div class="content b">
+    <!--content-->
+    <div class="content content--g b">
+      <!-- categories -->
       <aside>
-        <ul id="content-categories" class="content-categories b" >
-          <!-- <li class="content-categories-item b">
-            <input id="content-categories-item-all" type="radio" name="content-categories-item-radio" checked>
-            <label for="content-categories-item-all">All</label>
+        <ul id="categories" class="content__categories categories-js b" >
+          <!-- <li class="content__categories__item b">
+            <input id="category-all" type="radio" name="category" checked>
+            <label for="category-all" class="text--cap--g">all</label>
           </li> -->
         </ul>
       </aside>
 
-      <main id="products-container" class="main b">
-        <!-- <div class="main-card b">
-          <div class="main-card-img-box b">
-            <span class="main-card-img-box-tag b">-20%</span>
-            <img
-              class="b"
-              src="../assets//img/products/samsung-galaxy-watch6.webp"
-              alt="Red black gaming hand console"
-            />
-          </div>
+      <!-- products -->
+      <main id="products" class="content__products b">
+        <div class="content__products__card b">
+          <img
+            src="../assets//img/products/samsung-galaxy-watch6.webp"
+            alt=""
+            class="b"
+          />
 
-          <div class="main-card-info b">
-            <p class="main-card-info-title">Samsung Galaxy watch6 44mm</p>
-            <div class="b">
-              <span class="main-card-info-price">$120</span>
-              <s class="main-card-info-plain-price">$140</s>
-            </div>
-          </div>
-        </div> -->
-    </main>
-    </div>
-
-    <!-- products pagination -->
-    <div class="content-nav b2">
-      <button id="content-nav-back" class="btn2">
-        <i class="uil uil-arrow-left" title="prev"></i>
-      </button>
-      <div class="content-nav-index b">
-        <p id="content-nav-index">1</p>
-      </div>
-      <button id="content-nav-forward" class="btn2">
-        <i class="uil uil-arrow-right" title="next"></i>
-      </button>
-    </div>
-  
-    <!-- footer -->
-    <footer class="footer b">
-      <div class="footer-copyright b">
-        <p>&copy; Copyright DungTran 2024. All rigth reserved.</p>
-      </div>
-    </footer>
-
-    <!--detail product popup-->
-    <div id="product-detail-backdrop" class="backdrop hide b2">
-      <!-- <div class="detail b">
-        <button class="detail-close close-btn b" title="close">
-          <i class="uil uil-times b"></i>
-        </button>
-
-        <img src="assets/img/products/samsung-galaxy-watch6.webp" alt="" class="b">
-
-        <div class="detail-right">
-          <div class="detail-right-info b">
-            <h2>Samsung Galaxy watch6 - 12GB 100GB</h2>
-            <p class="detail-right-info-price">$190.00</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-              ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-              aliquip ex ea commodo consequat.
+          <div class="content__products__card__info-box b">
+            <p class="content__products__card__info-box__title">Samsung Galaxy watch6 44mm</p>
+            <p class="content__products__card__info-box__price">
+              &dollar;<span>120</span>
             </p>
           </div>
-      
-          <div class="detail-right-btns">
-            <button class="btn1">Buy now</button>
-            <button class="btn2 add-btn-js">Add to cart</button>
-          </div>
         </div>
-      </div> -->
+      </main>
     </div>
 
-    <!--login form popup-->
-    <div id="login-form-container" class="backdrop hide b">
-      <form class="login-form b">
-        <button class="form-close close-btn b">
+    <!--pagination-->
+    <div id="paginat" class="paginat b2">
+      <button class="paginat__btn btn--g btn--sec--g back-btn-js">
+        <i class="uil uil-arrow-left"></i>
+      </button>
+
+      <div class="paginat__index-box b">
+        <p class="index-js">1</p>
+      </div>
+
+      <button class="paginat__btn btn--g btn--sec--g next-btn-js">
+        <i class="uil uil-arrow-right"></i>
+      </button>
+    </div>
+
+    <!--login form-->
+    <div id="login-backdrop" class="backdrop--g hide--g b">
+      <form class="form--g login-form-js b">
+        <button class="form__close-btn--g btn--none--g close-btn-js b">
           <i class="uil uil-times"></i>
         </button>
 
         <h1>Login</h1>
 
-        <div class="login-form-field b">
-          <label for="login-form-field-email">Email</label>
+        <div class="form__field--g b">
+          <label for="login-email">Email</label>
           <input
-            id="login-form-field-email"
+            id="login-email"
             type="email"
             placeholder="nikola.tesla@gmail.com"
+            class="form__field__input--g"
           />
         </div>
-        <div class="login-form-field b">
-          <label for="login-form-field-password">Password</label>
+
+        <div class="form__field--g b">
+          <label for="login-pass">Password</label>
           <input
-            id="login-form-field-password"
+            id="login-pass"
             type="password"
             placeholder="password123"
+            class="form__field__input--g"
           />
         </div>
 
-        <div class="login-form-field-invalid-email-js invalid-msg hide b">
-          <i class="uil uil-exclamation-triangle b"></i>
-          <p class="login-form-field-invalid-email-msg-js"></p>
+        <div class="form__invalid-msg--g hide--g invalid-box-js b">
+          <i class="uil uil-exclamation-triangle icon--small--g b"></i>
+          <span class="invalid-msg-js"></span>
         </div>
 
-        <button class="login-form-submit-btn-js btn1">Login in</button>
+        <button class="btn--g btn--prim--g btn--mw--g submit-btn-js">Login in</button>
 
-        <p class="login-form-question">
-          Don't have an account?
-          <a href="#register" class="register-link-js link">Register now.</a>
+        <p>
+          Don't have an account&#63;
+          <a href="#register" class="link--g register-link-js">Register now</a>
         </p>
       </form>
     </div>
 
-    <!--register form popup-->
-    <div id="register-form-container" class="backdrop hide b">
-      <form class="register-form b">
-        <button class="form-close close-btn b">
+    <!--register form-->
+    <div id="register-backdrop" class="backdrop--g hide--g b">
+      <form class="form--g register-form-js b">
+        <button class="form__close-btn--g btn--none--g close-btn-js b">
           <i class="uil uil-times"></i>
         </button>
 
         <h1>Register</h1>
 
-        <div class="register-form-field b">
-          <label for="register-form-field-email">Email</label>
+        <div class="form__field--g b">
+          <label for="register-email">Email</label>
           <input
-            id="register-form-field-email"
+            id="register-email"
             type="text"
             placeholder="nikola.tesla@gmail.com"
+            class="form__field__input--g"
           />
-          <span class="register-form-field-invalid-email-js invalid-msg hide b">
-            <i class="uil uil-exclamation-triangle"></i>
-            <p class="register-form-field-invalid-email-msg-js"></p>
-          </span>
+          <div class="form__invalid-msg--g hide--g invalid-email-box-js b">
+            <i class="uil uil-exclamation-triangle icon--small--g"></i>
+            <span class="invalid-email-msg-js"></span>
+          </div>
         </div>
 
-        <div class="register-form-field b">
-          <label for="register-form-field-phone">Phone number</label>
+        <div class="form__field--g b">
+          <label for="register-phone">Phone number</label>
           <input
-            id="register-form-field-phone"
+            id="register-phone"
             type="tel"
             placeholder="0123456789"
+            class="form__field__input--g"
           />
-          <span class="register-form-field-invalid-phone-js invalid-msg hide">
-            <i class="uil uil-exclamation-triangle"></i>
-            <p class="register-form-field-invalid-phone-msg-js"></p>
-          </span>
+          <div class="form__invalid-msg--g hide--g invalid-phone-box-js b">
+            <i class="uil uil-exclamation-triangle icon--small--g"></i>
+            <span class="invalid-phone-msg-js"></span>
+          </div>
         </div>
 
-        <div class="register-form-field b">
-          <label for="register-form-field-password">Password</label>
+        <div class="form__field--g b">
+          <label for="register-pass">Password</label>
           <input
-            id="register-form-field-password"
+            id="register-pass"
             type="password"
             placeholder="password123"
+            class="form__field__input--g"
           />
-          <span
-            class="register-form-field-invalid-password-js invalid-msg hide"
-          >
-            <ul class="b">
-              <div>
-                <i class="uil uil-exclamation-triangle b"></i>
-                Password must have 8 characters long and include at least:
-              </div>
+
+          <div class="form__invalid-msg--g hide--g invalid-pass-box-js b">
+            <div>
+              <i class="uil uil-exclamation-triangle icon--small--g b"></i>
+              <span>Password must have 8 characters long and include at least:</span>
+            </div>
+            <ul>
               <li>one number [0-9].</li>
               <li>one uppercase letter [a-z].</li>
               <li>one lowercase letter [A-Z].</li>
               <li>one special letter [(!-)].</li>
             </ul>
-          </span>
+          </div>
+    
         </div>
 
-        <div class="register-form-field b">
-          <label for="register-form-field-address">Delivery address</label>
+        <div class="form__field--g b">
+          <label for="register-addr">Delivery address</label>
           <input
-            id="register-form-field-address"
+            id="register-addr"
             type="text"
             placeholder="123 Wall Street, Los"
+            class="form__field__input--g"
           />
         </div>
 
-        <button class="register-form-btn-js btn1">Register</button>
+        <button class="btn--g btn--prim--g btn--mw--g submit-btn-js">Register</button>
 
-        <p class="register-form-question">
-          Already have an account?
-          <a href="#login" class="login-link-js link">Login now.</a>
+        <p> 
+          Already have an account&#63;
+          <a href="#login" class="link--g login-link-js">Login now</a>
         </p>
       </form>
     </div>
 
+    <!--product detail-->
+    <div id="product-detail-backdrop" class="backdrop--g hide--g b2">
+      <div class="product-detail-box b">
+        <button class="form__close-btn--g btn--none--g b">
+          <i class="uil uil-times b"></i>
+        </button>
+
+        <img src="assets/img/products/samsung-galaxy-watch6.webp" alt="" class="product-detail-box__img b">
+
+        <div class="product-detail-box__info-box">
+          <h2 class="b">Samsung Galaxy watch6 - 12GB 100GB</h2>
+
+          <div class="product-detail-box__info-box__text-box b">
+            <p>&dollar;<span>199</span></p>
+            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+              ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+              aliquip ex ea commodo consequat.
+            </span>
+          </div>
+      
+          <div class="product-detail-box__info-box__btns b">
+            <button class="btn--g btn--prim--g btn--mw--g">Buy now</button>
+            <button class="btn--g btn--sec--g btn--mw--g">Add to cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--footer-->
+    <footer class="footer--g b">
+      <div class="footer__copyright--g b">
+        <p>&copy; Copyright DungTran 2024. All right reserved.</p>
+      </div>
+    </footer>
+    
+
     <script type="module" src="./backend/views/client/home/main.js" ></script>
+
   </body>
 </html>

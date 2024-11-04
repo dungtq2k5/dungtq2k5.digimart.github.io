@@ -8,7 +8,7 @@ export const MIN_PRODUCT_PRICE = 0, MAX_PRODUCT_PRICE = 500;
 
 
 export const CLASSNAME = { //relative to html-css
-  hide: "hide",
+  hide: "hide--g",
   checked: "checked",
   bgActive: "bg-active",
 }

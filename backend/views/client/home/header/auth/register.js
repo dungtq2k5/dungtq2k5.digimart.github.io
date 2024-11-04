@@ -16,42 +16,34 @@ import {
 import { showLoginForm } from "./login.js";
 
 
-const registerBtns = document.body.querySelectorAll(".register-btn-js");
+const header = document.getElementById("header");
+const registerBtns = header.querySelectorAll(".register-btn-js");
 
 //register-form
-const registerFormContainer = document.getElementById("register-form-container");
-const registerForm = registerFormContainer.querySelector(".register-form");
+const backDrop = document.getElementById("register-backdrop");
+const registerForm = backDrop.querySelector(".register-form-js");
 const loginLink = registerForm.querySelector(".login-link-js");
-const registerCloseBtn = registerForm.querySelector(".form-close");
+const registerCloseBtn = registerForm.querySelector(".close-btn-js");
 
 //register-auth
 const emailRegisterField = registerForm.querySelector(
-  "#register-form-field-email"
+  "#register-email"
 );
 const phoneRegisterField = registerForm.querySelector(
-  "#register-form-field-phone"
+  "#register-phone"
 );
 const passwordRegisterField = registerForm.querySelector(
-  "#register-form-field-password"
+  "#register-pass"
 );
-const delAddrRegisterField = registerForm.querySelector("#register-form-field-address");
-const registerSubmitBtn = registerForm.querySelector(".register-form-btn-js");
+const delAddrRegisterField = registerForm.querySelector("#register-addr");
+const registerSubmitBtn = registerForm.querySelector(".submit-btn-js");
 
-const invalidEmailPopup = registerForm.querySelector(
-  ".register-form-field-invalid-email-js"
-);
-const invalidPhonePopup = registerForm.querySelector(
-  ".register-form-field-invalid-phone-js"
-);
-const invalidPasswordPopup = registerForm.querySelector(
-  ".register-form-field-invalid-password-js"
-);
-const invalidEmailMsg = registerForm.querySelector(
-  ".register-form-field-invalid-email-msg-js"
-);
-const invalidPhoneMsg = registerForm.querySelector(
-  ".register-form-field-invalid-phone-msg-js"
-);
+const invalidEmailPopup = registerForm.querySelector(".invalid-email-box-js");
+const invalidPhonePopup = registerForm.querySelector(".invalid-phone-box-js");
+const invalidPasswordPopup = registerForm.querySelector(".invalid-pass-box-js");
+
+const invalidEmailMsg = registerForm.querySelector(".invalid-email-msg-js");
+const invalidPhoneMsg = registerForm.querySelector(".invalid-phone-msg-js");
 
 
 function responsiveRegister() {
@@ -71,7 +63,7 @@ function responsiveRegisterBtn() {
         invalidPasswordPopup,
         invalidPhonePopup,
       ]);
-      showElements(registerFormContainer);
+      showElements(backDrop);
       console.log("show-register");
     });
   });
@@ -80,7 +72,7 @@ function responsiveRegisterBtn() {
 function responsiveRegisterCloseBtn() {
   registerCloseBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    hideElements(registerFormContainer);
+    hideElements(backDrop);
     // console.log("hide-register");
   });
 }
@@ -95,7 +87,7 @@ function responsiveRegisterSubmitBtn() {
 function responsiveLoginLink() {
   loginLink.addEventListener("click", e => {
     e.preventDefault();
-    hideElements(registerFormContainer);
+    hideElements(backDrop);
     showLoginForm();
   });
 }
@@ -184,11 +176,11 @@ function hideRegisterBtn() {
 }
 
 function showRegisterForm() {
-  showElements(registerFormContainer);
+  showElements(backDrop);
 }
 
 function hideRegisterForm() {
-  hideElements(registerFormContainer);
+  hideElements(backDrop);
 }
 
 

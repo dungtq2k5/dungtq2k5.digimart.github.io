@@ -10,14 +10,10 @@ import { showLoginForm } from "./auth/login.js";
 
 const user = userAuthenticated() || console.log("user not auth but main-header rendered");
 
-const header = document.getElementById("main-header");
+const header = document.getElementById("header");
 
-//cart
-const cart = header.querySelector(".header-ulti-cart");
-const cartNotifi = cart.querySelector(".red-dot");
-// const cartPopupContainer = cart.querySelector(".pop-up");
-// const cartPopupItemsContainer = cartPopupContainer.querySelector(".cart-popup-items-container");
-
+const cart = header.querySelector(".cart-icon-js");
+const cartNotifi = cart.querySelector(".red-dot-js");
 
 function responsiveCart() {
   responsiveCartIcon();
@@ -55,41 +51,6 @@ function showCartNotifi() {
 function hideCartNotifi() {
   hideElements(cartNotifi);
 }
-
-// export function responsiveCartPopUp() {
-//   cart.addEventListener("mouseover", () => {
-//    showElements(cartPopupContainer);
-//   });
-
-//   cart.addEventListener("mouseleave", () => {
-//     hideElements(cartPopupContainer);
-//     // console.log("out");
-//   });
-// }
-
-// export function renderCartPopupItems() { //future dev
-//   let htmlDoc = ``;
-
-//   if(user) {
-//     getUserCart(user.id).splice(0, MAX_ITEM_CART_POPUP_RENDERED).forEach(item => {
-//       const product = getProductDetail(item.productId);
-  
-//       htmlDoc += `
-//         <li class="cart-popup-item b">
-//           <img class="b" src="${IMG_ROOT_PATH}/${product.img}.${IMG_TYPE}" alt="">
-//           <p class="b">${product.name}</p>
-//           <p class="cart-popup-item-price b">$${product.price}</p>
-//         </li>
-//       `;
-//     });
-//   } else {
-//     htmlDoc = "Your cart is emptyYour cart is emptyYour cart is emptyYour cart is emptyYour cart is emptyYour cart is emptyYour cart is emptyYour cart is emptyYour cart is empty!";
-//     console.log("Empty cart");
-//   }
-
-//   cartPopupItemsContainer.innerHTML = htmlDoc;
-//   console.log("render cart popup items");
-// }
 
 export default responsiveCart;
 export { renderCartNotifi, showCartNotifi, hideCartNotifi};

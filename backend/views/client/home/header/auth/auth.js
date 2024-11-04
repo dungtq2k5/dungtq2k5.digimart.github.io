@@ -2,8 +2,9 @@ import { hideElements, showElements } from "../../../../../controllers/utils.js"
 import { CLASSNAME } from "../../../../../settings.js";
 
 
-const authBtn = document.getElementById("header-auth-profile");
-const authPopup = document.getElementById("header-auth-profile-popup");
+const header = document.getElementById("header");
+const authBtn = header.querySelector(".auth-icon-js");
+const authPopup = header.querySelector(".auth-popup-js");
 
 
 function responsiveAuthBtn() {

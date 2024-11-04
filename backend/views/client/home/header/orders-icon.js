@@ -10,10 +10,10 @@ import { showLoginForm } from "./auth/login.js";
 
 const user = userAuthenticated() || console.log("user not auth but main-header rendered");
 
-const header = document.getElementById("main-header");
+const header = document.getElementById("header");
 
-const orders = header.querySelector(".header-ulti-orders");
-const ordersNotifi = orders.querySelector(".red-dot");
+const orders = header.querySelector(".orders-icon-js");
+const ordersNotifi = orders.querySelector(".red-dot-js");
 
 
 function responsiveOrders() {

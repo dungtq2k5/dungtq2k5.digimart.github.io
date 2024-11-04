@@ -1,8 +1,8 @@
 import { LOCALSTORAGE } from "../../../../settings.js";
 
 
-const header = document.getElementById("main-header");
-const logo = header.querySelector(".header-logo-js");
+const header = document.getElementById("header");
+const logo = header.querySelector(".logo-js");
 
 
 function responsiveLogo() {
