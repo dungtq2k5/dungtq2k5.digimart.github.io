@@ -81,6 +81,10 @@ img {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.text--blue--bold--g {
+  color: var(--blue);
+  font-weight: 500;
+}
 
 
 .btn--g {

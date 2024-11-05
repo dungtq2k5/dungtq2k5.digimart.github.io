@@ -1,4 +1,4 @@
-import { CLASSNAME } from "../settings.js";
+import { CLASSNAME, MAX_PRODUCT_PRICE, MIN_PRODUCT_PRICE } from "../settings.js";
 
 export function includesSubArr(parentArr, subArr) {
   /**
@@ -21,11 +21,6 @@ export function toggleEleInArr(arr, ele) {
   else arr.push(ele);
 }
 
-export function capitalizeFirstLetter(string) { //AI generate
-  return string.replace(/\b\w+/g, function(word) {
-    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-  });
-}
 
 export function genEmailToUsername(email) { //AI generate
   // Split the email address by the '@' symbol
@@ -80,7 +75,6 @@ export function generateUID() { //algorithm on stackoverflow
   return Date.now().toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9*Math.pow(10, 12)).toString(36);
 }
 
-
 export function hashPassword(password) {
   return encryptString(password);
 }
@@ -129,19 +123,6 @@ export function hideElements(eles, className=CLASSNAME.hide) {
   // console.log("clear invalid msgs");
 }
 
-export function clearFormInputs(inputs) {
-  if(!Array.isArray(inputs)) { //handle single ele
-    inputs = [inputs];
-  } else { //handle nested arr
-    inputs = inputs.flat();
-  }
-
-  inputs.forEach(e => {
-    e.value = "";
-  });
-  // console.log("clear inputs");
-}
-
 export function calculatePages(totalProducts, maxProductsPerPage) {
   return Math.ceil(totalProducts / maxProductsPerPage);
 }
@@ -167,4 +148,19 @@ export function dateFormatted(time) {
   const date = `${monthsName[time.getMonth()]} ${time.getDate()}`; //month date
   
   return date;
+}
+
+export function centsToDollars(cents, decimalPlaces=2) {
+  return (cents / 100).toFixed(decimalPlaces);
+}
+
+export function calculatePercentage(amount, minRange=MIN_PRODUCT_PRICE, maxRange=MAX_PRODUCT_PRICE) { //AI generate
+  // Calculate the range
+  const range = maxRange - minRange;
+
+  // Calculate the percentage based on the range and the input amount
+  const percentage = (amount - minRange) / range * 100;
+
+  // Ensure the percentage is within the 0-100 range
+  return Math.max(0, Math.min(100, percentage));
 }

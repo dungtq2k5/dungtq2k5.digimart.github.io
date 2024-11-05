@@ -3,7 +3,8 @@ import {
   hideElements, 
   calculatePages, 
   getFromStorage, 
-  saveToStorage 
+  saveToStorage,
+  centsToDollars
 } from "../../../controllers/utils.js";
 import { 
   IMG_ROOT_PATH, 
@@ -63,8 +64,8 @@ function renderProducts(productsList) {
             <p class="content__products__card__info-box__title text--cap--g">
               ${item.name} - ${item.ram}GB ${item.rom}GB
             </p>
-            <p class="content__products__card__info-box__price">
-              &dollar;<span>${item.price}</span>
+            <p class="text--blue--bold--g">
+              &dollar;<span>${centsToDollars(item.price)}</span>
             </p>
           </div>
         </div>
@@ -133,7 +134,7 @@ function renderProductDetailPopUp(product) {
           <h2 class="text--cap--g b">${product.name} - ${product.ram}GB ${product.rom}GB</h2>
 
           <div class="product-detail-box__info-box__text-box b">
-            <p>&dollar;<span>${product.price}</span></p>
+            <p class="text--blue--bold--g">&dollar;<span>${centsToDollars(product.price)}</span></p>
             <span>${product.description}</span>
           </div>
       

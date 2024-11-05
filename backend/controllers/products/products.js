@@ -43,30 +43,34 @@ export function filterProducts(
   minPrice = MIN_PRODUCT_PRICE,
   maxPrice = MAX_PRODUCT_PRICE
 ) {
-  //search engine
+  minPrice = Number(minPrice);
+  maxPrice = Number(maxPrice);
 
   if (minPrice > maxPrice) [minPrice, maxPrice] = [maxPrice, minPrice];
 
+  //by val
   if (value != "") {
-    //by val
     productsList = productsList.filter((item) =>
       item.name.toLowerCase().includes(value.toLowerCase())
     );
     // console.log(`filter val ${value}`);
   }
 
+  //by category & brand
   if (categories.length > 0) {
-    //by category & brand
     productsList = productsList.filter((item) =>
       includesSubArr(item.typesId, categories)
     );
     // console.log(`filter categories ${categories}`);
   }
 
+  //by price
   productsList = productsList.filter(
-    (item) => item.price >= minPrice && item.price <= maxPrice
-  ); //by price
+    (item) => Number(item.price) >= minPrice && Number(item.price) <= maxPrice
+  ); 
   // console.log(`filter price range ${minPrice}, ${maxPrice}`);
+
+  // console.log(productsList);
 
   return productsList;
 }

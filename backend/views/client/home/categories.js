@@ -58,7 +58,7 @@ function renderCategories(categoriesList = getBrandsList()) {
 function hideCategories() {
   saveToStorage(LOCALSTORAGE.categoryHidden, true);
   hideElements(categoriesContainer);
-  console.log("hide categories");
+  // console.log("hide categories");
 }
 
 export { renderCategories, hideCategories };

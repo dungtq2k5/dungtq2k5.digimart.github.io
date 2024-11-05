@@ -4,8 +4,7 @@ export const IMG_TYPE = "webp";
 
 export const MAX_ITEM_SUGGESTION = 5;
 export const MAX_ITEM_CART_POPUP_RENDERED = 3;
-export const MIN_PRODUCT_PRICE = 0, MAX_PRODUCT_PRICE = 500;
-
+export const MIN_PRODUCT_PRICE = 0, MAX_PRODUCT_PRICE = 130000; //cents
 
 export const CLASSNAME = { //relative to css classes
   hide: "hide--g",

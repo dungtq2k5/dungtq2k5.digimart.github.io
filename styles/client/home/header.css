@@ -177,7 +177,6 @@
 .header__search-popup__result__item__img {
   max-width: 84px;
   border-radius: var(--border-radius);
-  background: var(--darkwhite);
 }
 
 

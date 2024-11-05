@@ -11,6 +11,8 @@ import {
   hideElements,
   saveToStorage,
   getFromStorage,
+  centsToDollars,
+  calculatePercentage as calcPercentage,
 } from "../../../../controllers/utils.js";
 import {
   filterProducts,
@@ -35,7 +37,7 @@ const filterSearchResultContainer = searchPopupContainer.querySelector(".filter-
 let minVal = searchPopupContainer.querySelector(".min-js");
 let maxVal = searchPopupContainer.querySelector(".max-js");
 const rangeFill = searchPopupContainer.querySelector(".range-fill-js");
-const inputEles = searchPopupContainer.querySelectorAll(".input-js");
+const rangeInputs = searchPopupContainer.querySelectorAll(".input-js");
 
 //filtering searching
 let valueLookup = "";
@@ -43,7 +45,7 @@ let categoriesLookup = [];
 
 if(getFromStorage(LOCALSTORAGE.categoryHidden)) { //avoid category menu show but filter still applied when refresh page
   hideCategories();
-  console.log("Page refresh but category menu still hidden");
+  // console.log("Page refresh but category menu still hidden");
 }
 
 function responsiveSearch() {
@@ -61,8 +63,8 @@ function responsiveSearchField() {
       getPlainProductsList(),
       valueLookup,
       categoriesLookup,
-      minVal.innerHTML,
-      maxVal.innerHTML
+      rangeInputs[0].value,
+      rangeInputs[1].value
     );
     renderSuggestProduct(productsListFiltered);
   });
@@ -70,15 +72,15 @@ function responsiveSearchField() {
 
 function responsiveSearchSuggestPopup() {
   searchBtn.addEventListener("click", () => {
-    console.log("execute search");
+    // console.log("execute search");
     valueLookup = searchField.value;
 
     const productsListFiltered = filterProducts(
       getPlainProductsList(),
       valueLookup,
       categoriesLookup,
-      minVal.innerHTML,
-      maxVal.innerHTML
+      rangeInputs[0].value,
+      rangeInputs[1].value
     );
 
     renderSuggestProduct(productsListFiltered); //make sure suggestion up to date
@@ -108,7 +110,7 @@ function responsiveSearchSuggestPopup() {
 }
 
 function responsivePriceSlider() {
-  inputEles.forEach((e) => {
+  rangeInputs.forEach((e) => {
     e.addEventListener("input", validateRange);
   });
 
@@ -153,7 +155,7 @@ function renderSuggestProduct(
     });
   });
 
-  console.log("render product suggest");
+  // console.log("render product suggest");
 }
 
 function renderCategory(categoriesList = getCategoriesList()) {
@@ -184,8 +186,8 @@ function renderCategory(categoriesList = getCategoriesList()) {
           getPlainProductsList(),
           valueLookup,
           categoriesLookup,
-          minVal.innerHTML,
-          maxVal.innerHTML
+          rangeInputs[0].value,
+          rangeInputs[1].value
         );
         renderSuggestProduct(productsListFiltered);
       });
@@ -193,19 +195,19 @@ function renderCategory(categoriesList = getCategoriesList()) {
 }
 
 function validateRange() {
-  let minPrice = parseInt(inputEles[0].value);
-  let maxPrice = parseInt(inputEles[1].value);
+  let minPrice = parseInt(rangeInputs[0].value);
+  let maxPrice = parseInt(rangeInputs[1].value); 
 
   if (minPrice > maxPrice) [minPrice, maxPrice] = [maxPrice, minPrice];
 
-  const minPercentage = (minPrice * 100) / 500;
-  const maxPercentage = (maxPrice * 100) / 500;
+  const minPercentage = calcPercentage(minPrice);
+  const maxPercentage = calcPercentage(maxPrice);
 
   rangeFill.style.left = `${minPercentage}%`;
   rangeFill.style.width = `${maxPercentage - minPercentage}%`;
 
-  minVal.innerHTML = minPrice;
-  maxVal.innerHTML = maxPrice;
+  minVal.innerHTML = centsToDollars(minPrice);
+  maxVal.innerHTML = centsToDollars(maxPrice);
 
   // console.log("price range");
   const productsListFiltered = filterProducts(
@@ -215,6 +217,7 @@ function validateRange() {
     minPrice,
     maxPrice
   );
+
   renderSuggestProduct(productsListFiltered);
 }
 

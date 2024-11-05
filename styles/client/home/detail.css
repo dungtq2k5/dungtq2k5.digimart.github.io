@@ -13,7 +13,6 @@
 .product-detail-box__img {
   max-width: 400px;
   border-radius: var(--border-radius);
-  background: var(--darkwhite);
 }
 .product-detail-box__info-box {
   display: flex;
