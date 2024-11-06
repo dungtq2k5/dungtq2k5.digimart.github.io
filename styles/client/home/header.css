@@ -1,5 +1,6 @@
 .header {
   justify-content: space-between;
+  gap: 3em;
 }
 
 /*logo*/
@@ -10,9 +11,10 @@
 /*utils*/
 .header__utils {
   display: flex;
-  width: 50%;
+  width: 100%;
+  max-width: 800px;
   justify-content: center;
-  gap: 1em;
+  gap: .75em;
 }
 .header__utils__search {
   position: relative;
@@ -70,7 +72,10 @@
   background: var(--white);
 }
 
-@media (max-width: 500px) {
+@media (max-width: 520px) {
+  .header__utils__search__input {
+    padding: .25em .5em;
+  }
   .header__auth__icon{
     display: block;
   }

@@ -1,7 +1,8 @@
 import { 
   PAGES, 
   LOCALSTORAGE, 
-  LOCALHOST 
+  LOCALHOST, 
+  CLASSNAME
 } from "../../../settings.js";
 import { removeCart } from "../../../controllers/carts.js";
 import { 
@@ -13,7 +14,8 @@ import {
   hideElements, 
   isValidDeliveryAddress, 
   saveToStorage, 
-  showElements 
+  showElements,
+  centsToDollars,
 } from "../../../controllers/utils.js";
 import { 
   addDelAddr, 
@@ -57,12 +59,13 @@ function responsiveCheckoutForm() {
 
 function responsiveCheckoutBtn() {
   checkoutBtn.addEventListener("click", () => {
-    if(getItemsSelected().length == 0) { 
-      console.error("no product selected"); //TODO: UI for this.
+    if(getItemsSelected().length == 0) { //btn disable when no item selected
+      console.error("no product selected");
     } else {
       handleCheckout();
       console.log("Order added");
-      window.location.href = `${LOCALHOST}/${PAGES.orders}`;
+      window.location.href = PAGES.orders;
+      localStorage.removeItem(LOCALSTORAGE.allItemSelected);
     }
   });
 }
@@ -87,7 +90,7 @@ function handleCheckout() {
 
 function updateCheckoutForm() {
   const itemsSelected = getItemsSelected().length;
-  const total = getTotalItemsSelected();
+  const total = centsToDollars(getTotalItemsSelected());
   const delAddr = getDeliveryAddress(getUser(user.id).deliveryAddressId).address;
 
   checkoutForm.querySelector(".items-js").innerHTML = itemsSelected;
@@ -96,6 +99,15 @@ function updateCheckoutForm() {
   checkoutForm.querySelector(".del-to-js").innerHTML = delAddr;
 
   selectDelAddr.innerHTML = genDelAddrOptionHTML();
+
+  //checkout btn
+  if(itemsSelected >= 1) {
+    checkoutBtn.disabled = false;
+    checkoutBtn.classList.remove(CLASSNAME.btnDisable);
+  } else {
+    checkoutBtn.disabled = true;
+    checkoutBtn.classList.add(CLASSNAME.btnDisable);
+  }
 
   console.log("update checkout form");
 }
@@ -152,4 +164,4 @@ function genDelAddrOptionHTML() {
 }
 
 export default responsiveCheckoutForm;
-export { updateCheckoutForm };
+export { updateCheckoutForm};

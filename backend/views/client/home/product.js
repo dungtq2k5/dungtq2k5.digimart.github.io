@@ -89,6 +89,7 @@ function renderProducts(productsList) {
 }
 
 function responsivePaginatProducts() {
+  //TODO UI when pagination end
   navProductBackBtn.addEventListener("click", () => {
     if(currentPaginat > 1) {
       currentPaginat--
@@ -160,7 +161,7 @@ function renderProductDetailPopUp(product) {
     if(user) {
       //add to cart -> go directly to cart page
       addToCart(user, product.id);
-      window.location.href = `${LOCALHOST}/${PAGES.cart}`;
+      window.location.href = PAGES.cart;
     } else {
       showLoginForm();
     } 

@@ -145,7 +145,7 @@
   </form>
 </div>
 
-<!-- del user form -->
+<!-- del form -->
 <div class="backdrop--g hide--g b">
   <div class="form--g b">
     <button class="form__close-btn--g btn--none--g b">
@@ -159,4 +159,132 @@
       <button class="btn--g btn--sec--g btn--mw--g">Cancel</button>
     </div>
   </div>
+</div>
+
+<!-- update product form -->
+<div class="backdrop--g hide--g b">
+  <form class="form--g b">
+
+    <button class="form__close-btn--g btn--none--g b">
+      <i class="uil uil-times"></i>
+    </button>
+
+    <h2>Update Products</h2>
+    
+    <!-- name -->
+    <div class="form__field--g b">
+      <label for="update-name">Name</label>
+      <input
+        id="update-name"
+        type="text"
+        placeholder="oldname"
+        class="form__field__input--g"
+      />
+    </div>
+
+    <!-- brand -->
+    <div class="form__field--g b">
+      <label for="update-brand">Brand</label>
+      <select id="update-brand" class="form__field__input--g">
+        <option value="brand1">brand1</option>
+        <option value="brand2">brand2</option>
+        <option value="brand4">brand3</option>
+      </select>
+    </div>
+
+    <!-- chipset -->
+    <div class="form__field--g b">
+      <label for="update-chipset">Chipset</label>
+      <select id="update-chipset" class="form__field__input--g">
+        <option value="chip1">chip1</option>
+        <option value="chip2">chip2</option>
+        <option value="chip3">chip3</option>
+      </select>
+    </div>
+
+    <!-- rom -->
+    <div class="form__field--g b">
+      <label for="update-rom">ROM</label>
+      <input
+        id="update-rom"
+        type="number"
+        placeholder="oldrom"
+        class="form__field__input--g"
+      />
+    </div>
+
+    <!-- ram -->
+    <div class="form__field--g b">
+      <label for="update-ram">RAM</label>
+      <input
+        id="update-ram"
+        type="number"
+        placeholder="oldram"
+        class="form__field__input--g"
+      />
+    </div>
+
+    <!-- battery -->
+    <div class="form__field--g b">
+      <label for="update-battery">Battery capacity</label>
+      <input
+        id="update-battery"
+        type="number"
+        placeholder="oldbattery"
+        class="form__field__input--g"
+      />
+    </div>
+
+    <!-- categories -->
+    <div class="form__field--g b">
+      <label>Categories</label>
+      <ul>
+        <li>
+          <input type="checkbox">
+          <label for="">Cate1</label>
+        </li>
+        <li>
+          <input type="checkbox">
+          <label for="">Cate1</label>
+        </li>
+        <li>
+          <input type="checkbox">
+          <label for="">Cate1</label>
+        </li>
+      </ul>
+    </div>
+
+    <!-- price -->
+    <div class="form__field--g b">
+      <label for="update-price">Price</label>
+      <input
+        id="update-price"
+        type="number"
+        placeholder="oldprice"
+        class="form__field__input--g"
+      />
+    </div>
+
+    <!-- quantity -->
+    <div class="form__field--g b">
+      <label for="update-quant">Quantity</label>
+      <input
+        id="update-quant"
+        type="number"
+        placeholder="oldquant"
+        class="form__field__input--g"
+      />
+    </div>
+
+    <!-- description -->
+    <div class="form__field--g b">
+      <label for="update-description">Description</label>
+      <textarea id="update-description">Old description</textarea>
+    </div>
+
+    <div class="form__btns">
+      <button class="btn--g btn--prim--g btn--mw--g">Update</button>
+      <button class="btn--g btn--sec--g btn--mw--g">Cancel</button>
+    </div>
+  </form>
 </div>

@@ -1,79 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link
-  rel="stylesheet"
-  href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
-  />
-  
-  <link rel="stylesheet" href="styles/general.css">
-  <link rel="stylesheet" href="styles/admin/header.css">
-  <link rel="stylesheet" href="styles/admin/content.css">
-  <title>Document</title>
-</head>
-<body id="root">
-  
-  <!-- login form -->
-  <div class="backdrop--g hide--g b">
-    <form class="form--g b">
-      <h2>Login</h2>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+    />
 
-      <div class="form__field--g b">
-        <label for="login-name">Name</label>
-        <input
-          id="login-name"
-          type="text"
-          placeholder="nikolatesla123"
-          class="form__field__input--g"
-        />
+    <link rel="stylesheet" href="styles/general.css" />
+    <link rel="stylesheet" href="styles/admin/header.css" />
+    <link rel="stylesheet" href="styles/admin/content.css" />
+    <link rel="stylesheet" href="styles/admin/products.css">
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- login form -->
+    <div class="backdrop--g hide--g b">
+      <form class="form--g b">
+        <h2>Login</h2>
+
+        <div class="form__field--g b">
+          <label for="login-name">Name</label>
+          <input
+            id="login-name"
+            type="text"
+            placeholder="nikolatesla123"
+            class="form__field__input--g"
+          />
+        </div>
+
+        <div class="form__field--g b">
+          <label for="login-password">Password</label>
+          <input
+            id="login-password"
+            type="password"
+            placeholder="password123"
+            class="form__field__input--g"
+          />
+        </div>
+
+        <button class="btn--g btn--prim--g btn--mw--g">Login in</button>
+      </form>
+    </div>
+
+    <header class="header header--g b">
+      <div class="header__logo">
+        <a href="admin.html" class="b" title="home">Admin page</a>
       </div>
 
-      <div class="form__field--g b">
-        <label for="login-password">Password</label>
-        <input
-          id="login-password"
-          type="password"
-          placeholder="password123"
-          class="form__field__input--g"
-        />
+      <nav class="header__nav b">
+        <ul class="header__nav__list">
+          <li>
+            <button class="btn--none--g text--cap--g">users</button>
+          </li>
+          <li>
+            <button class="btn--none--g text--cap--g">products</button>
+          </li>
+          <li>
+            <button class="btn--none--g text--cap--g">orders</button>
+          </li>
+          <li>
+            <button class="btn--none--g text--cap--g">analysis</button>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="header__auth b">
+        <p>Admin: <span>dungtran</span></p>
+        <button class="link--g btn--none--g">logout</button>
       </div>
+    </header>
 
-      <button class="btn--g btn--prim--g btn--mw--g">Login in</button>
-    </form>
-  </div>
+    <main class="content content--g b">
+      <table class="content__products-table b">
+        <caption class="b">
+          <h1>Products managment</h1>
+        </caption>
 
-  <header class="header header--g b">
-    <div class="header__logo">
-      <a href="admin.html" class="b" title="home">Admin page</a>
-    </div>
-  
-    <nav class="header__nav b">
-      <ul class="header__nav__list">
-        <li>
-          <button class="btn--none--g text--cap--g">users</button>
-        </li>
-        <li>
-          <button class="btn--none--g text--cap--g">products</button>
-        </li>
-        <li>
-          <button class="btn--none--g text--cap--g">orders</button>
-        </li>
-        <li>
-          <button class="btn--none--g text--cap--g">analysis</button>
-        </li>
-      </ul>
-    </nav>
-    
-    <div class="header__auth b">
-      <p>Admin: <span>dungtran</span></p>
-      <button class="link--g btn--none--g">logout</button>
-    </div>
-  </header>
+        <thead class="b">
+          <tr>
+            <th class="b">img</th>
+            <th class="b">id</th>
+            <th class="b">name</th>
+            <th class="b">brand</th>
+            <th class="b">chipset</th>
+            <th class="b">ROM(GB) - RAM(GB)</th>
+            <th class="b">battery capacity(mah)</th>
+            <th class="b">categories</th>
+            <th class="b">price (cents)</th>
+            <th class="b">quantity</th>
+            <th class="b">description</th>
+            <th class="b">actions</th>
+          </tr>
+        </thead>
 
-  
-  
+        <tbody class="b">
+          <tr>
+            <td class="b" data-cell="img">
+              <!-- <img src="./assets/img/products/example.webp" alt="" /> -->
 
-</body>
+              <input type="image" src="./assets/img/products" alt="submit">
+            </td>
+            <td class="b" data-cell="id">123</td>
+            <td class="text--cap--g b" data-cell="name">
+              <span>iphone 15 promax</span>
+          
+              <div class="hide--g">
+                <label for="update-name"></label>
+                <input id="update-name" type="text" placeholder="oldname">
+              </div>
+            </td>
+            <td class="text--cap--g b" data-cell="brand">
+              <span>apple</span>
+
+              <div class="hide--g b">
+                <label for="update-brand"></label>
+                <select id="update-brand">
+                  <option value="brand1">brand1</option>
+                  <option value="brand2">brand2</option>
+                  <option value="brand4">brand3</option>
+                </select>
+              </div>
+            </td>
+            <td class="text--cap--g b" data-cell="chipset">
+              <span>apple bionic 13</span>
+              <div class="hide--g b">
+                <label for="update-chipset"></label>
+                <select id="update-chipset">
+                  <option value="chip1">chip1</option>
+                  <option value="chip2">chip2</option>
+                  <option value="chip3">chip3</option>
+                </select>
+              </div>
+            </td>
+            <td class="b" data-cell="rom - ram">
+              <span>128 - 16</span>
+
+              <div class="content__products-table_memory hide--g">
+                <div class="b">
+                  <p>ROM</p>
+                  <input
+                  id="update-rom"
+                  type="number"
+                  placeholder="oldrom"
+                  />
+                  <label for="update-rom">GB</label>
+                </div>
+                <div class="b">
+                  <p>RAM</p>
+                  <input
+                  id="update-ram"
+                  type="number"
+                  placeholder="oldram"
+                  />
+                  <label for="update-ram">GB</label>
+                </div>
+              </div>
+            </td>
+            <td class="b" data-cell="battery capacity">
+              <span>4800</span>
+
+              <div class="flex--gap--g hide--g b">
+                <input
+                id="update-battery"
+                type="number"
+                placeholder="oldbattery"
+                />
+                <label for="update-battery">mah</label>
+              </div>
+            </td>
+            <td class="text--cap--g b" data-cell="categories">
+              <span>flagship, fashion</span>
+
+              <div class="hide--g b">
+                <ul class="content__products-table_categories">
+                  <li>
+                    <input id="checkbox" type="checkbox">
+                    <label for="checkbox">Cate1</label>
+                  </li>
+                  <!-- ... -->
+                </ul>
+              </div>
+            </td>
+            <td class="b" data-cell="price">
+              <span>129900</span>
+              <div class="flex--gap--g hide--g b">
+                <input
+                id="update-price"
+                type="number"
+                placeholder="oldprice"
+                />
+                <label for="update-price">cents</label>
+              </div>
+            </td>
+            <td class="b" data-cell="quantity">
+              <span>100</span>
+
+              <div class="hide--g b">
+                <input
+                id="update-quant"
+                type="number"
+                placeholder="oldquant"
+                />
+              </div>
+            </td>
+            <td class="b" data-cell="description">
+              <span class="description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </span>
+              <div class="hide--g b">
+                <label for="update-description"></label>
+                <textarea id="update-description" placeholder="old description"></textarea>
+              </div>
+          
+            </td>
+            <td class="b" data-cell="actions">
+              <div class="btns">
+                <button class="btn--none--g link--g">update</button>
+                <button class="btn--none--g link--g link--red--g">
+                  delete
+                </button>
+              </div>
+            </td>
+          </tr>
+          <!-- ... -->
+        </tbody>
+      </table>
+    </main>
+
+    <!-- create product form -->
+
+  </body>
 </html>

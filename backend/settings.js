@@ -10,6 +10,7 @@ export const CLASSNAME = { //relative to css classes
   hide: "hide--g",
   // checked: "checked",
   bgBlue: "bg--blue--g",
+  btnDisable: "btn--forbidden--g",
 }
 
 export const MAX_PRODUCT_RENDERED = 5;

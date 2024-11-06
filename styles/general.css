@@ -67,8 +67,14 @@ img {
 }
 .content--g {
   padding-top: 6em !important; 
+  padding-bottom: 6em !important;
 }
 
+.flex--gap--g {
+  display: flex;
+  align-items: center;
+  gap: .25em;
+}
 
 .text--cap--g {
   text-transform: capitalize;
@@ -81,6 +87,13 @@ img {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/* overflow: hidden;
+display: -webkit-box;
+-webkit-line-clamp: 4; 
+        line-clamp: 4; 
+-webkit-box-orient: vertical;
+max-width: 200px; */
+
 .text--blue--bold--g {
   color: var(--blue);
   font-weight: 500;
@@ -116,6 +129,10 @@ img {
 .btn--mw--g {
   width: 100%;
 }
+.btn--forbidden--g {
+  opacity: .8;
+  cursor: not-allowed;
+}
 
 .icon--small--g {
   font-size: 1rem;
@@ -143,6 +160,7 @@ img {
   align-items: center;
   justify-content: center;
   padding: 1em;
+  padding-bottom: 10em;
   background: rgba(133, 133, 133, 0.5);
   z-index: 99;
 }

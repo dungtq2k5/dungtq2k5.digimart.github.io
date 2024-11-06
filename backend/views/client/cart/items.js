@@ -17,7 +17,8 @@ import {
   getFromStorage, 
   hideElements, 
   saveToStorage, 
-  showElements 
+  showElements,
+  centsToDollars
 } from "../../../controllers/utils.js";
 import { updateCheckoutForm } from "./checkout-form.js";
 
@@ -30,7 +31,6 @@ const itemContainer = contentContainer.querySelector(".items-container-js");
 
 const selectAllItem = contentContainer.querySelector(".select-all-js");
 
-//FIXME check and uncheck display
 selectAllItem.checked = getFromStorage(LOCALSTORAGE.allItemSelected) || false; //still keep when page refreshed
 
 const removeItemBackDrop = document.getElementById("remove-item-backdrop");
@@ -41,6 +41,7 @@ function renderItems() {
 
   getUserCart(user.id).forEach(item => {
     const product = getProductDetail(item.productId);
+    const price = centsToDollars(product.price);
 
     htmlDoc += `
       <li class="content__items__item b" data-cart-id="${item.id}">
@@ -59,7 +60,7 @@ function renderItems() {
           <label for="product-${item.id}" class="content__items__item__select__label text--cap--g">${product.name}</label>
         </div>
 
-        <p class="b">$${product.price}</p>
+        <p class="b">$${price}</p>
 
         <div class="content__items__item__quant b">
           <i class="uil uil-arrow-left decs-quant-js b"></i>
@@ -67,7 +68,7 @@ function renderItems() {
           <i class="uil uil-arrow-right incs-quant-js b"></i>
         </div>
 
-        <p class="b">$${item.quantity*product.price}</p>
+        <p class="b">$${item.quantity*price}</p>
 
         <button class="link--g link--red--g btn--none--g del-btn-js b">Delete</button>
       </li>

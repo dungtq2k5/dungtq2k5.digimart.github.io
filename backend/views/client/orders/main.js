@@ -1,10 +1,14 @@
-import { renderOrders, renderEmptyOrders } from "./orders.js";
 import { userAuthenticated } from "../../../controllers/users.js";
+import { PAGES } from "../../../settings.js";
 import { getUserOrders } from "../../../controllers/orders.js";
+import { renderOrders, renderEmptyOrders } from "./orders.js";
 
 
 const user = userAuthenticated();
-//TODO: if user not auth but go here through url -> render Login form instead
+
+//user not auth but go here through url
+if(!user) window.location.href = PAGES.home;
+
 if(getUserOrders(user.id).length > 0) {
   renderOrders();
 } else {

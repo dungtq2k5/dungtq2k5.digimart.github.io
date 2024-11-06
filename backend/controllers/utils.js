@@ -21,7 +21,6 @@ export function toggleEleInArr(arr, ele) {
   else arr.push(ele);
 }
 
-
 export function genEmailToUsername(email) { //AI generate
   // Split the email address by the '@' symbol
   const [username, domain] = email.split('@');
@@ -67,7 +66,6 @@ export function isValidVietnamesePhoneNumber(phoneNumber) { //AI generate
 }
 
 export function isValidDeliveryAddress(delAddr) {
-  //TODO: modify to be a real address
   return delAddr.length >= 1;
 }
 
