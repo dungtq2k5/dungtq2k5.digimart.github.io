@@ -92,6 +92,11 @@ function responsiveLoginLink() {
   });
 }
 
+function resetForm() {
+  hideElements([invalidEmailPopup, invalidPasswordPopup, invalidPasswordPopup]);
+  registerForm.reset();
+}
+
 function handleRegister() {
   if(!userAuthenticated()) {
     const user = {
@@ -176,6 +181,7 @@ function hideRegisterBtn() {
 }
 
 function showRegisterForm() {
+  resetForm();
   showElements(backDrop);
 }
 

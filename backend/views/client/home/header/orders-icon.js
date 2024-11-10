@@ -1,5 +1,4 @@
 import { 
-  LOCALHOST,
   PAGES
 } from "../../../../settings.js";
 import { userAuthenticated } from "../../../../controllers/users.js";
@@ -26,7 +25,7 @@ function responsiveOrdersIcon() {
     e.preventDefault();
 
     if(user) {
-      window.location.href = `${LOCALHOST}/${PAGES.orders}`;
+      window.location.href = `./${PAGES.orders}`;
     } else {
       showLoginForm();
       console.log("Login first to go to orders page");

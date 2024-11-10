@@ -1,5 +1,4 @@
 import { 
-  LOCALHOST,
   PAGES
 } from "../../../../settings.js";
 import { userAuthenticated } from "../../../../controllers/users.js";
@@ -25,7 +24,7 @@ function responsiveCartIcon() {
     e.preventDefault();
 
     if(user) {
-      window.location.href = `${LOCALHOST}/${PAGES.cart}`;
+      window.location.href = `./${PAGES.cart}`;
     } else {
       showLoginForm();
       console.log("Login first to go to cart page");

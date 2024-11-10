@@ -158,8 +158,7 @@ function handleDelItem(cartId) {
   // console.log(`del product ${cartId} in cart`);
   removeCart(cartId);
 
-  const userCart = getUserCart(user.id);
-  if(getUserCart(user.id) > 0) {
+  if(getUserCart(user.id).length > 0) {
     renderItems();
   } else {
     renderEmptyCart();

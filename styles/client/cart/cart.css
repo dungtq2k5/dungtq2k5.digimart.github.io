@@ -17,7 +17,7 @@
   margin: 0 auto;
   padding: 1em;
 }
-.content__items, .content__items__header {
+.content__items {
   margin-bottom: 1em;
 }
 .content__items__header, .content__items__item {
@@ -26,6 +26,7 @@
   align-items: center;
   gap: 1em;
   padding: 1em;
+  margin-top: 1em;
   border: 1px solid var(--lightgrey);
   border-radius: var(--border-radius);
 }

@@ -1,7 +1,6 @@
 import { 
   PAGES, 
   LOCALSTORAGE, 
-  LOCALHOST, 
   CLASSNAME
 } from "../../../settings.js";
 import { removeCart } from "../../../controllers/carts.js";

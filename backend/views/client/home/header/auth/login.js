@@ -43,7 +43,6 @@ function responsiveLoginBtn() {
       loginForm.reset();
       hideElements(invalidCredentialPopup);
       showElements(backDrop);
-      // console.log("show-login");
     });
   });
 }
@@ -57,11 +56,17 @@ function responsiveLoginCloseBtn() {
 }
 
 function showLoginForm() {
+  resetForm();
   showElements(backDrop);
 }
 
 function hideLoginForm() {
   hideElements(backDrop);
+}
+
+function resetForm() {
+  hideElements(invalidCredentialPopup);
+  loginForm.reset();
 }
 
 function showLoginBtn() {

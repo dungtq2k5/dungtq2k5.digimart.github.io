@@ -4,7 +4,7 @@ import {
   MAX_PRODUCT_PRICE,
   LOCALSTORAGE,
 } from "../../settings.js";
-import { generateUID, getFromStorage, includesSubArr, isStorageExist, saveToStorage } from "../utils.js";
+import { generateUID, getFromStorage, includesSubArr, saveToStorage } from "../utils.js";
 import { getBrandDetail } from "./brands.js";
 
 
@@ -14,29 +14,22 @@ function getPlainProductsList(from = 0, to = products.length) {
 }
 
 
-export function getProductsList(from = 0, to = getProductAmount()) {
+export function getProductsList(from, to) {
   if (from > to) [from, to] = [to, from];
   return (
     getFromStorage(LOCALSTORAGE.productsList) || getPlainProductsList()
   ).slice(from, to);
 }
 
-export function getProductsFilteredList(from = 0, to = getProductAmount()) {
+export function getProductsFilteredList(from, to) {
   if (from > to) [from, to] = [to, from];
   return (
     getFromStorage(LOCALSTORAGE.productsFilteredList) || getProductsList()
   ).slice(from, to);
 }
 
-export function getProductAmount() {
-  if(isStorageExist(LOCALSTORAGE.productsFilteredList)) {
-    return getFromStorage(LOCALSTORAGE.productsFilteredList).length;
-  }
-  if(isStorageExist(LOCALSTORAGE.productsList)) {
-    return getFromStorage(LOCALSTORAGE.productsList).length;
-  }
-
-  return getPlainProductsList().length;
+export function getProductAmount(productsList=getProductsFilteredList()) {
+  return productsList.length;
 }
 
 export function getProductDetail(id, productsList=getProductsList()) {

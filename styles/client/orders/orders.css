@@ -1,5 +1,5 @@
 .header { 
-font-size: 1.5rem;
+  font-size: 1.5rem;
   gap: .25em;
 }
 
@@ -34,12 +34,10 @@ font-size: 1.5rem;
   border: 1px solid var(--lightgrey);
   border-radius: var(--border-radius);
 }
-
-.content__orders__order__items {
-  margin-top: .5em;
+.content__orders__order__items__item {
+  margin-top: 1em;
 }
 .content__orders__order__items__item__img {
-  max-width: 200px;
+  max-width: 100px;
   border-radius: var(--border-radius);
-  background: var(--darkwhite);
 }

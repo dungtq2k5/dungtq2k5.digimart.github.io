@@ -1,5 +1,4 @@
-export const LOCALHOST = "http://127.0.0.1:5500";
-export const IMG_ROOT_PATH = "../assets/img/products"; //relative to index.html
+export const IMG_ROOT_PATH = "./assets/img/products"; //relative to index.html
 export const IMG_TYPE = "webp";
 export const IMG_SIZE = "650"; //px
 export const IMG_DEFAULT = "default"
