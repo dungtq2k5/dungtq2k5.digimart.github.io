@@ -135,6 +135,10 @@ export function getFromStorage(storage) {
   return JSON.parse(localStorage.getItem(storage));
 }
 
+export function isStorageExist(storage) {
+  return getFromStorage(storage) ? true : false;
+}
+
 export function dateFormatted(time) {
   const monthsName = [
     "January", "February", "March",

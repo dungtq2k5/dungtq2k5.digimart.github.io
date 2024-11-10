@@ -7,6 +7,13 @@ import {
 import { getFromStorage, includesSubArr, saveToStorage } from "../utils.js";
 import { getBrandDetail } from "./brands.js";
 
+
+function getPlainProductsList(from = 0, to = products.length) {
+  if (from > to) [from, to] = [to, from];
+  return products.slice(from, to);
+}
+
+
 export function getProductsList(from = 0, to = products.length) {
   //potential bugs
   if (from > to) [from, to] = [to, from];
@@ -15,16 +22,19 @@ export function getProductsList(from = 0, to = products.length) {
   ).slice(from, to);
 }
 
-export function getPlainProductsList(from = 0, to = products.length) {
+export function getProductsFilteredList(from = 0, to = products.length) {
+  //potential bugs
   if (from > to) [from, to] = [to, from];
-  return products.slice(from, to);
+  return (
+    getFromStorage(LOCALSTORAGE.productsFilteredList) || getProductsList()
+  ).slice(from, to);
 }
 
-export function getProductAmount() {
-  return getProductsList().length;
+export function getProductAmount(productsList=getProductsFilteredList()) {
+  return productsList.length;
 }
 
-export function getProductDetail(id, productsList=getPlainProductsList()) {
+export function getProductDetail(id, productsList=getProductsList()) {
   const findIndex = productsList.findIndex((item) => item.id === id);
 
   if (findIndex !== -1) return productsList[findIndex];
@@ -32,13 +42,12 @@ export function getProductDetail(id, productsList=getPlainProductsList()) {
   return -1;
 }
 
-export function deleteProduct(id) {
-  const productList = getProductsList();
-  const findIndex = productList.findIndex(item => item.id === id);
+export function deleteProduct(id, productsList=getProductsList()) {
+  const findIndex = productsList.findIndex(item => item.id === id);
 
   if(findIndex !== -1) {
-    productList.splice(findIndex, 1);
-    saveToStorage(LOCALSTORAGE.productsList, productList);
+    productsList.splice(findIndex, 1);
+    saveToStorage(LOCALSTORAGE.productsList, productsList);
     console.log(`Delete product with an id ${id}`);
     return true;
   }
@@ -47,8 +56,7 @@ export function deleteProduct(id) {
   return false;
 }
 
-export function updateProduct(id, product) { //update all props except id
-  const productsList = getProductsList();
+export function updateProduct(id, product, productsList=getProductsList()) { //update all props except id
   const findIndex = productsList.findIndex(product => product.id === id);
 
   if(findIndex !== -1) {
@@ -64,17 +72,17 @@ export function updateProduct(id, product) { //update all props except id
   return false;
 }
 
-export function checkProductExist(id) {
-  const existingProduct = getPlainProductsList().find((item) => item.id === id);
+export function checkProductExist(id, productsList=getProductsList()) {
+  const existingProduct = productsList.find((item) => item.id === id);
   return existingProduct !== undefined;
 }
 
 export function filterProducts(
-  productsList = getPlainProductsList(),
   value = "",
   categories = [],
   minPrice = MIN_PRODUCT_PRICE,
-  maxPrice = MAX_PRODUCT_PRICE
+  maxPrice = MAX_PRODUCT_PRICE,
+  productsList = getProductsList()
 ) {
   minPrice = Number(minPrice);
   maxPrice = Number(maxPrice);
@@ -109,8 +117,8 @@ export function filterProducts(
 }
 
 export function filterProductsByBrand(
-  productsList = getPlainProductsList(),
-  brandId
+  brandId,
+  productsList = getProductsList()
 ) {
   const brand = getBrandDetail(brandId);
   return productsList.filter((item) => item.brandId === brand.id);

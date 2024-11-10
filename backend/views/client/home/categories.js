@@ -5,7 +5,6 @@ import {
   saveToStorage,
 } from "../../../controllers/utils.js";
 import {
-  getPlainProductsList,
   filterProductsByBrand,
 } from "../../../controllers/products/products.js";
 import { getBrandsList } from "../../../controllers/products/brands.js";
@@ -38,17 +37,19 @@ function renderCategories(categoriesList = getBrandsList()) {
   categoriesContainer.querySelectorAll(".content__categories__item").forEach((item, index) => { //index start at 1
     item.addEventListener("change", () => {
       const brandId = item.dataset.brandId;
-      const productsListFiltered =
-      !brandId
-      ? getPlainProductsList()
-      : filterProductsByBrand(getPlainProductsList(), brandId);
+
+      if(brandId) {
+        const productsFilteredList = filterProductsByBrand(brandId);
+        saveToStorage(LOCALSTORAGE.productsFilteredList, productsFilteredList); //for pagination product
+      } else {
+        localStorage.removeItem(LOCALSTORAGE.productsFilteredList);
+      }
       
-      saveToStorage(LOCALSTORAGE.productsList, productsListFiltered); //for pagination product
       saveToStorage(LOCALSTORAGE.categoryCheckedIndex, index); //save current checked index
       resetPaginatProduct(); //reset page index
-      renderProducts(productsListFiltered);
+      renderProducts();
 
-      // console.log(`filter ${brand}`);
+      // console.log(`filter ${brandId}`);
     });
   });
 

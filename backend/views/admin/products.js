@@ -3,7 +3,7 @@ import { getCategoriesList, getCategoryDetail } from "../../controllers/products
 import { getChipsetDetail, getChipsetsList } from "../../controllers/products/chipsets.js"
 import { deleteProduct, getProductDetail, getProductsList, updateProduct } from "../../controllers/products/products.js";
 import { hideElements, includesSubArr, showElements } from "../../controllers/utils.js";
-import { IMG_ROOT_PATH, IMG_SIZE, IMG_TYPE } from "../../settings.js";
+import { IMG_SIZE, IMG_TYPE } from "../../settings.js";
 
 
 const mainContainer = document.getElementById("main-container-js");
@@ -12,7 +12,6 @@ const itemsContainer = mainContainer.querySelector(".tbody-js");
 const backDrop = document.getElementById("backdrop");
 
 export function renderItems() {
-  //FIXME handle get plain product first when go to admin page.
   const productsList = getProductsList(0, 1);
   let htmlDoc = ``;
 
@@ -122,7 +121,8 @@ function renderDelForm(productId) {
 }
 
 function renderUpdateForm(productId) {
-  const product = getProductDetail(productId, getProductsList());
+  const reader = new FileReader();
+  const product = getProductDetail(productId);
   const brandsList = getBrandsList();
   const chipsetsList = getChipsetsList();
   const catesList = getCategoriesList();
@@ -135,23 +135,27 @@ function renderUpdateForm(productId) {
 
       <h2>Update products</h2>
 
-      <!-- img -->
-      <label for="update-img" class="create__form__upload">
-        <input id="update-img" type="file" accept="image/webp" hidden>
 
-        <div class="create__form__upload-box hide--g">
-          <div class="create__form__upload-box__title-box">
+      <!-- img -->
+      <div class="create__form__upload-img b">
+        <!-- display -->
+        <img src="${product.img}" alt="" class="create__form__upload-img__display img-display-js b">
+
+        <!-- upload -->
+        <label for="update-img" class="create__form__upload-img__upload drop-area-js b">
+          <input id="update-img" type="file" accept="image/webp" hidden>
+
+          <div class="create__form__upload-img__upload__info b">
+          <div class="create__form__upload-img__upload__info__title">
             <i class="uil uil-upload icon--small--g"></i>
             <p>click to upload or drop file here.</p>
           </div>
           <p class="text--em--g">
-            only accept image with size &#91;${IMG_SIZE} x ${IMG_SIZE}&#93;px and .${IMG_TYPE} type
+            Only support image with size &#91;${IMG_SIZE} x ${IMG_SIZE}&#93;px and .${IMG_TYPE} type
           </p>
-        </div>
-
-        <!-- display -->
-        <img src="${IMG_ROOT_PATH}/${product.img}.${IMG_TYPE}" alt="" class="create__form__upload-img">
-      </label>
+          </div>
+        </label>
+      </div>
       
       <!-- name -->
       <div class="form__field--g b">
@@ -262,9 +266,33 @@ function renderUpdateForm(productId) {
   </form>
   `;
 
+  //TODO drap-drop features
+  const imgDisplay = backDrop.querySelector(".img-display-js");
+  const imgDropArea = backDrop.querySelector(".drop-area-js");
+  const inputImg = backDrop.querySelector("#update-img");
+
   const closeBtn = backDrop.querySelector(".close-btn-js");
   const discardBtn = backDrop.querySelector(".discard-btn-js");
   const submitBtn = backDrop.querySelector(".submit-btn-js");
+
+  const renderUploadImg = () => {
+    let imgLink = URL.createObjectURL(inputImg.files[0]);
+    imgDisplay.setAttribute("src", imgLink);
+    reader.readAsDataURL(inputImg.files[0]);
+  }
+
+  imgDropArea.addEventListener("dragover", e => e.preventDefault());
+
+  imgDropArea.addEventListener("drop", e => {
+    e.preventDefault();
+    inputImg.files = e.dataTransfer.files;
+    renderUploadImg();
+  });
+
+  inputImg.addEventListener("change", () => {
+    renderUploadImg();
+    console.log("upload img");
+  });
 
   closeBtn.addEventListener("click", e => {
     e.preventDefault();
@@ -280,6 +308,7 @@ function renderUpdateForm(productId) {
 
   submitBtn.addEventListener("click", e => {
     e.preventDefault();
+
     const name = backDrop.querySelector("#update-name").value;
     const brand = backDrop.querySelector("#update-brand");
     const brandId = brand.options[brand.selectedIndex].value;
@@ -290,27 +319,29 @@ function renderUpdateForm(productId) {
     const rom = backDrop.querySelector("#update-rom").value;
     const ram = backDrop.querySelector("#update-ram").value;
     const batteryCapacity = backDrop.querySelector("#update-battery").value;
+
     const cateInputs = [...backDrop.querySelectorAll(".update-cates-js")].filter(input => input.checked);
-    const typesId = cateInputs.map(cate => cate.dataset.cateId);
+    const catesId = cateInputs.map(cate => cate.dataset.cateId);
+
     const price = backDrop.querySelector("#update-price").value;
     const quantity = backDrop.querySelector("#update-quant").value;
     const description = backDrop.querySelector("#update-description").value;
         
-    const product = {
-      img: "example", //TODO update img
-      name, 
+    const updatedProduct = {
       brandId, 
+      typesId: catesId, 
       chipSetId, 
+      name, 
+      price, 
+      quantity, 
+      img: inputImg.files[0] ? reader.result : product.img,
       rom, 
       ram, 
       batteryCapacity, 
-      typesId, 
-      price, 
-      quantity, 
       description,
     }
 
-    updateProduct(productId, product);
+    updateProduct(productId, updatedProduct);
     renderItems();
     hideElements(backDrop);
     backDrop.innerHTML = "";
@@ -355,4 +386,3 @@ function genCatesCheckBoxHtmlList(catesList=getCategoriesList(), currIdsList) {
     `;
   }).join("");
 }
-

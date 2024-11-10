@@ -101,7 +101,7 @@ max-width: 200px; */
   font-weight: 500;
 }
 .text--em--g {
-  padding: .25em .5em;
+  padding: .5em;
   background: var(--darkwhite2);
   border-radius: var(--border-radius);
   font-size: .85rem;

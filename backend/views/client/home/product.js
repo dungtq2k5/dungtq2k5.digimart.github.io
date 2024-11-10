@@ -13,9 +13,9 @@ import {
   PAGES 
 } from "../../../settings.js";
 import { 
-  getProductsList,
   getProductDetail,
   getProductAmount,
+  getProductsFilteredList,
 } from "../../../controllers/products/products.js";
 import { userAuthenticated } from "../../../controllers/users.js";
 import { addToCart } from "../../../controllers/carts.js";
@@ -41,10 +41,10 @@ paginat.innerHTML = currentPaginat;
 let addToCartBtnTimeout;
 
 
-function renderProducts(productsList) {
+function renderProducts() {
   const start = (currentPaginat-1) * MAX_PRODUCT_RENDERED;
   const end = currentPaginat * MAX_PRODUCT_RENDERED;
-  productsList = productsList ? productsList.slice(start, end) : getProductsList(start, end);
+  const productsList = getProductsFilteredList(start, end);
 
   let htmlDoc = ``;
   if(productsList.length >= 1) {

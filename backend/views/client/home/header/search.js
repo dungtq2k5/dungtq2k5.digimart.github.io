@@ -14,7 +14,6 @@ import {
 } from "../../../../controllers/utils.js";
 import {
   filterProducts,
-  getPlainProductsList,
 } from "../../../../controllers/products/products.js";
 import { getCategoriesList } from "../../../../controllers/products/categories.js";
 import renderProducts, { resetPaginatProduct } from "../product.js";
@@ -58,7 +57,6 @@ function responsiveSearchField() {
     valueLookup = e.target.value;
 
     const productsListFiltered = filterProducts(
-      getPlainProductsList(),
       valueLookup,
       categoriesLookup,
       rangeInputs[0].value,
@@ -74,7 +72,6 @@ function responsiveSearchSuggestPopup() {
     valueLookup = searchField.value;
 
     const productsListFiltered = filterProducts(
-      getPlainProductsList(),
       valueLookup,
       categoriesLookup,
       rangeInputs[0].value,
@@ -82,10 +79,10 @@ function responsiveSearchSuggestPopup() {
     );
 
     renderSuggestProduct(productsListFiltered); //make sure suggestion up to date
-    saveToStorage(LOCALSTORAGE.productsList, productsListFiltered);
+    saveToStorage(LOCALSTORAGE.productsFilteredList, productsListFiltered);
     if(!getFromStorage(LOCALSTORAGE.categoryHidden)) hideCategories();
     resetPaginatProduct();
-    renderProducts(productsListFiltered);
+    renderProducts();
     hideElements(searchPopupContainer);
   });
 
@@ -181,7 +178,6 @@ function renderCategory(categoriesList = getCategoriesList()) {
         toggleEleInArr(categoriesLookup, categoryId);
         console.log(categoriesLookup);
         const productsListFiltered = filterProducts(
-          getPlainProductsList(),
           valueLookup,
           categoriesLookup,
           rangeInputs[0].value,
@@ -209,7 +205,6 @@ function validateRange() {
 
   // console.log("price range");
   const productsListFiltered = filterProducts(
-    getPlainProductsList(),
     valueLookup,
     categoriesLookup,
     minPrice,

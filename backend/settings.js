@@ -34,6 +34,7 @@ export const MSG = {
 
 export const LOCALSTORAGE = {
   productsList: "productsList",
+  productsFilteredList: "productsFilteredList",
   usersList: "usersList",
   cartsList: "cartsList",
   ordersList: "ordersList",

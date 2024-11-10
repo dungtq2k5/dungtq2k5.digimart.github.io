@@ -52,25 +52,29 @@
 }
 
 /* update - create form */
-.create__form__upload-box {
-  max-width: max-content;
-  padding: .5em;
-  border: 1px dashed var(--grey);
-  border-radius: var(--border-radius);
-  white-space: nowrap;
+.create__form__upload-img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
 }
-
-.create__form__upload-box__title-box {
+.create__form__upload-img__display {
+  max-width: 100px;
+}
+.create__form__upload-img__upload {
+  text-align: center;
+  padding: .5em 1em;
+  border: 1px dashed var(--grey);
+  background: var(--white);
+  border-radius: var(--border-radius);
+}
+.create__form__upload-img__upload__info__title {
   display: flex;
   justify-content: center;
-  text-align: center;
-  gap: .25em; 
+  gap: .5em;
   margin-bottom: .5em;
 }
 
-.create__form__upload-img {
-  max-width: 100px;
-}
 .create__form__categories__items {
   display: flex;
   gap: 1em;
