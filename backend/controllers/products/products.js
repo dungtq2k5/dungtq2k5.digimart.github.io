@@ -4,7 +4,7 @@ import {
   MAX_PRODUCT_PRICE,
   LOCALSTORAGE,
 } from "../../settings.js";
-import { getFromStorage, includesSubArr } from "../utils.js";
+import { getFromStorage, includesSubArr, saveToStorage } from "../utils.js";
 import { getBrandDetail } from "./brands.js";
 
 export function getProductsList(from = 0, to = products.length) {
@@ -24,11 +24,44 @@ export function getProductAmount() {
   return getProductsList().length;
 }
 
-export function getProductDetail(id) {
-  const findIndex = getPlainProductsList().findIndex((item) => item.id === id);
-  if (findIndex !== -1) return getPlainProductsList()[findIndex];
+export function getProductDetail(id, productsList=getPlainProductsList()) {
+  const findIndex = productsList.findIndex((item) => item.id === id);
+
+  if (findIndex !== -1) return productsList[findIndex];
   console.error(`Product with an id ${id} not found!`);
   return -1;
+}
+
+export function deleteProduct(id) {
+  const productList = getProductsList();
+  const findIndex = productList.findIndex(item => item.id === id);
+
+  if(findIndex !== -1) {
+    productList.splice(findIndex, 1);
+    saveToStorage(LOCALSTORAGE.productsList, productList);
+    console.log(`Delete product with an id ${id}`);
+    return true;
+  }
+
+  console.error(`Product with an id ${id} not found!`);
+  return false;
+}
+
+export function updateProduct(id, product) { //update all props except id
+  const productsList = getProductsList();
+  const findIndex = productsList.findIndex(product => product.id === id);
+
+  if(findIndex !== -1) {
+    product["id"] = productsList[findIndex].id;
+    productsList[findIndex] = product;
+
+    saveToStorage(LOCALSTORAGE.productsList, productsList);
+    console.log("product updated");
+    return true;
+  };
+
+  console.error(`Product with an id ${id} not found`);
+  return false;
 }
 
 export function checkProductExist(id) {

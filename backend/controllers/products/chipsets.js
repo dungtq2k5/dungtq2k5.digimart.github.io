@@ -1,10 +1,10 @@
-import chipsets from "../../../assets/models/products/chipsets";
+import chipsets from "../../../assets/models/products/chipsets.js";
 
-function getChipsetsList() {
+export function getChipsetsList() {
   return chipsets;
 }
 
-export function getChipset(id) {
+export function getChipsetDetail(id) {
   const chipset =  getChipsetsList().find(chipset => chipset.id === id);
 
   return chipset 

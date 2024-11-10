@@ -24,7 +24,7 @@ import { getUserCart } from "../../../controllers/carts.js";
 import { renderItems, responsiveSelectAllItem, renderEmptyCart } from "./items.js";
 import { default as checkoutForm } from "./checkout-form.js";
 
-
+//TODO DOMContentLoaded if needed
 const user = userAuthenticated();
 
 //user not auth but go here through url

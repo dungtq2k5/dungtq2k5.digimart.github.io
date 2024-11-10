@@ -1,43 +1,43 @@
 const chipsets = [
   {
     "id": "1",
-    "name": "Dimensity 9400"
+    "name": "dimensity 9400"
   },
   {
     "id": "2",
-    "name": "Snapdragon 8 Gen 3"
+    "name": "snapdragon 8 gen 3"
   },
   {
     "id": "3",
-    "name": "Apple A17 Bionic"
+    "name": "apple A17 bionic"
   },
   {
     "id": "4",
-    "name": "Exynos 2400"
+    "name": "exynos 2400"
   },
   {
     "id": "5",
-    "name": "Kirin 990 5G"
+    "name": "kirin 990 5G"
   },
   {
     "id": "6",
-    "name": "MediaTek Dimensity 1100"
+    "name": "mediaTek dimensity 1100"
   },
   {
     "id": "7",
-    "name": "Qualcomm Snapdragon 778G"
+    "name": "qualcomm snapdragon 778G"
   },
   {
     "id": "8",
-    "name": "Samsung Exynos 2200"
+    "name": "samsung exynos 2200"
   },
   {
     "id": "9",
-    "name": "Apple A16 Bionic"
+    "name": "apple a16 bionic"
   },
   {
     "id": "10",
-    "name": "Google Tensor G2"
+    "name": "google tensor g2"
   }
 ];
 

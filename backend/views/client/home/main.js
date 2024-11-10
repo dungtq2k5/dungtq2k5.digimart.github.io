@@ -31,6 +31,7 @@ from "./product.js";
 import { genEmailToUsername } from "../../../controllers/utils.js";
 
 
+//TODO DOMContentLoaded if needed
 const user = userAuthenticated();
 
 //responsive header

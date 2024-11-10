@@ -3,7 +3,7 @@ import { PAGES } from "../../../settings.js";
 import { getUserOrders } from "../../../controllers/orders.js";
 import { renderOrders, renderEmptyOrders } from "./orders.js";
 
-
+//TODO DOMContentLoaded if needed
 const user = userAuthenticated();
 
 //user not auth but go here through url

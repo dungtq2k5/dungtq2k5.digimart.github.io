@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;700&display=swap');
 :root {
+  --grey: grey;
   --lightgrey: #c4c7c5;
   --lightblue: #f0f4f9;
   --blue: #1a73e8;
@@ -7,8 +8,9 @@
   --black: #1f1f1f;
   --white: #ffff;
   --darkwhite: #f5f5f5;
-  --red: rgb(255, 100, 100);
-  --green : rgb(0, 156, 0);
+  --darkwhite2: #e7e7e7;
+  --red: #ff6464;
+  --green : #009c00;
 
   --border-radius: 4px;
   --max-screen-size: 1920px;
@@ -32,7 +34,7 @@ button {
 li {
   list-style-type: none;
 }
-i, label {
+i, label, button {
   cursor: pointer;
 }
 i {
@@ -98,6 +100,15 @@ max-width: 200px; */
   color: var(--blue);
   font-weight: 500;
 }
+.text--em--g {
+  padding: .25em .5em;
+  background: var(--darkwhite2);
+  border-radius: var(--border-radius);
+  font-size: .85rem;
+}
+.text--nowrap--g {
+  white-space: nowrap;
+}
 
 
 .btn--g {
@@ -107,7 +118,6 @@ max-width: 200px; */
   height: max-content;
   border: 1px solid transparent;
   border-radius: var(--border-radius);
-  cursor: pointer;
 }
 .btn--prim--g {
   color: var(--white);
@@ -122,6 +132,7 @@ max-width: 200px; */
   color: var(--white);
   background: var(--red);
 }
+
 .btn--none--g {
   border: none;
   background: transparent;
@@ -145,6 +156,9 @@ max-width: 200px; */
 .link--red--g {
   color: var(--red);
 }
+.link--green--g {
+  color: var(--green);
+}
 
 .hide--g {
   display: none !important;
@@ -160,7 +174,6 @@ max-width: 200px; */
   align-items: center;
   justify-content: center;
   padding: 1em;
-  padding-bottom: 10em;
   background: rgba(133, 133, 133, 0.5);
   z-index: 99;
 }
@@ -183,6 +196,8 @@ max-width: 200px; */
   border: 1px solid var(--lightgrey);
   border-radius: var(--border-radius);
   padding: 2em;
+  max-height: 100%;
+  overflow-y: auto;
 }
 
 .form__close-btn--g {

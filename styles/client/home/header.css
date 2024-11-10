@@ -76,11 +76,11 @@
   .header__utils__search__input {
     padding: .25em .5em;
   }
-  .header__auth__icon{
-    display: block;
-  }
   .header__auth__btn {
     display: none;
+  }
+  .header__auth__icon{
+    display: block;
   }
 }
 

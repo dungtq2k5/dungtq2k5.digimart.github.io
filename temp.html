@@ -1,4 +1,33 @@
 <!-- USER -->
+ <!-- login form -->
+<div class="backdrop--g hide--g b">
+  <form class="form--g b">
+    <h2>Login</h2>
+
+    <div class="form__field--g b">
+      <label for="login-name">Name</label>
+      <input
+        id="login-name"
+        type="text"
+        placeholder="nikolatesla123"
+        class="form__field__input--g"
+      />
+    </div>
+
+    <div class="form__field--g b">
+      <label for="login-password">Password</label>
+      <input
+        id="login-password"
+        type="password"
+        placeholder="password123"
+        class="form__field__input--g"
+      />
+    </div>
+
+    <button class="btn--g btn--prim--g btn--mw--g">Login in</button>
+  </form>
+</div>
+
 <!-- content -->
 <main class="content content--g b">
   <table class="b">
@@ -145,31 +174,177 @@
   </form>
 </div>
 
-<!-- del form -->
-<div class="backdrop--g hide--g b">
-  <div class="form--g b">
+
+
+
+<!-- PRODUCTS -->
+<!-- create product form -->
+<div class="backdrop--g hide--g  b">
+  <form class="create__form form--g b">
     <button class="form__close-btn--g btn--none--g b">
       <i class="uil uil-times"></i>
     </button>
 
-    <h2>You want to remove user [username]&#63;</h2>
+    <h2>Create products</h2>
 
-    <div class="form__btns">
-      <button class="btn--g btn--del--g btn--mw--g">Remove</button>
-      <button class="btn--g btn--sec--g btn--mw--g">Cancel</button>
+    <!-- img -->
+    <label for="create-img" class="create__form__upload">
+      <input id="create-img" type="file" accept="image/webp" hidden>
+      <div class="create__form__upload-box hide--g">
+        <div class="create__form__upload-box__title-box">
+          <i class="uil uil-upload icon--small--g"></i>
+          <p>click to upload or drop file here.</p>
+        </div>
+        <p class="text--em--g">
+          only accept image with size &#91;650 x 650&#93;px and .webp type
+        </p>
+      </div>
+
+      <!-- display -->
+      <img src="./assets/img/products/example.webp" alt="" class="create__form__upload-img">
+    </label>
+    
+    <!-- name -->
+    <div class="form__field--g b">
+      <label for="create-name">Name</label>
+      <input
+        id="create-name"
+        type="text"
+        placeholder="productabc"
+        class="form__field__input--g"
+      />
     </div>
-  </div>
+
+    <!-- brand -->
+    <div class="form__field--g b">
+      <label for="create-brand">Brand</label>
+      <select id="create-brand" class="form__field__input--g">
+        <option value="brand1">brand1</option>
+        <option value="brand2">brand2</option>
+        <option value="brand4">brand3</option>
+      </select>
+    </div>
+
+    <!-- chipset -->
+    <div class="form__field--g b">
+      <label for="create-chipset">Chipset</label>
+      <select id="create-chipset" class="form__field__input--g">
+        <option value="chip1">chip1</option>
+        <option value="chip2">chip2</option>
+        <option value="chip3">chip3</option>
+      </select>
+    </div>
+
+    <!-- rom -->
+    <div class="form__field--g b">
+      <label for="create-rom">ROM</label>
+      <input
+        id="create-rom"
+        type="number"
+        value="0"
+        min="0"
+        class="form__field__input--g"
+      />
+    </div>
+
+    <!-- ram -->
+    <div class="form__field--g b">
+      <label for="create-ram">RAM</label>
+      <input
+        id="create-ram"
+        type="number"
+        value="0"
+        min="0"
+        class="form__field__input--g"
+      />
+    </div>
+
+    <!-- battery -->
+    <div class="form__field--g b">
+      <label for="create-battery">Battery capacity</label>
+      <input
+        id="create-battery"
+        type="number"
+        value="0"
+        min="0"
+        class="form__field__input--g"
+      />
+    </div>
+
+    <!-- categories -->
+    <div class="create__form__categories form__field--g b">
+      <p>Categories</p>
+      <ul class="create__form__categories__items">
+        <li>
+          <input id="create-cate1" type="checkbox">
+          <label for="create-cate1">Cate1</label>
+        </li>
+      </ul>
+    </div>
+
+    <!-- price -->
+    <div class="form__field--g b">
+      <label for="create-price">Price</label>
+      <input
+        id="create-price"
+        type="number"
+        value="0"
+        min="0"
+        class="form__field__input--g"
+      />
+    </div>
+
+    <!-- quantity -->
+    <div class="form__field--g b">
+      <label for="create-quant">Quantity</label>
+      <input
+        id="create-quant"
+        type="number"
+        value="0"
+        min="0"
+        class="form__field__input--g"
+      />
+    </div>
+
+    <!-- description -->
+    <div class="form__field--g b">
+      <label for="create-description">Description</label>
+      <textarea id="create-description" placeholder="Lorem ipsum"></textarea>
+    </div>
+    
+    <!-- button -->
+    <div class="form__btns">
+      <button class="btn--g btn--sec--g btn--mw--g">Cancel</button>
+      <button class="btn--g btn--prim--g btn--mw--g">Create</button>
+    </div>
+  </form>
 </div>
 
 <!-- update product form -->
-<div class="backdrop--g hide--g b">
-  <form class="form--g b">
-
+<div class="backdrop--g b">
+  <form class="create__form form--g b">
     <button class="form__close-btn--g btn--none--g b">
       <i class="uil uil-times"></i>
     </button>
 
-    <h2>Update Products</h2>
+    <h2>Update products</h2>
+
+    <!-- img -->
+    <label for="update-img" class="create__form__upload">
+      <input id="update-img" type="file" accept="image/webp" hidden>
+      <div class="create__form__upload-box hide--g">
+        <div class="create__form__upload-box__title-box">
+          <i class="uil uil-upload icon--small--g"></i>
+          <p>click to upload or drop file here.</p>
+        </div>
+        <p class="text--em--g">
+          only accept image with size &#91;650 x 650&#93;px and .webp type
+        </p>
+      </div>
+
+      <!-- display -->
+      <img src="./assets/img/products/example.webp" alt="" class="create__form__upload-img">
+    </label>
     
     <!-- name -->
     <div class="form__field--g b">
@@ -177,7 +352,7 @@
       <input
         id="update-name"
         type="text"
-        placeholder="oldname"
+        placeholder="productabc"
         class="form__field__input--g"
       />
     </div>
@@ -208,7 +383,8 @@
       <input
         id="update-rom"
         type="number"
-        placeholder="oldrom"
+        value="0"
+        min="0"
         class="form__field__input--g"
       />
     </div>
@@ -219,7 +395,8 @@
       <input
         id="update-ram"
         type="number"
-        placeholder="oldram"
+        value="0"
+        min="0"
         class="form__field__input--g"
       />
     </div>
@@ -230,26 +407,19 @@
       <input
         id="update-battery"
         type="number"
-        placeholder="oldbattery"
+        value="0"
+        min="0"
         class="form__field__input--g"
       />
     </div>
 
     <!-- categories -->
-    <div class="form__field--g b">
-      <label>Categories</label>
-      <ul>
+    <div class="create__form__categories form__field--g b">
+      <p>Categories</p>
+      <ul class="create__form__categories__items">
         <li>
-          <input type="checkbox">
-          <label for="">Cate1</label>
-        </li>
-        <li>
-          <input type="checkbox">
-          <label for="">Cate1</label>
-        </li>
-        <li>
-          <input type="checkbox">
-          <label for="">Cate1</label>
+          <input id="update-cate1" type="checkbox">
+          <label for="update-cate1">Cate1</label>
         </li>
       </ul>
     </div>
@@ -260,7 +430,8 @@
       <input
         id="update-price"
         type="number"
-        placeholder="oldprice"
+        value="0"
+        min="0"
         class="form__field__input--g"
       />
     </div>
@@ -271,7 +442,8 @@
       <input
         id="update-quant"
         type="number"
-        placeholder="oldquant"
+        value="0"
+        min="0"
         class="form__field__input--g"
       />
     </div>
@@ -279,12 +451,29 @@
     <!-- description -->
     <div class="form__field--g b">
       <label for="update-description">Description</label>
-      <textarea id="update-description">Old description</textarea>
+      <textarea id="update-description" placeholder="Lorem ipsum"></textarea>
     </div>
-
+    
+    <!-- button -->
     <div class="form__btns">
+      <button class="btn--g btn--del--g btn--mw--g">Discard</button>
       <button class="btn--g btn--prim--g btn--mw--g">Update</button>
-      <button class="btn--g btn--sec--g btn--mw--g">Cancel</button>
     </div>
   </form>
+</div>
+
+<!-- delete product form -->
+<div id="del-backdrop" class="backdrop--g hide--g b">
+  <div class="form--g b">
+    <button class="form__close-btn--g btn--none--g b">
+      <i class="uil uil-times"></i>
+    </button>
+
+    <h2>Confirm remove product with an id &#34;1&#34; &#33;</h2>
+
+    <div class="form__btns">
+      <button class="btn--g btn--del--g btn--mw--g">Delete</button>
+      <button class="btn--g btn--sec--g btn--mw--g">Cancel</button>
+    </div>
+  </div>
 </div>
