@@ -1,6 +1,4 @@
 import { 
-  IMG_ROOT_PATH, 
-  IMG_TYPE, 
   LOCALSTORAGE,
   MSG,
   PAGES
@@ -53,7 +51,7 @@ function renderItems() {
             class="select-js"
           >
           <img 
-            src="${IMG_ROOT_PATH}/${product.img}.${IMG_TYPE}" 
+            src="${product.img}" 
             alt="" 
             class="content__items__item__select__label__img" 
           >

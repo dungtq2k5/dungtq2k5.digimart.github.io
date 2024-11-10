@@ -24,7 +24,7 @@ export function renderItems() {
     htmlDoc += `
       <tr data-product-id="${product.id}">
         <td class="b" data-cell="image">
-          <img src="${IMG_ROOT_PATH}/${product.img}.${IMG_TYPE}" alt=""/>
+          <img src="${product.img}" alt=""/>
         </td>
 
         <td class="b" data-cell="id">${product.id}</td>

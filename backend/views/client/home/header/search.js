@@ -1,9 +1,7 @@
 import {
-  IMG_ROOT_PATH,
   MAX_ITEM_SUGGESTION,
   CLASSNAME,
   LOCALSTORAGE,
-  IMG_TYPE,
 } from "../../../../settings.js";
 import {
   toggleEleInArr,
@@ -131,7 +129,7 @@ function renderSuggestProduct(
       htmlDoc += `
         <li class="header__search-popup__result__item b" data-product-plain-name="${product.name}">
           <img
-            src="${IMG_ROOT_PATH}/${product.img}.${IMG_TYPE}"
+            src="${product.img}"
             alt=""
             class="header__search-popup__result__item__img b"
           />

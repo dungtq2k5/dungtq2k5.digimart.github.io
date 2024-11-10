@@ -1,4 +1,4 @@
-import { IMG_ROOT_PATH, IMG_TYPE, MSG } from "../../../settings.js";
+import { MSG } from "../../../settings.js";
 import { getPackage, getUserOrders } from "../../../controllers/orders.js";
 import { getProductDetail } from "../../../controllers/products/products.js";
 import { userAuthenticated } from "../../../controllers/users.js";
@@ -27,7 +27,7 @@ function renderOrders() {
       packagesDoc += `
         <li class="content__orders__order__items__item" data-order-id="${order.id}" data-product-id="${product.id}">
           <img 
-            src="${IMG_ROOT_PATH}/${product.img}.${IMG_TYPE}"
+            src="${product.img}"
             alt=""
             class="content__orders__order__items__item__img"
           >
@@ -94,7 +94,7 @@ function renderTrackPackagePopup(orderId, productId) {
       <p class="text--cap--g">${product.name}</p>
       <p>Quantity: ${pack.quantity}</p>
       <img 
-        src="${IMG_ROOT_PATH}/${product.img}.${IMG_TYPE}"
+        src="${product.img}"
         alt=""
         class="track__img"
       >

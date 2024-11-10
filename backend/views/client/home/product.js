@@ -7,12 +7,9 @@ import {
   centsToDollars
 } from "../../../controllers/utils.js";
 import { 
-  IMG_ROOT_PATH, 
-  IMG_TYPE, 
   LOCALSTORAGE, 
   MAX_PRODUCT_RENDERED, 
   MSG, 
-  LOCALHOST, 
   PAGES 
 } from "../../../settings.js";
 import { 
@@ -51,21 +48,21 @@ function renderProducts(productsList) {
 
   let htmlDoc = ``;
   if(productsList.length >= 1) {
-    productsList.forEach(item => {
+    productsList.forEach(product => {
       htmlDoc += `
-        <div class="content__products__card b" data-product-id="${item.id}">
+        <div class="content__products__card b" data-product-id="${product.id}">
           <img
-            src="${IMG_ROOT_PATH}/${item.img}.${IMG_TYPE}"
+            src="${product.img}"
             alt=""
             class="b"
           />
 
           <div class="content__products__card__info-box b">
             <p class="content__products__card__info-box__title text--cap--g">
-              ${item.name} - ${item.ram}GB ${item.rom}GB
+              ${product.name} - ${product.ram}GB ${product.rom}GB
             </p>
             <p class="text--blue--bold--g">
-              &dollar;<span>${centsToDollars(item.price)}</span>
+              &dollar;<span>${centsToDollars(product.price)}</span>
             </p>
           </div>
         </div>
@@ -129,7 +126,7 @@ function renderProductDetailPopUp(product) {
           <i class="uil uil-times b"></i>
         </button>
 
-        <img src="${IMG_ROOT_PATH}/${product.img}.webp" alt="" class="product-detail-box__img b">
+        <img src="${product.img}" alt="" class="product-detail-box__img b">
 
         <div class="product-detail-box__info-box">
           <h2 class="text--cap--g b">${product.name} - ${product.ram}GB ${product.rom}GB</h2>
