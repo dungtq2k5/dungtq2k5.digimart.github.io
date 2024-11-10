@@ -1,18 +1,19 @@
 import { getBrandDetail, getBrandsList } from "../../controllers/products/brands.js";
 import { getCategoriesList, getCategoryDetail } from "../../controllers/products/categories.js";
 import { getChipsetDetail, getChipsetsList } from "../../controllers/products/chipsets.js"
-import { deleteProduct, getProductDetail, getProductsList, updateProduct } from "../../controllers/products/products.js";
+import { addProduct, deleteProduct, getProductDetail, getProductsList, updateProduct } from "../../controllers/products/products.js";
 import { hideElements, includesSubArr, showElements } from "../../controllers/utils.js";
-import { IMG_SIZE, IMG_TYPE } from "../../settings.js";
+import { IMG_DEFAULT, IMG_ROOT_PATH, IMG_SIZE, IMG_TYPE } from "../../settings.js";
 
 
 const mainContainer = document.getElementById("main-container-js");
+const createBtn = mainContainer.querySelector(".create-btn-js");
 const itemsContainer = mainContainer.querySelector(".tbody-js");
 
 const backDrop = document.getElementById("backdrop");
 
 export function renderItems() {
-  const productsList = getProductsList(0, 1);
+  const productsList = getProductsList();
   let htmlDoc = ``;
 
   productsList.forEach(product => {
@@ -81,6 +82,12 @@ export function renderItems() {
   console.log("render products data");
 }
 
+export function responsiveCreateBtn() {
+  createBtn.addEventListener("click", () => {
+    renderCreateForm();
+  });
+}
+
 function renderDelForm(productId) {
   backDrop.innerHTML = `
     <div class="form--g b">
@@ -88,7 +95,7 @@ function renderDelForm(productId) {
         <i class="uil uil-times"></i>
       </button>
 
-      <h2>Confirm delete product with an id &#34;${productId}&#34; &#33;</h2>
+      <h2>Confirm delete product id &#34;${productId}&#34; &#33;</h2>
 
       <div class="form__btns">
         <button class="btn--g btn--del--g btn--mw--g submit-btn-js">Delete</button>
@@ -128,7 +135,7 @@ function renderUpdateForm(productId) {
   const catesList = getCategoriesList();
 
   backDrop.innerHTML = `
-    <form class="create__form form--g b">
+    <form class="create__form form--g update-form-js b">
       <button class="form__close-btn--g btn--none--g close-btn-js b">
         <i class="uil uil-times"></i>
       </button>
@@ -266,7 +273,6 @@ function renderUpdateForm(productId) {
   </form>
   `;
 
-  //TODO drap-drop features
   const imgDisplay = backDrop.querySelector(".img-display-js");
   const imgDropArea = backDrop.querySelector(".drop-area-js");
   const inputImg = backDrop.querySelector("#update-img");
@@ -309,23 +315,24 @@ function renderUpdateForm(productId) {
   submitBtn.addEventListener("click", e => {
     e.preventDefault();
 
-    const name = backDrop.querySelector("#update-name").value;
-    const brand = backDrop.querySelector("#update-brand");
+    const form = backDrop.querySelector(".update-form-js");
+    const name = form.querySelector("#update-name").value;
+    const brand = form.querySelector("#update-brand");
     const brandId = brand.options[brand.selectedIndex].value;
 
-    const chipset = backDrop.querySelector("#update-chipset");
+    const chipset = form.querySelector("#update-chipset");
     const chipSetId = chipset.options[chipset.selectedIndex].value;
 
-    const rom = backDrop.querySelector("#update-rom").value;
-    const ram = backDrop.querySelector("#update-ram").value;
-    const batteryCapacity = backDrop.querySelector("#update-battery").value;
+    const rom = form.querySelector("#update-rom").value;
+    const ram = form.querySelector("#update-ram").value;
+    const batteryCapacity = form.querySelector("#update-battery").value;
 
-    const cateInputs = [...backDrop.querySelectorAll(".update-cates-js")].filter(input => input.checked);
+    const cateInputs = [...form.querySelectorAll(".update-cates-js")].filter(input => input.checked);
     const catesId = cateInputs.map(cate => cate.dataset.cateId);
 
-    const price = backDrop.querySelector("#update-price").value;
-    const quantity = backDrop.querySelector("#update-quant").value;
-    const description = backDrop.querySelector("#update-description").value;
+    const price = form.querySelector("#update-price").value;
+    const quantity = form.querySelector("#update-quant").value;
+    const description = form.querySelector("#update-description").value;
         
     const updatedProduct = {
       brandId, 
@@ -342,9 +349,232 @@ function renderUpdateForm(productId) {
     }
 
     updateProduct(productId, updatedProduct);
-    renderItems();
+    form.submit();
+  });
+
+  showElements(backDrop);
+  console.log("render update form");
+}
+
+function renderCreateForm() {
+  const reader = new FileReader();
+  const brandsList = getBrandsList();
+  const chipsetsList = getChipsetsList();
+  const catesList = getCategoriesList();
+
+  backDrop.innerHTML = `
+    <form class="create__form form--g create-form-js b">
+      <button class="form__close-btn--g btn--none--g close-btn-js b">
+        <i class="uil uil-times"></i>
+      </button>
+
+      <h2>Create products</h2>
+
+      <!-- img -->
+      <div class="create__form__upload-img b">
+        <!-- display -->
+        <img src="" alt="no image upload" class="create__form__upload-img__display img-display-js b">
+
+        <!-- upload -->
+        <label for="create-img" class="create__form__upload-img__upload drop-area-js b">
+          <input id="create-img" type="file" accept="image/webp" hidden>
+
+          <div class="create__form__upload-img__upload__info b">
+          <div class="create__form__upload-img__upload__info__title">
+            <i class="uil uil-upload icon--small--g"></i>
+            <p>click to upload or drop file here.</p>
+          </div>
+          <p class="text--em--g">
+            Only support image with size &#91;${IMG_SIZE} x ${IMG_SIZE}&#93;px and .${IMG_TYPE} type
+          </p>
+          </div>
+        </label>
+      </div>
+      
+      <!-- name -->
+      <div class="form__field--g b">
+        <label for="create-name">Name</label>
+        <input
+          id="create-name"
+          type="text"
+          placeholder="productabc"
+          class="form__field__input--g"
+        />
+      </div>
+
+      <!-- brand -->
+      <div class="form__field--g b">
+        <label for="create-brand">Brand</label>
+        <select id="create-brand" class="form__field__input--g">${genSelectOptionsHtml(brandsList)}</select>
+      </div>
+
+      <!-- chipset -->
+      <div class="form__field--g b">
+        <label for="create-chipset">Chipset</label>
+        <select id="create-chipset" class="form__field__input--g">${genSelectOptionsHtml(chipsetsList)}</select>
+      </div>
+
+      <!-- rom -->
+      <div class="form__field--g b">
+        <label for="create-rom">ROM</label>
+        <input
+          id="create-rom"
+          type="number"
+          placeholder="0"
+          min="0"
+          value="0"
+          class="form__field__input--g"
+        />
+      </div>
+
+      <!-- ram -->
+      <div class="form__field--g b">
+        <label for="create-ram">RAM</label>
+        <input
+          id="create-ram"
+          type="number"
+          placeholder="0"
+          min="0"
+          value="0"
+          class="form__field__input--g"
+        />
+      </div>
+
+      <!-- battery -->
+      <div class="form__field--g b">
+        <label for="create-battery">Battery capacity</label>
+        <input
+          id="create-battery"
+          type="number"
+          placeholder="0"
+          min="0"
+          value="0"
+          class="form__field__input--g"
+        />
+      </div>
+
+      <!-- categories -->
+      <div class="create__form__categories form__field--g b">
+        <p>Categories</p>
+        <ul class="create__form__categories__items">${genCatesCheckBoxHtmlList(catesList)}</ul>
+      </div>
+
+      <!-- price -->
+      <div class="form__field--g b">
+        <label for="create-price">Price</label>
+        <input
+          id="create-price"
+          type="number"
+          placeholder="0"
+          min="0"
+          value="0"
+          class="form__field__input--g"
+        />
+      </div>
+
+      <!-- quantity -->
+      <div class="form__field--g b">
+        <label for="create-quant">Quantity</label>
+        <input
+          id="create-quant"
+          type="number"
+          placeholder="0"
+          min="0"
+          value="0"
+          class="form__field__input--g"
+        />
+      </div>
+
+      <!-- description -->
+      <div class="form__field--g b">
+        <label for="create-description">Description</label>
+        <textarea id="create-description" placeholder="Lorem ipsum" class="form__field__input--g"></textarea>
+      </div>
+      
+      <!-- button -->
+      <div class="form__btns">
+        <button class="btn--g btn--del--g btn--mw--g discard-btn-js">Discard</button>
+        <button class="btn--g btn--prim--g btn--mw--g submit-btn-js">Create</button>
+      </div>
+    </form>
+  `;
+
+  const imgDisplay = backDrop.querySelector(".img-display-js");
+  const imgDropArea = backDrop.querySelector(".drop-area-js");
+  const inputImg = backDrop.querySelector("#create-img");
+
+  const closeBtn = backDrop.querySelector(".close-btn-js");
+  const discardBtn = backDrop.querySelector(".discard-btn-js");
+  const submitBtn = backDrop.querySelector(".submit-btn-js");
+
+  const renderUploadImg = () => {
+    let imgLink = URL.createObjectURL(inputImg.files[0]);
+    imgDisplay.setAttribute("src", imgLink);
+    reader.readAsDataURL(inputImg.files[0]);
+  }
+
+  imgDropArea.addEventListener("dragover", e => e.preventDefault());
+
+  imgDropArea.addEventListener("drop", e => {
+    e.preventDefault();
+    inputImg.files = e.dataTransfer.files;
+    renderUploadImg();
+  });
+
+  inputImg.addEventListener("change", () => {
+    renderUploadImg();
+    console.log("upload img");
+  });
+
+  closeBtn.addEventListener("click", e => {
+    e.preventDefault();
     hideElements(backDrop);
     backDrop.innerHTML = "";
+  });
+
+  discardBtn.addEventListener("click", e => {
+    e.preventDefault();
+    hideElements(backDrop);
+    backDrop.innerHTML = "";
+  });
+
+  submitBtn.addEventListener("click", e => {
+    e.preventDefault();
+    const form = backDrop.querySelector(".create-form-js");
+    const name = form.querySelector("#create-name").value;
+    const brand = form.querySelector("#create-brand");
+    const brandId = brand.options[brand.selectedIndex].value;
+
+    const chipset = form.querySelector("#create-chipset");
+    const chipSetId = chipset.options[chipset.selectedIndex].value;
+
+    const rom = form.querySelector("#create-rom").value;
+    const ram = form.querySelector("#create-ram").value;
+    const batteryCapacity = form.querySelector("#create-battery").value;
+
+    const cateInputs = [...form.querySelectorAll(".create-cates-js")].filter(input => input.checked);
+    const catesId = cateInputs.map(cate => cate.dataset.cateId);
+
+    const price = form.querySelector("#create-price").value;
+    const quantity = form.querySelector("#create-quant").value;
+    const description = form.querySelector("#create-description").value;
+    
+    const newProduct = {
+      brandId, 
+      typesId: catesId, 
+      chipSetId, 
+      name, 
+      price, 
+      quantity, 
+      img: inputImg.files[0] ? reader.result : `${IMG_ROOT_PATH}/${IMG_DEFAULT}.${IMG_TYPE}`,
+      rom, 
+      ram, 
+      batteryCapacity, 
+      description,
+    }
+
+    addProduct(newProduct);
+    form.submit();
   });
 
   showElements(backDrop);
@@ -359,7 +589,7 @@ function handleDeleteProduct(productId) {
   console.log("delete item");
 }
 
-function genSelectOptionsHtml(list, currItemId) {
+function genSelectOptionsHtml(list, currItemId=-1) {
   return list.map(item => {
     return `
       <option 
@@ -370,7 +600,7 @@ function genSelectOptionsHtml(list, currItemId) {
   }).join("");
 }
 
-function genCatesCheckBoxHtmlList(catesList=getCategoriesList(), currIdsList) {
+function genCatesCheckBoxHtmlList(catesList=getCategoriesList(), currIdsList=[-1]) {
   return catesList.map(cate => {
     return `
       <li>

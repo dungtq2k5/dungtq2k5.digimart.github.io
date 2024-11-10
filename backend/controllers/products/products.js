@@ -4,7 +4,7 @@ import {
   MAX_PRODUCT_PRICE,
   LOCALSTORAGE,
 } from "../../settings.js";
-import { getFromStorage, includesSubArr, saveToStorage } from "../utils.js";
+import { generateUID, getFromStorage, includesSubArr, isStorageExist, saveToStorage } from "../utils.js";
 import { getBrandDetail } from "./brands.js";
 
 
@@ -14,24 +14,29 @@ function getPlainProductsList(from = 0, to = products.length) {
 }
 
 
-export function getProductsList(from = 0, to = products.length) {
-  //potential bugs
+export function getProductsList(from = 0, to = getProductAmount()) {
   if (from > to) [from, to] = [to, from];
   return (
     getFromStorage(LOCALSTORAGE.productsList) || getPlainProductsList()
   ).slice(from, to);
 }
 
-export function getProductsFilteredList(from = 0, to = products.length) {
-  //potential bugs
+export function getProductsFilteredList(from = 0, to = getProductAmount()) {
   if (from > to) [from, to] = [to, from];
   return (
     getFromStorage(LOCALSTORAGE.productsFilteredList) || getProductsList()
   ).slice(from, to);
 }
 
-export function getProductAmount(productsList=getProductsFilteredList()) {
-  return productsList.length;
+export function getProductAmount() {
+  if(isStorageExist(LOCALSTORAGE.productsFilteredList)) {
+    return getFromStorage(LOCALSTORAGE.productsFilteredList).length;
+  }
+  if(isStorageExist(LOCALSTORAGE.productsList)) {
+    return getFromStorage(LOCALSTORAGE.productsList).length;
+  }
+
+  return getPlainProductsList().length;
 }
 
 export function getProductDetail(id, productsList=getProductsList()) {
@@ -40,6 +45,14 @@ export function getProductDetail(id, productsList=getProductsList()) {
   if (findIndex !== -1) return productsList[findIndex];
   console.error(`Product with an id ${id} not found!`);
   return -1;
+}
+
+export function addProduct(product, productsList=getProductsList()) {
+  product.id = generateUID();
+  productsList.push(product);
+  saveToStorage(LOCALSTORAGE.productsList, productsList);
+
+  return product;
 }
 
 export function deleteProduct(id, productsList=getProductsList()) {

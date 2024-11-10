@@ -1,4 +1,4 @@
-import { CLASSNAME, MAX_PRODUCT_PRICE, MIN_PRODUCT_PRICE } from "../settings.js";
+import { CLASSNAME, IMG_ROOT_PATH, MAX_PRODUCT_PRICE, MIN_PRODUCT_PRICE } from "../settings.js";
 
 export function includesSubArr(parentArr, subArr) {
   /**

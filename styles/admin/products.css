@@ -51,6 +51,11 @@
   }
 }
 
+/* create btn */
+.content__create-btn {
+  margin-bottom: .5em;
+}
+
 /* update - create form */
 .create__form__upload-img {
   display: flex;

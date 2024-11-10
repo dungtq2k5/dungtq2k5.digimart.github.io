@@ -1,31 +1,31 @@
 <!-- USER -->
- <!-- login form -->
+<!-- login form -->
 <div class="backdrop--g hide--g b">
-  <form class="form--g b">
-    <h2>Login</h2>
+<form class="form--g b">
+  <h2>Login</h2>
 
-    <div class="form__field--g b">
-      <label for="login-name">Name</label>
-      <input
-        id="login-name"
-        type="text"
-        placeholder="nikolatesla123"
-        class="form__field__input--g"
-      />
-    </div>
+  <div class="form__field--g b">
+    <label for="login-name">Name</label>
+    <input
+      id="login-name"
+      type="text"
+      placeholder="nikolatesla123"
+      class="form__field__input--g"
+    />
+  </div>
 
-    <div class="form__field--g b">
-      <label for="login-password">Password</label>
-      <input
-        id="login-password"
-        type="password"
-        placeholder="password123"
-        class="form__field__input--g"
-      />
-    </div>
+  <div class="form__field--g b">
+    <label for="login-password">Password</label>
+    <input
+      id="login-password"
+      type="password"
+      placeholder="password123"
+      class="form__field__input--g"
+    />
+  </div>
 
-    <button class="btn--g btn--prim--g btn--mw--g">Login in</button>
-  </form>
+  <button class="btn--g btn--prim--g btn--mw--g">Login in</button>
+</form>
 </div>
 
 <!-- content -->
@@ -176,10 +176,9 @@
 
 
 
-
 <!-- PRODUCTS -->
 <!-- create product form -->
-<div class="backdrop--g hide--g  b">
+<div id="backdrop" class="backdrop--g b">
   <form class="create__form form--g b">
     <button class="form__close-btn--g btn--none--g b">
       <i class="uil uil-times"></i>
@@ -188,21 +187,25 @@
     <h2>Create products</h2>
 
     <!-- img -->
-    <label for="create-img" class="create__form__upload">
-      <input id="create-img" type="file" accept="image/webp" hidden>
-      <div class="create__form__upload-box hide--g">
-        <div class="create__form__upload-box__title-box">
-          <i class="uil uil-upload icon--small--g"></i>
-          <p>click to upload or drop file here.</p>
-        </div>
-        <p class="text--em--g">
-          only accept image with size &#91;650 x 650&#93;px and .webp type
-        </p>
-      </div>
-
+    <div class="create__form__upload-img b">
       <!-- display -->
-      <img src="./assets/img/products/example.webp" alt="" class="create__form__upload-img">
-    </label>
+      <img src="" alt="no image upload" class="create__form__upload-img__display b">
+
+      <!-- upload -->
+      <label for="update-img" class="create__form__upload-img__upload b">
+        <input id="update-img" type="file" accept="image/webp" hidden >
+
+        <div class="create__form__upload-img__upload__info b">
+          <div class="create__form__upload-img__upload__info__title">
+            <i class="uil uil-upload icon--small--g"></i>
+            <p>click to upload or drop file here.</p>
+          </div>
+          <p class="text--em--g">
+            Only support image with size &#91;650 x 650&#93;px and .webp type
+          </p>
+        </div>
+      </label>
+    </div>
     
     <!-- name -->
     <div class="form__field--g b">
@@ -212,6 +215,7 @@
         type="text"
         placeholder="productabc"
         class="form__field__input--g"
+        
       />
     </div>
 
@@ -244,6 +248,7 @@
         value="0"
         min="0"
         class="form__field__input--g"
+        
       />
     </div>
 
@@ -256,6 +261,7 @@
         value="0"
         min="0"
         class="form__field__input--g"
+        
       />
     </div>
 
@@ -268,6 +274,7 @@
         value="0"
         min="0"
         class="form__field__input--g"
+        
       />
     </div>
 
@@ -291,6 +298,7 @@
         value="0"
         min="0"
         class="form__field__input--g"
+        
       />
     </div>
 
@@ -303,6 +311,7 @@
         value="0"
         min="0"
         class="form__field__input--g"
+        
       />
     </div>
 
@@ -314,7 +323,7 @@
     
     <!-- button -->
     <div class="form__btns">
-      <button class="btn--g btn--sec--g btn--mw--g">Cancel</button>
+      <button class="btn--g btn--del--g btn--mw--g">Discard</button>
       <button class="btn--g btn--prim--g btn--mw--g">Create</button>
     </div>
   </form>
@@ -471,7 +480,7 @@
       <i class="uil uil-times"></i>
     </button>
 
-    <h2>Confirm remove product with an id &#34;1&#34; &#33;</h2>
+    <h2>Confirm delete product id &#34;1&#34; &#33;</h2>
 
     <div class="form__btns">
       <button class="btn--g btn--del--g btn--mw--g">Delete</button>
