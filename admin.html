@@ -45,7 +45,7 @@
     </header>
 
     <!-- content -->
-    <main class="content content--g b">
+    <main id="content" class="content content--g b">
       <!-- create btn -->
       <button class="content__create-btn link--g btn--none--g text--cap--g create-btn-js">create new user</button>
 
@@ -59,16 +59,16 @@
             <th class="b">phone</th>
             <th class="b">password</th>
             <th class="b">delivery addresses</th> 
-            <!-- TODO mode user state -->
+            <th class="b">state</th> 
             <th class="b">actions</th>
           </tr>
         </thead>
 
-        <tbody class="b">
-          <tr>
+        <tbody class="items-container-js b">
+          <!-- <tr>
             <td class="b" data-cell="id">123</td>
-            <td class="b" data-cell="name">dungtranquang2005@gmail.com</td>
-            <td class="b" data-cell="phone number">0392018660</td>
+            <td class="b" data-cell="email">dungtranquang2005@gmail.com</td>
+            <td class="b" data-cell="phone">0392018660</td>
             <td class="b" data-cell="password">password123</td>
             <td class="b" data-cell="delivery addresses">
               <ul class="content__body__del_addrs">
@@ -77,13 +77,14 @@
                 <li>abc WallSteer std.</li>
               </ul>
             </td>
+            <td class="b" data-cell="state">normal</td>
             <td class="b" data-cell="actions">
               <div class="btns">
                 <button class="btn--none--g link--g">update</button>
                 <button class="btn--none--g link--g link--red--g">delete</button>
               </div>
             </td>
-          </tr>
+          </tr> -->
           <!-- ... -->
         </tbody>
       </table>
@@ -92,6 +93,6 @@
     <!-- backdrop -->
     <div id="backdrop" class="backdrop--g hide--g b"></div>
 
-    <script type="module" src="./backend/views/admin/users.js"></script>
+    <script type="module" src="./backend/views/admin/main.js"></script>
   </body>
 </html>

@@ -1,7 +1,7 @@
 /* general */
-.content__products-table th, .content__products-table td  {
+/* .content__products-table th, .content__products-table td  {
   text-align: center;
-}
+} */
 .content__products-table img {
   max-width: 100px;
 }
@@ -62,7 +62,7 @@
   max-width: 100px;
 }
 .create__form__upload-img__upload {
-  text-align: center;
+  /* text-align: center; */
   padding: .5em 1em;
   border: 1px dashed var(--grey);
   background: var(--white);

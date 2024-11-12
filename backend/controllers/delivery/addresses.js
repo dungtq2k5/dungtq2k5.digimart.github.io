@@ -20,8 +20,23 @@ export function addDelAddr(userId, address) {
   console.log("Added delivery address");
 }
 
+export function updateDelAddr(id, {address}) {
+  const delAddrList = getDelAddrList();
+  const findIndex = delAddrList.findIndex(addr => addr.id === id);
+
+  if(findIndex !== -1) {
+    if(address) delAddrList[findIndex].address = address;
+
+    saveToStorage(LOCALSTORAGE.deliveryAddressList, delAddrList);
+    return true;
+  }
+
+  console.error(`Del addr id ${id} not found!`);
+  return false;
+}
+
 export function getUserDelAddrList(userId) {
-  const delAddrList = getDelAddrList().filter(item => item.userId === userId);
+  const delAddrList = getDelAddrList().filter(addr => addr.userId === userId);
 
   return delAddrList
     ? delAddrList
@@ -29,9 +44,9 @@ export function getUserDelAddrList(userId) {
 }
 
 export function getDeliveryAddress(id) {
-  const delAddr = getDelAddrList().find(item => item.id === id);
+  const delAddr = getDelAddrList().find(addr => addr.id === id);
   if(delAddr) return delAddr;
 
   console.error(`Delivery address with an id ${id} not found!`);
-  return undefined;
+  return null;
 }

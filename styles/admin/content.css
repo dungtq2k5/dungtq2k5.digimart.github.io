@@ -29,7 +29,8 @@ th {
 
 th, td {
   padding: .5em;
-  text-align: left;
+  /* text-align: left; */
+  text-align: center;
   border: 1px solid var(--lightgrey);
 }
 
@@ -48,6 +49,7 @@ tr:nth-of-type(2n) {
 
   th, td {
     border: none;
+    text-align: left;
   }
 
 

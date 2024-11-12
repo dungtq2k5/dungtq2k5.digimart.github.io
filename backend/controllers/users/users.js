@@ -51,13 +51,31 @@ export function addUser({ email, phone, password, deliveryAddress }) {
   return true;
 }
 
-export function updateUser(id, {deliveryAddressId, stateId}) {
+export function getUser(id) {
+  const user = getUsersList().find(user => user.id === id);
+  return user;
+}
+
+export function updateUser(
+  id, 
+  {
+    email,
+    phone,
+    password,
+    deliveryAddressId,
+    stateId
+  }
+) {
   const usersList = getUsersList();
   const findIndex = usersList.findIndex(user => user.id === id);
 
   if(findIndex !== -1) {
+    if(email) usersList[findIndex].email = email;
+    if(phone) usersList[findIndex].phone = phone;
+    if(password) usersList[findIndex].password = hashPassword(password);
     if(deliveryAddressId) usersList[findIndex].deliveryAddressId = deliveryAddressId;
     if(stateId) usersList[findIndex].stateId = stateId;
+    
     saveToStorage(LOCALSTORAGE.usersList, usersList);
     
     return true;
@@ -67,9 +85,19 @@ export function updateUser(id, {deliveryAddressId, stateId}) {
   return false;
 }
 
-export function getUser(id) {
-  const user = getUsersList().find(user => user.id === id);
-  return user;
+export function deleteUser(id) {
+  const usersList = getUsersList();
+  const findIndex = usersList.findIndex(user => user.id === id);
+
+  if(findIndex !== -1) {
+    usersList.splice(findIndex, 1);
+    saveToStorage(LOCALSTORAGE.usersList, usersList);
+    console.log(`Delete user ${id}`);
+    return true;
+  }
+
+  console.error(`User with an id ${id} not found!`);
+  return false;
 }
 
 export function checkEmailExist(email) {

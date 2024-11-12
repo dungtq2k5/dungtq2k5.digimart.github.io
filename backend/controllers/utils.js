@@ -1,4 +1,4 @@
-import { CLASSNAME, IMG_ROOT_PATH, MAX_PRODUCT_PRICE, MIN_PRODUCT_PRICE } from "../settings.js";
+import { CLASSNAME, MAX_PRODUCT_PRICE, MIN_PRODUCT_PRICE } from "../settings.js";
 
 export function includesSubArr(parentArr, subArr) {
   /**
@@ -165,4 +165,27 @@ export function calculatePercentage(amount, minRange=MIN_PRODUCT_PRICE, maxRange
 
   // Ensure the percentage is within the 0-100 range
   return Math.max(0, Math.min(100, percentage));
+}
+
+export function togglePasswordVisibility(inputId) {
+  const input = document.getElementById(`${inputId}`);
+
+  if(input) {
+    input.type = input.type === "password" 
+      ? "text"
+      : "password"
+  } else {
+    console.error("Can find input element!");
+  }
+}
+
+export function genSelectOptionsHtml(list, currItemId) {
+  return list.map(item => {
+    return `
+      <option 
+        value="${item.id}" 
+        ${currItemId === item.id ? "selected" : ""}
+      >${item.name}</option>
+    `;
+  }).join("");
 }

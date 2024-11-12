@@ -101,40 +101,83 @@
 </div>
 
 <!-- update user form-->
-<div class="backdrop--g hide--g b">
-  <form class="form--g b">
-
+<div id="backdrop" class="backdrop--g b">
+  <form class="create__form form--g b">
     <button class="form__close-btn--g btn--none--g b">
       <i class="uil uil-times"></i>
     </button>
 
     <h2>Update User</h2>
-
+    
+    <!-- email -->
     <div class="form__field--g b">
       <label for="update-email">Email</label>
       <input
         id="update-email"
         type="email"
         placeholder="nikolatesla123"
+        value=""
         class="form__field__input--g"
       />
     </div>
-
+    
+    <!-- phone -->
     <div class="form__field--g b">
       <label for="update-phone">Phone</label>
       <input
         id="update-phone"
         type="tel"
         placeholder="+123456789"
+        value=""
         class="form__field__input--g"
       />
     </div>
 
-    <!-- TODO state -->
+    <!-- password -->
+    <!-- TODO hide/unhide pass JS -->
+    <div class="form__field--g b">
+      <label for="update-pass">Password</label>
+      <input
+        id="update-pass"
+        type="password"
+        placeholder="password123"
+        value=""
+        class="form__field__input--g"
+      />
+    </div>
+
+    <!-- del addrs -->
+    <div class="create__form__addrs form__field--g b">
+      <p>Delivery address</p>
+      <ul class="create__form__addrs__inputs b">
+        <li class="create__form__addrs__inputs__input">
+          <label for="update-addr1">address 1</label>
+          <input
+            id="update-addr1"
+            type="text"
+            placeholder="Wall Street 123 std."
+            value=""
+            class="create__form__addrs__inputs__input__field"
+          />
+        </li>
+        <!-- ... -->
+      </ul>
+    </div>
+
+    <!-- state -->
+    <div class="b">
+      <label for="update-state">State</label>
+      <select id="update-state">
+        <option value="1">1</option>
+        <option value="1">1</option>
+        <option value="1">1</option>
+        <option value="1">1</option>
+      </select>
+    </div>
 
     <div class="form__btns">
+      <button class="btn--g btn--del--g btn--mw--g">Discard</button>
       <button class="btn--g btn--prim--g btn--mw--g">Update</button>
-      <button class="btn--g btn--sec--g btn--mw--g">Cancel</button>
     </div>
   </form>
 </div>

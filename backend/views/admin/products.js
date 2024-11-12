@@ -2,18 +2,18 @@ import { getBrandDetail, getBrandsList } from "../../controllers/products/brands
 import { getCategoriesList, getCategoryDetail } from "../../controllers/products/categories.js";
 import { getChipsetDetail, getChipsetsList } from "../../controllers/products/chipsets.js"
 import { addProduct, deleteProduct, getProductDetail, getProductsList, updateProduct } from "../../controllers/products/products.js";
-import { hideElements, includesSubArr, showElements } from "../../controllers/utils.js";
+import { hideElements, includesSubArr, showElements, genSelectOptionsHtml } from "../../controllers/utils.js";
 import { IMG_DEFAULT, IMG_ROOT_PATH, IMG_SIZE, IMG_TYPE } from "../../settings.js";
 
 
-const mainContainer = document.getElementById("main-container-js");
+const mainContainer = document.getElementById("container");
 const createBtn = mainContainer.querySelector(".create-btn-js");
 const itemsContainer = mainContainer.querySelector(".tbody-js");
 
 const backDrop = document.getElementById("backdrop");
 
 export function renderItems() {
-  const productsList = getProductsList();
+  const productsList = getProductsList(); //TODO handle when product list empty
   let htmlDoc = ``;
 
   productsList.forEach(product => {
@@ -99,24 +99,19 @@ function renderDelForm(productId) {
 
       <div class="form__btns">
         <button class="btn--g btn--del--g btn--mw--g submit-btn-js">Delete</button>
-        <button class="btn--g btn--sec--g btn--mw--g cancel-btn-js">Cancel</button>
+        <button class="btn--g btn--sec--g btn--mw--g close-btn-js">Cancel</button>
       </div>
     </div>
   `;
 
-  const closeBtn = backDrop.querySelector(".close-btn-js");
+  const closeBtns = backDrop.querySelectorAll(".close-btn-js");
   const submitBtn = backDrop.querySelector(".submit-btn-js");
-  const cancelBtn = backDrop.querySelector(".cancel-btn-js");
 
-  closeBtn.addEventListener("click", () => {
-    hideElements(backDrop);
-    backDrop.innerHTML = "";
-  });
-
-  cancelBtn.addEventListener("click", () => {
-    hideElements(backDrop);
-    backDrop.innerHTML = "";
-    console.log("cancel delete item");
+  closeBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      hideElements(backDrop);
+      backDrop.innerHTML = "";
+    });
   });
 
   submitBtn.addEventListener("click", () => {
@@ -173,6 +168,7 @@ function renderUpdateForm(productId) {
           placeholder="productabc"
           value="${product.name}"
           class="form__field__input--g"
+          required
         />
       </div>
 
@@ -198,6 +194,7 @@ function renderUpdateForm(productId) {
           value="${product.rom}"
           min="0"
           class="form__field__input--g"
+          required
         />
       </div>
 
@@ -211,6 +208,7 @@ function renderUpdateForm(productId) {
           value="${product.ram}"
           min="0"
           class="form__field__input--g"
+          required
         />
       </div>
 
@@ -224,6 +222,7 @@ function renderUpdateForm(productId) {
           value="${product.batteryCapacity}"
           min="0"
           class="form__field__input--g"
+          required
         />
       </div>
 
@@ -243,6 +242,7 @@ function renderUpdateForm(productId) {
           value="${product.price}"
           min="0"
           class="form__field__input--g"
+          required
         />
       </div>
 
@@ -256,6 +256,7 @@ function renderUpdateForm(productId) {
           value="${product.quantity}"
           min="0"
           class="form__field__input--g"
+          required
         />
       </div>
 
@@ -314,7 +315,6 @@ function renderUpdateForm(productId) {
 
   submitBtn.addEventListener("click", e => {
     e.preventDefault();
-
     const form = backDrop.querySelector(".update-form-js");
     const name = form.querySelector("#update-name").value;
     const brand = form.querySelector("#update-brand");
@@ -587,17 +587,6 @@ function handleDeleteProduct(productId) {
   hideElements(backDrop);
   backDrop.innerHTML = "";
   console.log("delete item");
-}
-
-function genSelectOptionsHtml(list, currItemId=-1) {
-  return list.map(item => {
-    return `
-      <option 
-        value="${item.id}" 
-        ${currItemId === item.id ? "selected" : ""}
-      >${item.name}</option>
-    `;
-  }).join("");
 }
 
 function genCatesCheckBoxHtmlList(catesList=getCategoriesList(), currIdsList=[-1]) {

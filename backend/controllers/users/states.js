@@ -1,6 +1,6 @@
 import states from "../../../assets/models/users/states.js";
 
-function getStatesList() {
+export function getStatesList() {
   return states;
 }
 

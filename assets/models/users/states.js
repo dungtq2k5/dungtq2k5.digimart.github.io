@@ -9,7 +9,7 @@ const states = [
   },
   {
     "id": "3",
-    "name": "lock"
+    "name": "restrict"
   }
 ];
 
