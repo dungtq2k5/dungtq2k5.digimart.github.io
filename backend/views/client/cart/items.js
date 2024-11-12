@@ -9,7 +9,7 @@ import {
   removeCart, 
   updateCart 
 } from "../../../controllers/carts.js";
-import { userAuthenticated } from "../../../controllers/users.js";
+import { userAuthenticated } from "../../../controllers/users/users.js";
 import { getProductDetail } from "../../../controllers/products/products.js";
 import { 
   getFromStorage, 

@@ -6,7 +6,7 @@ import {
 import {
   userAuthenticated,
   loginUser,
-} from "../../../../../controllers/users.js";
+} from "../../../../../controllers/users/users.js";
 import { showRegisterForm } from "./register.js";
 
 

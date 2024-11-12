@@ -8,7 +8,7 @@ import {
   getUser, 
   updateUser, 
   userAuthenticated 
-} from "../../../controllers/users.js";
+} from "../../../controllers/users/users.js";
 import { 
   hideElements, 
   isValidDeliveryAddress, 

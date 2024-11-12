@@ -1,4 +1,4 @@
-import { userAuthenticated } from "../../../controllers/users.js";
+import { userAuthenticated } from "../../../controllers/users/users.js";
 import { default as logo } from "./header/logo.js";
 import { default as search } from "./header/search.js";
 import { default as cartIcon } from "./header/cart-icon.js";

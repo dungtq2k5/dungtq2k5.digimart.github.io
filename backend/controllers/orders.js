@@ -2,7 +2,7 @@ import orders from "../../assets/models/orders.js";
 import { LOCALSTORAGE } from "../settings.js";
 import { getFromStorage, saveToStorage, generateUID } from "./utils.js";
 import { getDefaultDeliveryStateId } from "./delivery/states.js";
-import { checkUserExist } from "./users.js";
+import { checkUserExist } from "./users/users.js";
 
 
 export function getOrdersList() {

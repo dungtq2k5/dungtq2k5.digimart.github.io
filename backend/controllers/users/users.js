@@ -1,12 +1,13 @@
-import users from "../../assets/models/users.js";
-import { LOCALSTORAGE } from "../settings.js";
-import { addDelAddr, getUserDelAddrList } from "./delivery/addresses.js";
+import users from "../../../assets/models/users/users.js";
+import { getDefaultStateId } from "./states.js";
+import { LOCALSTORAGE } from "../../settings.js";
+import { addDelAddr, getUserDelAddrList } from "../delivery/addresses.js";
 import {
   generateUID,
   getFromStorage,
   hashPassword,
   saveToStorage,
-} from "./utils.js";
+} from "../utils.js";
 
 
 export function getUsersList() {
@@ -42,6 +43,7 @@ export function addUser({ email, phone, password, deliveryAddress }) {
     phone,
     password: hashPassword(password),
     deliveryAddressId,
+    stateId: getDefaultStateId()
   });
   console.log(usersList);
   saveToStorage(LOCALSTORAGE.usersList, usersList);
@@ -49,12 +51,13 @@ export function addUser({ email, phone, password, deliveryAddress }) {
   return true;
 }
 
-export function updateUser(id, {deliveryAddressId}) {
+export function updateUser(id, {deliveryAddressId, stateId}) {
   const usersList = getUsersList();
   const findIndex = usersList.findIndex(user => user.id === id);
 
   if(findIndex !== -1) {
     if(deliveryAddressId) usersList[findIndex].deliveryAddressId = deliveryAddressId;
+    if(stateId) usersList[findIndex].stateId = stateId;
     saveToStorage(LOCALSTORAGE.usersList, usersList);
     
     return true;

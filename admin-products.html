@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+    />
+
+    <link rel="stylesheet" href="styles/general.css" />
+    <link rel="stylesheet" href="styles/admin/header.css" />
+    <link rel="stylesheet" href="styles/admin/content.css" />
+    <link rel="stylesheet" href="styles/admin/products.css">
+    <title>Document</title>
+  </head>
+  <body>
+
+    <header class="header header--g b">
+      <div class="header__logo">
+        <a href="admin.html" class="b" title="home">Admin page</a>
+      </div>
+
+      <nav class="header__nav b">
+        <ul class="header__nav__list">
+          <li>
+            <button class="btn--none--g text--cap--g">users</button>
+          </li>
+          <li>
+            <button class="btn--none--g text--cap--g">products</button>
+          </li>
+          <li>
+            <button class="btn--none--g text--cap--g">orders</button>
+          </li>
+          <li>
+            <button class="btn--none--g text--cap--g">analysis</button>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="header__auth b">
+        <p>Admin: <span>dungtran</span></p>
+        <button class="link--g btn--none--g">logout</button>
+      </div>
+    </header>
+
+    <!-- display -->
+    <main id="main-container-js" class="content content--g b">
+      <!-- create btn -->
+      <button class="content__create-btn link--g btn--none--g text--cap--g create-btn-js">create new product</button>
+      
+      <!-- data -->
+      <table class="content__products-table b">
+        <caption class="b">
+          <h1>Products managment</h1>
+        </caption>
+
+        <thead class="b">
+          <tr>
+            <th class="b">img</th>
+            <th class="b">id</th>
+            <th class="b">name</th>
+            <th class="b">brand</th>
+            <th class="b">chipset</th>
+            <th class="b">ROM(GB) - RAM(GB)</th>
+            <th class="b">battery capacity(mah)</th>
+            <th class="b">categories</th>
+            <th class="b">price (cents)</th>
+            <th class="b">quantity</th>
+            <th class="b">description</th>
+            <th class="b">actions</th>
+          </tr>
+        </thead>
+
+        <tbody class="tbody-js b">
+          <tr>
+            <td class="b" data-cell="image">
+              <img src="./assets/img/products/example.webp" alt="" />
+            </td>
+
+            <td class="b" data-cell="id">123</td>
+
+            <td class="text--cap--g b" data-cell="name">
+              <span>iphone 15 promax</span>
+            </td>
+
+            <td class="text--cap--g b" data-cell="brand">
+              <span>apple</span>
+            </td>
+
+            <td class="text--cap--g b" data-cell="chipset">
+              <span>apple bionic 13</span>
+            </td>
+
+            <td class="b" data-cell="rom - ram">
+              <span>128 - 16</span>
+            </td>
+
+            <td class="b" data-cell="battery capacity">
+              <span>4800</span>
+            </td>
+
+            <td class="text--cap--g b" data-cell="categories">
+              <span>flagship, fashion</span>
+            </td>
+
+            <td class="b" data-cell="price">
+              <span>129900</span>
+            </td>
+
+            <td class="b" data-cell="quantity">
+              <span>100</span>
+            </td>
+
+            <td class="b" data-cell="description">
+              <div class="content__products-table__description-box">
+                <p>Lorem ipsum.</p>
+              </div>
+            </td>
+
+            <td class="b" data-cell="actions">
+              <div>
+                <button class="btn--none--g link--g">update</button>
+                <button class="btn--none--g link--g link--red--g">delete</button>
+              </div>
+            </td>
+          </tr>
+          <!-- ... -->
+        </tbody>
+      </table>
+    </main>
+
+    <!-- backdrop -->
+    <div id="backdrop" class="backdrop--g hide--g b"></div>
+
+    <script type="module" src="./backend/views/admin/main.js"></script>
+  </body>
+</html>

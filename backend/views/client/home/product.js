@@ -17,7 +17,7 @@ import {
   getProductAmount,
   getProductsFilteredList,
 } from "../../../controllers/products/products.js";
-import { userAuthenticated } from "../../../controllers/users.js";
+import { userAuthenticated } from "../../../controllers/users/users.js";
 import { addToCart } from "../../../controllers/carts.js";
 import { showLoginForm } from "./header/auth/login.js";
 import { renderCartNotifi } from "./header/cart-icon.js";

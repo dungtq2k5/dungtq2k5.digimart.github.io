@@ -1,7 +1,7 @@
 import {
   userAuthenticated,
   logoutUser,
-} from "../../../../../controllers/users.js";
+} from "../../../../../controllers/users/users.js";
 import { hideElements, showElements } from "../../../../../controllers/utils.js";
 
 

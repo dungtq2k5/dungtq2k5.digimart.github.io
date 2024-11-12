@@ -18,7 +18,7 @@ if (getUserCart(user.id).length >= 1) {
 }
 */
 
-import { userAuthenticated } from "../../../controllers/users.js";
+import { userAuthenticated } from "../../../controllers/users/users.js";
 import { PAGES } from "../../../settings.js";
 import { getUserCart } from "../../../controllers/carts.js";
 import { renderItems, responsiveSelectAllItem, renderEmptyCart } from "./items.js";

@@ -12,7 +12,7 @@ import {
   checkPhoneExist,
   userAuthenticated,
   loginUser,
-} from "../../../../../controllers/users.js";
+} from "../../../../../controllers/users/users.js";
 import { showLoginForm } from "./login.js";
 
 

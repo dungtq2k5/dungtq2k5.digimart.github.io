@@ -1,7 +1,7 @@
 import { MSG } from "../../../settings.js";
 import { getPackage, getUserOrders } from "../../../controllers/orders.js";
 import { getProductDetail } from "../../../controllers/products/products.js";
-import { userAuthenticated } from "../../../controllers/users.js";
+import { userAuthenticated } from "../../../controllers/users/users.js";
 import { dateFormatted, hideElements, showElements } from "../../../controllers/utils.js";
 import { getDeliveryState } from "../../../controllers/delivery/states.js";
 

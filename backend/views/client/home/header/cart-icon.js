@@ -1,7 +1,7 @@
 import { 
   PAGES
 } from "../../../../settings.js";
-import { userAuthenticated } from "../../../../controllers/users.js";
+import { userAuthenticated } from "../../../../controllers/users/users.js";
 import { getUserCart } from "../../../../controllers/carts.js";
 import { hideElements, showElements } from "../../../../controllers/utils.js";
 import { showLoginForm } from "./auth/login.js";

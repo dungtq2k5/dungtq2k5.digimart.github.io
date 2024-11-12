@@ -5,6 +5,7 @@ const users = [
   //   "phone": "9528025822",
   //   "password": "zD7$v0u9M",
   //   "deliveryAddressId": "1",
+  //   "stateId": "1",
   // }
 ];
 
