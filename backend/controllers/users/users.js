@@ -18,7 +18,15 @@ export function checkUserExist(id) {
   return getUser(id) !== undefined;
 }
 
-export function addUser({ email, phone, password, deliveryAddress }) {
+export function addUser(
+  { 
+    email, 
+    phone, 
+    password, 
+    deliveryAddress, 
+    stateId=getDefaultStateId() 
+  }
+) {
   const existingUser = getUsersList().find(
     (user) => user.email === email || user.phone === phone
   );
@@ -43,7 +51,7 @@ export function addUser({ email, phone, password, deliveryAddress }) {
     phone,
     password: hashPassword(password),
     deliveryAddressId,
-    stateId: getDefaultStateId()
+    stateId,
   });
   console.log(usersList);
   saveToStorage(LOCALSTORAGE.usersList, usersList);

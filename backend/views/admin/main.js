@@ -3,6 +3,7 @@
 // renderItems();
 // responsiveCreateBtn();
 
-import { renderItems } from "./users.js";
+import { renderItems, reponsiveCreateBtn } from "./users.js";
 
+reponsiveCreateBtn();
 renderItems();

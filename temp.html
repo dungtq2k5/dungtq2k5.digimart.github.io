@@ -30,24 +30,13 @@
 
 <!-- USER -->
 <!-- create user form -->
-<div class="backdrop--g hide--g b">
-  <div class="form--g b">
+<div id="backdrop" class="backdrop--g b">
+  <form class="form--g b">
     <button class="form__close-btn--g btn--none--g b">
       <i class="uil uil-times"></i>
     </button>
 
     <h2>Create new user</h2>
-    
-    <!-- name -->
-    <div class="form__field--g b">
-      <label for="create-name">Name</label>
-      <input
-        id="create-name"
-        type="text"
-        placeholder="nikolatesla123"
-        class="form__field__input--g"
-      />
-    </div>
 
     <!-- email -->
     <div class="form__field--g b">
@@ -55,8 +44,9 @@
       <input
         id="create-email"
         type="email"
-        placeholder="nikolatesla123"
+        placeholder="nikolatesla@gmail.com"
         class="form__field__input--g"
+        required
       />
     </div>
 
@@ -66,8 +56,9 @@
       <input
         id="create-pass"
         type="password"
-        placeholder="nikolatesla123"
+        placeholder="password123"
         class="form__field__input--g"
+        required
       />
     </div>
 
@@ -77,8 +68,9 @@
       <input
         id="create-phone"
         type="tel"
-        placeholder="nikolatesla123"
+        placeholder="+123456789"
         class="form__field__input--g"
+        required
       />
     </div>
 
@@ -88,17 +80,32 @@
       <input
         id="create-addr"
         type="text"
-        placeholder="nikolatesla123"
+        placeholder="123 Wall Street std."
         class="form__field__input--g"
+        required
       />
     </div>
 
-    <!-- TODO state -->
+    <!-- state -->
+    <div class="b">
+      <label for="create-state">State</label>
+      <select id="create-state">
+        <option value="1">1</option>
+        <option value="1">1</option>
+        <option value="1">1</option>
+        <option value="1">1</option>
+      </select>
+    </div>
       
 
-    <button class="btn--g btn--prim--g btn--mw--g">Add</button>
-  </div>
+     <!-- button -->
+    <div class="form__btns">
+      <button class="btn--g btn--del--g btn--mw--g">Discard</button>
+      <button class="btn--g btn--prim--g btn--mw--g">Create</button>
+    </div>
+  </form>
 </div>
+
 
 <!-- update user form-->
 <div id="backdrop" class="backdrop--g b">

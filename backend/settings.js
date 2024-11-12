@@ -54,3 +54,11 @@ export const PAGES = {
   cart: "cart.html",
   orders: "orders.html"
 }
+
+export const PLACEHOLDERS = {
+  name: "nikolatesla123",
+  email: "nikola.tesla@gmail.com",
+  password: "password123",
+  phone: "0123456789",
+  address: "123 Wall Street, Los",
+}

@@ -1,12 +1,14 @@
 import { getUserDelAddrList, updateDelAddr } from "../../controllers/delivery/addresses.js";
-import { getStateDetail, getStatesList } from "../../controllers/users/states.js";
-import { deleteUser, getUser, getUsersList, updateUser } from "../../controllers/users/users.js";
+import { getDefaultStateId, getStateDetail, getStatesList } from "../../controllers/users/states.js";
+import { addUser, deleteUser, getUser, getUsersList, updateUser } from "../../controllers/users/users.js";
 import { hideElements, showElements, genSelectOptionsHtml } from "../../controllers/utils.js";
+import { PLACEHOLDERS } from "../../settings.js";
 
 const mainContainer = document.getElementById("content");
+const backDrop = document.getElementById("backdrop");
+
 const createBtn = mainContainer.querySelector(".create-btn-js");
 const itemsContainer = mainContainer.querySelector(".items-container-js");
-const backDrop = document.getElementById("backdrop");
 
 export function renderItems() {
   const usersList = getUsersList(); //TODO handle when user list empty
@@ -57,6 +59,121 @@ export function renderItems() {
   });
 
   console.log("render users");
+}
+
+export function reponsiveCreateBtn() {
+  createBtn.addEventListener("click", () => {
+    renderCreateForm();
+  });
+}
+
+function renderCreateForm() {
+  backDrop.innerHTML = `
+    <form class="form--g create-form-js b">
+      <button class="form__close-btn--g btn--none--g close-btn-js b">
+        <i class="uil uil-times"></i>
+      </button>
+
+      <h2>Create new user</h2>
+
+      <!-- email -->
+      <div class="form__field--g b">
+        <label for="create-email">Email</label>
+        <input
+          id="create-email"
+          type="email"
+          placeholder="${PLACEHOLDERS.email}"
+          class="form__field__input--g"
+          required
+        />
+      </div>
+
+      <!-- pass -->
+      <div class="form__field--g b">
+        <label for="create-pass">Password</label>
+        <input
+          id="create-pass"
+          type="password"
+          placeholder="${PLACEHOLDERS.password}"
+          class="form__field__input--g"
+          required
+        />
+      </div>
+
+      <!-- phone -->
+      <div class="form__field--g b">
+        <label for="create-phone">Phone number</label>
+        <input
+          id="create-phone"
+          type="tel"
+          placeholder="${PLACEHOLDERS.phone}"
+          class="form__field__input--g"
+          required
+        />
+      </div>
+
+      <!-- address -->
+      <div class="form__field--g b">
+        <label for="create-addr">Delivery address</label>
+        <input
+          id="create-addr"
+          type="text"
+          placeholder="${PLACEHOLDERS.address}"
+          class="form__field__input--g"
+          required
+        />
+      </div>
+
+      <!-- state -->
+      <div class="b">
+        <label for="create-state">State</label>
+        <select id="create-state">${genSelectOptionsHtml(getStatesList(), getDefaultStateId())}</select>
+      </div>
+        
+
+      <!-- button -->
+      <div class="form__btns">
+        <button class="btn--g btn--del--g btn--mw--g close-btn-js">Discard</button>
+        <button class="btn--g btn--prim--g btn--mw--g create-btn-js">Create</button>
+      </div>
+    </form>
+  `;
+
+  const closeBtns = backDrop.querySelectorAll(".close-btn-js");
+  const submitBtn = backDrop.querySelector(".create-btn-js");
+
+  closeBtns.forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.preventDefault();
+      hideElements(backDrop);
+      backDrop.innerHTML = "";
+    });
+  });
+
+  submitBtn.addEventListener("click", e => {
+    e.preventDefault();
+    const form = backDrop.querySelector(".create-form-js");
+    const email = form.querySelector("#create-email").value;
+    const phone = form.querySelector("#create-phone").value;
+    const password = form.querySelector("#create-pass").value;
+    const deliveryAddress = form.querySelector("#create-addr").value;
+
+    const stateSelect = form.querySelector("#create-state");
+    const stateId = stateSelect.options[stateSelect.selectedIndex].value;
+
+    const newUser = {
+      email,
+      phone,
+      password,
+      deliveryAddress,
+      stateId
+    }
+
+    addUser(newUser);
+    form.submit(); //TODO validate fields before submitting
+  });
+  
+  showElements(backDrop);
 }
 
 function genUserDelAddrsHtmlList(userId) {
@@ -123,7 +240,7 @@ function renderUpdateForm(userId) {
         <input
           id="update-email"
           type="email"
-          placeholder="nikolatesla123"
+          placeholder="${PLACEHOLDERS.email}"
           value="${user.email}"
           class="form__field__input--g"
           required
@@ -136,7 +253,7 @@ function renderUpdateForm(userId) {
         <input
           id="update-phone"
           type="tel"
-          placeholder="+123456789"
+          placeholder="${PLACEHOLDERS.phone}"
           value="${user.phone}"
           class="form__field__input--g"
           required
@@ -149,7 +266,7 @@ function renderUpdateForm(userId) {
         <input
           id="update-pass"
           type="password"
-          placeholder="password123"
+          placeholder="${PLACEHOLDERS.password}"
           value="${user.password}"
           class="form__field__input--g"
           required
@@ -200,8 +317,8 @@ function renderUpdateForm(userId) {
       updateDelAddr(addrId, {address});
     });
 
-    const state = form.querySelector("#update-state");
-    const stateId = state.options[state.selectedIndex].value;
+    const stateSelect = form.querySelector("#update-state");
+    const stateId = stateSelect.options[stateSelect.selectedIndex].value;
 
     const updatedUser = {
       email,
@@ -229,7 +346,7 @@ function genUserDelAddrHtmlInputsList(userId) {
         <input
           id="update-addr-${addr.id}"
           type="text"
-          placeholder="Wall Street 123 std."
+          placeholder="${PLACEHOLDERS.address}"
           value="${addr.address}"
           class="create__form__addrs__inputs__input__field update-addr-input-js"
           data-address-id=${addr.id}
