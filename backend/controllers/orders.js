@@ -75,3 +75,11 @@ export function getPackage(orderId, productId) {
     console.error(`Order with an id ${orderId} not found!`);
   }
 }
+
+export function sortOrdersListByDate() {
+  return getOrdersList().sort((a, b) => new Date(a.placed) - new Date(b.placed));
+}
+
+export function getEarliestOrderDate() {
+  return new Date(sortOrdersListByDate()[0].placed);
+}

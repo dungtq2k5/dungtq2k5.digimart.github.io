@@ -165,19 +165,20 @@ export function isStorageExist(storage) {
   return getFromStorage(storage) ? true : false;
 }
 
-export function dateFormatted(datetime) {
-  const dateTimeFormatted = new Date(datetime);
-
+export function dateFormatted(time) {
+  /**
+   * return month name and day number
+   */
   const monthsName = [
     "January", "February", "March",
     "April", "May", "June",
     "July", "August", "September",
     "October", "November", "December"
   ];
+
+  if(!(time instanceof Date)) time = new Date(time);
   
-  const date = `${monthsName[dateTimeFormatted.getMonth()]} ${dateTimeFormatted.getDate()}`; //month date
-  
-  return date;
+  return `${monthsName[time.getMonth()]} ${time.getDate()}`; //month date
 }
 
 export function centsToDollars(cents, decimalPlaces=2) {

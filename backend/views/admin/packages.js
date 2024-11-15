@@ -1,12 +1,27 @@
 import { getDeliveryAddress } from "../../controllers/delivery/addresses.js";
 import { getDeliveryState, getDeliveryStatesList } from "../../controllers/delivery/states.js";
-import { getOrderDetail, getOrdersList, updateOrder } from "../../controllers/orders.js";
-import { dateFormatted, genSelectOptionsHtml, hideElements, showElements } from "../../controllers/utils.js";
+import { getEarliestOrderDate, getOrderDetail, getOrdersList, updateOrder } from "../../controllers/orders.js";
+import { dateFormatted, genSelectOptionsHtml, hideElements, showElements, calculatePercentage as calcPercentage } from "../../controllers/utils.js";
 import { getProductDetail } from "../../controllers/products/products.js"
 
-const mainContainer = document.getElementById("content");
 const backDrop = document.getElementById("backdrop");
+const mainContainer = document.getElementById("content");
+
+/* date slider */
+const minDate = getEarliestOrderDate();
+const maxDate = new Date();
+const dayStep = 24 * 60 * 60 * 1000; //per day
+
+const slider = mainContainer.querySelector(".slider-js");
+const rangeInputs = slider.querySelectorAll(".range-input-js");
+let dateStart = slider.querySelector(".min-js");
+let dateEnd = slider.querySelector(".max-js");
+const rangeFill = slider.querySelector(".range-fill-js");
+
 const itemsContainer = mainContainer.querySelector(".items-container-js");
+
+initDateRange();
+responsiveSlider();
 
 function renderItems() {
   const ordersList = getOrdersList();
@@ -118,4 +133,54 @@ function renderUpdateForm(orderId) {
 
   showElements(backDrop);
   console.log(`Render update package ${orderId} form`);
+}
+
+function validateRange() {
+  const min = minDate.getTime();
+  const max = maxDate.getTime();
+  let start = parseInt(rangeInputs[0].value);
+  let end = parseInt(rangeInputs[1].value); 
+
+  if (start > end) [start, end] = [end, start];
+
+  const minPercentage = calcPercentage(start, min, max);
+  const maxPercentage = calcPercentage(end, min, max);
+
+  rangeFill.style.left = `${minPercentage}%`;
+  rangeFill.style.width = `${maxPercentage - minPercentage}%`;
+
+  dateStart.innerHTML = fullDateFormatted(start);
+  dateEnd.innerHTML = fullDateFormatted(end);
+}
+
+function responsiveSlider() {
+  rangeInputs.forEach((e) => {
+    e.addEventListener("input", validateRange);
+  });
+
+  validateRange();
+}
+
+function initDateRange() {
+  rangeInputs.forEach((input, index) => {
+    input.setAttribute("min", minDate.getTime());
+    input.setAttribute("max", maxDate.getTime());
+    input.setAttribute("step", dayStep);
+    input.setAttribute(
+      "value", 
+      index === 0 
+        ? minDate.getTime() 
+        : maxDate.getTime()
+    );
+  });
+}
+
+function fullDateFormatted(time) {
+  /**
+   * return month name - day number - year
+   */
+
+  if(!(time instanceof Date)) time = new Date(time);
+
+  return `${dateFormatted(time)} ${time.getFullYear()}`;
 }
