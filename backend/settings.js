@@ -11,7 +11,9 @@ export const CLASSNAME = { //relative to css classes
   hide: "hide--g",
   // checked: "checked",
   bgBlue: "bg--blue--g",
+  bgWhite: "bg--white--g",
   btnDisable: "btn--forbidden--g",
+  btnChoose: "btn--choose--g",
 }
 
 export const MAX_PRODUCT_RENDERED = 5;
@@ -52,7 +54,8 @@ export const LOCALSTORAGE = {
 export const PAGES = {
   home: "index.html",
   cart: "cart.html",
-  orders: "orders.html"
+  orders: "orders.html",
+  admin: "admin.html",
 }
 
 export const PLACEHOLDERS = {

@@ -1,9 +1,12 @@
-// import { renderItems, responsiveCreateBtn } from "./products.js";
+import { isSuperUser, userAuthenticated } from "../../controllers/users/users.js";
+import { renderAuthForm } from "./auth.js";
+import { responsiveNavBar } from "./header.js";
 
-// renderItems();
-// responsiveCreateBtn();
+const user = userAuthenticated();
 
-import { renderItems, reponsiveCreateBtn } from "./users.js";
-
-reponsiveCreateBtn();
-renderItems();
+if(!(user && isSuperUser(user.id))) {
+  renderAuthForm();
+} else {
+  console.log("Login to admin page success");
+  responsiveNavBar();
+}

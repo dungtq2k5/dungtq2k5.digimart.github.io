@@ -1,5 +1,5 @@
 import users from "../../../assets/models/users/users.js";
-import { getDefaultStateId } from "./states.js";
+import { getDefaultStateId, getStateDetail } from "./states.js";
 import { LOCALSTORAGE } from "../../settings.js";
 import { addDelAddr, getUserDelAddrList } from "../delivery/addresses.js";
 import {
@@ -86,11 +86,11 @@ export function updateUser(
     
     saveToStorage(LOCALSTORAGE.usersList, usersList);
     
-    return true;
+    return usersList[findIndex];
   }
 
   console.error(`User with an id ${id} not found!`);
-  return false;
+  return undefined;
 }
 
 export function deleteUser(id) {
@@ -101,11 +101,11 @@ export function deleteUser(id) {
     usersList.splice(findIndex, 1);
     saveToStorage(LOCALSTORAGE.usersList, usersList);
     console.log(`Delete user ${id}`);
-    return true;
+    return usersList[findIndex];
   }
 
   console.error(`User with an id ${id} not found!`);
-  return false;
+  return undefined;
 }
 
 export function checkEmailExist(email) {
@@ -127,9 +127,10 @@ export function loginUser(email, password) {
 
   if (existingUser) {
     saveToStorage(LOCALSTORAGE.userAuth, existingUser);
-    return true;
+    return existingUser;
   }
-  return false;
+
+  return undefined;
 }
 
 export function logoutUser() {
@@ -144,4 +145,13 @@ export function userAuthenticated() {
 
   // console.log("check user authenticated");
   return getFromStorage(LOCALSTORAGE.userAuth) || undefined;
+}
+
+export function isSuperUser(id) {
+  const existingUser = getUser(id);
+
+  if(existingUser) return getStateDetail(existingUser.stateId).name === "super";
+
+  console.error(`User with id ${id} not found!`);
+  return false;
 }

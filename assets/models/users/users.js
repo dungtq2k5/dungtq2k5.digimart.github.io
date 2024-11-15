@@ -39,6 +39,13 @@ const users = [
     "deliveryAddressId": "5",
     "stateId": "1",
   },
+  {
+    "id": "6",
+    "email": "dungtran",
+    "phone": "9528025822",
+    "password": "admin123",
+    "stateId": "2",
+  },
 ];
 
 export default users;

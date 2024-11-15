@@ -11,83 +11,177 @@
     <link rel="stylesheet" href="styles/general.css" />
     <link rel="stylesheet" href="styles/admin/header.css" />
     <link rel="stylesheet" href="styles/admin/content.css" />
-    <link rel="stylesheet" href="styles/admin/users.css">
+    <link rel="stylesheet" href="styles/admin/users.css" />
     <title>Document</title>
   </head>
   <body>
 
-    <header class="header header--g b">
+    <header id="header" class="header header--g b">
       <div class="header__logo">
-        <a href="admin.html" class="b" title="home">Admin page</a>
+        <a href="admin.html" class="b">Admin page</a>
       </div>
 
       <nav class="header__nav b">
-        <ul class="header__nav__list">
+        <ul class="header__nav__list nav-list-js">
           <li>
-            <button class="btn--none--g text--cap--g">users</button>
+            <button data-section="1" class="btn--none--g text--cap--g btn--choose--g">users</button>
           </li>
           <li>
-            <button class="btn--none--g text--cap--g">products</button>
+            <button data-section="2" class="btn--none--g text--cap--g">products</button>
           </li>
           <li>
-            <button class="btn--none--g text--cap--g">orders</button>
+            <button data-section="3" class="btn--none--g text--cap--g">orders</button>
           </li>
           <li>
-            <button class="btn--none--g text--cap--g">analysis</button>
+            <button data-section="4" class="btn--none--g text--cap--g">statistic</button>
           </li>
         </ul>
       </nav>
 
       <div class="header__auth b">
-        <p>Admin: <span>dungtran</span></p>
-        <button class="link--g btn--none--g">logout</button>
+        <p>Admin: <span class="auth-name-js">dungtran</span></p>
+        <button class="link--g btn--none--g logout-btn-js">logout</button>
       </div>
     </header>
 
-    <!-- content -->
     <main id="content" class="content content--g b">
-      <!-- create btn -->
-      <button class="content__create-btn link--g btn--none--g create-btn-js">Create new user</button>
+      <!-- users section -->
+      <section class="b">
+        <!-- create btn -->
+        <button class="content__create-btn link--g btn--none--g create-btn-js">Create new user</button>
+  
+        <table class="b">
+          <caption class="b"><h1>Users managment</h1></caption>
+          
+          <thead class="b">
+            <tr>
+              <th class="b">id</th>
+              <th class="b">email</th>
+              <th class="b">phone</th>
+              <th class="b">password</th>
+              <th class="b">delivery addresses</th> 
+              <th class="b">state</th> 
+              <th class="b">actions</th>
+            </tr>
+          </thead>
+  
+          <tbody class="items-container-js b">
+            <tr>
+              <td class="b" data-cell="id">123</td>
+              <td class="b" data-cell="email">dungtranquang2005@gmail.com</td>
+              <td class="b" data-cell="phone">0392018660</td>
+              <td class="b" data-cell="password">password123</td>
+              <td class="b" data-cell="delivery addresses">
+                <ul class="content__body__del_addrs">
+                  <li>abc WallSteer std.</li>
+                  <li>abc WallSteer std.</li>
+                  <li>abc WallSteer std.</li>
+                </ul>
+              </td>
+              <td class="b" data-cell="state">normal</td>
+              <td class="b" data-cell="actions">
+                <div class="btns">
+                  <button class="btn--none--g link--g">update</button>
+                  <button class="btn--none--g link--g link--red--g">delete</button>
+                </div>
+              </td>
+            </tr>
+            <!-- ... -->
+          </tbody>
+        </table>
+      </section>
 
-      <table class="b">
-        <caption class="b"><h1>Users managment</h1></caption>
+      <!-- products section -->
+      <section class="b">
+        <!-- create btn -->
+        <button class="content__create-btn link--g btn--none--g text--cap--g create-btn-js">create new product</button>
         
-        <thead class="b">
-          <tr>
-            <th class="b">id</th>
-            <th class="b">email</th>
-            <th class="b">phone</th>
-            <th class="b">password</th>
-            <th class="b">delivery addresses</th> 
-            <th class="b">state</th> 
-            <th class="b">actions</th>
-          </tr>
-        </thead>
+        <!-- data -->
+        <table class="content__products-table b">
+          <caption class="b">
+            <h1>Products managment</h1>
+          </caption>
 
-        <tbody class="items-container-js b">
-          <!-- <tr>
-            <td class="b" data-cell="id">123</td>
-            <td class="b" data-cell="email">dungtranquang2005@gmail.com</td>
-            <td class="b" data-cell="phone">0392018660</td>
-            <td class="b" data-cell="password">password123</td>
-            <td class="b" data-cell="delivery addresses">
-              <ul class="content__body__del_addrs">
-                <li>abc WallSteer std.</li>
-                <li>abc WallSteer std.</li>
-                <li>abc WallSteer std.</li>
-              </ul>
-            </td>
-            <td class="b" data-cell="state">normal</td>
-            <td class="b" data-cell="actions">
-              <div class="btns">
-                <button class="btn--none--g link--g">update</button>
-                <button class="btn--none--g link--g link--red--g">delete</button>
-              </div>
-            </td>
-          </tr> -->
-          <!-- ... -->
-        </tbody>
-      </table>
+          <thead class="b">
+            <tr>
+              <th class="b">img</th>
+              <th class="b">id</th>
+              <th class="b">name</th>
+              <th class="b">brand</th>
+              <th class="b">chipset</th>
+              <th class="b">ROM(GB) - RAM(GB)</th>
+              <th class="b">battery capacity(mah)</th>
+              <th class="b">categories</th>
+              <th class="b">price (cents)</th>
+              <th class="b">quantity</th>
+              <th class="b">description</th>
+              <th class="b">actions</th>
+            </tr>
+          </thead>
+
+          <tbody class="tbody-js b">
+            <tr>
+              <td class="b" data-cell="image">
+                <img src="./assets/img/products/example.webp" alt="" />
+              </td>
+
+              <td class="b" data-cell="id">123</td>
+
+              <td class="text--cap--g b" data-cell="name">
+                <span>iphone 15 promax</span>
+              </td>
+
+              <td class="text--cap--g b" data-cell="brand">
+                <span>apple</span>
+              </td>
+
+              <td class="text--cap--g b" data-cell="chipset">
+                <span>apple bionic 13</span>
+              </td>
+
+              <td class="b" data-cell="rom - ram">
+                <span>128 - 16</span>
+              </td>
+
+              <td class="b" data-cell="battery capacity">
+                <span>4800</span>
+              </td>
+
+              <td class="text--cap--g b" data-cell="categories">
+                <span>flagship, fashion</span>
+              </td>
+
+              <td class="b" data-cell="price">
+                <span>129900</span>
+              </td>
+
+              <td class="b" data-cell="quantity">
+                <span>100</span>
+              </td>
+
+              <td class="b" data-cell="description">
+                <div class="content__products-table__description-box">
+                  <p>Lorem ipsum.</p>
+                </div>
+              </td>
+
+              <td class="b" data-cell="actions">
+                <div>
+                  <button class="btn--none--g link--g">update</button>
+                  <button class="btn--none--g link--g link--red--g">delete</button>
+                </div>
+              </td>
+            </tr>
+            <!-- ... -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- orders section -->
+      <section class="b">Orders section</section>
+
+      <!-- statistic section -->
+      <section class="b">Statistic section</section>
     </main>
 
     <!-- backdrop -->

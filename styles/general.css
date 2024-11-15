@@ -144,6 +144,12 @@ max-width: 200px; */
   opacity: .8;
   cursor: not-allowed;
 }
+.btn--choose--g { /* for admin navbar */
+  background: var(--lightblue);
+  padding: 0 .5em;
+  color: var(--blue);
+  border-radius: var(--border-radius);
+}
 
 .icon--small--g {
   font-size: 1rem;
@@ -181,6 +187,9 @@ max-width: 200px; */
 .bg--blue--g {
   color: var(--white);
   background: var(--blue);
+}
+.bg--white--g {
+  background: var(--white);
 }
 
 /*form*/

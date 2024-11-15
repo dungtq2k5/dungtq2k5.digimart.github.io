@@ -74,7 +74,8 @@ export function generateUID() { //algorithm on stackoverflow
 }
 
 export function hashPassword(password) {
-  return encryptString(password);
+  return password;
+  // return encryptString(password);
 }
 
 function encryptString(string, offset=1) {
@@ -120,6 +121,31 @@ export function hideElements(eles, className=CLASSNAME.hide) {
   })
   // console.log("clear invalid msgs");
 }
+
+export function addClassName(eles, className) {
+  if(!Array.isArray(eles)) { //handle single ele
+    eles = [eles];
+  } else { //handle nested arr
+    eles = eles.flat();
+  }
+
+  eles.forEach(ele => {
+    if(!ele.classList.contains(className)) ele.classList.add(className);
+  });
+}
+
+export function removeClassName(eles, className) {
+  if(!Array.isArray(eles)) { //handle single ele
+    eles = [eles];
+  } else { //handle nested arr
+    eles = eles.flat();
+  }
+
+  eles.forEach(ele => {
+    if(ele.classList.contains(className)) ele.classList.remove(className);
+  });
+}
+
 
 export function calculatePages(totalProducts, maxProductsPerPage) {
   return Math.ceil(totalProducts / maxProductsPerPage);
