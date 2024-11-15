@@ -26,4 +26,6 @@ if(!(user && isSuperUser(user.id))) {
   //products
   renderProducts();
   resCreateProductBtn();
+
+  //packages
 }

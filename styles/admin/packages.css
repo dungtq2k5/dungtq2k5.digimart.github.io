@@ -1,0 +1,18 @@
+.content__orders-section__products ul {
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+  max-height: 100px;
+  overflow-y: auto;
+  text-transform: capitalize;
+}
+
+.content__orders-section__products ul li {
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto auto 3ch 3ch;
+}
+
+.content__orders-section__products img {
+  max-width: 50px;
+}

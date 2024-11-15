@@ -165,7 +165,9 @@ export function isStorageExist(storage) {
   return getFromStorage(storage) ? true : false;
 }
 
-export function dateFormatted(time) {
+export function dateFormatted(datetime) {
+  const dateTimeFormatted = new Date(datetime);
+
   const monthsName = [
     "January", "February", "March",
     "April", "May", "June",
@@ -173,7 +175,7 @@ export function dateFormatted(time) {
     "October", "November", "December"
   ];
   
-  const date = `${monthsName[time.getMonth()]} ${time.getDate()}`; //month date
+  const date = `${monthsName[dateTimeFormatted.getMonth()]} ${dateTimeFormatted.getDate()}`; //month date
   
   return date;
 }

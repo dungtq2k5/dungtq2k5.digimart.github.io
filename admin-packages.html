@@ -11,13 +11,14 @@
     <link rel="stylesheet" href="styles/general.css" />
     <link rel="stylesheet" href="styles/admin/header.css" />
     <link rel="stylesheet" href="styles/admin/content.css" />
+    <link rel="stylesheet" href="styles/admin/packages.css" />
     <title>Document</title>
   </head>
   <body>
 
     <header id="header" class="header header--g b">
       <div class="header__logo">
-        <a href="admin.html" class="b"><h1>Admin page</h1></a>
+        <a href="admin.html"><h1>Admin page</h1></a>
       </div>
 
       <nav class="header__nav b">
@@ -46,30 +47,46 @@
 
     <main id="content" class="content content--g b">
       <!-- orders section -->
-      <section class="b">
+      <section class="content__orders-section b">
         <table class="b">
           <caption class="b"><h2>Packages managment</h2></caption>
           
           <thead class="b">
             <tr>
-              <th class="b">order id</th>
-              <th class="b">product id</th>
-              <th class="b">product quantity</th> 
+              <th class="b">id</th>
+              <th class="b">buyer id</th>
+              <th class="b">products</th>
+              <th class="b">total</th>
               <th class="b">delivery to</th>
               <th class="b">placed</th> 
               <th class="b">package state</th>
             </tr>
           </thead>
   
-          <tbody class="b">
-            <tr>
+          <tbody class="items-container-js b">
+            <!-- <tr>
               <td data-cell="order id" class="b">1</td>
-              <td data-cell="product id" class="b">1</td>
-              <td data-cell="product quantity" class="b">2</td>
-              <td data-cell="delivery to" class="b">123abc / xyz</td>
+              <td data-cell="buyer id" class="b">1</td>
+              <td data-cell="products" class="content__orders-section__products b">
+                <ul>
+                  <li>
+                    <img src="./assets/img/products/example.webp" alt="">
+                    <p>iphone 16pro max</p>
+                    <i class="uil uil-times icon--small--g"></i>
+                    <p>15</p>
+                  </li>
+                </ul>
+              </td>
+              <td data-cell="total" class="b">1999</td>
+              <td data-cell="delivery to" class="b">
+                <address>123abc / xyz</address>
+              </td>
               <td data-cell="placed" class="b">nov-11-2023</td>
-              <td data-cell="package state" class="b">preparing</td>
-            </tr>
+              <td data-cell="package state" class="b">
+                <span>preparing</span>
+                <button class="btn--none--g link--g">(click to edit)</button>
+              </td>
+            </tr> -->
             <!-- ... -->
           </tbody>
         </table>

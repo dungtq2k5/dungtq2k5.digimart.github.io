@@ -3,6 +3,7 @@ import { LOCALSTORAGE } from "../settings.js";
 import { getFromStorage, saveToStorage, generateUID } from "./utils.js";
 import { getDefaultDeliveryStateId } from "./delivery/states.js";
 import { checkUserExist } from "./users/users.js";
+import deliveryAddress from "../../assets/models/delivery/addresses.js";
 
 
 export function getOrdersList() {
@@ -13,7 +14,7 @@ export function getUserOrders(userId) {
   return getOrdersList().filter(order => order.userId === userId);
 }
 
-export function addOrders(userId, total, packages, placed = new Date()) {
+export function addOrders(userId, total, packages, deliveryAddressId, placed = new Date()) {
   if(checkUserExist(userId)) {
     const ordersList = getOrdersList();
     ordersList.push({
@@ -22,6 +23,7 @@ export function addOrders(userId, total, packages, placed = new Date()) {
       total,
       placed,
       packages,
+      deliveryAddressId,
       deliveryStateId: getDefaultDeliveryStateId(),
     });
 
@@ -30,6 +32,21 @@ export function addOrders(userId, total, packages, placed = new Date()) {
   } else {
     console.error(`User with an id ${userId} not found!`);
   }
+}
+
+export function updateOrder(id, {deliveryStateId}) {
+  const ordersList = getOrdersList();
+  const findIndex = ordersList.findIndex(order => order.id === id);
+
+  if(findIndex !== -1) {
+    if(deliveryStateId) ordersList[findIndex].deliveryStateId = deliveryStateId;
+
+    saveToStorage(LOCALSTORAGE.ordersList, ordersList);
+    return ordersList[findIndex];
+  }
+
+  console.error(`Order id ${id} not found`);
+  return undefined;
 }
 
 export function getOrderDetail(id) {

@@ -79,12 +79,11 @@ function handleCheckout() {
 
     return {
       productId: item.productId,
-      deliveryAddressId: getUser(user.id).deliveryAddressId,
       quantity: item.quantity
     }
   });
 
-  addOrders(user.id, total, packages);
+  addOrders(user.id, total, packages, getUser(user.id).deliveryAddressId);
 }
 
 function updateCheckoutForm() {
