@@ -48,9 +48,54 @@
     <main id="content" class="content content--g b">
       <!-- orders section -->
       <section class="content__orders-section b">
+
+        <!-- filter search -->
+        <div>
+          <!-- filter search slider -->
+          <div class="slider--g b">
+          <!-- title -->
+          <div class="slider__title--g b">
+            <label for="slider__bar__min">
+              From: <span class="min-js">Nov 11</span>
+            </label>
+
+            <label for="slider__bar__max">
+              To: <span class="max-js">Sep 27</span>
+            </label>
+          </div>
+
+          <!-- bar -->
+          <div class="slider__bar--g b">
+          <div class="slider__bar__fill--g"></div>
+
+          <input
+            id="slider__bar__min"
+            type="range"
+            value="0"
+            min="0"
+            max="130000"
+            step="100"
+            class="slider__bar__range--g"
+          />
+
+          <input
+            id="slider__bar__max"
+            type="range"
+            value="130000"
+            min="0"
+            max="130000"
+            step="100"
+            class="slider__bar__range--g"
+          />
+          </div>
+        </div>
+        
+        </div>
+
+        <!-- data -->
         <table class="b">
           <caption class="b"><h2>Packages managment</h2></caption>
-          
+
           <thead class="b">
             <tr>
               <th class="b">id</th>
@@ -96,6 +141,6 @@
     <!-- backdrop -->
     <div id="backdrop" class="backdrop--g hide--g b"></div>
 
-    <script type="module" src="./backend/views/admin/packages.js"></script>
+    <!-- <script type="module" src="./backend/views/admin/packages.js"></script> -->
   </body>
 </html>

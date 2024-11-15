@@ -8,8 +8,6 @@ const mainContainer = document.getElementById("content");
 const backDrop = document.getElementById("backdrop");
 const itemsContainer = mainContainer.querySelector(".items-container-js");
 
-renderItems();
-
 function renderItems() {
   const ordersList = getOrdersList();
   let htmlDoc = ``;

@@ -76,7 +76,6 @@ function renderEmptyOrders() {
   `;
 }
 
-
 function renderTrackOrderPopup(orderId) {
   const order = getOrderDetail(orderId);
   const deliveryState = getDeliveryState(order.deliveryStateId);
@@ -102,6 +101,7 @@ function renderTrackOrderPopup(orderId) {
     </div>
   `;
 
+  //TODO UI for canceling order canceled
   let deliverPercentage;
   switch(Number(deliveryState.completeLevel)) {
     case 1:
