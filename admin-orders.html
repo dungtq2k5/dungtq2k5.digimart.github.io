@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+    />
+
+    <link rel="stylesheet" href="styles/general.css" />
+    <link rel="stylesheet" href="styles/admin/header.css" />
+    <link rel="stylesheet" href="styles/admin/content.css" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    <header id="header" class="header header--g b">
+      <div class="header__logo">
+        <a href="admin.html" class="b"><h1>Admin page</h1></a>
+      </div>
+
+      <nav class="header__nav b">
+        <ul class="header__nav__list nav-list-js">
+          <li>
+            <button data-section="1" class="btn--none--g text--cap--g">users</button>
+          </li>
+          <li>
+            <button data-section="2" class="btn--none--g text--cap--g">products</button>
+          </li>
+          <li>
+            <button data-section="3" class="btn--none--g text--cap--g btn--choose--g">orders</button>
+          </li>
+          <li>
+            <button data-section="4" class="btn--none--g text--cap--g">statistic</button>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="header__auth b">
+        <p>Hello Admin: <span class="auth-name-js">dungtran</span></p>
+        &#8739;
+        <button class="link--g btn--none--g logout-btn-js">logout</button>
+      </div>
+    </header>
+
+    <main id="content" class="content content--g b">
+      <!-- orders section -->
+      <section class="b">
+        <table class="b">
+          <caption class="b"><h2>Packages managment</h2></caption>
+          
+          <thead class="b">
+            <tr>
+              <th class="b">order id</th>
+              <th class="b">product id</th>
+              <th class="b">product quantity</th> 
+              <th class="b">delivery to</th>
+              <th class="b">placed</th> 
+              <th class="b">package state</th>
+            </tr>
+          </thead>
+  
+          <tbody class="b">
+            <tr>
+              <td data-cell="order id" class="b">1</td>
+              <td data-cell="product id" class="b">1</td>
+              <td data-cell="product quantity" class="b">2</td>
+              <td data-cell="delivery to" class="b">123abc / xyz</td>
+              <td data-cell="placed" class="b">nov-11-2023</td>
+              <td data-cell="package state" class="b">preparing</td>
+            </tr>
+            <!-- ... -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <!-- backdrop -->
+    <div id="backdrop" class="backdrop--g hide--g b"></div>
+
+    <script type="module" src="./backend/views/admin/packages.js"></script>
+  </body>
+</html>

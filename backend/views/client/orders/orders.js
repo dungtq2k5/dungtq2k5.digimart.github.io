@@ -1,5 +1,5 @@
 import { MSG } from "../../../settings.js";
-import { getPackage, getUserOrders } from "../../../controllers/orders.js";
+import { getOrderDetail, getPackage, getUserOrders } from "../../../controllers/orders.js";
 import { getProductDetail } from "../../../controllers/products/products.js";
 import { userAuthenticated } from "../../../controllers/users/users.js";
 import { dateFormatted, hideElements, showElements } from "../../../controllers/utils.js";
@@ -25,7 +25,7 @@ function renderOrders() {
       const product = getProductDetail(pack.productId);
 
       packagesDoc += `
-        <li class="content__orders__order__items__item" data-order-id="${order.id}" data-product-id="${product.id}">
+        <li class="content__orders__order__items__item">
           <img 
             src="${product.img}"
             alt=""
@@ -36,17 +36,17 @@ function renderOrders() {
             <p>Arriving on: ...</p>
             <p>Quantity: ${pack.quantity}</p>
           </div>
-          <button class="btn--g btn--prim--g track-btn-js">Track package</button>
         </li>
       `;
     });
 
     htmlDoc += `
-      <li class="content__orders__order b">
+      <li class="content__orders__order b" data-order-id="${order.id}">
         <div class="content__orders__order__title b">
           <p class="b">Order placed: ${dateFormatted(placed)}</p>
           <p class="b">Total: $${order.total}</p>
           <p class="b">Order ID: ${order.id}</p>
+          <button class="link--g btn--none--g track-btn-js">Track your package</button>
         </div>
 
         <ul class="content__orders__order__items">${packagesDoc}</ul>
@@ -56,13 +56,11 @@ function renderOrders() {
 
   ordersContainer.innerHTML = htmlDoc;
 
-  ordersContainer.querySelectorAll(".content__orders__order__items__item").forEach(section => {
-    const orderId = section.dataset.orderId;
-    const productId = section.dataset.productId;
+  ordersContainer.querySelectorAll(".content__orders__order").forEach(order => {
+    const orderId = order.dataset.orderId;
 
-    section.querySelector(".track-btn-js").addEventListener("click", () => {
-      // console.log(`Track product ${productId} of an order ${orderId}`);
-      renderTrackPackagePopup(orderId, productId);
+    order.querySelector(".track-btn-js").addEventListener("click", () => {
+      renderTrackOrderPopup(orderId);
     });
   });
 
@@ -79,25 +77,17 @@ function renderEmptyOrders() {
 }
 
 
-function renderTrackPackagePopup(orderId, productId) {
-  const pack = getPackage(orderId, productId);
-  const product = getProductDetail(productId);
-  const deliveryState = getDeliveryState(pack.deliveryStateId);
+function renderTrackOrderPopup(orderId) {
+  const order = getOrderDetail(orderId);
+  const deliveryState = getDeliveryState(order.deliveryStateId);
 
   trackBackDrop.innerHTML = `
     <div class="track b">
       <button class="form__close-btn--g btn--none--g close-btn-js b">
         <i class="uil uil-times b"></i>
       </button>
-
-      <h2>Arriving on ..</h2>
-      <p class="text--cap--g">${product.name}</p>
-      <p>Quantity: ${pack.quantity}</p>
-      <img 
-        src="${product.img}"
-        alt=""
-        class="track__img"
-      >
+      
+      <h2 class="track__title">Your package state</h2>
 
       <div class="track__bar b">
         <div class="track__bar__title b">

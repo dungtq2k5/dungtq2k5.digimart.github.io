@@ -6,13 +6,13 @@ import { hideElements, includesSubArr, showElements, genSelectOptionsHtml } from
 import { IMG_DEFAULT, IMG_ROOT_PATH, IMG_SIZE, IMG_TYPE } from "../../settings.js";
 
 
-const mainContainer = document.getElementById("container");
+const mainContainer = document.getElementById("content").querySelector(".products-section-js");
 const createBtn = mainContainer.querySelector(".create-btn-js");
 const itemsContainer = mainContainer.querySelector(".tbody-js");
 
 const backDrop = document.getElementById("backdrop");
 
-export function renderItems() {
+function renderItems() {
   const productsList = getProductsList(); //TODO handle when product list empty
   let htmlDoc = ``;
 
@@ -82,7 +82,7 @@ export function renderItems() {
   console.log("render products data");
 }
 
-export function responsiveCreateBtn() {
+function responsiveCreateBtn() {
   createBtn.addEventListener("click", () => {
     renderCreateForm();
   });
@@ -605,3 +605,5 @@ function genCatesCheckBoxHtmlList(catesList=getCategoriesList(), currIdsList=[-1
     `;
   }).join("");
 }
+
+export { renderItems, responsiveCreateBtn };

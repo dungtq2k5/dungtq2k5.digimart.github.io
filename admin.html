@@ -12,13 +12,14 @@
     <link rel="stylesheet" href="styles/admin/header.css" />
     <link rel="stylesheet" href="styles/admin/content.css" />
     <link rel="stylesheet" href="styles/admin/users.css" />
+    <link rel="stylesheet" href="styles/admin/products.css" />
     <title>Document</title>
   </head>
   <body>
 
     <header id="header" class="header header--g b">
       <div class="header__logo">
-        <a href="admin.html" class="b">Admin page</a>
+        <a href="admin.html" class="b"><h1>Admin page</h1></a>
       </div>
 
       <nav class="header__nav b">
@@ -39,19 +40,20 @@
       </nav>
 
       <div class="header__auth b">
-        <p>Admin: <span class="auth-name-js">dungtran</span></p>
+        <p>Hello Admin: <span class="auth-name-js">dungtran</span></p>
+        &#8739;
         <button class="link--g btn--none--g logout-btn-js">logout</button>
       </div>
     </header>
 
     <main id="content" class="content content--g b">
       <!-- users section -->
-      <section class="b">
+      <section class="users-section-js b">
         <!-- create btn -->
-        <button class="content__create-btn link--g btn--none--g create-btn-js">Create new user</button>
+        <button class="content__create-btn link--g btn--none--g create-btn-js">create new user</button>
   
         <table class="b">
-          <caption class="b"><h1>Users managment</h1></caption>
+          <caption class="b"><h2>Users managment</h2></caption>
           
           <thead class="b">
             <tr>
@@ -66,7 +68,7 @@
           </thead>
   
           <tbody class="items-container-js b">
-            <tr>
+            <!-- <tr>
               <td class="b" data-cell="id">123</td>
               <td class="b" data-cell="email">dungtranquang2005@gmail.com</td>
               <td class="b" data-cell="phone">0392018660</td>
@@ -85,21 +87,21 @@
                   <button class="btn--none--g link--g link--red--g">delete</button>
                 </div>
               </td>
-            </tr>
+            </tr> -->
             <!-- ... -->
           </tbody>
         </table>
       </section>
 
       <!-- products section -->
-      <section class="b">
+      <section class="products-section-js b">
         <!-- create btn -->
-        <button class="content__create-btn link--g btn--none--g text--cap--g create-btn-js">create new product</button>
+        <button class="content__create-btn link--g btn--none--g create-btn-js">create new product</button>
         
         <!-- data -->
         <table class="content__products-table b">
           <caption class="b">
-            <h1>Products managment</h1>
+            <h2>Products managment</h2>
           </caption>
 
           <thead class="b">
@@ -120,7 +122,7 @@
           </thead>
 
           <tbody class="tbody-js b">
-            <tr>
+            <!-- <tr>
               <td class="b" data-cell="image">
                 <img src="./assets/img/products/example.webp" alt="" />
               </td>
@@ -171,17 +173,17 @@
                   <button class="btn--none--g link--g link--red--g">delete</button>
                 </div>
               </td>
-            </tr>
+            </tr> -->
             <!-- ... -->
           </tbody>
         </table>
       </section>
 
       <!-- orders section -->
-      <section class="b">Orders section</section>
+      <section class="orders-section-js b">Orders section</section>
 
       <!-- statistic section -->
-      <section class="b">Statistic section</section>
+      <section class="statistic-section-js b">Statistic section</section>
     </main>
 
     <!-- backdrop -->

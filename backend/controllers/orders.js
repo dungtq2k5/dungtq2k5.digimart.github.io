@@ -15,17 +15,14 @@ export function getUserOrders(userId) {
 
 export function addOrders(userId, total, packages, placed = new Date()) {
   if(checkUserExist(userId)) {
-    packages.forEach(item => {
-      item.deliveryStateId = getDefaultDeliveryStateId();
-    });
-
     const ordersList = getOrdersList();
     ordersList.push({
       id: generateUID(),
       userId,
       total,
       placed,
-      packages
+      packages,
+      deliveryStateId: getDefaultDeliveryStateId(),
     });
 
     saveToStorage(LOCALSTORAGE.ordersList, ordersList);
@@ -35,8 +32,17 @@ export function addOrders(userId, total, packages, placed = new Date()) {
   }
 }
 
+export function getOrderDetail(id) {
+  const existingOrder = getOrdersList().find(order => order.id === id);
+
+  if(existingOrder) return existingOrder;
+
+  console.error(`Order id ${id} not found`);
+  return null;
+}
+
 export function getPackage(orderId, productId) {
-  const existingOrder = getOrdersList().find(order => order.id === orderId);
+  const existingOrder = getOrderDetail(orderId);
 
   if(existingOrder) {
     const packagesList = existingOrder.packages;
@@ -52,4 +58,3 @@ export function getPackage(orderId, productId) {
     console.error(`Order with an id ${orderId} not found!`);
   }
 }
-

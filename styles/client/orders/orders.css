@@ -6,7 +6,7 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: .5em;
+  gap: .75em;
   max-width: 1200px;
   margin: 0 auto;
   padding: 1em;
@@ -25,9 +25,9 @@
   gap: 1.5em;
 }
 
-.content__orders__order__title, .content__orders__order__items__item {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.content__orders__order__title {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 1em;
   padding: 1em;
@@ -35,7 +35,13 @@
   border-radius: var(--border-radius);
 }
 .content__orders__order__items__item {
-  margin-top: 1em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding: 1em;
+  margin-top: .5em;
+  border: 1px solid var(--lightgrey);
+  border-radius: var(--border-radius);
 }
 .content__orders__order__items__item__img {
   max-width: 100px;

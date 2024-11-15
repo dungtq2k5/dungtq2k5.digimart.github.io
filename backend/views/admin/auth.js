@@ -7,32 +7,32 @@ const backDrop = document.getElementById("backdrop");
 export function renderAuthForm() {
   backDrop.innerHTML = `
     <form class="form--g auth-form-js b">
-    <h1>Login</h1>
+      <h1>Login</h1>
 
-    <div class="form__field--g b">
-      <label for="login-email">Email</label>
-      <input
-        id="login-email"
-        type="email"
-        class="form__field__input--g"
-      />
-    </div>
+      <div class="form__field--g b">
+        <label for="login-email">Email</label>
+        <input
+          id="login-email"
+          type="email"
+          class="form__field__input--g"
+        />
+      </div>
 
-    <div class="form__field--g b">
-      <label for="login-pass">Password</label>
-      <input
-        id="login-pass"
-        type="password"
-        class="form__field__input--g"
-      />
-    </div>
+      <div class="form__field--g b">
+        <label for="login-pass">Password</label>
+        <input
+          id="login-pass"
+          type="password"
+          class="form__field__input--g"
+        />
+      </div>
 
-    <div class="form__invalid-msg--g hide--g invalid-msg-box-js b">
-      <i class="uil uil-exclamation-triangle icon--small--g b"></i>
-      <span class="invalid-msg-js"></span>
-    </div>
+      <div class="form__invalid-msg--g hide--g invalid-msg-box-js b">
+        <i class="uil uil-exclamation-triangle icon--small--g b"></i>
+        <span class="invalid-msg-js"></span>
+      </div>
 
-    <button class="btn--g btn--prim--g btn--mw--g login-btn-js">Login in</button>
+      <button class="btn--g btn--prim--g btn--mw--g login-btn-js">Login in</button>
     </form>
   `;
 

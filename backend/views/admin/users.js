@@ -4,13 +4,14 @@ import { addUser, deleteUser, getUser, getUsersList, updateUser } from "../../co
 import { hideElements, showElements, genSelectOptionsHtml } from "../../controllers/utils.js";
 import { PLACEHOLDERS } from "../../settings.js";
 
-const mainContainer = document.getElementById("content");
+const mainContainer = document.getElementById("content").querySelector(".users-section-js");
 const backDrop = document.getElementById("backdrop");
 
 const createBtn = mainContainer.querySelector(".create-btn-js");
 const itemsContainer = mainContainer.querySelector(".items-container-js");
 
-export function renderItems() {
+
+function renderItems() {
   const usersList = getUsersList(); //TODO handle when user list empty
   let htmlDoc = "";
 
@@ -61,7 +62,7 @@ export function renderItems() {
   console.log("render users");
 }
 
-export function reponsiveCreateBtn() {
+function responsiveCreateBtn() {
   createBtn.addEventListener("click", () => {
     renderCreateForm();
   });
@@ -356,3 +357,5 @@ function genUserDelAddrHtmlInputsList(userId) {
     `;
   }).join("");
 }
+
+export { renderItems, responsiveCreateBtn };

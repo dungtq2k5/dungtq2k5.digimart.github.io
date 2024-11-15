@@ -49,6 +49,7 @@ export const LOCALSTORAGE = {
   allItemSelected: "allItemSelected",
 
   adminAuth: "adminAuth",
+  currentSectionIndex: "currentSectionIndex",
 }
 
 export const PAGES = {
