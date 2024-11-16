@@ -83,3 +83,13 @@ export function sortOrdersListByDate() {
 export function getEarliestOrderDate() {
   return new Date(sortOrdersListByDate()[0].placed);
 }
+
+export function filterOrdersList(dateStart, dateEnd, list=getOrdersList()) {
+  if(!(dateStart instanceof Date)) dateStart = new Date(dateStart);
+  if(!(dateEnd instanceof Date)) dateEnd = new Date(dateEnd);
+
+  return list.filter(order => {
+    const placed = new Date(order.placed);
+    return placed >= dateStart && placed <= dateEnd;
+  });
+}

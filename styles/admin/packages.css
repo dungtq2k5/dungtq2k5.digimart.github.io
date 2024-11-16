@@ -1,3 +1,11 @@
+/* slider filter */
+.content__orders-section__filter {
+  display: flex;
+  align-items: end;
+  gap: 1em;
+}
+
+/* data */
 .content__orders-section__products ul {
   display: flex;
   flex-direction: column;

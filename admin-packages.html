@@ -48,30 +48,35 @@
     <main id="content" class="content content--g b">
       <!-- orders section -->
       <section class="content__orders-section b">
-        <!-- filter search slider -->
-        <div class="slider--g slider-js b">
-          <!-- title -->
-          <div class="slider__title--g b">
-            <label for="slider__bar__min">All packages from: <span class="min-js"></span></label>
-            <label for="slider__bar__max">to: <span class="max-js"></span></label>
+        <!-- filter search -->
+        <div class="content__orders-section__filter">
+          <!-- slider -->
+          <div class="slider--g slider-js b">
+            <!-- title -->
+            <div class="slider__title--g b">
+              <label for="slider__bar__min">All packages from: <span class="min-js"></span></label>
+              <label for="slider__bar__max">to: <span class="max-js"></span></label>
+            </div>
+  
+            <!-- bar -->
+            <div class="slider__bar--g b">
+              <div class="slider__bar__fill--g range-fill-js"></div>
+  
+              <input
+                id="slider__bar__min"
+                type="range"
+                class="slider__bar__range--g range-input-js"
+              />
+  
+              <input
+                id="slider__bar__max"
+                type="range"
+                class="slider__bar__range--g range-input-js"
+              />
+            </div>
           </div>
-
-          <!-- bar -->
-          <div class="slider__bar--g b">
-            <div class="slider__bar__fill--g range-fill-js"></div>
-
-            <input
-              id="slider__bar__min"
-              type="range"
-              class="slider__bar__range--g range-input-js"
-            />
-
-            <input
-              id="slider__bar__max"
-              type="range"
-              class="slider__bar__range--g range-input-js"
-            />
-          </div>
+          
+          <button class="btn--none--g link--g reset-btn-js">reset filter</button>
         </div>
 
         <!-- data -->

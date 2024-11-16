@@ -1,8 +1,9 @@
 import { getDeliveryAddress } from "../../controllers/delivery/addresses.js";
 import { getDeliveryState, getDeliveryStatesList } from "../../controllers/delivery/states.js";
-import { getEarliestOrderDate, getOrderDetail, getOrdersList, updateOrder } from "../../controllers/orders.js";
-import { dateFormatted, genSelectOptionsHtml, hideElements, showElements, calculatePercentage as calcPercentage } from "../../controllers/utils.js";
+import { filterOrdersList, getEarliestOrderDate, getOrderDetail, getOrdersList, updateOrder } from "../../controllers/orders.js";
+import { dateFormatted, genSelectOptionsHtml, hideElements, showElements, calculatePercentage as calcPercentage, saveToStorage, getFromStorage } from "../../controllers/utils.js";
 import { getProductDetail } from "../../controllers/products/products.js"
+import { LOCALSTORAGE } from "../../settings.js";
 
 const backDrop = document.getElementById("backdrop");
 const mainContainer = document.getElementById("content");
@@ -17,14 +18,14 @@ const rangeInputs = slider.querySelectorAll(".range-input-js");
 let dateStart = slider.querySelector(".min-js");
 let dateEnd = slider.querySelector(".max-js");
 const rangeFill = slider.querySelector(".range-fill-js");
+const resetFilterBtn = mainContainer.querySelector(".reset-btn-js");
 
 const itemsContainer = mainContainer.querySelector(".items-container-js");
 
-initDateRange();
-responsiveSlider();
+responsiveResetFilterBtn();
+responsiveSlider(); //contain renderItems
 
-function renderItems() {
-  const ordersList = getOrdersList();
+function renderItems(ordersList = getFromStorage(LOCALSTORAGE.ordersFilteredList) || getOrdersList()) {
   let htmlDoc = ``;
 
   ordersList.forEach(order => {
@@ -57,10 +58,9 @@ function renderItems() {
         <td data-cell="delivery to" class="b">
           <address>${delAdrr.address}</address>
         </td>
-        <td data-cell="placed" class="b">${dateFormatted(order.placed)}</td>
+        <td data-cell="placed" class="b">${fullDateFormatted(order.placed)}</td>
         <td data-cell="package state" class="b">
-          <span>${delState.name}</span>
-          <button class="btn--none--g link--g update-btn-js">(click to update)</button>
+          <button class="btn--none--g link--g update-btn-js">${delState.name}</button>
         </td>
       </tr>
     `;
@@ -151,9 +151,17 @@ function validateRange() {
 
   dateStart.innerHTML = fullDateFormatted(start);
   dateEnd.innerHTML = fullDateFormatted(end);
+  
+  const ordersFilteredList = filterOrdersList(start, end);
+  saveToStorage(LOCALSTORAGE.ordersFilteredList, ordersFilteredList);
+  saveToStorage(LOCALSTORAGE.dateStart, start);
+  saveToStorage(LOCALSTORAGE.dateEnd, end);
+  renderItems(ordersFilteredList);
 }
 
 function responsiveSlider() {
+  initDateRange();
+
   rangeInputs.forEach((e) => {
     e.addEventListener("input", validateRange);
   });
@@ -169,8 +177,8 @@ function initDateRange() {
     input.setAttribute(
       "value", 
       index === 0 
-        ? minDate.getTime() 
-        : maxDate.getTime()
+        ? getFromStorage(LOCALSTORAGE.dateStart) || minDate.getTime() 
+        : getFromStorage(LOCALSTORAGE.dateEnd) || maxDate.getTime()
     );
   });
 }
@@ -183,4 +191,13 @@ function fullDateFormatted(time) {
   if(!(time instanceof Date)) time = new Date(time);
 
   return `${dateFormatted(time)} ${time.getFullYear()}`;
+}
+
+function responsiveResetFilterBtn() {
+  resetFilterBtn.addEventListener("click", () => {
+    localStorage.removeItem(LOCALSTORAGE.ordersFilteredList);
+    localStorage.removeItem(LOCALSTORAGE.dateStart);
+    localStorage.removeItem(LOCALSTORAGE.dateEnd);
+    location.reload();
+  });
 }

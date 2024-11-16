@@ -37,18 +37,25 @@ export const MSG = {
 export const LOCALSTORAGE = {
   productsList: "productsList",
   productsFilteredList: "productsFilteredList",
-  usersList: "usersList",
-  cartsList: "cartsList",
-  ordersList: "ordersList",
-  deliveryAddressList: "deliveryAddressList",
 
+  usersList: "usersList",
   userAuth: "userAuth",
-  categoryCheckedIndex: "categoryCheckedIndex",
-  currentProductPagination: "currentProductPagination",
-  categoryHidden: "categoryHidden",
+
+  cartsList: "cartsList",
   allItemSelected: "allItemSelected",
 
-  adminAuth: "adminAuth",
+  ordersList: "ordersList",
+  ordersFilteredList: "ordersFilteredList",
+  dateStart: "dateStart",
+  dateEnd: "dateEnd",
+
+  deliveryAddressList: "deliveryAddressList",
+
+  categoryCheckedIndex: "categoryCheckedIndex",
+  categoryHidden: "categoryHidden",
+
+  currentProductPagination: "currentProductPagination",
+
   currentSectionIndex: "currentSectionIndex",
 }
 
