@@ -29,6 +29,10 @@
   margin-top: 1em;
   border: 1px solid var(--lightgrey);
   border-radius: var(--border-radius);
+  transition: background .15s;
+}
+.content__items__item:hover {
+  background: var(--darkwhite);
 }
 .content__items__item__select {
   display: flex;
@@ -46,6 +50,13 @@
   display: flex;
   align-items: center;
   gap: .5em;
+  transition: transform .15s;
+}
+.content__items__item__quant .uil-arrow-left:active {
+  transform: translateX(-2px);
+}
+.content__items__item__quant .uil-arrow-right:active {
+  transform: translateX(2px);
 }
 
 /*remove item*/

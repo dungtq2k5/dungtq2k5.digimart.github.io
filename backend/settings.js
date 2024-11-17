@@ -16,7 +16,7 @@ export const CLASSNAME = { //relative to css classes
   btnChoose: "btn--choose--g",
 }
 
-export const MAX_PRODUCT_RENDERED = 5;
+export const MAX_PRODUCT_RENDERED = 3;
 
 export const MSG = {
   emailInvalid: "Invalid email.",
@@ -30,7 +30,7 @@ export const MSG = {
   nothingInCart: "Your shopping cart is empty",
   nothingInOrders: "No orders yet!",
 
-  addToCartSuccess: "Added success",
+  addToCartSuccess: "Added success &#10003;",
   addToCart: "Add to cart",
 }
 

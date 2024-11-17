@@ -4,9 +4,12 @@ import {
   calculatePages, 
   getFromStorage, 
   saveToStorage,
-  centsToDollars
+  centsToDollars,
+  addClassName,
+  removeClassName
 } from "../../../controllers/utils.js";
 import { 
+  CLASSNAME,
   LOCALSTORAGE, 
   MAX_PRODUCT_RENDERED, 
   MSG, 
@@ -22,6 +25,8 @@ import { addToCart } from "../../../controllers/carts.js";
 import { showLoginForm } from "./header/auth/login.js";
 import { renderCartNotifi } from "./header/cart-icon.js";
 import { renderOrdersNotifi } from "./header/orders-icon.js";
+import { getBrandDetail } from "../../../controllers/products/brands.js";
+import { getChipsetDetail } from "../../../controllers/products/chipsets.js";
 
 
 //products
@@ -53,7 +58,7 @@ function renderProducts() {
         <div class="content__products__card b" data-product-id="${product.id}">
           <img
             src="${product.img}"
-            alt=""
+            alt="${product.name}"
             class="b"
           />
 
@@ -61,10 +66,8 @@ function renderProducts() {
             <p class="content__products__card__info-box__title text--cap--g">
               ${product.name} - ${product.ram}GB ${product.rom}GB
             </p>
-            <p class="text--blue--bold--g">
-              &dollar;<span>${centsToDollars(product.price)}</span>
-            </p>
-          </div>
+            <p class="text--blue--bold--g">&dollar;${centsToDollars(product.price)}</p>
+        </div>
         </div>
       `;
     });
@@ -86,12 +89,15 @@ function renderProducts() {
 }
 
 function responsivePaginatProducts() {
-  //TODO UI when pagination end
+  renderProductsPaginatBtns();
+
   navProductBackBtn.addEventListener("click", () => {
     if(currentPaginat > 1) {
       currentPaginat--
       paginat.innerHTML = currentPaginat;
+
       saveToStorage(LOCALSTORAGE.currentProductPagination, currentPaginat);
+      renderProductsPaginatBtns();
       renderProducts();
       
       // console.log("back");
@@ -102,9 +108,11 @@ function responsivePaginatProducts() {
     if(currentPaginat < calculatePages(getProductAmount(), MAX_PRODUCT_RENDERED)) {
       currentPaginat++;
       paginat.innerHTML = currentPaginat;
+
       saveToStorage(LOCALSTORAGE.currentProductPagination, currentPaginat);
+      renderProductsPaginatBtns();
       renderProducts();
-      
+
       // console.log("forward");
     }
   });
@@ -114,11 +122,39 @@ function resetPaginatProduct() {
   currentPaginat = 1;
   paginat.innerHTML = currentPaginat;
   localStorage.removeItem(LOCALSTORAGE.currentProductPagination);
+  renderProductsPaginatBtns();
   // console.log("reset page index");
+}
+
+function renderProductsPaginatBtns() {
+  const pages = calculatePages(getProductAmount(), MAX_PRODUCT_RENDERED);
+
+  if(pages === 1) {
+    addClassName(navProductBackBtn, CLASSNAME.btnDisable);
+    addClassName(navProductForwardBtn, CLASSNAME.btnDisable);
+    return;
+  }
+
+  if(currentPaginat === 1) {
+    addClassName(navProductBackBtn, CLASSNAME.btnDisable);
+    removeClassName(navProductForwardBtn, CLASSNAME.btnDisable);
+    return;
+  }
+
+  if(currentPaginat === pages) {
+    addClassName(navProductForwardBtn, CLASSNAME.btnDisable);
+    removeClassName(navProductBackBtn, CLASSNAME.btnDisable);
+    return;
+  }
+
+  removeClassName(navProductForwardBtn, CLASSNAME.btnDisable);
+  removeClassName(navProductBackBtn, CLASSNAME.btnDisable);
 }
 
 function renderProductDetailPopUp(product) {
   const user = userAuthenticated();
+  const chipset = getChipsetDetail(product.chipSetId);
+  const brand = getBrandDetail(product.brandId);
 
   productDetailBackDrop.innerHTML = `
     <div class="product-detail-box b">
@@ -126,14 +162,23 @@ function renderProductDetailPopUp(product) {
           <i class="uil uil-times b"></i>
         </button>
 
-        <img src="${product.img}" alt="" class="product-detail-box__img b">
+        <img src="${product.img}" alt="${product.name}" class="product-detail-box__img b">
 
         <div class="product-detail-box__info-box">
           <h2 class="text--cap--g b">${product.name} - ${product.ram}GB ${product.rom}GB</h2>
 
           <div class="product-detail-box__info-box__text-box b">
-            <p class="text--blue--bold--g">&dollar;<span>${centsToDollars(product.price)}</span></p>
-            <span>${product.description}</span>
+            <p class="text--blue--bold--g text--big--g">&dollar;${centsToDollars(product.price)}</p>
+            <p>${product.description}</p>
+            <details>
+              <summary>Show phone inspect</summary>
+              <ul>
+                <li>chipset: <span>${chipset.name}</span></li>
+                <li>battery capacity: <span>${product.batteryCapacity}mah</span></li>
+                <li>brand: <span>${brand.name}</span></li>
+                <li>memory: <span>${product.ram}GB RAM ${product.rom}GB ROM</span></li>
+              </ul>
+            </details>
           </div>
       
           <div class="product-detail-box__info-box__btns b">

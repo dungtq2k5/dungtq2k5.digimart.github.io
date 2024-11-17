@@ -34,7 +34,7 @@ button {
 li {
   list-style-type: none;
 }
-i, label, button {
+i, label, button, summary {
   cursor: pointer;
 }
 i {
@@ -109,6 +109,9 @@ max-width: 200px; */
 .text--nowrap--g {
   white-space: nowrap;
 }
+.text--big--g {
+  font-size: 1.5rem;
+}
 
 
 .btn--g {
@@ -118,6 +121,13 @@ max-width: 200px; */
   height: max-content;
   border: 1px solid transparent;
   border-radius: var(--border-radius);
+  transition: opacity .15s;
+}
+.btn--g:hover {
+  opacity: .8;
+}
+.btn--g:active {
+  opacity: 1;
 }
 .btn--prim--g {
   color: var(--white);
@@ -141,7 +151,7 @@ max-width: 200px; */
   width: 100%;
 }
 .btn--forbidden--g {
-  opacity: .8;
+  opacity: .6;
   cursor: not-allowed;
 }
 .btn--choose--g { /* for admin navbar */
@@ -187,6 +197,8 @@ max-width: 200px; */
 .bg--blue--g {
   color: var(--white);
   background: var(--blue);
+  border: transparent !important;
+  transition: all .15s;
 }
 .bg--white--g {
   background: var(--white);

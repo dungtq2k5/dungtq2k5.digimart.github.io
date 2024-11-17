@@ -3,8 +3,8 @@
   padding: 1em;
   border-radius: var(--border-radius);
   background: var(--white);
-  width: 100%;
-  max-width: 1000px;
+  width: max-content;
+  min-width: 555px;
 }
 
 .track__title {
@@ -17,7 +17,7 @@
 }
 .track__bar__progress {
   position: relative;
-  height: 1.5em;
+  height: 1em;
   border-radius: 15px;
   border: 1px solid var(--lightgrey);
   overflow: hidden;

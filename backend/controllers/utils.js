@@ -123,6 +123,7 @@ export function hideElements(eles, className=CLASSNAME.hide) {
 }
 
 export function addClassName(eles, className) {
+  // console.log("add");
   if(!Array.isArray(eles)) { //handle single ele
     eles = [eles];
   } else { //handle nested arr
@@ -135,6 +136,7 @@ export function addClassName(eles, className) {
 }
 
 export function removeClassName(eles, className) {
+  // console.log("remove");
   if(!Array.isArray(eles)) { //handle single ele
     eles = [eles];
   } else { //handle nested arr

@@ -131,6 +131,10 @@
   border: 1px solid var(--lightgrey);
   border-radius: var(--border-radius);
   padding: .5em;
+  transition: background .15s;
+}
+.header__search-popup__result__item:hover {
+  background: var(--darkwhite);
 }
 .header__search-popup__result__item__img {
   max-width: 84px;

@@ -182,7 +182,9 @@ function genUserDelAddrsHtmlList(userId) {
   
   return addrsList.map(addr => {
     return `
-      <li>${addr.address}.</li>
+      <li>
+      <address>${addr.address}.</address>
+      </li>
     `;
   }).join("");
 }

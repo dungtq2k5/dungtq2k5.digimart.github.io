@@ -2,8 +2,9 @@ import { MSG } from "../../../settings.js";
 import { getOrderDetail, getPackage, getUserOrders } from "../../../controllers/orders.js";
 import { getProductDetail } from "../../../controllers/products/products.js";
 import { userAuthenticated } from "../../../controllers/users/users.js";
-import { dateFormatted, hideElements, showElements } from "../../../controllers/utils.js";
+import { centsToDollars, dateFormatted, hideElements, showElements } from "../../../controllers/utils.js";
 import { getDeliveryState } from "../../../controllers/delivery/states.js";
+import { getDeliveryAddress } from "../../../controllers/delivery/addresses.js";
 
 const user = userAuthenticated() || console.error("user not auth but order-page is render");
 
@@ -32,9 +33,10 @@ function renderOrders() {
             class="content__orders__order__items__item__img"
           >
           <div class="content__orders__order__items__item__info">
-            <p class="text--ca[-g]">${product.name}</p>
-            <p>Arriving on: ...</p>
+            <p class="text--cap--g">${product.name} - ${product.ram}GB ${product.rom}GB</p>
+            <p>Product id: ${product.id}</p>
             <p>Quantity: ${pack.quantity}</p>
+            <p>Total: &#36;${centsToDollars(product.price * pack.quantity)}</p>
           </div>
         </li>
       `;
@@ -44,8 +46,9 @@ function renderOrders() {
       <li class="content__orders__order b" data-order-id="${order.id}">
         <div class="content__orders__order__title b">
           <p class="b">Order placed: ${dateFormatted(placed)}</p>
-          <p class="b">Total: $${order.total}</p>
+          <p class="b">Total: $${centsToDollars(order.total)}</p>
           <p class="b">Order ID: ${order.id}</p>
+          <p>Delivery to: ${getDeliveryAddress(order.deliveryAddressId).address}.</p>
           <button class="link--g btn--none--g track-btn-js">Track your package</button>
         </div>
 
@@ -88,32 +91,48 @@ function renderTrackOrderPopup(orderId) {
       
       <h2 class="track__title">Your package state</h2>
 
-      <div class="track__bar b">
-        <div class="track__bar__title b">
-          <p class="b">Preparing</p>
-          <p class="b">Shipped</p>
-          <p class="b">Delivered</p>
-        </div>
-        <div class="track__bar__progress b">
-          <div class="track__bar__progress__fill progress-fill-js"></div>
-        </div>
-      </div>
+      ${
+        deliveryState.completeLevel != -1 
+          ?
+          `
+            <div class="track__bar b">
+              <div class="track__bar__title b">
+                <p class="b"><i class="uil uil-parcel icon"></i> preparing </p>
+                <p class="b"><i class="uil uil-truck"></i> shipped</p>
+                <p class="b"><i class="uil uil-location-pin-alt"></i> delivered</p>
+              </div>
+              <div class="track__bar__progress b">
+                <div class="track__bar__progress__fill progress-fill-js"></div>
+              </div>
+            </div>
+          `
+          : //order was cancel
+          `
+            <p class="link--red--g text--uc--g">
+              <i class="uil uil-squint"></i>
+              Your order had been cancel for some reason, we're apologize for this inconvience!
+            </p>
+          `
+      } 
+    
     </div>
   `;
 
-  //TODO UI for canceling order canceled
-  let deliverPercentage;
-  switch(Number(deliveryState.completeLevel)) {
-    case 1:
-      deliverPercentage = 25;
-      break;
-    case 2:
-      deliverPercentage = 75;
-      break;
-    default:
-      deliverPercentage = 100;
+  if(deliveryState.completeLevel != -1) {
+    let deliverPercentage;
+    switch(Number(deliveryState.completeLevel)) {
+      case 1:
+        deliverPercentage = 25;
+        break;
+      case 2:
+        deliverPercentage = 75;
+        break;
+      case 3:
+        deliverPercentage = 100;
+        break;
+    }
+    trackBackDrop.querySelector(".progress-fill-js").style.width = `${deliverPercentage}%`;
   }
-  trackBackDrop.querySelector(".progress-fill-js").style.width = `${deliverPercentage}%`;
 
   trackBackDrop.querySelector(".close-btn-js").addEventListener("click", () => {
     hideElements(trackBackDrop);
