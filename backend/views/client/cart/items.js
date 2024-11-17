@@ -40,6 +40,7 @@ function renderItems() {
   getUserCart(user.id).forEach(item => {
     const product = getProductDetail(item.productId);
     const price = centsToDollars(product.price);
+    const total = centsToDollars(product.price * item.quantity);
 
     htmlDoc += `
       <li class="content__items__item b" data-cart-id="${item.id}">
@@ -66,7 +67,7 @@ function renderItems() {
           <i class="uil uil-arrow-right incs-quant-js b"></i>
         </div>
 
-        <p class="b">$${item.quantity*price}</p>
+        <p class="b">$${total}</p>
 
         <button class="link--g link--red--g btn--none--g del-btn-js b">Delete</button>
       </li>

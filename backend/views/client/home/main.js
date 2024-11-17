@@ -31,34 +31,35 @@ from "./product.js";
 import { genEmailToUsername } from "../../../controllers/utils.js";
 
 
-//TODO DOMContentLoaded if needed
-const user = userAuthenticated();
-
-//responsive header
-logo();
-search();
-cartIcon();
-ordersIcon();
-loginBtn();
-registerBtn();
-logoutBtn();
-authBtn();
-
-if (user) {
-  hideLoginBtn();
-  hideRegisterBtn();
-  hideAuthBtn();
-  showLogoutBtn(genEmailToUsername(user.email));
-} else {
-  hideLogoutBtn();
-  showLoginBtn();
-  showRegisterBtn();
-  showAuthBtn();
-}
-
-//responsive & render menu(categories)
-renderCategories();
-
-//responsive & render products
-renderProducts();
-responsivePaginatProducts();
+document.addEventListener("DOMContentLoaded", () => {
+  const user = userAuthenticated();
+  
+  //responsive header
+  logo();
+  search();
+  cartIcon();
+  ordersIcon();
+  loginBtn();
+  registerBtn();
+  logoutBtn();
+  authBtn();
+  
+  if (user) {
+    hideLoginBtn();
+    hideRegisterBtn();
+    hideAuthBtn();
+    showLogoutBtn(genEmailToUsername(user.email));
+  } else {
+    hideLogoutBtn();
+    showLoginBtn();
+    showRegisterBtn();
+    showAuthBtn();
+  }
+  
+  //responsive & render menu(categories)
+  renderCategories();
+  
+  //responsive & render products
+  renderProducts();
+  responsivePaginatProducts();
+});
