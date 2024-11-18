@@ -48,6 +48,7 @@ export const LOCALSTORAGE = {
   ordersFilteredList: "ordersFilteredList",
   dateStart: "dateStart",
   dateEnd: "dateEnd",
+  packStatesIdListLookup: "packStatesIdListLookup",
 
   deliveryAddressList: "deliveryAddressList",
 

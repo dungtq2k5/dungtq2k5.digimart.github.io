@@ -29,7 +29,7 @@ const orders = [
         "quantity": "3",
       },
     ],
-    "deliveryStateId": "1",
+    "deliveryStateId": "2",
   },
   {
     "id": "3",
@@ -51,7 +51,7 @@ const orders = [
         "quantity": "3",
       },
     ],
-    "deliveryStateId": "1",
+    "deliveryStateId": "3",
   },
 ];
 

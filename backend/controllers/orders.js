@@ -1,6 +1,6 @@
 import orders from "../../assets/models/orders.js";
 import { LOCALSTORAGE } from "../settings.js";
-import { getFromStorage, saveToStorage, generateUID } from "./utils.js";
+import { getFromStorage, saveToStorage, generateUID, includesSubArr } from "./utils.js";
 import { getDefaultDeliveryStateId } from "./delivery/states.js";
 import { checkUserExist } from "./users/users.js";
 import deliveryAddress from "../../assets/models/delivery/addresses.js";
@@ -8,6 +8,10 @@ import deliveryAddress from "../../assets/models/delivery/addresses.js";
 
 export function getOrdersList() {
   return getFromStorage(LOCALSTORAGE.ordersList) || orders;
+}
+
+export function getOrdersFilteredList() {
+  return getFromStorage(LOCALSTORAGE.ordersFilteredList) || getOrdersList();
 }
 
 export function getUserOrders(userId) {
@@ -84,12 +88,27 @@ export function getEarliestOrderDate() {
   return new Date(sortOrdersListByDate()[0].placed);
 }
 
-export function filterOrdersList(dateStart, dateEnd, list=getOrdersList()) {
-  if(!(dateStart instanceof Date)) dateStart = new Date(dateStart);
-  if(!(dateEnd instanceof Date)) dateEnd = new Date(dateEnd);
+export function filterOrdersList({dateStart, dateEnd, statesIdList}, list=getOrdersList()) {
+  if(dateStart > dateEnd) [dateStart, dateEnd] = [dateEnd, dateStart]; //result will auto false if undefined
 
-  return list.filter(order => {
-    const placed = new Date(order.placed);
-    return placed >= dateStart && placed <= dateEnd;
-  });
+  if(dateStart) {
+    dateStart = parseInt(dateStart);
+    if(!(dateStart instanceof Date)) dateStart = new Date(dateStart);
+    list = list.filter(order => new Date(order.placed) >= dateStart);
+    // console.log(`filter date start ${dateStart}`);
+  }
+
+  if(dateEnd) {
+    dateEnd = parseInt(dateEnd);
+    if(!(dateEnd instanceof Date)) dateEnd = new Date(dateEnd);
+    list = list.filter(order => new Date(order.placed) <= dateEnd);
+    // console.log(`filter date end ${dateEnd}`);
+  }
+
+  if(statesIdList.length !== 0) {
+    list = list.filter(order => statesIdList.includes(order.deliveryStateId));
+    // console.log(`filter state ${statesIdList}`);
+  }
+
+  return list;
 }

@@ -1,9 +1,9 @@
 import { getDeliveryAddress } from "../../controllers/delivery/addresses.js";
 import { getDeliveryState, getDeliveryStatesList } from "../../controllers/delivery/states.js";
-import { filterOrdersList, getEarliestOrderDate, getOrderDetail, getOrdersList, updateOrder } from "../../controllers/orders.js";
-import { dateFormatted, genSelectOptionsHtml, hideElements, showElements, calculatePercentage as calcPercentage, saveToStorage, getFromStorage } from "../../controllers/utils.js";
+import { filterOrdersList, getEarliestOrderDate, getOrderDetail, getOrdersFilteredList, getOrdersList, updateOrder } from "../../controllers/orders.js";
+import { dateFormatted, genSelectOptionsHtml, hideElements, showElements, calculatePercentage as calcPercentage, saveToStorage, getFromStorage, toggleEleInArr, includesSubArr } from "../../controllers/utils.js";
 import { getProductDetail } from "../../controllers/products/products.js"
-import { LOCALSTORAGE } from "../../settings.js";
+import { CLASSNAME, LOCALSTORAGE } from "../../settings.js";
 
 const backDrop = document.getElementById("backdrop");
 const mainContainer = document.getElementById("content");
@@ -20,12 +20,17 @@ let dateEnd = slider.querySelector(".max-js");
 const rangeFill = slider.querySelector(".range-fill-js");
 const resetFilterBtn = mainContainer.querySelector(".reset-btn-js");
 
+/* filter states */
+const statesFilterContainer = mainContainer.querySelector(".states-filter-js");
+const statesIdListLookup = getFromStorage(LOCALSTORAGE.packStatesIdListLookup) || [];
+
 const itemsContainer = mainContainer.querySelector(".items-container-js");
 
-responsiveResetFilterBtn();
 responsiveSlider(); //contain renderItems
+renderPackFilterStates();
+responsiveResetFilterBtn();
 
-function renderItems(ordersList = getFromStorage(LOCALSTORAGE.ordersFilteredList) || getOrdersList()) {
+function renderItems(ordersList = getOrdersFilteredList()) {
   let htmlDoc = ``;
 
   ordersList.forEach(order => {
@@ -128,6 +133,8 @@ function renderUpdateForm(orderId) {
 
     updateOrder(orderId, {deliveryStateId: delStateId});
 
+    localStorage.removeItem(LOCALSTORAGE.packStatesIdListLookup); //avoid error when filter by states by update state to another
+
     form.submit();
   });
 
@@ -152,7 +159,11 @@ function validateRange() {
   dateStart.innerHTML = fullDateFormatted(start);
   dateEnd.innerHTML = fullDateFormatted(end);
   
-  const ordersFilteredList = filterOrdersList(start, end);
+  const ordersFilteredList = filterOrdersList({
+    dateStart: start, 
+    dateEnd: end,
+    statesIdList: statesIdListLookup
+  });
   saveToStorage(LOCALSTORAGE.ordersFilteredList, ordersFilteredList);
   saveToStorage(LOCALSTORAGE.dateStart, start);
   saveToStorage(LOCALSTORAGE.dateEnd, end);
@@ -198,6 +209,53 @@ function responsiveResetFilterBtn() {
     localStorage.removeItem(LOCALSTORAGE.ordersFilteredList);
     localStorage.removeItem(LOCALSTORAGE.dateStart);
     localStorage.removeItem(LOCALSTORAGE.dateEnd);
+    localStorage.removeItem(LOCALSTORAGE.packStatesIdListLookup);
     location.reload();
   });
+}
+
+/* filter states */
+function renderPackFilterStates() {
+  const statesList = getDeliveryStatesList();
+  let htmlDoc = ``;
+
+  statesList.forEach(state => {
+    const isActive = includesSubArr(statesIdListLookup, state.id);
+
+    htmlDoc += `
+     <li>
+       <button 
+        class="btn--g ${isActive ? CLASSNAME.bgBlue : ""}" 
+        data-state-id=${state.id}
+      >
+        ${state.name} 
+        <i class="uil uil-check icon--small--g ${isActive ? "" : CLASSNAME.hide}"></i>
+       </button>
+     </li>
+   `;
+  });
+
+  statesFilterContainer.innerHTML = htmlDoc;
+
+  statesFilterContainer.querySelectorAll("button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const stateId = btn.dataset.stateId;
+
+      btn.classList.toggle(CLASSNAME.bgBlue);
+      btn.querySelector("i").classList.toggle(CLASSNAME.hide);
+
+      toggleEleInArr(statesIdListLookup, stateId);
+      
+      const ordersFilteredList = filterOrdersList({
+        dateStart: rangeInputs[0].value,
+        dateEnd: rangeInputs[1].value,
+        statesIdList: statesIdListLookup
+      });
+
+      saveToStorage(LOCALSTORAGE.packStatesIdListLookup, statesIdListLookup);
+      saveToStorage(LOCALSTORAGE.ordersFilteredList, ordersFilteredList);
+      renderItems(ordersFilteredList);
+    });
+  });
+
 }

@@ -150,7 +150,7 @@ function renderUpdateForm(productId) {
           <div class="create__form__upload-img__upload__info b">
           <div class="create__form__upload-img__upload__info__title">
             <i class="uil uil-upload icon--small--g"></i>
-            <p>click to upload or drop file here.</p>
+            <p>drag an image here or upload a file</p>
           </div>
           <p class="text--em--g">
             Only support image with size &#91;${IMG_SIZE} x ${IMG_SIZE}&#93;px and .${IMG_TYPE} type

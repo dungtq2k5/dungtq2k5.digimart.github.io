@@ -1,8 +1,23 @@
 /* slider filter */
 .content__orders-section__filter {
   display: flex;
-  align-items: end;
+  flex-direction: column;
+  align-items: start;
   gap: 1em;
+  margin-bottom: 1em;
+}
+.content__orders-section__filter__states {
+  display: flex;
+  align-items: end;
+  gap: .5em;
+}
+.content__orders-section__filter__states ul {
+  display: flex;
+  gap: .5em;
+}
+.content__orders-section__filter__states ul button {
+  padding: 0 .5em;
+  border: none;
 }
 
 /* data */
