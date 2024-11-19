@@ -2,7 +2,7 @@
 :root {
   --grey: grey;
   --lightgrey: #c4c7c5;
-  --lightblue: #f0f4f9;
+  --lightblue: #f2f8ff;
   --blue: #1a73e8;
   --darkblue: #1358b2;
   --black: #1f1f1f;
@@ -167,7 +167,13 @@ max-width: 200px; */
 
 .link--g {
   color: var(--blue);
+  transition: opacity .15s, text-decoration .15s;
+}
+.link--g:hover {
   text-decoration: underline;
+}
+.link--g:active {
+  opacity: .8;
 }
 .link--red--g {
   color: var(--red);
