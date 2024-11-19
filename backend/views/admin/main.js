@@ -10,6 +10,11 @@ import {
   renderItems as renderProducts, 
   responsiveCreateBtn as resCreateProductBtn 
 } from "./products.js";
+import {
+  responsiveSlider as resFilterDatePack,
+  renderPackFilterStates,
+  responsiveResetFilterBtn as resResetFilterBtn
+} from "./packages.js";
 
 const user = userAuthenticated();
 
@@ -28,4 +33,7 @@ if(!(user && isSuperUser(user.id))) {
   resCreateProductBtn();
 
   //packages
+  resFilterDatePack();
+  renderPackFilterStates();
+  resResetFilterBtn();
 }

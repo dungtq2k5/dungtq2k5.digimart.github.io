@@ -6,9 +6,9 @@ import { getProductDetail } from "../../controllers/products/products.js"
 import { CLASSNAME, LOCALSTORAGE } from "../../settings.js";
 
 const backDrop = document.getElementById("backdrop");
-const mainContainer = document.getElementById("content");
+const mainContainer = document.getElementById("content").querySelector(".orders-section-js");
 
-/* date slider */
+/* filter dates */
 const minDate = getEarliestOrderDate();
 const maxDate = new Date();
 const dayStep = 24 * 60 * 60 * 1000; //per day
@@ -26,9 +26,6 @@ const statesIdListLookup = getFromStorage(LOCALSTORAGE.packStatesIdListLookup) |
 
 const itemsContainer = mainContainer.querySelector(".items-container-js");
 
-responsiveSlider(); //contain renderItems
-renderPackFilterStates();
-responsiveResetFilterBtn();
 
 function renderItems(ordersList = getOrdersFilteredList()) {
   let htmlDoc = ``;
@@ -142,6 +139,8 @@ function renderUpdateForm(orderId) {
   console.log(`Render update package ${orderId} form`);
 }
 
+/* filter dates */
+
 function validateRange() {
   const min = minDate.getTime();
   const max = maxDate.getTime();
@@ -170,7 +169,7 @@ function validateRange() {
   renderItems(ordersFilteredList);
 }
 
-function responsiveSlider() {
+function responsiveSlider() { //contain renderItems
   initDateRange();
 
   rangeInputs.forEach((e) => {
@@ -259,3 +258,5 @@ function renderPackFilterStates() {
   });
 
 }
+
+export { responsiveSlider, renderPackFilterStates, responsiveResetFilterBtn };
