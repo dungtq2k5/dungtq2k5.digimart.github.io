@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="styles/client/home/header.css" />
     <link rel="stylesheet" href="styles/client/home/content.css" />
     <link rel="stylesheet" href="styles/client/home/detail.css" />
-    <title>Document</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/img/icon.svg">
+    <title>Digi Mart &#8739; Home</title>
   </head>
   <body>
     <!-- 
@@ -21,19 +22,23 @@
     <header id="header" class="header header--g b">
 
       <!-- logo -->
-      <div class="header__logo logo-js b">
-        <a href="./index.html">Logo</a>
-      </div>
+      <a href="./index.html">
+        <div class="header__logo__g logo-js b">
+          <p>Digi Mart</p>
+        </div>
+      </a>
 
       <!-- utils -->
       <div class="header__utils b">
         <!-- search bar -->
         <div class="header__utils__search b">
-          <input type="text" placeholder="What are you looking for&#63;" class="header__utils__search__input search-input-js"/>
-
-          <button class="header__utils__search__btn search-btn-js">
-            <i class="uil uil-search"></i>
-          </button>
+          <input type="text" id="search-bar" placeholder="What are you looking for&#63;" class="header__utils__search__input search-input-js"/>
+          
+          <label for="search-bar">
+            <button class="header__utils__search__btn search-btn-js">
+              <i class="uil uil-search"></i>
+            </button>
+          </label>
 
           <!-- filter search popup -->
           <div class="header__search-popup hide--g filter-search-js b">

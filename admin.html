@@ -14,14 +14,22 @@
     <link rel="stylesheet" href="styles/admin/users.css" />
     <link rel="stylesheet" href="styles/admin/products.css" />
     <link rel="stylesheet" href="styles/admin/packages.css" />
-    <title>Document</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/img/icon.svg">
+    <title>Digi Mart &#8739; Admin</title>
   </head>
   <body>
 
     <header id="header" class="header header--g b">
-      <div class="header__logo">
-        <a href="admin.html" class="b"><h1>Admin page</h1></a>
-      </div>
+      <!-- logo -->
+      <a href="./admin.html">
+        <div class="header__logo logo-js b">
+          <p>
+            <span class="header__logo__g">Digi Mart</span>
+            &#8211;
+            Admin Page
+          </p>
+        </div>
+      </a>
 
       <nav class="header__nav b">
         <ul class="header__nav__list nav-list-js">
@@ -35,7 +43,7 @@
             <button data-section="3" class="btn--none--g text--cap--g">orders</button>
           </li>
           <li>
-            <button data-section="4" class="btn--none--g text--cap--g">statistic</button>
+            <button data-section="4" class="btn--none--g text--cap--g">analysis</button>
           </li>
         </ul>
       </nav>
@@ -182,96 +190,96 @@
 
       <!-- orders section -->
       <section class="content__orders-section orders-section-js b">
-      <!-- filter search -->
-      <div class="content__orders-section__filter">
-        <!-- slider -->
-        <div class="slider--g slider-js b">
-          <!-- title -->
-          <div class="slider__title--g b">
-            <label for="slider__bar__min">All packages from: <span class="min-js"></span></label>
-            <label for="slider__bar__max">to: <span class="max-js"></span></label>
+        <!-- filter search -->
+        <div class="content__orders-section__filter">
+          <!-- slider -->
+          <div class="slider--g slider-js b">
+            <!-- title -->
+            <div class="slider__title--g b">
+              <label for="slider__bar__min">All packages from: <span class="min-js"></span></label>
+              <label for="slider__bar__max">to: <span class="max-js"></span></label>
+            </div>
+
+            <!-- bar -->
+            <div class="slider__bar--g b">
+              <div class="slider__bar__fill--g range-fill-js"></div>
+
+              <input
+                id="slider__bar__min"
+                type="range"
+                class="slider__bar__range--g range-input-js"
+              />
+
+              <input
+                id="slider__bar__max"
+                type="range"
+                class="slider__bar__range--g range-input-js"
+              />
+            </div>
           </div>
 
-          <!-- bar -->
-          <div class="slider__bar--g b">
-            <div class="slider__bar__fill--g range-fill-js"></div>
-
-            <input
-              id="slider__bar__min"
-              type="range"
-              class="slider__bar__range--g range-input-js"
-            />
-
-            <input
-              id="slider__bar__max"
-              type="range"
-              class="slider__bar__range--g range-input-js"
-            />
+          <div class="content__orders-section__filter__states b">
+            <p>Filter by states: </p>
+            <ul class="states-filter-js b">
+              <!-- <li>
+                <button class="btn--g bg--blue--g">
+                  state1 <i class="uil uil-check icon--small--g"></i>
+                </button>
+              </li> -->
+              <!-- ... -->
+            </ul>
           </div>
+          
+          <button class="btn--none--g link--g reset-btn-js">clear all filters</button>
         </div>
 
-        <div class="content__orders-section__filter__states b">
-          <p>Filter by states: </p>
-          <ul class="states-filter-js b">
-            <!-- <li>
-              <button class="btn--g bg--blue--g">
-                state1 <i class="uil uil-check icon--small--g"></i>
-              </button>
-            </li> -->
+        <!-- data -->
+        <table class="b">
+          <caption class="b"><h2>Packages managment</h2></caption>
+
+          <thead class="b">
+            <tr>
+              <th class="b">id</th>
+              <th class="b">buyer id</th>
+              <th class="b">products</th>
+              <th class="b">total</th>
+              <th class="b">delivery to</th>
+              <th class="b">placed</th> 
+              <th class="b">package state</th>
+            </tr>
+          </thead>
+
+          <tbody class="items-container-js b">
+            <!-- <tr>
+              <td data-cell="order id" class="b">1</td>
+              <td data-cell="buyer id" class="b">1</td>
+              <td data-cell="products" class="content__orders-section__products b">
+                <ul>
+                  <li>
+                    <img src="./assets/img/products/example.webp" alt="">
+                    <p>iphone 16pro max</p>
+                    <i class="uil uil-times icon--small--g"></i>
+                    <p>15</p>
+                  </li>
+                </ul>
+              </td>
+              <td data-cell="total" class="b">1999</td>
+              <td data-cell="delivery to" class="b">
+                <address>123abc / xyz</address>
+              </td>
+              <td data-cell="placed" class="b">nov-11-2023</td>
+              <td data-cell="package state" class="b">
+                <span>preparing</span>
+                <button class="btn--none--g link--g">(click to edit)</button>
+              </td>
+            </tr> -->
             <!-- ... -->
-          </ul>
-        </div>
-        
-        <button class="btn--none--g link--g reset-btn-js">clear all filters</button>
-      </div>
-
-      <!-- data -->
-      <table class="b">
-        <caption class="b"><h2>Packages managment</h2></caption>
-
-        <thead class="b">
-          <tr>
-            <th class="b">id</th>
-            <th class="b">buyer id</th>
-            <th class="b">products</th>
-            <th class="b">total</th>
-            <th class="b">delivery to</th>
-            <th class="b">placed</th> 
-            <th class="b">package state</th>
-          </tr>
-        </thead>
-
-        <tbody class="items-container-js b">
-          <!-- <tr>
-            <td data-cell="order id" class="b">1</td>
-            <td data-cell="buyer id" class="b">1</td>
-            <td data-cell="products" class="content__orders-section__products b">
-              <ul>
-                <li>
-                  <img src="./assets/img/products/example.webp" alt="">
-                  <p>iphone 16pro max</p>
-                  <i class="uil uil-times icon--small--g"></i>
-                  <p>15</p>
-                </li>
-              </ul>
-            </td>
-            <td data-cell="total" class="b">1999</td>
-            <td data-cell="delivery to" class="b">
-              <address>123abc / xyz</address>
-            </td>
-            <td data-cell="placed" class="b">nov-11-2023</td>
-            <td data-cell="package state" class="b">
-              <span>preparing</span>
-              <button class="btn--none--g link--g">(click to edit)</button>
-            </td>
-          </tr> -->
-          <!-- ... -->
-        </tbody>
-      </table>
+          </tbody>
+        </table>
       </section>
 
-      <!-- statistic section -->
-      <section class="statistic-section-js b">Statistic section</section>
+      <!-- analysis section -->
+      <section class="analysis-section-js b">Statistic section</section>
     </main>
 
     <!-- backdrop -->

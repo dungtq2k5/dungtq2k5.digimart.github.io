@@ -1,6 +1,7 @@
 .header { 
   font-size: 1.5rem;
   gap: .25em;
+  padding: 1rem;
 }
 
 .content {

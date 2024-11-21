@@ -127,6 +127,7 @@ function renderUpdateForm(orderId) {
 
     const delStateSelect = form.querySelector("#update-del-state");
     const delStateId = delStateSelect.options[delStateSelect.selectedIndex].value;
+    //TODO if delStateid is delivered -> sold of product ++
 
     updateOrder(orderId, {deliveryStateId: delStateId});
 

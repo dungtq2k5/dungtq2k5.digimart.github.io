@@ -50,6 +50,12 @@ img {
   object-fit: cover;
   object-position: center;
 }
+summary {
+  list-style-type: '⬇';
+} 
+details[open] > summary {
+  list-style-type: '⬆';
+}
 
 
 /*general classes*/
@@ -66,6 +72,12 @@ img {
   border-bottom: 1px solid var(--lightgrey);
   background: var(--white);
   z-index: 99;
+}
+.header__logo__g {
+  color: var(--blue);
+  font-size: 1.65rem;
+  font-weight: 500;
+  white-space: nowrap;
 }
 .content--g {
   padding-top: 6em !important; 

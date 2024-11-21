@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+    />
+
+    <link rel="stylesheet" href="styles/general.css" />
+    <link rel="stylesheet" href="styles/admin/header.css" />
+    <link rel="stylesheet" href="styles/admin/content.css" />
+    <link rel="stylesheet" href="styles/admin/analysis.css" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    <header id="header" class="header header--g b">
+      <div class="header__logo">
+        <a href="admin.html" class="b"><h1>Admin page</h1></a>
+      </div>
+
+      <nav class="header__nav b">
+        <ul class="header__nav__list nav-list-js">
+          <li>
+            <button data-section="1" class="btn--none--g text--cap--g">users</button>
+          </li>
+          <li>
+            <button data-section="2" class="btn--none--g text--cap--g">products</button>
+          </li>
+          <li>
+            <button data-section="3" class="btn--none--g text--cap--g">orders</button>
+          </li>
+          <li>
+            <button data-section="4" class="btn--none--g text--cap--g btn--choose--g">analysis</button>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="header__auth b">
+        <p>Hello Admin: <span class="auth-name-js">dungtran</span></p>
+        &#8739;
+        <button class="link--g btn--none--g logout-btn-js">logout</button>
+      </div>
+    </header>
+
+    <main id="content" class="content content--g b">
+      <!-- filter -->
+      <div class="content-analysis__filter">
+        <!-- slider -->
+        <div class="slider--g b">
+          <!-- title -->
+          <div class="slider__title--g b">
+            <label for="analysis__slider__bar__min">All packages from: <span class="min-js"></span></label>
+            <label for="analysis__slider__bar__max">to: <span class="max-js"></span></label>
+          </div>
+
+          <!-- bar -->
+          <div class="slider__bar--g b">
+            <div class="slider__bar__fill--g range-fill-js"></div>
+
+            <input
+              id="analysis__slider__bar__min"
+              type="range"
+              class="slider__bar__range--g range-input-js"
+            />
+
+            <input
+              id="analysis__slider__bar__max"
+              type="range"
+              class="slider__bar__range--g range-input-js"
+            />
+          </div>
+        </div>
+        <button class="btn--none--g link--g reset-btn-js">clear filter</button>
+      </div>
+
+      <!-- data -->
+      <table class="content-analysis__table">
+        <caption class="b"><h2>Analysis</h2></caption>
+
+        <thead class="b">
+          <tr>
+            <th class="b">product</th>
+            <th class="b">sold</th>
+            <th class="b">total (cents)</th>
+          </tr>
+        </thead>
+
+        <tbody class="items-container-js b">
+          <!-- <tr>
+            <td class="b" data-cell="product">
+              <div class="content-analysis__table__product">
+                <img src="./assets/img/products/example.webp" alt="">
+                <p>iphone 16pro max</p>
+                <details>
+                  <summary>view more info</summary>
+                  <ul>
+                    <li>id: <span>1</span></li>
+                    <li>price: <span>39900cents</span></li>
+                    <li>chipset: <span>snapdragon 365</span></li>
+                    <li>battery capacity: <span>5000mah</span></li>
+                    <li>brand: <span>samsung</span></li>
+                    <li>memory: <span>16GB RAM -  512GB ROM</span></li>
+                  </ul>
+                </details>
+              </div>
+            </td>
+            <td class="b" data-cell="sold">123</td>
+            <td class="b" data-cell="total (cents)">39900 * 123</td>
+          </tr> -->
+          <!-- ... -->
+        </tbody>
+      </table>
+    </main>
+
+    <!-- backdrop -->
+    <div id="backdrop" class="backdrop--g hide--g b"></div>
+
+    <script type="module" src="./backend/views/admin/analysis.js"></script>
+
+  </body>
+</html>

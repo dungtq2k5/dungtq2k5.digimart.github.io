@@ -42,6 +42,7 @@ export function getProductDetail(id, productsList=getProductsList()) {
 
 export function addProduct(product, productsList=getProductsList()) {
   product.id = generateUID();
+  product.sold = "0";
   productsList.push(product);
   saveToStorage(LOCALSTORAGE.productsList, productsList);
 
@@ -66,7 +67,7 @@ export function updateProduct(id, product, productsList=getProductsList()) { //u
   const findIndex = productsList.findIndex(product => product.id === id);
 
   if(findIndex !== -1) {
-    product["id"] = productsList[findIndex].id;
+    product.id = productsList[findIndex].id;
     productsList[findIndex] = product;
 
     saveToStorage(LOCALSTORAGE.productsList, productsList);
@@ -128,4 +129,8 @@ export function filterProductsByBrand(
 ) {
   const brand = getBrandDetail(brandId);
   return productsList.filter((item) => item.brandId === brand.id);
+}
+
+export function sortProductsBySold(list=getProductsList()) {
+  return list.sort((a, b) => a.sold - b.sold);
 }

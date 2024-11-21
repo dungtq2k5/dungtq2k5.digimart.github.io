@@ -3,16 +3,18 @@
   justify-content: space-between;
   white-space: nowrap;
 }
-.header__logo h1 {
+
+.header__logo {
   font-size: 1.5rem;
-}
-.header__auth {
-  display: flex;
-  align-items: center;
-  gap: .5em;
 }
 
 .header__nav__list {
   display: flex;
   gap: 1em;
+}
+
+.header__auth {
+  display: flex;
+  align-items: center;
+  gap: .5em;
 }
