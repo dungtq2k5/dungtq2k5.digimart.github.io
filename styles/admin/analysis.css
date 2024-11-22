@@ -2,6 +2,10 @@
   margin-bottom: 1em;
 }
 
+.content-analysis__table__total {
+  font-weight: normal;
+}
+
 .content-analysis__table__product {
   display: grid;
   grid-template-columns: max-content 30ch auto;

@@ -102,7 +102,86 @@
           <button class="link--g btn--none--g add-addr-btn-js">Add new</button>
         </div>
 
-        <button class="btn--g btn--prim--g btn--mw--g checkout-btn-js">Checkout</button>
+        <!-- payment -->
+        <div class="content__checkout-form__payment">
+          <!-- select -->
+          <div class="content__checkout-form__payment__method">
+            <label for="payment-method">Payment method:</label>
+            <select id="payment-method">
+              <option value="cash">Cash on Delivery</option>
+              <option value="card">Credit &#8725; Debit Card</option>
+            </select>
+          </div>
+
+          <!-- credit / debit card form -->
+          <div class="content__checkout-form__payment__card-form hide--g card-form-js b">
+            <div class="content__checkout-form__payment__card-form__title">
+              <i class="uil uil-credit-card"></i>
+              <h3 class="content__checkout-form__payment__card-form__title__heading">Input Card Details</h3>
+            </div>
+            
+            <!-- number -->
+            <div class="b">
+              <label for="payment-card-number">Card Number:</label>
+              <input
+                id="payment-card-number"
+                type="text"
+                placeholder="1234 1234 1234 1234"
+                required
+              />
+            </div>
+            <div class="form__invalid-msg--g invalid-number-msg-js hide--g b">
+              <i class="uil uil-exclamation-triangle icon--small--g"></i>
+              <span>Invalid card number&#33;</span>
+            </div>
+
+            <!-- expiry date -->
+            <div class="b">
+              <label for="payment-card-expire">Expiry Date:</label>
+              <input
+                id="payment-card-expire"
+                type="month"
+                required
+              />
+            </div>
+            <div class="form__invalid-msg--g invalid-date-msg-js hide--g b">
+              <i class="uil uil-exclamation-triangle icon--small--g"></i>
+              <span>Invalid expiry date&#33;</span>
+            </div>
+
+            <!-- cvv -->
+            <div class="b">
+              <label for="payment-card-cvv">CVV:</label>
+              <input
+                id="payment-card-cvv"
+                type="text"
+                placeholder="123"
+                required
+              />
+            </div>
+            <div class="form__invalid-msg--g invalid-cvv-msg-js hide--g b">
+              <i class="uil uil-exclamation-triangle icon--small--g"></i>
+              <span>Invalid CVV&#33;</span>
+            </div>
+
+            <!-- name -->
+            <div class="b">
+              <label for="payment-card-name">Name on Card:</label>
+              <input
+                id="payment-card-name"
+                type="text"
+                placeholder="NIKOLA TESLA"
+                required
+              />
+            </div>
+            <div class="form__invalid-msg--g invalid-name-msg-js hide--g b">
+              <i class="uil uil-exclamation-triangle icon--small--g"></i>
+              <span>Invalid name&#33;</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn--g btn--prim--g btn--mw--g checkout-btn-js">Place order</button>
       </div>
 
     </div>

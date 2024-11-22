@@ -15,6 +15,7 @@ import {
   saveToStorage, 
   showElements,
   centsToDollars,
+  validateCreditCardNumber,
 } from "../../../controllers/utils.js";
 import { 
   addDelAddr, 
@@ -46,20 +47,26 @@ const addrCloseBtn = addrForm.querySelector(".close-btn-js");
 const addrInput = addrForm.querySelector(".input-js");
 const addrSubmitBtn = addrForm.querySelector(".submit-btn-js");
 
+//payment method
+const selectPaymentMethod = checkoutForm.querySelector("#payment-method");
+const cardForm = checkoutForm.querySelector(".card-form-js");
+
 
 function responsiveCheckoutForm() {
   responsiveSelectDelAddr();
   responsiveAddDelAddrBtn();
-  responsiveaddrCloseBtn();
+  responsiveAddrCloseBtn();
   responsiveDelAddrSubmitBtn();
+
+  responsiveSelectPaymentMethod();
 
   responsiveCheckoutBtn();
 }
 
 function responsiveCheckoutBtn() {
   checkoutBtn.addEventListener("click", () => {
-    if(getItemsSelected().length == 0) { //btn disable when no item selected
-      console.error("no product selected");
+    if(selectPaymentMethod.value === "card" && !validateCardForm()) {
+      console.error("card input unvalid!");
     } else {
       handleCheckout();
       console.log("Order added");
@@ -116,7 +123,7 @@ function responsiveAddDelAddrBtn() {
   });
 }
 
-function responsiveaddrCloseBtn() {
+function responsiveAddrCloseBtn() {
   addrCloseBtn.addEventListener("click", e => {
     e.preventDefault();
     hideElements(addAddrBackDrop);
@@ -147,6 +154,14 @@ function responsiveSelectDelAddr() {
   });
 }
 
+function responsiveSelectPaymentMethod() {
+  selectPaymentMethod.addEventListener("change", () => {
+    selectPaymentMethod.value === "cash"
+      ? hideElements(cardForm)
+      : showElements(cardForm);
+  });
+}
+
 function genDelAddrOptionHTML() {
   let htmlDoc = `
     <option value="" disabled selected>select</option>
@@ -161,5 +176,53 @@ function genDelAddrOptionHTML() {
   return htmlDoc;
 }
 
+function validateCardForm() {
+  let result = true;
+
+  const cardNumber = cardForm.querySelector("#payment-card-number").value;
+  const expiryDate = cardForm.querySelector("#payment-card-expire").value;
+  const cvv = cardForm.querySelector("#payment-card-cvv").value;
+  const cardName = cardForm.querySelector("#payment-card-name").value;
+
+  const invalidNumberMsg = cardForm.querySelector(".invalid-number-msg-js");
+  const invalidExpiryDateMsg = cardForm.querySelector(".invalid-date-msg-js");
+  const invalidCvvMsg = cardForm.querySelector(".invalid-cvv-msg-js");
+  const invalidNameMsg = cardForm.querySelector(".invalid-name-msg-js");
+
+  if(cardNumber === "" || !validateCreditCardNumber(cardNumber)) {
+    showElements(invalidNumberMsg);
+    result = false;
+  } else {
+    hideElements(invalidNumberMsg);
+  }
+  
+  const now = new Date();
+  const expiryDateFormatted = expiryDate === ""
+    ? new Date()
+    : new Date(expiryDate);
+  if(expiryDateFormatted <= now) {
+    showElements(invalidExpiryDateMsg);
+    result = false;
+  } else {
+    hideElements(invalidExpiryDateMsg);
+  }
+  
+  if(cvv === "" || isNaN(cvv) || cvv.length !== 3) { //three-digit code
+    showElements(invalidCvvMsg);
+    result = false;
+  } else {
+    hideElements(invalidCvvMsg);
+  }
+  
+  if(cardName.length === 0) {
+    showElements(invalidNameMsg);
+    result = false;
+  } else {
+    hideElements(invalidNameMsg);
+  }
+
+  return result;
+}
+
 export default responsiveCheckoutForm;
-export { updateCheckoutForm};
+export { updateCheckoutForm };

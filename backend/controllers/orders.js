@@ -4,6 +4,7 @@ import { getFromStorage, saveToStorage, generateUID, includesSubArr } from "./ut
 import { getDefaultDeliveryStateId } from "./delivery/states.js";
 import { checkUserExist } from "./users/users.js";
 import deliveryAddress from "../../assets/models/delivery/addresses.js";
+import { getDeliveryAddress } from "./delivery/addresses.js";
 
 
 export function getOrdersList() {

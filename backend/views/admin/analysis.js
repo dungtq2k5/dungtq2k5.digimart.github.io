@@ -1,10 +1,14 @@
 import { getBrandDetail } from "../../controllers/products/brands.js";
 import { getChipsetDetail } from "../../controllers/products/chipsets.js";
-import { sortProductsBySold } from "../../controllers/products/products.js";
+import { getProductsList, sortProductsBySold } from "../../controllers/products/products.js";
+import { centsToDollars } from "../../controllers/utils.js";
 
 const mainContainer = document.getElementById("content");
 const itemsContainer = mainContainer.querySelector(".items-container-js");
+const totalCents = mainContainer.querySelector(".total-cents-js");
+const totalDollars = mainContainer.querySelector(".total-dollars-js");
 
+updateTotal();
 renderItems();
 
 function renderItems(list=sortProductsBySold()) {
@@ -40,4 +44,21 @@ function renderItems(list=sortProductsBySold()) {
   });
 
   itemsContainer.innerHTML = htmlDoc;
+}
+
+function updateTotal() {
+  const total = getTotal();
+
+  totalCents.innerHTML = total;
+  totalDollars.innerHTML = centsToDollars(total);
+  console.log("update total");
+}
+
+function getTotal() {
+  let total = 0;
+  getProductsList().forEach(product => {
+    total += product.price * product.sold;
+  });
+
+  return total;
 }

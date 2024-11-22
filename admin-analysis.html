@@ -16,35 +16,6 @@
   </head>
   <body>
 
-    <header id="header" class="header header--g b">
-      <div class="header__logo">
-        <a href="admin.html" class="b"><h1>Admin page</h1></a>
-      </div>
-
-      <nav class="header__nav b">
-        <ul class="header__nav__list nav-list-js">
-          <li>
-            <button data-section="1" class="btn--none--g text--cap--g">users</button>
-          </li>
-          <li>
-            <button data-section="2" class="btn--none--g text--cap--g">products</button>
-          </li>
-          <li>
-            <button data-section="3" class="btn--none--g text--cap--g">orders</button>
-          </li>
-          <li>
-            <button data-section="4" class="btn--none--g text--cap--g btn--choose--g">analysis</button>
-          </li>
-        </ul>
-      </nav>
-
-      <div class="header__auth b">
-        <p>Hello Admin: <span class="auth-name-js">dungtran</span></p>
-        &#8739;
-        <button class="link--g btn--none--g logout-btn-js">logout</button>
-      </div>
-    </header>
-
     <main id="content" class="content content--g b">
       <!-- filter -->
       <div class="content-analysis__filter">
@@ -84,7 +55,11 @@
           <tr>
             <th class="b">product</th>
             <th class="b">sold</th>
-            <th class="b">total (cents)</th>
+            <th class="b">total (cents): 
+              <div class="content-analysis__table__total">
+                <span class="total-cents-js">0</span>&#162; &#61; &#36;<span class="total-dollars-js">0</span> 
+              </div>
+            </th>
           </tr>
         </thead>
 

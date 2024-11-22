@@ -220,3 +220,24 @@ export function genSelectOptionsHtml(list, currItemId) {
     `;
   }).join("");
 }
+
+export function validateCreditCardNumber(cardNumber) { //AI generate
+  let sum = 0;
+  let alternate = false;
+
+  for (let i = cardNumber.length - 1; i >= 0; i--) {
+    let n = parseInt(cardNumber[i]);
+
+    if (alternate) {
+      n *= 2;
+      if (n > 9) {
+        n -= 9;
+      }
+    }
+
+    sum += n;
+    alternate = !alternate;
+  }
+
+  return sum % 10 === 0;
+}

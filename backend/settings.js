@@ -21,14 +21,14 @@ export const MAX_PRODUCT_RENDERED = 3;
 export const MSG = {
   emailInvalid: "Invalid email.",
   phoneInvalid: "Invalid phone number.",
-  invalidCredential: "Invalid credentials, can't login!",
+  invalidCredential: "Invalid credentials, can't login&#33;",
 
   emailTaken: "This email is already taken.",
   phoneTaken: "This phone number is already taken.",
   
-  noProductFound: "Sorry, no products found!",
+  noProductFound: "Sorry, no products found&#33;",
   nothingInCart: "Your shopping cart is empty",
-  nothingInOrders: "No orders yet!",
+  nothingInOrders: "No orders yet&#33;",
 
   addToCartSuccess: "Added success &#10003;",
   addToCart: "Add to cart",
