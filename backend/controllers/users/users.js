@@ -1,5 +1,5 @@
 import users from "../../../assets/models/users/users.js";
-import { getDefaultStateId, getStateDetail } from "./states.js";
+import { getDefaultStateId, getStateDetail, isRestricted } from "./states.js";
 import { LOCALSTORAGE } from "../../settings.js";
 import { addDelAddr, getUserDelAddrList } from "../delivery/addresses.js";
 import {
@@ -125,7 +125,7 @@ export function loginUser(email, password) {
   );
   // console.log(getFromStorage(LOCALSTORAGE.usersList),existingUser);
 
-  if (existingUser) {
+  if (existingUser && !isRestricted(existingUser.stateId)) {
     saveToStorage(LOCALSTORAGE.userAuth, existingUser);
     return existingUser;
   }

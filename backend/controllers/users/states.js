@@ -15,3 +15,8 @@ export function getStateDetail(id) {
 export function getDefaultStateId() {
   return "1";
 }
+
+export function isRestricted(id) {
+  console.log("check restricted");
+  return Number(id) === 3;
+}

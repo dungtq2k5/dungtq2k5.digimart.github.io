@@ -69,7 +69,7 @@ export function isValidDeliveryAddress(delAddr) {
   return delAddr.length >= 1;
 }
 
-export function generateUID() { //algorithm on stackoverflow
+export function generateUID() { //algorithm on stack overflow
   return Date.now().toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9*Math.pow(10, 12)).toString(36);
 }
 

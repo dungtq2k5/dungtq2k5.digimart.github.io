@@ -96,7 +96,7 @@ function handleLogin() {
   if(!userAuthenticated()) {
     const email = emailLoginField.value;
     const password = passwordLoginField.value;
-
+    
     if(loginUser(email, password)) {
       loginForm.submit();
     } else {
