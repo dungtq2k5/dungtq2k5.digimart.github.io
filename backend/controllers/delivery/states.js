@@ -11,3 +11,7 @@ export function getDefaultDeliveryStateId() {
 export function getDeliveryState(id) {
   return getDeliveryStatesList().find(state => state.id === id);
 }
+
+export function isDelivered(id) {
+  return Number(id) === 3;
+}

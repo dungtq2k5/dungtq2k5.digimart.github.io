@@ -310,10 +310,6 @@ max-width: 200px; */
 
 /*footer*/
 .footer--g {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
   background: var(--white);
   text-align: center;
   border-top: 1px solid var(--lightgrey);

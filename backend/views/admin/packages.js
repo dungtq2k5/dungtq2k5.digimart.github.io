@@ -1,6 +1,6 @@
 import { getDeliveryAddress } from "../../controllers/delivery/addresses.js";
 import { getDeliveryState, getDeliveryStatesList } from "../../controllers/delivery/states.js";
-import { filterOrdersList, getEarliestOrderDate, getOrderDetail, getOrdersFilteredList, getOrdersList, updateOrder } from "../../controllers/orders.js";
+import { filterOrdersList, getEarliestOrderDate, getOrderDetail, getOrdersFilteredList, updateOrder } from "../../controllers/orders.js";
 import { dateFormatted, genSelectOptionsHtml, hideElements, showElements, calculatePercentage as calcPercentage, saveToStorage, getFromStorage, toggleEleInArr, includesSubArr } from "../../controllers/utils.js";
 import { getProductDetail } from "../../controllers/products/products.js"
 import { CLASSNAME, LOCALSTORAGE } from "../../settings.js";
@@ -10,8 +10,8 @@ const mainContainer = document.getElementById("content").querySelector(".orders-
 
 /* filter dates */
 const minDate = getEarliestOrderDate();
-const maxDate = new Date();
-const dayStep = 24 * 60 * 60 * 1000; //per day
+const maxDate = new Date(); maxDate.setHours(23, 59, 59, 999);
+const dayStep = 23 * 59 * 59 * 999; //per day
 
 const slider = mainContainer.querySelector(".slider-js");
 const rangeInputs = slider.querySelectorAll(".range-input-js");
@@ -81,7 +81,7 @@ function renderItems(ordersList = getOrdersFilteredList()) {
 
   });
 
-  console.log("render packages data");
+  // console.log("render packages data");
 }
 
 function renderUpdateForm(orderId) {
@@ -141,7 +141,6 @@ function renderUpdateForm(orderId) {
 }
 
 /* filter dates */
-
 function validateRange() {
   const min = minDate.getTime();
   const max = maxDate.getTime();

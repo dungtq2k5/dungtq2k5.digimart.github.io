@@ -49,6 +49,11 @@ const deliveryAddress = [
     "userId": "3",
     "address": "abcxyz street town 10"
   },
+  {
+    "id": "11",
+    "userId": "6",
+    "address": "abcxyz street town 11"
+  },
 ];
 
 export default deliveryAddress;

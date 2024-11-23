@@ -128,7 +128,7 @@
   justify-content: center;
   text-align: center;
   gap: .5em;
-  margin: 1em auto 0 auto;
+  margin: 1em auto;
   width: max-content;
 }
 .paginat__btn {

@@ -44,6 +44,7 @@ const users = [
     "email": "dungtran",
     "phone": "9528025822",
     "password": "admin123",
+    "deliveryAddressId": "11",
     "stateId": "2",
   },
 ];

@@ -1,10 +1,8 @@
 import orders from "../../assets/models/orders.js";
 import { LOCALSTORAGE } from "../settings.js";
-import { getFromStorage, saveToStorage, generateUID, includesSubArr } from "./utils.js";
-import { getDefaultDeliveryStateId } from "./delivery/states.js";
+import { getFromStorage, saveToStorage, generateUID } from "./utils.js";
+import { getDefaultDeliveryStateId, getDeliveryState, isDelivered } from "./delivery/states.js";
 import { checkUserExist } from "./users/users.js";
-import deliveryAddress from "../../assets/models/delivery/addresses.js";
-import { getDeliveryAddress } from "./delivery/addresses.js";
 
 
 export function getOrdersList() {
@@ -86,7 +84,9 @@ export function sortOrdersListByDate() {
 }
 
 export function getEarliestOrderDate() {
-  return new Date(sortOrdersListByDate()[0].placed);
+  const ordersListSorted = sortOrdersListByDate(); //avoid when list is empty
+  if(ordersListSorted.length > 0) return new Date(ordersListSorted[0].placed);
+  return new Date();
 }
 
 export function filterOrdersList({dateStart, dateEnd, statesIdList}, list=getOrdersList()) {
@@ -112,4 +112,34 @@ export function filterOrdersList({dateStart, dateEnd, statesIdList}, list=getOrd
   }
 
   return list;
+}
+
+export function getProductSoldList(dateStart, dateEnd, list=getOrdersList()) {
+  /**
+   * return an obj of productId and quantity(sold)
+   */
+
+  let result = [];
+
+  if(!(dateStart instanceof Date)) dateStart = new Date(dateStart);
+  if(!(dateEnd instanceof Date)) dateEnd = new Date(dateEnd);
+  
+  list.forEach(order => {
+    const placed = new Date(order.placed);
+
+    if(isDelivered(order.deliveryStateId) && placed >= dateStart && placed <= dateEnd) {
+      const packages = order.packages;
+
+      packages.forEach(pack => {
+        const findIndex = result.findIndex(item => item.productId === pack.productId);
+        if(findIndex !== -1) { //exist -> quant++
+          result[findIndex].quantity++;
+        } else {
+          result.push(pack);
+        }
+      });
+    }
+  });
+
+  return result;
 }
