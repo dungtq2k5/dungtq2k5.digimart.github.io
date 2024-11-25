@@ -183,6 +183,16 @@ export function dateFormatted(time) {
   return `${monthsName[time.getMonth()]} ${time.getDate()}`; //month date
 }
 
+export function fullDateFormatted(time) {
+  /**
+   * return month name - day number - year
+   */
+
+  if(!(time instanceof Date)) time = new Date(time);
+
+  return `${dateFormatted(time)} ${time.getFullYear()}`;
+}
+
 export function centsToDollars(cents, decimalPlaces=2) {
   return (cents / 100).toFixed(decimalPlaces);
 }
@@ -240,4 +250,11 @@ export function validateCreditCardNumber(cardNumber) { //AI generate
   }
 
   return sum % 10 === 0;
+}
+
+export function getLatestCurrentDate() {
+  const now = new Date();
+  now.setHours(23, 59, 59, 999);
+
+  return now;
 }

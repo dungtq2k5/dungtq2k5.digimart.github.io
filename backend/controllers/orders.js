@@ -1,7 +1,7 @@
 import orders from "../../assets/models/orders.js";
 import { LOCALSTORAGE } from "../settings.js";
 import { getFromStorage, saveToStorage, generateUID } from "./utils.js";
-import { getDefaultDeliveryStateId, getDeliveryState, isDelivered } from "./delivery/states.js";
+import { getDefaultDeliveryStateId } from "./delivery/states.js";
 import { checkUserExist } from "./users/users.js";
 
 
@@ -114,32 +114,3 @@ export function filterOrdersList({dateStart, dateEnd, statesIdList}, list=getOrd
   return list;
 }
 
-export function getProductSoldList(dateStart, dateEnd, list=getOrdersList()) {
-  /**
-   * return an obj of productId and quantity(sold)
-   */
-
-  let result = [];
-
-  if(!(dateStart instanceof Date)) dateStart = new Date(dateStart);
-  if(!(dateEnd instanceof Date)) dateEnd = new Date(dateEnd);
-  
-  list.forEach(order => {
-    const placed = new Date(order.placed);
-
-    if(isDelivered(order.deliveryStateId) && placed >= dateStart && placed <= dateEnd) {
-      const packages = order.packages;
-
-      packages.forEach(pack => {
-        const findIndex = result.findIndex(item => item.productId === pack.productId);
-        if(findIndex !== -1) { //exist -> quant++
-          result[findIndex].quantity++;
-        } else {
-          result.push(pack);
-        }
-      });
-    }
-  });
-
-  return result;
-}

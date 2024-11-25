@@ -1,7 +1,7 @@
 import { getDeliveryAddress } from "../../controllers/delivery/addresses.js";
 import { getDeliveryState, getDeliveryStatesList } from "../../controllers/delivery/states.js";
 import { filterOrdersList, getEarliestOrderDate, getOrderDetail, getOrdersFilteredList, updateOrder } from "../../controllers/orders.js";
-import { dateFormatted, genSelectOptionsHtml, hideElements, showElements, calculatePercentage as calcPercentage, saveToStorage, getFromStorage, toggleEleInArr, includesSubArr } from "../../controllers/utils.js";
+import { fullDateFormatted, genSelectOptionsHtml, hideElements, showElements, calculatePercentage as calcPercentage, saveToStorage, getFromStorage, toggleEleInArr, includesSubArr, getLatestCurrentDate } from "../../controllers/utils.js";
 import { getProductDetail } from "../../controllers/products/products.js"
 import { CLASSNAME, LOCALSTORAGE } from "../../settings.js";
 
@@ -9,8 +9,8 @@ const backDrop = document.getElementById("backdrop");
 const mainContainer = document.getElementById("content").querySelector(".orders-section-js");
 
 /* filter dates */
-const minDate = getEarliestOrderDate();
-const maxDate = new Date(); maxDate.setHours(23, 59, 59, 999);
+const minDate = getEarliestOrderDate(); minDate.setHours(0, 0, 0, 0);
+const maxDate = getLatestCurrentDate();
 const dayStep = 23 * 59 * 59 * 999; //per day
 
 const slider = mainContainer.querySelector(".slider-js");
@@ -127,7 +127,6 @@ function renderUpdateForm(orderId) {
 
     const delStateSelect = form.querySelector("#update-del-state");
     const delStateId = delStateSelect.options[delStateSelect.selectedIndex].value;
-    //TODO if delStateid is delivered -> sold of product ++
 
     updateOrder(orderId, {deliveryStateId: delStateId});
 
@@ -158,7 +157,7 @@ function validateRange() {
   dateStart.innerHTML = fullDateFormatted(start);
   dateEnd.innerHTML = fullDateFormatted(end);
   
-  const ordersFilteredList = filterOrdersList({
+  const ordersFilteredList = filterOrdersList({ //TODO move to responsiveSlider
     dateStart: start, 
     dateEnd: end,
     statesIdList: statesIdListLookup
@@ -191,16 +190,6 @@ function initDateRange() {
         : getFromStorage(LOCALSTORAGE.dateEnd) || maxDate.getTime()
     );
   });
-}
-
-function fullDateFormatted(time) {
-  /**
-   * return month name - day number - year
-   */
-
-  if(!(time instanceof Date)) time = new Date(time);
-
-  return `${dateFormatted(time)} ${time.getFullYear()}`;
 }
 
 function responsiveResetFilterBtn() {

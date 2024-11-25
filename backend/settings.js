@@ -58,6 +58,9 @@ export const LOCALSTORAGE = {
   currentProductPagination: "currentProductPagination",
 
   currentSectionIndex: "currentSectionIndex",
+
+  analysisDateStart: "analysisDateStart",
+  analysisDateEnd: "analysisDateEnd",
 }
 
 export const PAGES = {

@@ -6,6 +6,8 @@ import {
 } from "../../settings.js";
 import { generateUID, getFromStorage, includesSubArr, saveToStorage } from "../utils.js";
 import { getBrandDetail } from "./brands.js";
+import { getEarliestOrderDate, getOrdersList } from "../orders.js";
+import { isDelivered } from "../delivery/states.js";
 
 
 function getPlainProductsList(from = 0, to = products.length) {
@@ -133,4 +135,39 @@ export function filterProductsByBrand(
 
 export function sortProductsBySold(list=getProductsList()) {
   return list.sort((a, b) => a.sold - b.sold);
+}
+
+export function getProductSoldList(dateStart=getEarliestOrderDate(), dateEnd=new Date(), list=getOrdersList()) {
+  /**
+   * filtered by placed datetime, delivery state is delivered
+   * return list of objs, each contain productId and quantity(sold)
+   */
+
+  let result = [];
+
+  if(!(dateStart instanceof Date)) dateStart = new Date(parseInt(dateStart));
+  if(!(dateEnd instanceof Date)) dateEnd = new Date(parseInt(dateEnd));
+  if(dateStart > dateEnd) [dateStart, dateEnd] = [dateEnd, dateStart];
+  
+  list.forEach(order => {
+    const placed = new Date(order.placed);
+
+    if(isDelivered(order.deliveryStateId) && placed >= dateStart && placed <= dateEnd) {
+      const packages = order.packages;
+
+      packages.forEach(pack => {
+        const copiedPack = {...pack}; //avoid Pass-by-Reference
+
+        const findIndex = result.findIndex(item => item.productId === copiedPack.productId);
+        if(findIndex !== -1) { //exist -> accum quant
+          const currentQuant = Number(result[findIndex].quantity);
+          result[findIndex].quantity = String(currentQuant + Number(copiedPack.quantity));
+        } else {
+          result.push(copiedPack);
+        }
+      });
+    }
+  });
+
+  return result;
 }

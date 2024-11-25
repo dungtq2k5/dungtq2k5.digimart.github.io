@@ -11,7 +11,7 @@ const orders = [
         "quantity": "1",
       },
     ],
-    "deliveryStateId": "1",
+    "deliveryStateId": "3",
   },
   {
     "id": "2",
@@ -22,14 +22,14 @@ const orders = [
     "packages": [
       {
         "productId": "1",
-        "quantity": "1",
+        "quantity": "2",
       },
       {
         "productId": "2",
         "quantity": "3",
       },
     ],
-    "deliveryStateId": "2",
+    "deliveryStateId": "3",
   },
   {
     "id": "3",
