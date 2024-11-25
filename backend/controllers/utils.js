@@ -258,3 +258,7 @@ export function getLatestCurrentDate() {
 
   return now;
 }
+
+export function setLatestDate(time) {
+  
+}

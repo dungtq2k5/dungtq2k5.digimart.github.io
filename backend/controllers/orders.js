@@ -89,26 +89,31 @@ export function getEarliestOrderDate() {
   return new Date();
 }
 
-export function filterOrdersList({dateStart, dateEnd, statesIdList}, list=getOrdersList()) {
+
+export function filterOrdersList({dateStart, dateEnd, statesIdList, productId}, list=getOrdersList()) {
   if(dateStart > dateEnd) [dateStart, dateEnd] = [dateEnd, dateStart]; //result will auto false if undefined
 
   if(dateStart) {
-    dateStart = parseInt(dateStart);
-    if(!(dateStart instanceof Date)) dateStart = new Date(dateStart);
+    if(!(dateStart instanceof Date)) dateStart = new Date(parseInt(dateStart));
     list = list.filter(order => new Date(order.placed) >= dateStart);
     // console.log(`filter date start ${dateStart}`);
   }
 
   if(dateEnd) {
-    dateEnd = parseInt(dateEnd);
-    if(!(dateEnd instanceof Date)) dateEnd = new Date(dateEnd);
+    if(!(dateEnd instanceof Date)) dateEnd = new Date(parseInt(dateEnd));
     list = list.filter(order => new Date(order.placed) <= dateEnd);
     // console.log(`filter date end ${dateEnd}`);
   }
 
-  if(statesIdList.length !== 0) {
+  if(statesIdList && statesIdList.length !== 0) {
     list = list.filter(order => statesIdList.includes(order.deliveryStateId));
     // console.log(`filter state ${statesIdList}`);
+  }
+
+  if(productId) {
+    list = list.filter(order => {
+      return order.packages.some(pack => pack.productId === productId);
+    });
   }
 
   return list;

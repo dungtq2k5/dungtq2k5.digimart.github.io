@@ -41,3 +41,34 @@
     justify-self: start;
   }
 }
+
+/* view bills */
+.view-bills {
+  position: relative;
+  padding: 2em;
+  background: var(--lightblue);
+  border-radius: var(--border-radius);
+}
+
+.view-bills__table-box {
+  margin-bottom: 2em;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.view-bills__table-box table {
+  background: var(--white);
+}
+
+.view-bills__table-box__products {
+  display: flex;
+  flex-direction: column;
+  gap: .25em;
+  max-height: 100px;
+  overflow-y: auto;
+}
+.view-bills__table-box__products li {
+  display: grid;
+  grid-template-columns: auto 3ch 3ch;
+  gap: .5em;
+}

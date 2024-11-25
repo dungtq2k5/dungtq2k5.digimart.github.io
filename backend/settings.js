@@ -5,7 +5,7 @@ export const IMG_DEFAULT = "default"
 
 export const MAX_ITEM_SUGGESTION = 5;
 export const MAX_ITEM_CART_POPUP_RENDERED = 3;
-export const MIN_PRODUCT_PRICE = 0, MAX_PRODUCT_PRICE = 130000; //cents
+export const MIN_PRODUCT_PRICE = 0, MAX_PRODUCT_PRICE = 130000; //cents //TODO function to get min max of products List
 
 export const CLASSNAME = { //relative to css classes
   hide: "hide--g",

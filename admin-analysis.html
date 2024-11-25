@@ -17,6 +17,9 @@
   <body>
 
     <main id="content" class="content content--g b">
+      <!-- feature products -->
+
+
       <!-- filter -->
       <div class="content-analysis__filter">
         <!-- slider -->
@@ -60,6 +63,7 @@
                 <span class="total-cents-js">0</span>&#162; &#61; &#36;<span class="total-dollars-js">0</span> 
               </div>
             </th>
+            <th class="b">action</th>
           </tr>
         </thead>
 
@@ -84,6 +88,11 @@
             </td>
             <td class="b" data-cell="sold">123</td>
             <td class="b" data-cell="total (cents)">39900 * 123</td>
+            <td class="b" data-cell="action">
+              <div>
+                <button class="btn--none--g link--g">view bills</button>
+              </div>
+            </td>
           </tr> -->
           <!-- ... -->
         </tbody>
@@ -91,9 +100,64 @@
     </main>
 
     <!-- backdrop -->
-    <div id="backdrop" class="backdrop--g hide--g b"></div>
+    <div id="backdrop" class="backdrop--g hide--g b">
+      <!-- <div class="view-bills b">
+        <button class="form__close-btn--g btn--none--g b">
+          <i class="uil uil-times"></i>
+        </button>
+
+        <div class="view-bills__table-box">
+          <table>
+            <caption><h2>All bills contain product <span class="text--em--g">Iphone 15 promax</span> from ... to ...</h2></caption>
+  
+            <thead>
+              <tr>
+                <th>order id</th>
+                <th>buyer id</th>
+                <th>products</th>
+                <th>order total</th>
+                <th>delivery to</th>
+                <th>placed at</th>
+              </tr>
+            </thead>
+  
+            <tbody>
+              <tr>
+                <td data-cell="order id">123</td>
+                <td data-cell="buyer id">123</td>
+                <td data-cell="products">
+                  <ul class="view-bills__table-box__products">
+                    <li class="text--em--g">
+                      <p>product name</p>
+                      <i class="uil uil-times icon--small--g"></i>
+                      <p>2</p>
+                    </li>
+                    <li>
+                      <p>product name</p>
+                      <i class="uil uil-times icon--small--g"></i>
+                      <p>2</p>
+                    </li>
+                    <li>
+                      <p>product name</p>
+                      <i class="uil uil-times icon--small--g"></i>
+                      <p>2</p>
+                    </li>
+                  </ul>
+                </td>
+                <td data-cell="order total">&#36;29990</td>
+                <td data-cell="delivery to"><address>123 Wall Street</address></td>
+                <td data-cell="placed at">12 Sep 2024</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <button class="btn--g btn--prim--g btn--mw--g">Close</button>
+      </div> -->
+    </div>
 
     <script type="module" src="./backend/views/admin/analysis.js"></script>
 
   </body>
 </html>
+

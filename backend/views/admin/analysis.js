@@ -1,4 +1,5 @@
-import { getEarliestOrderDate } from "../../controllers/orders.js";
+import { getDeliveryAddress } from "../../controllers/delivery/addresses.js";
+import { filterOrdersList, getEarliestOrderDate } from "../../controllers/orders.js";
 import { getBrandDetail } from "../../controllers/products/brands.js";
 import { getChipsetDetail } from "../../controllers/products/chipsets.js";
 import { getProductDetail, getProductSoldList } from "../../controllers/products/products.js";
@@ -8,9 +9,13 @@ import {
   calculatePercentage as calcPercentage, 
   fullDateFormatted, 
   saveToStorage,
-  getFromStorage
+  getFromStorage,
+  hideElements,
+  showElements
 } from "../../controllers/utils.js";
 import { LOCALSTORAGE } from "../../settings.js";
+
+const backDrop = document.getElementById("backdrop");
 
 const mainContainer = document.getElementById("content");
 const itemsContainer = mainContainer.querySelector(".items-container-js");
@@ -29,6 +34,7 @@ let dateEnd = slider.querySelector(".max-js");
 const rangeFill = slider.querySelector(".range-fill-js");
 const resetFilterBtn = mainContainer.querySelector(".reset-btn-js");
 
+//temp
 responsiveSlider();
 responsiveResetFilterBtn();
 updateTotal();
@@ -45,7 +51,7 @@ function renderItems(list=getProductSoldList(rangeInputs[0].value, rangeInputs[1
     const brand = getBrandDetail(product.brandId);
 
     htmlDoc += `
-      <tr>
+      <tr data-product-id="${product.id}">
         <td class="b" data-cell="product">
           <div class="content-analysis__table__product">
             <img src="${product.img}" alt="${product.name}">
@@ -65,11 +71,27 @@ function renderItems(list=getProductSoldList(rangeInputs[0].value, rangeInputs[1
         </td>
         <td class="b" data-cell="sold">${sold}</td>
         <td class="b" data-cell="total (cents)">${product.price * sold}</td>
+        <td class="b" data-cell="action">
+          <div>
+            <button class="btn--none--g link--g btn-view-bills-js">view bills</button>
+          </div>
+        </td>
       </tr>
     `;
   });
 
   itemsContainer.innerHTML = htmlDoc;
+
+  itemsContainer.querySelectorAll("tr").forEach(item => {
+    const productId = item.dataset.productId;
+    const viewBillsBtn = item.querySelector(".btn-view-bills-js");
+
+    viewBillsBtn.addEventListener("click", () => {
+       renderProductBills(productId);
+    });
+
+  });
+
   console.log("render items");
 }
 
@@ -144,4 +166,98 @@ function responsiveResetFilterBtn() {
     localStorage.removeItem(LOCALSTORAGE.analysisDateEnd);
     location.reload();
   });
+}
+
+function renderProductBills(productId) {
+  const product = getProductDetail(productId);
+  let dateStart = new Date(parseInt(rangeInputs[0].value));
+  let dateEnd = new Date(parseInt(rangeInputs[1].value)); dateEnd.setHours(23, 59, 59, 999);
+
+  if(dateStart > dateEnd) [dateStart, dateEnd] = [dateEnd, dateStart];
+
+  const ordersFilteredList = filterOrdersList({ /* return orders list which one contain product id*/
+    dateStart,
+    dateEnd,
+    productId
+  });
+  
+  let ordersHtmlDoc = ``;
+  ordersFilteredList.forEach(order => {
+    const placed = fullDateFormatted(order.placed);
+    const deliveryTo = getDeliveryAddress(order.deliveryAddressId).address;
+    const total = centsToDollars(order.total);
+    
+    let packagesHtmlDoc = ``;
+    order.packages.forEach(pack => {
+      const product = getProductDetail(pack.productId);
+
+      packagesHtmlDoc += `
+        <li class="${product.id === productId ? "text--em--g" : ""}">
+          <p>${product.name}</p>
+          <i class="uil uil-times icon--small--g"></i>
+          <p>${pack.quantity}</p>
+        </li>
+      `;
+    })
+
+    ordersHtmlDoc += `
+      <tr>
+        <td data-cell="order id">${order.id}</td>
+        <td data-cell="buyer id">${order.userId}</td>
+        <td data-cell="products">
+          <ul class="view-bills__table-box__products">${packagesHtmlDoc}</ul>
+        </td>
+        <td data-cell="order total">&#36;${total}</td>
+        <td data-cell="delivery to"><address>${deliveryTo}</address></td>
+        <td data-cell="placed at">${placed}</td>
+      </tr>
+    `;
+  });
+
+
+  backDrop.innerHTML = `
+    <div class="view-bills b">
+      <button class="form__close-btn--g btn--none--g close-btn-js b">
+        <i class="uil uil-times"></i>
+      </button>
+
+      <div class="view-bills__table-box">
+        <table>
+          <caption>
+            <h2>
+              All bills contain
+              <span class="text--em--g">${product.name}</span> from &#34;${fullDateFormatted(dateStart)}&#34; to &#34;${fullDateFormatted(dateEnd)}&#34;
+            </h2>
+          </caption>
+
+          <thead>
+            <tr>
+              <th>order id</th>
+              <th>buyer id</th>
+              <th>products</th>
+              <th>order total</th>
+              <th>delivery to</th>
+              <th>placed at</th>
+            </tr>
+          </thead>
+
+          <tbody>${ordersHtmlDoc}</tbody>
+        </table>
+      </div>
+
+      <button class="btn--g btn--prim--g btn--mw--g close-btn-js">Close</button>
+    </div>
+  `;
+
+  const closeBtns = backDrop.querySelectorAll(".close-btn-js");
+
+  closeBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      hideElements(backDrop);
+      backDrop.innerHTML = "";
+    });
+  });
+
+  showElements(backDrop);
+  console.log(`render view bills product ${productId}`);
 }
