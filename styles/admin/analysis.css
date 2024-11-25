@@ -72,3 +72,29 @@
   grid-template-columns: auto 3ch 3ch;
   gap: .5em;
 }
+
+/* top products sold */
+.content-analysis__top-products__heading {
+  margin-bottom: .5em;
+}
+.content-analysis__top-products__list {
+  width: max-content;
+  display: flex;
+  gap: .5em;
+  border: 1px solid var(--lightgrey);
+  padding: 1em;
+  border-radius: var(--border-radius);
+  overflow-x: auto;
+}
+
+.content-analysis__top-products__list__item {
+  display: grid;
+  grid-template-columns: 4rem repeat(4, auto);
+  min-width: max-content;
+  align-items: center;
+  gap: .5em;
+  padding: .5em;
+  border: 1px solid var(--lightgrey);
+  border-radius: var(--border-radius);
+  background: var(--lightblue);
+}

@@ -16,6 +16,10 @@ table {
   border-collapse: collapse;
 }
 
+table thead {
+  background: var(--lightblue);
+}
+
 caption {
   text-align: left;
   margin-bottom: .5em;

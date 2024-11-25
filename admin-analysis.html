@@ -17,17 +17,14 @@
   <body>
 
     <main id="content" class="content content--g b">
-      <!-- feature products -->
-
-
       <!-- filter -->
       <div class="content-analysis__filter">
         <!-- slider -->
         <div class="slider--g slider-js b">
           <!-- title -->
           <div class="slider__title--g b">
-            <label for="analysis__slider__bar__min">All packages from: <span class="min-js"></span></label>
-            <label for="analysis__slider__bar__max">to: <span class="max-js"></span></label>
+            <label for="analysis__slider__bar__min">From: <span class="min-js"></span></label>
+            <label for="analysis__slider__bar__max">To: <span class="max-js"></span></label>
           </div>
 
           <!-- bar -->
@@ -50,9 +47,45 @@
         <button class="btn--none--g link--g reset-btn-js">clear filter</button>
       </div>
 
-      <!-- data -->
+      <!-- top products sold -->
+      <div class="content-analysis__top-products b">
+        <h2 class="content-analysis__top-products__heading">Top products sold <i class="uil uil-arrow-growth"></i></h2>
+
+        <ul class="content-analysis__top-products__list b">
+          <li class="content-analysis__top-products__list__item b">
+            <img src="./assets/img/products/example.webp" alt="">
+            <i class="uil uil-times icon--small--g"></i>
+            <p>iphone 15 promax 16GB 512GB</p>
+            <i class="uil uil-times icon--small--g"></i>
+            <p>12 sold</p>
+          </li>
+          <!-- ... -->
+        </ul>
+      </div>
+
+      <hr>
+
+      <!-- low products sold -->
+      <div class="content-analysis__top-products b">
+        <h2 class="content-analysis__top-products__heading">Lowest products sold <i class="uil uil-chart-down"></i></h2>
+
+        <ul class="content-analysis__top-products__list b">
+          <li class="content-analysis__top-products__list__item b">
+            <img src="./assets/img/products/example.webp" alt="">
+            <i class="uil uil-times icon--small--g"></i>
+            <p>iphone 15 promax 16GB 512GB</p>
+            <i class="uil uil-times icon--small--g"></i>
+            <p>12 sold</p>
+          </li>
+          <!-- ... -->
+        </ul>
+      </div>
+
+      <hr>
+
+      <!-- product -->
       <table class="content-analysis__table">
-        <caption class="b"><h2>Analysis</h2></caption>
+        <caption class="b"><h2>Products Analysis <i class="uil uil-analytics"></i></h2></caption>
 
         <thead class="b">
           <tr>
@@ -97,6 +130,9 @@
           <!-- ... -->
         </tbody>
       </table>
+
+      <!-- customer -->
+
     </main>
 
     <!-- backdrop -->
@@ -156,7 +192,7 @@
       </div> -->
     </div>
 
-    <script type="module" src="./backend/views/admin/analysis.js"></script>
+    <!-- <script type="module" src="./backend/views/admin/analysis.js"></script> -->
 
   </body>
 </html>

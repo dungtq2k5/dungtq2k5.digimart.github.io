@@ -56,6 +56,9 @@ summary {
 details[open] > summary {
   list-style-type: '⬆';
 }
+hr {
+  margin: 2em 0;
+}
 
 
 
@@ -240,11 +243,14 @@ max-width: 200px; */
   overflow-y: auto;
 }
 
-/* TODO aniamtion close btn */
 .form__close-btn--g { 
   position: absolute;
   top: 2px;
   right: 2px;
+  transition: opacity .15s;
+}
+.form__close-btn--g:hover {
+  opacity: .8;
 }
 .form__field--g {
   display: flex;
