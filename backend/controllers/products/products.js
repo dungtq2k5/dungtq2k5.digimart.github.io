@@ -6,7 +6,7 @@ import {
 } from "../../settings.js";
 import { generateUID, getFromStorage, includesSubArr, saveToStorage } from "../utils.js";
 import { getBrandDetail } from "./brands.js";
-import { getEarliestOrderPlacedDate, getEarliestOrderReceivedDate, getOrdersList } from "../orders.js";
+import { filterOrdersList, getEarliestOrderPlacedDate, getEarliestOrderReceivedDate, getOrdersList } from "../orders.js";
 import { isDelivered } from "../delivery/states.js";
 
 
@@ -134,7 +134,7 @@ export function filterProductsByBrand(
 }
 
 
-export function getProductSoldList(dateStart=getEarliestOrderReceivedDate(), dateEnd=new Date(), ordersList=getOrdersList()) {
+export function getProductSoldList(dateStart=getEarliestOrderReceivedDate(), dateEnd=new Date(), ordersList=filterOrdersList({statesIdList: ["3"]})) {
   /**
    * filtered by received datetime, delivery state is delivered
    * return list of objs, each contain productId and quantity(sold)
@@ -147,24 +147,22 @@ export function getProductSoldList(dateStart=getEarliestOrderReceivedDate(), dat
   if(dateStart > dateEnd) [dateStart, dateEnd] = [dateEnd, dateStart];
   
   ordersList.forEach(order => {
-    if(isDelivered(order.deliveryStateId) && order.receivedDate !== "unknown") {
-      const receivedDate = new Date(order.receivedDate);
-      
-      if(receivedDate >= dateStart && receivedDate <= dateEnd) {
-        const packages = order.packages;
-  
-        packages.forEach(pack => {
-          const copiedPack = {...pack}; //avoid Pass-by-Reference
-  
-          const findIndex = result.findIndex(item => item.productId === copiedPack.productId);
-          if(findIndex !== -1) { //exist -> accum quant
-            const currentQuant = Number(result[findIndex].quantity);
-            result[findIndex].quantity = String(currentQuant + Number(copiedPack.quantity));
-          } else {
-            result.push(copiedPack);
-          }
-        });
-      }
+    const receivedDate = new Date(order.receivedDate);
+    
+    if(receivedDate >= dateStart && receivedDate <= dateEnd) {
+      const packages = order.packages;
+
+      packages.forEach(pack => {
+        const copiedPack = {...pack}; //avoid Pass-by-Reference
+
+        const findIndex = result.findIndex(item => item.productId === copiedPack.productId);
+        if(findIndex !== -1) { //exist -> accum quant
+          const currentQuant = Number(result[findIndex].quantity);
+          result[findIndex].quantity = String(currentQuant + Number(copiedPack.quantity));
+        } else {
+          result.push(copiedPack);
+        }
+      });
     }
   });
 

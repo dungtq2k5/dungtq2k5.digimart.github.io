@@ -61,6 +61,9 @@ export const LOCALSTORAGE = {
 
   analysisDateStart: "analysisDateStart",
   analysisDateEnd: "analysisDateEnd",
+
+  analysisCustomersDateStart: "analysisCustomersDateStart",
+  analysisCustomersDateEnd: "analysisCustomersDateEnd",
 }
 
 export const PAGES = {

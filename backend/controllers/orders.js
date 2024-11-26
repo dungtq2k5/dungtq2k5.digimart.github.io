@@ -134,4 +134,3 @@ export function filterOrdersList({dateStart, dateEnd, statesIdList, productId}, 
 
   return list;
 }
-

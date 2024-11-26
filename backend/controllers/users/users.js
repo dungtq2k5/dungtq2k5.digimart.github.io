@@ -8,6 +8,7 @@ import {
   hashPassword,
   saveToStorage,
 } from "../utils.js";
+import { filterOrdersList, getEarliestOrderReceivedDate } from "../orders.js";
 
 
 export function getUsersList() {
@@ -156,41 +157,48 @@ export function isSuperUser(id) {
   return false;
 }
 
-// export function getTopPotentialUser(dateStart=getEarliestOrderDate(), dateEnd=new Date(), top=5) {
-//   /**
-//    * return a list of top users that have highest spent in specific of time
-//    */
+export function getTopPotentialUser(dateStart=getEarliestOrderReceivedDate(), dateEnd=new Date(), top) {
+  /**
+   * return a list of top users that have highest spent in specific of time
+   */
 
+  const usersTotalSpentList = getUsersTotalSpentList(dateStart, dateEnd);
+  const usersTotalSpentListSorted = usersTotalSpentList.sort((a ,b) => b.total - a.total);
 
+  return usersTotalSpentListSorted.length > 0
+    ? usersTotalSpentListSorted.slice(0, top)
+    : [];
+}
 
-// }
+export function getUsersTotalSpentList(dateStart=getEarliestOrderReceivedDate(), dateEnd=new Date(), ordersList=filterOrdersList({statesIdList: ["3"]})) {
+  /**
+   * return a list of objs that contain userId and total user has spent with specific of time
+   */
+  let result = [];
 
-// export function getUsersTotalSpentList(dateStart=getEarliestOrderDate(), dateEnd=new Date(), ordersList=getOrdersList()) {
-//   /**
-//    * return a list of objs that contain userId and total user has spent with specific of time
-//    */
-//   let result = [];
+  if(!(dateStart instanceof Date)) dateStart = new Date(parseInt(dateStart));
+  if(!(dateEnd instanceof Date)) dateEnd = new Date(parseInt(dateEnd));
+  if(dateStart > dateEnd) [dateStart, dateEnd] = [dateEnd, dateStart];
 
-//   if(dateStart > dateEnd) [dateStart, dateEnd] = [dateEnd, dateStart];
-//   if(!(dateStart instanceof Date)) dateStart = new Date(parseInt(dateStart));
-//   if(!(dateEnd instanceof Date)) dateEnd = new Date(parseInt(dateEnd));
-
-//   ordersList.forEach(order => {
-//     const placed = 
+  ordersList.forEach(order => {
+    const receivedDate = new Date(order.receivedDate);
     
-//     const copiedOrder = {...order}
-//     const findIndex = result.findIndex(item => item.userId === copiedOrder.userId);
+    if(receivedDate >= dateStart && receivedDate <= dateEnd) {
+      const copiedOrder = {...order}
+      const findIndex = result.findIndex(item => item.userId === copiedOrder.userId);
+  
+      if(findIndex !== -1) { //accum total spent
+        const currTotal = parseFloat(result[findIndex].total);
+        result[findIndex].total = String(currTotal + parseFloat(copiedOrder.total));
+      } else {
+        result.push({
+          userId: copiedOrder.userId,
+          total: copiedOrder.total
+        });
+      }
+    }
 
-//     if(findIndex !== -1) { //accum total spent
-//       const currTotal = parseFloat(result[findIndex].total);
-//       result[findIndex].total = String(currTotal + parseFloat(copiedOrder.total));
-//     } else {
-//       result.push({
-//         userId: copiedOrder.userId,
-//         total: copiedOrder.total
-//       });
-//     }
-//   });
+  });
 
-//   return result;
-// }
+  return result;
+}

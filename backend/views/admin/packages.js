@@ -31,7 +31,7 @@ function renderItems(ordersList = getOrdersFilteredList()) {
   let htmlDoc = ``;
 
   ordersList.forEach(order => {
-    const delAdrr = getDeliveryAddress(order.deliveryAddressId);
+    const delAddr = getDeliveryAddress(order.deliveryAddressId);
     const delState = getDeliveryState(order.deliveryStateId);
 
     let packsHtmlList = ``;
@@ -56,9 +56,9 @@ function renderItems(ordersList = getOrdersFilteredList()) {
         <td data-cell="products" class="content__orders-section__products b">
           <ul>${packsHtmlList}</ul>
         </td>
-        <td data-cell="total" class="b">${order.total}</td>
+        <td data-cell="total" class="b">${order.total}&#162;</td>
         <td data-cell="delivery to" class="b">
-          <address>${delAdrr.address}</address>
+          <address>${delAddr.address}</address>
         </td>
         <td data-cell="placed" class="b">${fullDateFormatted(order.placed)}</td>
         <td data-cell="package state" class="b">
