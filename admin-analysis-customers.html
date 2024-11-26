@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+    />
+
+    <link rel="stylesheet" href="styles/general.css" />
+    <link rel="stylesheet" href="styles/admin/header.css" />
+    <link rel="stylesheet" href="styles/admin/content.css" />
+    <link rel="stylesheet" href="styles/admin/analysis.css" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    <main id="content" class="content content--g b">
+      <!-- filter -->
+      <div class="content-analysis__filter">
+        <!-- slider -->
+        <div class="slider--g slider-js b">
+          <!-- title -->
+          <div class="slider__title--g b">
+            <label for="analysis__slider__bar__min">From: <span class="min-js"></span></label>
+            <label for="analysis__slider__bar__max">To: <span class="max-js"></span></label>
+          </div>
+
+          <!-- bar -->
+          <div class="slider__bar--g b">
+            <div class="slider__bar__fill--g range-fill-js"></div>
+
+            <input
+              id="analysis__slider__bar__min"
+              type="range"
+              class="slider__bar__range--g range-input-js"
+            />
+
+            <input
+              id="analysis__slider__bar__max"
+              type="range"
+              class="slider__bar__range--g range-input-js"
+            />
+          </div>
+        </div>
+        <button class="btn--none--g link--g reset-btn-js">clear filter</button>
+      </div>
+
+      <!-- customers -->
+      <table class="content-analysis__table">
+        <caption class="b"><h2>Top 5 potential customers <i class="uil uil-users-alt"></i></h2></caption>
+
+        <thead class="b">
+          <tr>
+            <th class="b">customer id</th>
+            <th class="b">email</th>
+            <th class="b">phone</th> 
+            <th class="b">action</th>
+          </tr>
+        </thead>
+
+        <tbody class="items-container-js b">
+          <tr>
+            <td class="b" data-cell="customer id">123</td>
+            <td class="b" data-cell="email">dungtranquang2005@gmail.com</td>
+            <td class="b" data-cell="phone">0392018660</td>
+            <td class="b" data-cell="all orders">
+              <div>
+                <button class="btn--none--g link--g">view customer bills</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </main>
+
+    <!-- backdrop -->
+    <div id="backdrop" class="backdrop--g hide--g b"></div>
+
+    <script type="module" src="./backend/views/admin/analysis/customers.js"></script>
+  </body>
+</html>
+

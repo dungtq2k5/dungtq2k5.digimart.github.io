@@ -1,7 +1,7 @@
 import orders from "../../assets/models/orders.js";
 import { LOCALSTORAGE } from "../settings.js";
 import { getFromStorage, saveToStorage, generateUID } from "./utils.js";
-import { getDefaultDeliveryStateId } from "./delivery/states.js";
+import { getDefaultDeliveryStateId, isDelivered } from "./delivery/states.js";
 import { checkUserExist } from "./users/users.js";
 
 
@@ -28,6 +28,7 @@ export function addOrders(userId, total, packages, deliveryAddressId, placed = n
       packages,
       deliveryAddressId,
       deliveryStateId: getDefaultDeliveryStateId(),
+      receivedDate: "unknown",
     });
 
     saveToStorage(LOCALSTORAGE.ordersList, ordersList);
@@ -43,6 +44,10 @@ export function updateOrder(id, {deliveryStateId}) {
 
   if(findIndex !== -1) {
     if(deliveryStateId) ordersList[findIndex].deliveryStateId = deliveryStateId;
+
+    ordersList[findIndex].receivedDate = isDelivered(deliveryStateId)
+      ? new Date()
+      : "unknown"
 
     saveToStorage(LOCALSTORAGE.ordersList, ordersList);
     return ordersList[findIndex];
@@ -79,18 +84,29 @@ export function getPackage(orderId, productId) {
   }
 }
 
-export function sortOrdersListByDate() {
+export function sortOrdersListByReceivedDate(list=filterOrdersList({statesIdList: ["3"]})) {
+  return list.sort((a, b) => new Date(a.receivedDate) - new Date(b.receivedDate));
+}
+
+export function sortOrdersListByPlacedDate() {
   return getOrdersList().sort((a, b) => new Date(a.placed) - new Date(b.placed));
 }
 
-export function getEarliestOrderDate() {
-  const ordersListSorted = sortOrdersListByDate(); //avoid when list is empty
-  if(ordersListSorted.length > 0) return new Date(ordersListSorted[0].placed);
-  return new Date();
+export function getEarliestOrderPlacedDate() {
+  const ordersListSorted = sortOrdersListByPlacedDate(); //avoid when list is empty
+  return ordersListSorted.length > 0 
+    ?  new Date(ordersListSorted[0].placed)
+    : new Date();
 }
 
+export function getEarliestOrderReceivedDate() {
+  const ordersListSorted = sortOrdersListByReceivedDate();
+  return ordersListSorted.length > 0 
+    ? new Date(ordersListSorted[0].receivedDate)
+    : new Date();
+}
 
-export function filterOrdersList({dateStart, dateEnd, statesIdList, productId}, list=getOrdersList()) {
+export function filterOrdersList({dateStart, dateEnd, statesIdList, productId}, list=getOrdersList()) { //mainly for packages management
   if(dateStart > dateEnd) [dateStart, dateEnd] = [dateEnd, dateStart]; //result will auto false if undefined
 
   if(dateStart) {

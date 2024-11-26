@@ -155,3 +155,42 @@ export function isSuperUser(id) {
   console.error(`User with id ${id} not found!`);
   return false;
 }
+
+// export function getTopPotentialUser(dateStart=getEarliestOrderDate(), dateEnd=new Date(), top=5) {
+//   /**
+//    * return a list of top users that have highest spent in specific of time
+//    */
+
+
+
+// }
+
+// export function getUsersTotalSpentList(dateStart=getEarliestOrderDate(), dateEnd=new Date(), ordersList=getOrdersList()) {
+//   /**
+//    * return a list of objs that contain userId and total user has spent with specific of time
+//    */
+//   let result = [];
+
+//   if(dateStart > dateEnd) [dateStart, dateEnd] = [dateEnd, dateStart];
+//   if(!(dateStart instanceof Date)) dateStart = new Date(parseInt(dateStart));
+//   if(!(dateEnd instanceof Date)) dateEnd = new Date(parseInt(dateEnd));
+
+//   ordersList.forEach(order => {
+//     const placed = 
+    
+//     const copiedOrder = {...order}
+//     const findIndex = result.findIndex(item => item.userId === copiedOrder.userId);
+
+//     if(findIndex !== -1) { //accum total spent
+//       const currTotal = parseFloat(result[findIndex].total);
+//       result[findIndex].total = String(currTotal + parseFloat(copiedOrder.total));
+//     } else {
+//       result.push({
+//         userId: copiedOrder.userId,
+//         total: copiedOrder.total
+//       });
+//     }
+//   });
+
+//   return result;
+// }

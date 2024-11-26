@@ -1,8 +1,8 @@
-import { getDeliveryAddress } from "../../controllers/delivery/addresses.js";
-import { filterOrdersList, getEarliestOrderDate } from "../../controllers/orders.js";
-import { getBrandDetail } from "../../controllers/products/brands.js";
-import { getChipsetDetail } from "../../controllers/products/chipsets.js";
-import { getProductDetail, getProductSoldList } from "../../controllers/products/products.js";
+import { getDeliveryAddress } from "../../../controllers/delivery/addresses.js";
+import { filterOrdersList, getEarliestOrderReceivedDate } from "../../../controllers/orders.js";
+import { getBrandDetail } from "../../../controllers/products/brands.js";
+import { getChipsetDetail } from "../../../controllers/products/chipsets.js";
+import { getProductDetail, getProductSoldList } from "../../../controllers/products/products.js";
 import { 
   centsToDollars, 
   getLatestCurrentDate, 
@@ -12,8 +12,8 @@ import {
   getFromStorage,
   hideElements,
   showElements
-} from "../../controllers/utils.js";
-import { LOCALSTORAGE } from "../../settings.js";
+} from "../../../controllers/utils.js";
+import { LOCALSTORAGE } from "../../../settings.js";
 
 const backDrop = document.getElementById("backdrop");
 
@@ -23,7 +23,7 @@ const totalCents = mainContainer.querySelector(".total-cents-js");
 const totalDollars = mainContainer.querySelector(".total-dollars-js");
 
 /* filter slider */
-const minDate = getEarliestOrderDate();
+const minDate = getEarliestOrderReceivedDate();
 const maxDate = getLatestCurrentDate();
 const dayStep = 23 * 59 * 59 * 999;
 
@@ -92,7 +92,7 @@ function renderItems(list=getProductSoldList(rangeInputs[0].value, rangeInputs[1
 
   });
 
-  console.log("render items");
+  // console.log("render items");
 }
 
 function updateTotal(productSoldList=getProductSoldList(rangeInputs[0].value, rangeInputs[1].value)) {
@@ -105,7 +105,7 @@ function updateTotal(productSoldList=getProductSoldList(rangeInputs[0].value, ra
 
   totalCents.innerHTML = total;
   totalDollars.innerHTML = centsToDollars(total);
-  console.log("update total");
+  // console.log("update total");
 }
 
 function validateRange() {

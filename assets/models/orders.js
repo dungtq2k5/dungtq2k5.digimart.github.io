@@ -12,6 +12,7 @@ const orders = [
       },
     ],
     "deliveryStateId": "3",
+    "receivedDate": "2024-11-25T04:54:55.169Z",
   },
   {
     "id": "2",
@@ -30,6 +31,7 @@ const orders = [
       },
     ],
     "deliveryStateId": "3",
+    "receivedDate": "2020-11-26T09:27:07.611Z",
   },
   {
     "id": "3",
@@ -40,7 +42,7 @@ const orders = [
     "packages": [
       {
         "productId": "1",
-        "quantity": "1",
+        "quantity": "2",
       },
       {
         "productId": "2",
@@ -52,6 +54,7 @@ const orders = [
       },
     ],
     "deliveryStateId": "3",
+    "receivedDate": "2023-11-26T09:27:07.611Z",
   },
 ];
 

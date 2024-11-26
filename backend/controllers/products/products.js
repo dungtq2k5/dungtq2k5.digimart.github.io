@@ -6,7 +6,7 @@ import {
 } from "../../settings.js";
 import { generateUID, getFromStorage, includesSubArr, saveToStorage } from "../utils.js";
 import { getBrandDetail } from "./brands.js";
-import { getEarliestOrderDate, getOrdersList } from "../orders.js";
+import { getEarliestOrderPlacedDate, getEarliestOrderReceivedDate, getOrdersList } from "../orders.js";
 import { isDelivered } from "../delivery/states.js";
 
 
@@ -133,13 +133,10 @@ export function filterProductsByBrand(
   return productsList.filter((item) => item.brandId === brand.id);
 }
 
-export function sortProductsBySold(list=getProductsList()) {
-  return list.sort((a, b) => a.sold - b.sold);
-}
 
-export function getProductSoldList(dateStart=getEarliestOrderDate(), dateEnd=new Date(), list=getOrdersList()) {
+export function getProductSoldList(dateStart=getEarliestOrderReceivedDate(), dateEnd=new Date(), ordersList=getOrdersList()) {
   /**
-   * filtered by placed datetime, delivery state is delivered
+   * filtered by received datetime, delivery state is delivered
    * return list of objs, each contain productId and quantity(sold)
    */
 
@@ -149,23 +146,25 @@ export function getProductSoldList(dateStart=getEarliestOrderDate(), dateEnd=new
   if(!(dateEnd instanceof Date)) dateEnd = new Date(parseInt(dateEnd));
   if(dateStart > dateEnd) [dateStart, dateEnd] = [dateEnd, dateStart];
   
-  list.forEach(order => {
-    const placed = new Date(order.placed);
-
-    if(isDelivered(order.deliveryStateId) && placed >= dateStart && placed <= dateEnd) {
-      const packages = order.packages;
-
-      packages.forEach(pack => {
-        const copiedPack = {...pack}; //avoid Pass-by-Reference
-
-        const findIndex = result.findIndex(item => item.productId === copiedPack.productId);
-        if(findIndex !== -1) { //exist -> accum quant
-          const currentQuant = Number(result[findIndex].quantity);
-          result[findIndex].quantity = String(currentQuant + Number(copiedPack.quantity));
-        } else {
-          result.push(copiedPack);
-        }
-      });
+  ordersList.forEach(order => {
+    if(isDelivered(order.deliveryStateId) && order.receivedDate !== "unknown") {
+      const receivedDate = new Date(order.receivedDate);
+      
+      if(receivedDate >= dateStart && receivedDate <= dateEnd) {
+        const packages = order.packages;
+  
+        packages.forEach(pack => {
+          const copiedPack = {...pack}; //avoid Pass-by-Reference
+  
+          const findIndex = result.findIndex(item => item.productId === copiedPack.productId);
+          if(findIndex !== -1) { //exist -> accum quant
+            const currentQuant = Number(result[findIndex].quantity);
+            result[findIndex].quantity = String(currentQuant + Number(copiedPack.quantity));
+          } else {
+            result.push(copiedPack);
+          }
+        });
+      }
     }
   });
 
