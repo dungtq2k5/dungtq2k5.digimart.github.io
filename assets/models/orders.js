@@ -56,6 +56,21 @@ const orders = [
     "deliveryStateId": "3",
     "receivedDate": "2023-11-26T09:27:07.611Z",
   },
+  {
+    "id": "4",
+    "userId": "3",
+    "total": "399",
+    "placed": "2023-11-15T09:27:07.611Z",
+    "deliveryAddressId": "3",
+    "packages": [
+      {
+        "productId": "1",
+        "quantity": "3",
+      },
+    ],
+    "deliveryStateId": "3",
+    "receivedDate": "2023-11-26T09:27:07.611Z",
+  },
 ];
 
 export default orders;

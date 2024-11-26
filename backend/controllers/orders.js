@@ -84,7 +84,7 @@ export function getPackage(orderId, productId) {
   }
 }
 
-export function sortOrdersListByReceivedDate(list=filterOrdersList({statesIdList: ["3"]})) {
+export function sortOrdersListByReceivedDate(list=filterOrdersList({delStatesIdList: ["3"]})) {
   return list.sort((a, b) => new Date(a.receivedDate) - new Date(b.receivedDate));
 }
 
@@ -106,30 +106,61 @@ export function getEarliestOrderReceivedDate() {
     : new Date();
 }
 
-export function filterOrdersList({dateStart, dateEnd, statesIdList, productId}, list=getOrdersList()) { //mainly for packages management
-  if(dateStart > dateEnd) [dateStart, dateEnd] = [dateEnd, dateStart]; //result will auto false if undefined
+export function filterOrdersList(
+  {
+  placedStart, 
+  placedEnd, 
+  receivedDateStart,
+  receivedDateEnd,
+  delStatesIdList, 
+  productId, 
+  userId
+  }, 
+  list=getOrdersList()
+) {
+  if(placedStart > placedEnd) [placedStart, placedEnd] = [placedEnd, placedStart]; //result will auto false if undefined
 
-  if(dateStart) {
-    if(!(dateStart instanceof Date)) dateStart = new Date(parseInt(dateStart));
-    list = list.filter(order => new Date(order.placed) >= dateStart);
-    // console.log(`filter date start ${dateStart}`);
+  if(placedStart) {
+    if(!(placedStart instanceof Date)) placedStart = new Date(parseInt(placedStart));
+    list = list.filter(order => new Date(order.placed) >= placedStart);
+    // console.log(`filter date start ${placedStart}`);
+    // console.log(list);
+  }
+  if(placedEnd) {
+    if(!(placedEnd instanceof Date)) placedEnd = new Date(parseInt(placedEnd));
+    list = list.filter(order => new Date(order.placed) <= placedEnd);
+    // console.log(`filter date end ${placedEnd}`);
+    // console.log(list);
+  }
+  
+  if(receivedDateStart > receivedDateEnd) [receivedDateStart, receivedDateEnd] = [receivedDateEnd, receivedDateStart];
+
+  if(receivedDateStart) {
+    if(!(receivedDateStart instanceof Date)) receivedDateStart = new Date(parseInt(receivedDateStart));
+    list = list.filter(order => new Date(order.receivedDate) >= receivedDateStart);
+  }
+  if(receivedDateEnd) {
+    if(!(receivedDateEnd instanceof Date)) receivedDateEnd = new Date(parseInt(receivedDateEnd));
+    list = list.filter(order => new Date(order.receivedDate) <= receivedDateEnd);
   }
 
-  if(dateEnd) {
-    if(!(dateEnd instanceof Date)) dateEnd = new Date(parseInt(dateEnd));
-    list = list.filter(order => new Date(order.placed) <= dateEnd);
-    // console.log(`filter date end ${dateEnd}`);
-  }
-
-  if(statesIdList && statesIdList.length !== 0) {
-    list = list.filter(order => statesIdList.includes(order.deliveryStateId));
-    // console.log(`filter state ${statesIdList}`);
+  if(delStatesIdList && delStatesIdList.length !== 0) {
+    list = list.filter(order => delStatesIdList.includes(order.deliveryStateId));
+    // console.log(`filter state ${delStatesIdList}`);
+    // console.log(list);
   }
 
   if(productId) {
     list = list.filter(order => {
       return order.packages.some(pack => pack.productId === productId);
     });
+    console.log(list);
+  }
+
+  if(userId) {
+    list = list.filter(order => order.userId === userId);
+    // console.log(`filter user ${userId}`);
+    // console.log(list);
   }
 
   return list;

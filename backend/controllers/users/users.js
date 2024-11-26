@@ -170,7 +170,7 @@ export function getTopPotentialUser(dateStart=getEarliestOrderReceivedDate(), da
     : [];
 }
 
-export function getUsersTotalSpentList(dateStart=getEarliestOrderReceivedDate(), dateEnd=new Date(), ordersList=filterOrdersList({statesIdList: ["3"]})) {
+export function getUsersTotalSpentList(dateStart=getEarliestOrderReceivedDate(), dateEnd=new Date(), ordersList=filterOrdersList({delStatesIdList: ["3"]})) {
   /**
    * return a list of objs that contain userId and total user has spent with specific of time
    */

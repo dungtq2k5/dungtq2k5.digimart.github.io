@@ -46,7 +46,7 @@
 .view-bills {
   position: relative;
   padding: 2em;
-  background: var(--lightblue);
+  background: var(--white);
   border-radius: var(--border-radius);
 }
 
@@ -54,6 +54,10 @@
   margin-bottom: 2em;
   max-height: 80vh;
   overflow-y: auto;
+}
+
+.view-bills__table-box caption {
+  margin-bottom: 2em;
 }
 
 .view-bills__table-box table {
@@ -69,8 +73,13 @@
 }
 .view-bills__table-box__products li {
   display: grid;
-  grid-template-columns: auto 3ch 3ch;
+  grid-template-columns: 35ch auto auto;
   gap: .5em;
+  text-align: left;
+}
+.view-bills__table-box__customers li {
+  grid-template-columns: 4rem repeat(3, auto);
+  align-items: center;
 }
 
 /* top products sold */

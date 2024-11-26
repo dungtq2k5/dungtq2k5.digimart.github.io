@@ -34,21 +34,21 @@ const productContainer = document.getElementById("products");
 const productDetailBackDrop = document.getElementById("product-detail-backdrop"); //fixed at index.html
 
 //pagination
-const paginant = document.getElementById("paginat");
-const navProductBackBtn = paginant.querySelector(".back-btn-js");
-const navProductForwardBtn = paginant.querySelector(".next-btn-js");
+const pagination = document.getElementById("paginat");
+const navProductBackBtn = pagination.querySelector(".back-btn-js");
+const navProductForwardBtn = pagination.querySelector(".next-btn-js");
 
-let currentPaginat = getFromStorage(LOCALSTORAGE.currentProductPagination) || 1; //keep when page refreshed
-const paginat = paginant.querySelector(".index-js");
-paginat.innerHTML = currentPaginat;
+let currentPaginateIndex = getFromStorage(LOCALSTORAGE.currentProductPagination) || 1; //keep when page refreshed
+const paginateIndex = pagination.querySelector(".index-js");
+paginateIndex.innerHTML = currentPaginateIndex;
 
 //timeout event
 let addToCartBtnTimeout;
 
 
 function renderProducts() {
-  const start = (currentPaginat-1) * MAX_PRODUCT_RENDERED;
-  const end = currentPaginat * MAX_PRODUCT_RENDERED;
+  const start = (currentPaginateIndex-1) * MAX_PRODUCT_RENDERED;
+  const end = currentPaginateIndex * MAX_PRODUCT_RENDERED;
   const productsList = getProductsFilteredList(start, end);
 
   let htmlDoc = ``;
@@ -92,11 +92,11 @@ function responsivePaginatProducts() {
   renderProductsPaginatBtns();
 
   navProductBackBtn.addEventListener("click", () => {
-    if(currentPaginat > 1) {
-      currentPaginat--
-      paginat.innerHTML = currentPaginat;
+    if(currentPaginateIndex > 1) {
+      currentPaginateIndex--
+      paginateIndex.innerHTML = currentPaginateIndex;
 
-      saveToStorage(LOCALSTORAGE.currentProductPagination, currentPaginat);
+      saveToStorage(LOCALSTORAGE.currentProductPagination, currentPaginateIndex);
       renderProductsPaginatBtns();
       renderProducts();
       
@@ -105,11 +105,11 @@ function responsivePaginatProducts() {
   });
   
   navProductForwardBtn.addEventListener("click", () => {
-    if(currentPaginat < calculatePages(getProductAmount(), MAX_PRODUCT_RENDERED)) {
-      currentPaginat++;
-      paginat.innerHTML = currentPaginat;
+    if(currentPaginateIndex < calculatePages(getProductAmount(), MAX_PRODUCT_RENDERED)) {
+      currentPaginateIndex++;
+      paginateIndex.innerHTML = currentPaginateIndex;
 
-      saveToStorage(LOCALSTORAGE.currentProductPagination, currentPaginat);
+      saveToStorage(LOCALSTORAGE.currentProductPagination, currentPaginateIndex);
       renderProductsPaginatBtns();
       renderProducts();
 
@@ -119,8 +119,8 @@ function responsivePaginatProducts() {
 }
 
 function resetPaginatProduct() {
-  currentPaginat = 1;
-  paginat.innerHTML = currentPaginat;
+  currentPaginateIndex = 1;
+  paginateIndex.innerHTML = currentPaginateIndex;
   localStorage.removeItem(LOCALSTORAGE.currentProductPagination);
   renderProductsPaginatBtns();
   // console.log("reset page index");
@@ -135,13 +135,13 @@ function renderProductsPaginatBtns() {
     return;
   }
 
-  if(currentPaginat === 1) {
+  if(currentPaginateIndex === 1) {
     addClassName(navProductBackBtn, CLASSNAME.btnDisable);
     removeClassName(navProductForwardBtn, CLASSNAME.btnDisable);
     return;
   }
 
-  if(currentPaginat === pages) {
+  if(currentPaginateIndex === pages) {
     addClassName(navProductForwardBtn, CLASSNAME.btnDisable);
     removeClassName(navProductBackBtn, CLASSNAME.btnDisable);
     return;

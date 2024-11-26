@@ -1,5 +1,5 @@
 import { getDeliveryAddress } from "../../../controllers/delivery/addresses.js";
-import { filterOrdersList, getEarliestOrderReceivedDate } from "../../../controllers/orders.js";
+import { filterOrdersList, getEarliestOrderPlacedDate } from "../../../controllers/orders.js";
 import { getBrandDetail } from "../../../controllers/products/brands.js";
 import { getChipsetDetail } from "../../../controllers/products/chipsets.js";
 import { getProductDetail, getProductSoldList } from "../../../controllers/products/products.js";
@@ -23,7 +23,7 @@ const totalCents = mainContainer.querySelector(".total-cents-js");
 const totalDollars = mainContainer.querySelector(".total-dollars-js");
 
 /* filter slider */
-const minDate = getEarliestOrderReceivedDate();
+const minDate = getEarliestOrderPlacedDate();
 const maxDate = getLatestCurrentDate();
 const dayStep = 23 * 59 * 59 * 999;
 
@@ -171,13 +171,14 @@ function responsiveResetFilterBtn() {
 function renderProductBills(productId) {
   const product = getProductDetail(productId);
   let dateStart = new Date(parseInt(rangeInputs[0].value));
-  let dateEnd = new Date(parseInt(rangeInputs[1].value)); dateEnd.setHours(23, 59, 59, 999);
-
+  let dateEnd = new Date(parseInt(rangeInputs[1].value));
+  
   if(dateStart > dateEnd) [dateStart, dateEnd] = [dateEnd, dateStart];
+  dateEnd.setHours(23, 59, 59, 999);
 
-  const ordersFilteredList = filterOrdersList({ /* return orders list which one contain product id*/
-    dateStart,
-    dateEnd,
+  const ordersFilteredList = filterOrdersList({ /* return orders list which one has product id matched*/
+    placedStart: dateStart,
+    placedEnd: dateEnd,
     productId
   });
   
@@ -193,7 +194,7 @@ function renderProductBills(productId) {
 
       packagesHtmlDoc += `
         <li class="${product.id === productId ? "text--em--g" : ""}">
-          <p>${product.name}</p>
+          <p>${product.name} - ${product.ram}GB ${product.rom}GB</p>
           <i class="uil uil-times icon--small--g"></i>
           <p>${pack.quantity}</p>
         </li>
@@ -226,7 +227,8 @@ function renderProductBills(productId) {
           <caption>
             <h2>
               All bills contain
-              <span class="text--em--g">${product.name}</span> from &#34;${fullDateFormatted(dateStart)}&#34; to &#34;${fullDateFormatted(dateEnd)}&#34;
+              <span class="text--em--g">${product.name} - ${product.ram}GB ${product.rom}GB</span> 
+              from &#34;${fullDateFormatted(dateStart)}&#34; to &#34;${fullDateFormatted(dateEnd)}&#34;
             </h2>
           </caption>
 

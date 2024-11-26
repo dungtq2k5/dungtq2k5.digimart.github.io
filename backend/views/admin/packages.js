@@ -157,22 +157,25 @@ function validateRange() {
   dateStart.innerHTML = fullDateFormatted(start);
   dateEnd.innerHTML = fullDateFormatted(end);
   
-  const ordersFilteredList = filterOrdersList({ //TODO move to responsiveSlider
-    dateStart: start, 
-    dateEnd: end,
-    statesIdList: statesIdListLookup
-  });
-  saveToStorage(LOCALSTORAGE.ordersFilteredList, ordersFilteredList);
   saveToStorage(LOCALSTORAGE.dateStart, start);
   saveToStorage(LOCALSTORAGE.dateEnd, end);
-  renderItems(ordersFilteredList);
 }
 
-function responsiveSlider() { //contain renderItems
+function responsiveSlider() {
   initDateRange();
 
   rangeInputs.forEach((e) => {
-    e.addEventListener("input", validateRange);
+    e.addEventListener("input", () => {
+      validateRange();
+
+      const ordersFilteredList = filterOrdersList({
+        placedStart: start, 
+        placedEnd: end,
+        delStatesIdList: statesIdListLookup
+      });
+      saveToStorage(LOCALSTORAGE.ordersFilteredList, ordersFilteredList);
+      renderItems(ordersFilteredList);
+    });
   });
 
   validateRange();
@@ -235,9 +238,9 @@ function renderPackFilterStates() {
       toggleEleInArr(statesIdListLookup, stateId);
       
       const ordersFilteredList = filterOrdersList({
-        dateStart: rangeInputs[0].value,
-        dateEnd: rangeInputs[1].value,
-        statesIdList: statesIdListLookup
+        placedStart: rangeInputs[0].value,
+        placedEnd: rangeInputs[1].value,
+        delStatesIdList: statesIdListLookup
       });
 
       saveToStorage(LOCALSTORAGE.packStatesIdListLookup, statesIdListLookup);
