@@ -119,7 +119,6 @@ export function filterOrdersList(
   list=getOrdersList()
 ) {
   if(placedStart > placedEnd) [placedStart, placedEnd] = [placedEnd, placedStart]; //result will auto false if undefined
-
   if(placedStart) {
     if(!(placedStart instanceof Date)) placedStart = new Date(parseInt(placedStart));
     list = list.filter(order => new Date(order.placed) >= placedStart);
@@ -134,7 +133,6 @@ export function filterOrdersList(
   }
   
   if(receivedDateStart > receivedDateEnd) [receivedDateStart, receivedDateEnd] = [receivedDateEnd, receivedDateStart];
-
   if(receivedDateStart) {
     if(!(receivedDateStart instanceof Date)) receivedDateStart = new Date(parseInt(receivedDateStart));
     list = list.filter(order => new Date(order.receivedDate) >= receivedDateStart);

@@ -2,7 +2,7 @@ import { getDeliveryAddress } from "../../../controllers/delivery/addresses.js";
 import { filterOrdersList, getEarliestOrderPlacedDate } from "../../../controllers/orders.js";
 import { getBrandDetail } from "../../../controllers/products/brands.js";
 import { getChipsetDetail } from "../../../controllers/products/chipsets.js";
-import { getProductDetail, getProductSoldList } from "../../../controllers/products/products.js";
+import { getLowProductsSoldList, getProductDetail, getProductSoldList, getTopProductsSoldList } from "../../../controllers/products/products.js";
 import { 
   centsToDollars, 
   getLatestCurrentDate, 
@@ -17,7 +17,7 @@ import { LOCALSTORAGE } from "../../../settings.js";
 
 const backDrop = document.getElementById("backdrop");
 
-const mainContainer = document.getElementById("content");
+const mainContainer = document.getElementById("content").querySelector(".analysis-products-section-js");
 const itemsContainer = mainContainer.querySelector(".items-container-js");
 const totalCents = mainContainer.querySelector(".total-cents-js");
 const totalDollars = mainContainer.querySelector(".total-dollars-js");
@@ -34,11 +34,19 @@ let dateEnd = slider.querySelector(".max-js");
 const rangeFill = slider.querySelector(".range-fill-js");
 const resetFilterBtn = mainContainer.querySelector(".reset-btn-js");
 
-//temp
-responsiveSlider();
-responsiveResetFilterBtn();
-updateTotal();
-renderItems();
+/* feature products */
+const topProductsSoldContainer = mainContainer.querySelector(".top-products-sold-js");
+const lowProductsSoldContainer = mainContainer.querySelector(".low-products-sold-js");
+
+
+function renderProductsAnalysis() {
+  responsiveSlider();
+  responsiveResetFilterBtn();
+  renderTopProductsSold();
+  renderLowProductsSold();
+  updateTotal();
+  renderItems();
+}
 
 function renderItems(list=getProductSoldList(rangeInputs[0].value, rangeInputs[1].value)) {
   let htmlDoc = ``;
@@ -55,7 +63,7 @@ function renderItems(list=getProductSoldList(rangeInputs[0].value, rangeInputs[1
         <td class="b" data-cell="product">
           <div class="content-analysis__table__product">
             <img src="${product.img}" alt="${product.name}">
-            <p>${product.name} - ${product.ram}GB ${product.rom}</p>
+            <p>${product.name} - ${product.ram}GB ${product.rom}GB</p>
             <details>
               <summary>view more info</summary>
               <ul>
@@ -64,7 +72,7 @@ function renderItems(list=getProductSoldList(rangeInputs[0].value, rangeInputs[1
                 <li>chipset: <span>${chipset.name}</span></li>
                 <li>battery capacity: <span>${product.batteryCapacity}mah</span></li>
                 <li>brand: <span>${brand.name}</span></li>
-                <li>memory: <span>${product.ram}GB RAM -  ${product.rom}GB ROM</span></li>
+                <li>memory: <span>${product.ram}GB RAM - ${product.rom}GB ROM</span></li>
               </ul>
             </details>
           </div>
@@ -137,6 +145,8 @@ function responsiveSlider() {
       validateRange();
 
       const productSoldFilteredList = getProductSoldList(rangeInputs[0].value, rangeInputs[1].value);
+      renderTopProductsSold();
+      renderLowProductsSold();
       updateTotal(productSoldFilteredList);
       renderItems(productSoldFilteredList);
     });
@@ -263,3 +273,62 @@ function renderProductBills(productId) {
   showElements(backDrop);
   console.log(`render view bills product ${productId}`);
 }
+
+// TODO handle when empty
+function renderTopProductsSold() {
+  let dateStart = new Date(parseInt(rangeInputs[0].value));
+  let dateEnd = new Date(parseInt(rangeInputs[1].value));
+  if(dateStart > dateEnd) [dateStart, dateEnd] = [dateEnd, dateStart];
+  dateEnd.setHours(23, 59, 59, 999);
+
+  const topProductsSoldList = getTopProductsSoldList(dateStart, dateEnd);
+
+  let htmlDoc = ``;
+
+  topProductsSoldList.forEach(item => {
+    const product = getProductDetail(item.productId);
+    const sold = item.quantity;
+
+    htmlDoc += `
+      <li class="content-analysis__top-products__list__item b">
+        <img src="${product.img}" alt="${product.name}">
+        <i class="uil uil-times icon--small--g"></i>
+        <p>${product.name} - ${product.ram}GB ${product.rom}GB</p>
+        <i class="uil uil-times icon--small--g"></i>
+        <p>${sold} sold</p>
+      </li>
+    `;
+  });
+
+  topProductsSoldContainer.innerHTML = htmlDoc;
+}
+
+// TODO handle when empty
+function renderLowProductsSold() {
+  let dateStart = new Date(parseInt(rangeInputs[0].value));
+  let dateEnd = new Date(parseInt(rangeInputs[1].value));
+  if(dateStart > dateEnd) [dateStart, dateEnd] = [dateEnd, dateStart];
+  dateEnd.setHours(23, 59, 59, 999);
+
+  const lowProductsSoldList = getLowProductsSoldList(dateStart, dateEnd);
+
+  let htmlDoc = ``;
+  lowProductsSoldList.forEach(item => {
+    const product = getProductDetail(item.productId);
+    const sold = item.quantity;
+
+    htmlDoc += `
+      <li class="content-analysis__top-products__list__item b">
+        <img src="${product.img}" alt="${product.name}">
+        <i class="uil uil-times icon--small--g"></i>
+        <p>${product.name} ${product.ram}GB ${product.rom}GB</p>
+        <i class="uil uil-times icon--small--g"></i>
+        <p>${sold} sold</p>
+      </li>
+    `;
+  });
+
+  lowProductsSoldContainer.innerHTML = htmlDoc;
+}
+
+export default renderProductsAnalysis;

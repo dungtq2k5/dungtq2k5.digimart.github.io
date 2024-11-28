@@ -13,6 +13,33 @@
   gap: 1em;
 }
 
+.header__nav__list__analysis {
+  position: relative;
+}
+.header__nav__list__analysis__title {
+  cursor: pointer;
+}
+.header__nav__list__analysis__dropdown {
+  display: none;
+  position: absolute;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--darkwhite2);
+  background: var(--white);
+}
+.header__nav__list__analysis__dropdown li button {
+  width: 100%;
+  padding: .5em;
+  text-align: left;
+  border-radius: var(--border-radius);
+
+}
+.header__nav__list__analysis__dropdown li button:hover  {
+  background: var(--darkwhite2);
+}
+.header__nav__list__analysis:hover .header__nav__list__analysis__dropdown {
+  display: block;
+}
+
 .header__auth {
   display: flex;
   align-items: center;

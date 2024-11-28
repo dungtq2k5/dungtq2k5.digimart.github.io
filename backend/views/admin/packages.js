@@ -1,7 +1,23 @@
 import { getDeliveryAddress } from "../../controllers/delivery/addresses.js";
 import { getDeliveryState, getDeliveryStatesList } from "../../controllers/delivery/states.js";
-import { filterOrdersList, getEarliestOrderDate, getOrderDetail, getOrdersFilteredList, updateOrder } from "../../controllers/orders.js";
-import { fullDateFormatted, genSelectOptionsHtml, hideElements, showElements, calculatePercentage as calcPercentage, saveToStorage, getFromStorage, toggleEleInArr, includesSubArr, getLatestCurrentDate } from "../../controllers/utils.js";
+import { 
+  filterOrdersList, 
+  getEarliestOrderPlacedDate, 
+  getOrderDetail, 
+  getOrdersFilteredList, 
+  updateOrder } from "../../controllers/orders.js";
+import { 
+  fullDateFormatted, 
+  genSelectOptionsHtml, 
+  hideElements, 
+  showElements, 
+  calculatePercentage as calcPercentage, 
+  saveToStorage, 
+  getFromStorage, 
+  toggleEleInArr, 
+  includesSubArr, 
+  getLatestCurrentDate 
+} from "../../controllers/utils.js";
 import { getProductDetail } from "../../controllers/products/products.js"
 import { CLASSNAME, LOCALSTORAGE } from "../../settings.js";
 
@@ -9,7 +25,7 @@ const backDrop = document.getElementById("backdrop");
 const mainContainer = document.getElementById("content").querySelector(".orders-section-js");
 
 /* filter dates */
-const minDate = getEarliestOrderDate(); minDate.setHours(0, 0, 0, 0);
+const minDate = getEarliestOrderPlacedDate(); minDate.setHours(0, 0, 0, 0);
 const maxDate = getLatestCurrentDate();
 const dayStep = 23 * 59 * 59 * 999; //per day
 
@@ -26,6 +42,12 @@ const statesIdListLookup = getFromStorage(LOCALSTORAGE.packStatesIdListLookup) |
 
 const itemsContainer = mainContainer.querySelector(".items-container-js");
 
+function renderPackagesManagement() {
+  responsiveSlider();
+  renderPackFilterStates();
+  responsiveResetFilterBtn();
+  renderItems();
+}
 
 function renderItems(ordersList = getOrdersFilteredList()) {
   let htmlDoc = ``;
@@ -169,8 +191,8 @@ function responsiveSlider() {
       validateRange();
 
       const ordersFilteredList = filterOrdersList({
-        placedStart: start, 
-        placedEnd: end,
+        placedStart: rangeInputs[0].value, 
+        placedEnd: rangeInputs[1].value,
         delStatesIdList: statesIdListLookup
       });
       saveToStorage(LOCALSTORAGE.ordersFilteredList, ordersFilteredList);
@@ -251,4 +273,4 @@ function renderPackFilterStates() {
 
 }
 
-export { responsiveSlider, renderPackFilterStates, responsiveResetFilterBtn };
+export default renderPackagesManagement;

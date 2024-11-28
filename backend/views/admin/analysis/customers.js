@@ -16,7 +16,7 @@ import { getDeliveryAddress } from "../../../controllers/delivery/addresses.js";
 
 const backDrop = document.getElementById("backdrop");
 
-const mainContainer = document.getElementById("content");
+const mainContainer = document.getElementById("content").querySelector(".analysis-customers-section-js");
 const itemsContainer = mainContainer.querySelector(".items-container-js");
 
 /* filter slider */
@@ -31,10 +31,11 @@ let dateEnd = slider.querySelector(".max-js");
 const rangeFill = slider.querySelector(".range-fill-js");
 const resetFilterBtn = mainContainer.querySelector(".reset-btn-js");
 
-//temp
-responsiveSlider();
-responsiveResetFilterBtn();
-renderItems();
+function renderCustomersAnalysis() {
+  responsiveSlider();
+  responsiveResetFilterBtn();
+  renderItems();
+}
 
 function renderItems(list=getTopPotentialUser(rangeInputs[0].value, rangeInputs[1].value, 5)) {
   let htmlDoc = ``;
@@ -230,3 +231,5 @@ function renderUserBills(userId) {
   showElements(backDrop);
   console.log(`render customer ${userId} bills`);
 }
+
+export default renderCustomersAnalysis;

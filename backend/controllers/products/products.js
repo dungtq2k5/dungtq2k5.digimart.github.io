@@ -166,5 +166,33 @@ export function getProductSoldList(dateStart=getEarliestOrderReceivedDate(), dat
     }
   });
 
+  getProductsList().forEach(product => {
+    const existingProduct = result.find(item => item.productId === product.id);
+    if(!existingProduct) {
+      result.push({
+        productId: product.id,
+        quantity: "0"
+      });
+    }
+  });
+
   return result;
+}
+
+export function getTopProductsSoldList(dateStart, dateEnd) {
+  const productsSoldList = getProductSoldList(dateStart, dateEnd);
+  const maxSold = Math.max(...productsSoldList.map(item => item.quantity));
+
+  return maxSold != 0
+    ? productsSoldList.filter(item => item.quantity == maxSold)
+    : [];
+}
+
+export function getLowProductsSoldList(dateStart, dateEnd) {
+  const productsSoldList = getProductSoldList(dateStart, dateEnd);
+  const minSold = Math.min(...productsSoldList.map(item => item.quantity));
+  // console.log(productsSoldList);
+  // console.log(minSold);
+
+  return productsSoldList.filter(item => item.quantity == minSold);
 }
