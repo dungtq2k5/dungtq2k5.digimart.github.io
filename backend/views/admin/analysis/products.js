@@ -274,7 +274,6 @@ function renderProductBills(productId) {
   console.log(`render view bills product ${productId}`);
 }
 
-// TODO handle when empty
 function renderTopProductsSold() {
   let dateStart = new Date(parseInt(rangeInputs[0].value));
   let dateEnd = new Date(parseInt(rangeInputs[1].value));
@@ -282,28 +281,32 @@ function renderTopProductsSold() {
   dateEnd.setHours(23, 59, 59, 999);
 
   const topProductsSoldList = getTopProductsSoldList(dateStart, dateEnd);
-
   let htmlDoc = ``;
 
-  topProductsSoldList.forEach(item => {
-    const product = getProductDetail(item.productId);
-    const sold = item.quantity;
-
-    htmlDoc += `
-      <li class="content-analysis__top-products__list__item b">
-        <img src="${product.img}" alt="${product.name}">
-        <i class="uil uil-times icon--small--g"></i>
-        <p>${product.name} - ${product.ram}GB ${product.rom}GB</p>
-        <i class="uil uil-times icon--small--g"></i>
-        <p>${sold} sold</p>
-      </li>
-    `;
-  });
+  if(topProductsSoldList.length > 0) {
+    topProductsSoldList.forEach(item => {
+      const product = getProductDetail(item.productId);
+      const sold = item.quantity;
+  
+      htmlDoc += `
+        <li class="content-analysis__top-products__list__item b">
+          <img src="${product.img}" alt="${product.name}">
+          <i class="uil uil-times icon--small--g"></i>
+          <p>${product.name} - ${product.ram}GB ${product.rom}GB</p>
+          <i class="uil uil-times icon--small--g"></i>
+          <p>${sold} sold</p>
+        </li>
+      `;
+    });
+  } else {
+    htmlDoc = `
+      <p>Not any products was sold in this time!</p>
+`;
+  }
 
   topProductsSoldContainer.innerHTML = htmlDoc;
 }
 
-// TODO handle when empty
 function renderLowProductsSold() {
   let dateStart = new Date(parseInt(rangeInputs[0].value));
   let dateEnd = new Date(parseInt(rangeInputs[1].value));
