@@ -19,6 +19,7 @@ const backDrop = document.getElementById("backdrop");
 
 const mainContainer = document.getElementById("content").querySelector(".analysis-products-section-js");
 const itemsContainer = mainContainer.querySelector(".items-container-js");
+const noItem = mainContainer.querySelector(".no-item-js");
 const totalCents = mainContainer.querySelector(".total-cents-js");
 const totalDollars = mainContainer.querySelector(".total-dollars-js");
 
@@ -49,56 +50,60 @@ function renderProductsAnalysis() {
 }
 
 function renderItems(list=getProductSoldList(rangeInputs[0].value, rangeInputs[1].value)) {
-  let htmlDoc = ``;
-  // console.log(list);
-
-  list.forEach(item => {
-    const sold = item.quantity;
-    const product = getProductDetail(item.productId);
-    const chipset = getChipsetDetail(product.chipSetId);
-    const brand = getBrandDetail(product.brandId);
-
-    htmlDoc += `
-      <tr data-product-id="${product.id}">
-        <td class="b" data-cell="product">
-          <div class="content-analysis__table__product">
-            <img src="${product.img}" alt="${product.name}">
-            <p>${product.name} - ${product.ram}GB ${product.rom}GB</p>
-            <details>
-              <summary>view more info</summary>
-              <ul>
-                <li>id: <span>${product.id}</span></li>
-                <li>price cents: <span>${product.price}</span></li>
-                <li>chipset: <span>${chipset.name}</span></li>
-                <li>battery capacity: <span>${product.batteryCapacity}mah</span></li>
-                <li>brand: <span>${brand.name}</span></li>
-                <li>memory: <span>${product.ram}GB RAM - ${product.rom}GB ROM</span></li>
-              </ul>
-            </details>
-          </div>
-        </td>
-        <td class="b" data-cell="sold">${sold}</td>
-        <td class="b" data-cell="total (cents)">${product.price * sold}</td>
-        <td class="b" data-cell="action">
-          <div>
-            <button class="btn--none--g link--g btn-view-bills-js">view bills</button>
-          </div>
-        </td>
-      </tr>
-    `;
-  });
-
-  itemsContainer.innerHTML = htmlDoc;
-
-  itemsContainer.querySelectorAll("tr").forEach(item => {
-    const productId = item.dataset.productId;
-    const viewBillsBtn = item.querySelector(".btn-view-bills-js");
-
-    viewBillsBtn.addEventListener("click", () => {
-       renderProductBills(productId);
+  if(list.length === 0) {
+    itemsContainer.innerHTML = "";
+    showElements(noItem);
+  } else {
+    let htmlDoc = ``;
+    list.forEach(item => {
+      const sold = item.quantity;
+      const product = getProductDetail(item.productId);
+      const chipset = getChipsetDetail(product.chipSetId);
+      const brand = getBrandDetail(product.brandId);
+  
+      htmlDoc += `
+        <tr data-product-id="${product.id}">
+          <td class="b" data-cell="product">
+            <div class="content-analysis__table__product">
+              <img src="${product.img}" alt="${product.name}">
+              <p>${product.name} - ${product.ram}GB ${product.rom}GB</p>
+              <details>
+                <summary>view more info</summary>
+                <ul>
+                  <li>id: <span>${product.id}</span></li>
+                  <li>price cents: <span>${product.price}</span></li>
+                  <li>chipset: <span>${chipset.name}</span></li>
+                  <li>battery capacity: <span>${product.batteryCapacity}mah</span></li>
+                  <li>brand: <span>${brand.name}</span></li>
+                  <li>memory: <span>${product.ram}GB RAM - ${product.rom}GB ROM</span></li>
+                </ul>
+              </details>
+            </div>
+          </td>
+          <td class="b" data-cell="sold">${sold}</td>
+          <td class="b" data-cell="total (cents)">${product.price * sold}</td>
+          <td class="b" data-cell="action">
+            <div>
+              <button class="btn--none--g link--g btn-view-bills-js">view bills</button>
+            </div>
+          </td>
+        </tr>
+      `;
     });
-
-  });
+    
+    hideElements(noItem);
+    itemsContainer.innerHTML = htmlDoc;
+  
+    itemsContainer.querySelectorAll("tr").forEach(item => {
+      const productId = item.dataset.productId;
+      const viewBillsBtn = item.querySelector(".btn-view-bills-js");
+  
+      viewBillsBtn.addEventListener("click", () => {
+         renderProductBills(productId);
+      });
+  
+    });
+  }
 
   // console.log("render items");
 }

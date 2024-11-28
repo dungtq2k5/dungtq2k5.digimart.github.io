@@ -18,7 +18,9 @@
     <link rel="icon" type="image/svg+xml" href="./assets/img/icon.svg">
     <title>Digi Mart &#8739; Admin</title> 
   </head>
-  <body>
+  <body> 
+
+  <!-- TODO handle UI when empty data -->
 
     <header id="header" class="header header--g b">
       <!-- logo -->
@@ -116,6 +118,11 @@
             <!-- ... -->
           </tbody>
         </table>
+
+        <div class="no-items-found no-item-js hide--g">
+          <i class="uil uil-cloud-times"></i>
+          <p>There's no user found!</p>
+        </div>
       </section>
 
       <!-- products section -->
@@ -208,6 +215,11 @@
             <!-- ... -->
           </tbody>
         </table>
+
+        <div class="no-items-found hide--g no-item-js">
+          <i class="uil uil-cloud-times"></i>
+          <p>There's no product found!</p>
+        </div>
       </section>
 
       <!-- orders/packages section -->
@@ -261,7 +273,7 @@
           <caption class="b">
             <h2>
               <i class="uil uil-package"></i>
-              Packages management
+              Orders management
             </h2>
           </caption>
 
@@ -304,6 +316,11 @@
             <!-- ... -->
           </tbody>
         </table>
+
+        <div class="no-items-found hide--g no-item-js">
+          <i class="uil uil-cloud-times"></i>
+          <p>There's no packages found!</p>
+        </div>
       </section>
 
       <!-- products analysis section -->
@@ -429,7 +446,12 @@
           </tr> -->
           <!-- ... -->
           </tbody>
-          </table>
+
+          <div class="no-items-found hide--g no-item-js">
+            <i class="uil uil-cloud-times"></i>
+            <p>There's no product found!</p>
+          </div>
+        </table>
       </section>
 
       <!-- customers analysis section -->
@@ -497,11 +519,21 @@
             </tr> -->
           </tbody>
         </table>
+
+        <div class="no-items-found hide--g no-item-js">
+          <i class="uil uil-cloud-times"></i>
+          <p>There's no user found</p>
+        </div>
       </section>
     </main>
 
     <!-- backdrop -->
     <div id="backdrop" class="backdrop--g hide--g b"></div>
+
+    <!--footer-->
+    <footer class="footer--g b">
+      <p>&copy; Copyright 2024. All right reserved.</p>
+    </footer>
 
     <script type="module" src="./backend/views/admin/main.js"></script>
   </body>

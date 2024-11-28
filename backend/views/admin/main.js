@@ -10,7 +10,7 @@ import {
   renderItems as renderProducts, 
   responsiveCreateBtn as resCreateProductBtn 
 } from "./products.js";
-import renderPackagesManagement from "./packages.js";
+import renderPackagesManagement from "./orders.js";
 import renderProductsAnalysis from "./analysis/products.js";
 import renderCustomersAnalysis from "./analysis/customers.js";
 

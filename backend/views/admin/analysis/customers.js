@@ -18,6 +18,7 @@ const backDrop = document.getElementById("backdrop");
 
 const mainContainer = document.getElementById("content").querySelector(".analysis-customers-section-js");
 const itemsContainer = mainContainer.querySelector(".items-container-js");
+const noItem = mainContainer.querySelector(".no-item-js");
 
 /* filter slider */
 const minDate = getEarliestOrderReceivedDate();
@@ -38,38 +39,44 @@ function renderCustomersAnalysis() {
 }
 
 function renderItems(list=getTopPotentialUser(rangeInputs[0].value, rangeInputs[1].value, 5)) {
-  let htmlDoc = ``;
-
-  list.forEach(item => {
-    const user = getUser(item.userId);
-    const totalSpent = item.total;
-
-    htmlDoc += `
-      <tr data-user-id="${user.id}">
-        <td class="b" data-cell="customer id">${user.id}</td>
-        <td class="b" data-cell="email">${user.email}</td>
-        <td class="b" data-cell="phone">${user.phone}</td>
-        <td class="b" data-cell="total spent(cents)">${totalSpent}&#162;</td>
-        <td class="b" data-cell="all orders">
-          <div>
-            <button class="btn--none--g link--g view-bills-btn-js">view customer bills</button>
-          </div>
-        </td>
-      </tr>
-    `;
-  });
-
-  itemsContainer.innerHTML = htmlDoc;
-
-  itemsContainer.querySelectorAll("tr").forEach(item => {
-    const userId = item.dataset.userId;
-    const viewBillsBtn = item.querySelector(".view-bills-btn-js");
-
-    viewBillsBtn.addEventListener("click", () => {
-      renderUserBills(userId);
+  if(list.length === 0) {
+    itemsContainer.innerHTML = "";
+    showElements(noItem);
+  } else {
+    let htmlDoc = ``;
+  
+    list.forEach(item => {
+      const user = getUser(item.userId);
+      const totalSpent = item.total;
+  
+      htmlDoc += `
+        <tr data-user-id="${user.id}">
+          <td class="b" data-cell="customer id">${user.id}</td>
+          <td class="b" data-cell="email">${user.email}</td>
+          <td class="b" data-cell="phone">${user.phone}</td>
+          <td class="b" data-cell="total spent(cents)">${totalSpent}&#162;</td>
+          <td class="b" data-cell="all orders">
+            <div>
+              <button class="btn--none--g link--g view-bills-btn-js">view customer bills</button>
+            </div>
+          </td>
+        </tr>
+      `;
     });
-
-  });
+    
+    hideElements(noItem);
+    itemsContainer.innerHTML = htmlDoc;
+  
+    itemsContainer.querySelectorAll("tr").forEach(item => {
+      const userId = item.dataset.userId;
+      const viewBillsBtn = item.querySelector(".view-bills-btn-js");
+  
+      viewBillsBtn.addEventListener("click", () => {
+        renderUserBills(userId);
+      });
+  
+    });
+  }
 
   // console.log("render items");
 }

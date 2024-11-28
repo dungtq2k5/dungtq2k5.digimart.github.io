@@ -9,55 +9,62 @@ const backDrop = document.getElementById("backdrop");
 
 const createBtn = mainContainer.querySelector(".create-btn-js");
 const itemsContainer = mainContainer.querySelector(".items-container-js");
+const noItem = mainContainer.querySelector(".no-item-js");
 
 
 function renderItems() {
-  const usersList = getUsersList(); //TODO handle when user list empty
-  let htmlDoc = "";
-
-  usersList.forEach(user => {
-    const userState = getStateDetail(user.stateId);
-
-    htmlDoc += `
-      <tr data-user-id="${user.id}">
-        <td class="b" data-cell="id">${user.id}</td>
-        <td class="b" data-cell="email">${user.email}</td>
-        <td class="b" data-cell="phone">${user.phone}</td>
-        <td class="b" data-cell="password">${user.password}</td>
-
-        <td class="b" data-cell="delivery addresses">
-          <ul class="content__body__del_addrs">${genUserDelAddrsHtmlList(user.id)}</ul>
-        </td>
-
-        <td class="b" data-cell="state">${userState.name}</td>
-
-        <td class="b" data-cell="actions">
-          <div class="btns">
-            <button class="btn--none--g link--g update-btn-js">update</button>
-            <button class="btn--none--g link--g link--red--g del-btn-js">delete</button>
-          </div>
-        </td>
-      </tr>
-    `;
-  });
-
-  itemsContainer.innerHTML = htmlDoc;
-
-  [...itemsContainer.getElementsByTagName("tr")].forEach(item => {
-    const userId = item.dataset.userId;
-    const updateBtn = item.querySelector(".update-btn-js");
-    const delBtn = item.querySelector(".del-btn-js");
-
-    updateBtn.addEventListener("click", () => {
-      console.log(`Activate update user ${userId}`);
-      renderUpdateForm(userId);
+  const usersList = getUsersList();
+  
+  if(usersList.length === 0) {
+    itemsContainer.innerHTML = "";
+    showElements(noItem);
+  } else {
+    let htmlDoc = ``;
+    usersList.forEach(user => {
+      const userState = getStateDetail(user.stateId);
+  
+      htmlDoc += `
+        <tr data-user-id="${user.id}">
+          <td class="b" data-cell="id">${user.id}</td>
+          <td class="b" data-cell="email">${user.email}</td>
+          <td class="b" data-cell="phone">${user.phone}</td>
+          <td class="b" data-cell="password">${user.password}</td>
+  
+          <td class="b" data-cell="delivery addresses">
+            <ul class="content__body__del_addrs">${genUserDelAddrsHtmlList(user.id)}</ul>
+          </td>
+  
+          <td class="b" data-cell="state">${userState.name}</td>
+  
+          <td class="b" data-cell="actions">
+            <div class="btns">
+              <button class="btn--none--g link--g update-btn-js">update</button>
+              <button class="btn--none--g link--g link--red--g del-btn-js">delete</button>
+            </div>
+          </td>
+        </tr>
+      `;
     });
-
-    delBtn.addEventListener("click", () => {
-      console.log(`Activate del user ${userId}`);
-      renderDelForm(userId);
+    
+    hideElements(noItem);
+    itemsContainer.innerHTML = htmlDoc;
+  
+    [...itemsContainer.getElementsByTagName("tr")].forEach(item => {
+      const userId = item.dataset.userId;
+      const updateBtn = item.querySelector(".update-btn-js");
+      const delBtn = item.querySelector(".del-btn-js");
+  
+      updateBtn.addEventListener("click", () => {
+        console.log(`Activate update user ${userId}`);
+        renderUpdateForm(userId);
+      });
+  
+      delBtn.addEventListener("click", () => {
+        console.log(`Activate del user ${userId}`);
+        renderDelForm(userId);
+      });
     });
-  });
+  }
 
   console.log("render users");
 }

@@ -78,3 +78,9 @@ tr:nth-of-type(2n) {
   display: flex;
   gap: .5em;
 }
+
+.no-items-found {
+  text-align: center;
+  color: var(--grey);
+  padding: 1em 0;
+}

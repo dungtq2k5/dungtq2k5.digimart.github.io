@@ -40,7 +40,9 @@ const resetFilterBtn = mainContainer.querySelector(".reset-btn-js");
 const statesFilterContainer = mainContainer.querySelector(".states-filter-js");
 const statesIdListLookup = getFromStorage(LOCALSTORAGE.packStatesIdListLookup) || [];
 
+/* data */
 const itemsContainer = mainContainer.querySelector(".items-container-js");
+const noItem = mainContainer.querySelector(".no-item-js");
 
 function renderPackagesManagement() {
   responsiveSlider();
@@ -50,58 +52,64 @@ function renderPackagesManagement() {
 }
 
 function renderItems(ordersList = getOrdersFilteredList()) {
-  let htmlDoc = ``;
-
-  ordersList.forEach(order => {
-    const delAddr = getDeliveryAddress(order.deliveryAddressId);
-    const delState = getDeliveryState(order.deliveryStateId);
-
-    let packsHtmlList = ``;
-    order.packages.forEach(pack => {
-      const product = getProductDetail(pack.productId);
-
-      packsHtmlList += `
-        <li>
-          <img src="${product.img}" alt="">
-          <p>${product.name}</p>
-          <i class="uil uil-times icon--small--g"></i>
-          <p>${pack.quantity}</p>
-        </li>
+  if(ordersList.length === 0) {
+    itemsContainer.innerHTML = "";
+    showElements(noItem);
+  } else {
+    let htmlDoc = ``;
+    
+    ordersList.forEach(order => {
+      const delAddr = getDeliveryAddress(order.deliveryAddressId);
+      const delState = getDeliveryState(order.deliveryStateId);
+  
+      let packsHtmlList = ``;
+      order.packages.forEach(pack => {
+        const product = getProductDetail(pack.productId);
+  
+        packsHtmlList += `
+          <li>
+            <img src="${product.img}" alt="">
+            <p>${product.name}</p>
+            <i class="uil uil-times icon--small--g"></i>
+            <p>${pack.quantity}</p>
+          </li>
+        `;
+      });
+  
+  
+      htmlDoc += `
+        <tr data-order-id="${order.id}">
+          <td data-cell="order id" class="b">${order.id}</td>
+          <td data-cell="buyer id" class="b">${order.userId}</td>
+          <td data-cell="products" class="content__orders-section__products b">
+            <ul>${packsHtmlList}</ul>
+          </td>
+          <td data-cell="total" class="b">${order.total}&#162;</td>
+          <td data-cell="delivery to" class="b">
+            <address>${delAddr.address}</address>
+          </td>
+          <td data-cell="placed" class="b">${fullDateFormatted(order.placed)}</td>
+          <td data-cell="package state" class="b">
+            <button class="btn--none--g link--g update-btn-js">${delState.name}</button>
+          </td>
+        </tr>
       `;
+  
     });
-
-
-    htmlDoc += `
-      <tr data-order-id="${order.id}">
-        <td data-cell="order id" class="b">${order.id}</td>
-        <td data-cell="buyer id" class="b">${order.userId}</td>
-        <td data-cell="products" class="content__orders-section__products b">
-          <ul>${packsHtmlList}</ul>
-        </td>
-        <td data-cell="total" class="b">${order.total}&#162;</td>
-        <td data-cell="delivery to" class="b">
-          <address>${delAddr.address}</address>
-        </td>
-        <td data-cell="placed" class="b">${fullDateFormatted(order.placed)}</td>
-        <td data-cell="package state" class="b">
-          <button class="btn--none--g link--g update-btn-js">${delState.name}</button>
-        </td>
-      </tr>
-    `;
-
-  });
-
-  itemsContainer.innerHTML = htmlDoc;
-
-  itemsContainer.querySelectorAll("tr").forEach(item => {
-    const orderId = item.dataset.orderId;
-    const updateBtn = item.querySelector(".update-btn-js");
-
-    updateBtn.addEventListener("click", () => {
-      renderUpdateForm(orderId);
+    
+    hideElements(noItem);
+    itemsContainer.innerHTML = htmlDoc;
+  
+    itemsContainer.querySelectorAll("tr").forEach(item => {
+      const orderId = item.dataset.orderId;
+      const updateBtn = item.querySelector(".update-btn-js");
+  
+      updateBtn.addEventListener("click", () => {
+        renderUpdateForm(orderId);
+      });
+  
     });
-
-  });
+  }
 
   // console.log("render packages data");
 }

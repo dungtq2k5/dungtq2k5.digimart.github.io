@@ -9,76 +9,83 @@ import { IMG_DEFAULT, IMG_ROOT_PATH, IMG_SIZE, IMG_TYPE } from "../../settings.j
 const mainContainer = document.getElementById("content").querySelector(".products-section-js");
 const createBtn = mainContainer.querySelector(".create-btn-js");
 const itemsContainer = mainContainer.querySelector(".tbody-js");
+const noItem = mainContainer.querySelector(".no-item-js");
 
 const backDrop = document.getElementById("backdrop");
 
 function renderItems() {
-  const productsList = getProductsList(); //TODO handle when product list empty
-  let htmlDoc = ``;
-
-  productsList.forEach(product => {
-    const brand = getBrandDetail(product.brandId);
-    const chipset = getChipsetDetail(product.chipSetId);
-    const catesStrList = product.typesId.map(id => getCategoryDetail(id).name);
-
-    htmlDoc += `
-      <tr data-product-id="${product.id}">
-        <td class="b" data-cell="image">
-          <img src="${product.img}" alt=""/>
-        </td>
-
-        <td class="b" data-cell="id">${product.id}</td>
-
-        <td class="text--cap--g b" data-cell="name">${product.name}</td>
-
-        <td class="text--cap--g b" data-cell="brand">${brand.name}</td>
-
-        <td class="text--cap--g b" data-cell="chipset">${chipset.name}</td>
-
-        <td class="b" data-cell="rom - ram">${product.rom} - ${product.ram}</td>
-
-        <td class="b" data-cell="battery capacity">${product.batteryCapacity}</td>
-
-        <td class="text--cap--g b" data-cell="categories">${catesStrList}</td>
-
-        <td class="b" data-cell="price">${product.price}</td>
-
-        <td class="b" data-cell="quantity">${product.quantity}</td>
-
-        <td class="b" data-cell="description">
-          <div class="content__products-table__description-box ">
-            <p>${product.description}</p>
-          </div>
-        </td>
-
-        <td class="b" data-cell="actions">
-          <div>
-            <button class="btn--none--g link--g update-btn-js">update</button>
-            <button class="btn--none--g link--g link--red--g del-btn-js">delete</button>
-          </div>
-        </td>
-      </tr>
-    `;
-
-  });
-
-  itemsContainer.innerHTML = htmlDoc;
-
-  [...itemsContainer.getElementsByTagName("tr")].forEach(item => {
-    const productId = item.dataset.productId;
-    const updateBtn = item.querySelector(".update-btn-js");
-    const delBtn = item.querySelector(".del-btn-js");
-
-    updateBtn.addEventListener("click", () => {
-      renderUpdateForm(productId);
+  const productsList = getProductsList();
+  
+  if(productsList.length === 0) {
+    itemsContainer.innerHTML = "";
+    showElements(noItem);
+  } else { 
+    let htmlDoc = ``;
+    productsList.forEach(product => {
+      const brand = getBrandDetail(product.brandId);
+      const chipset = getChipsetDetail(product.chipSetId);
+      const catesStrList = product.typesId.map(id => getCategoryDetail(id).name);
+  
+      htmlDoc += `
+        <tr data-product-id="${product.id}">
+          <td class="b" data-cell="image">
+            <img src="${product.img}" alt=""/>
+          </td>
+  
+          <td class="b" data-cell="id">${product.id}</td>
+  
+          <td class="text--cap--g b" data-cell="name">${product.name}</td>
+  
+          <td class="text--cap--g b" data-cell="brand">${brand.name}</td>
+  
+          <td class="text--cap--g b" data-cell="chipset">${chipset.name}</td>
+  
+          <td class="b" data-cell="rom - ram">${product.rom} - ${product.ram}</td>
+  
+          <td class="b" data-cell="battery capacity">${product.batteryCapacity}</td>
+  
+          <td class="text--cap--g b" data-cell="categories">${catesStrList}</td>
+  
+          <td class="b" data-cell="price">${product.price}</td>
+  
+          <td class="b" data-cell="quantity">${product.quantity}</td>
+  
+          <td class="b" data-cell="description">
+            <div class="content__products-table__description-box ">
+              <p>${product.description}</p>
+            </div>
+          </td>
+  
+          <td class="b" data-cell="actions">
+            <div>
+              <button class="btn--none--g link--g update-btn-js">update</button>
+              <button class="btn--none--g link--g link--red--g del-btn-js">delete</button>
+            </div>
+          </td>
+        </tr>
+      `;
+  
     });
 
-    delBtn.addEventListener("click", () => {
-      console.log(`activate delete product ${productId}`);
-      renderDelForm(productId);
+    hideElements(noItem);
+    itemsContainer.innerHTML = htmlDoc;
+  
+    [...itemsContainer.getElementsByTagName("tr")].forEach(item => {
+      const productId = item.dataset.productId;
+      const updateBtn = item.querySelector(".update-btn-js");
+      const delBtn = item.querySelector(".del-btn-js");
+  
+      updateBtn.addEventListener("click", () => {
+        renderUpdateForm(productId);
+      });
+  
+      delBtn.addEventListener("click", () => {
+        console.log(`activate delete product ${productId}`);
+        renderDelForm(productId);
+      });
     });
-  });
-
+  }
+  
   console.log("render products data");
 }
 

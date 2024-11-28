@@ -86,6 +86,7 @@ hr {
 .content--g {
   padding-top: 6em !important; 
   padding-bottom: 6em !important;
+  min-height: 80vh;
 }
 
 .flex--gap--g {
