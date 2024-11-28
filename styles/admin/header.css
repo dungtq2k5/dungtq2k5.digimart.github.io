@@ -22,7 +22,6 @@
 .header__nav__list__analysis__dropdown {
   display: none;
   position: absolute;
-  border-radius: var(--border-radius);
   border: 1px solid var(--darkwhite2);
   background: var(--white);
 }
@@ -30,8 +29,7 @@
   width: 100%;
   padding: .5em;
   text-align: left;
-  border-radius: var(--border-radius);
-
+  border-radius: 0px;
 }
 .header__nav__list__analysis__dropdown li button:hover  {
   background: var(--darkwhite2);

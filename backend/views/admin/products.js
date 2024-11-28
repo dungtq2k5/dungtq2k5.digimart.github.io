@@ -46,7 +46,7 @@ function renderItems() {
   
           <td class="text--cap--g b" data-cell="categories">${catesStrList}</td>
   
-          <td class="b" data-cell="price">${product.price}</td>
+          <td class="b" data-cell="price">${product.price}&#65504;</td>
   
           <td class="b" data-cell="quantity">${product.quantity}</td>
   
@@ -149,6 +149,7 @@ function renderUpdateForm(productId) {
       <div class="create__form__upload-img b">
         <!-- display -->
         <img src="${product.img}" alt="" class="create__form__upload-img__display img-display-js b">
+        <button class="btn--none--g link--g link--red--g remove-img-js">remove image</button>
 
         <!-- upload -->
         <label for="update-img" class="create__form__upload-img__upload drop-area-js b">
@@ -157,7 +158,7 @@ function renderUpdateForm(productId) {
           <div class="create__form__upload-img__upload__info b">
           <div class="create__form__upload-img__upload__info__title">
             <i class="uil uil-upload icon--small--g"></i>
-            <p>drag an image here or upload a file</p>
+            <p>drag an image here or upload it</p>
           </div>
           <p class="text--em--g">
             Only support image with size &#91;${IMG_SIZE} x ${IMG_SIZE}&#93;px and .${IMG_TYPE} type
@@ -282,6 +283,7 @@ function renderUpdateForm(productId) {
   `;
 
   const imgDisplay = backDrop.querySelector(".img-display-js");
+  const removeImgBtn = backDrop.querySelector(".remove-img-js");
   const imgDropArea = backDrop.querySelector(".drop-area-js");
   const inputImg = backDrop.querySelector("#update-img");
 
@@ -294,6 +296,17 @@ function renderUpdateForm(productId) {
     imgDisplay.setAttribute("src", imgLink);
     reader.readAsDataURL(inputImg.files[0]);
   }
+
+  removeImgBtn.addEventListener("click", e => {
+    e.preventDefault();
+    const defaultImg = `${IMG_ROOT_PATH}/${IMG_DEFAULT}.${IMG_TYPE}`;
+
+    inputImg.value = "";
+    product.img = defaultImg;
+    imgDisplay.setAttribute("src",  defaultImg);
+
+    console.log("remove img");
+  });
 
   imgDropArea.addEventListener("dragover", e => e.preventDefault());
 
@@ -365,6 +378,7 @@ function renderUpdateForm(productId) {
 
 function renderCreateForm() {
   const reader = new FileReader();
+  const defaultImg = `${IMG_ROOT_PATH}/${IMG_DEFAULT}.${IMG_TYPE}`;
   const brandsList = getBrandsList();
   const chipsetsList = getChipsetsList();
   const catesList = getCategoriesList();
@@ -380,7 +394,8 @@ function renderCreateForm() {
       <!-- img -->
       <div class="create__form__upload-img b">
         <!-- display -->
-        <img src="" alt="no image upload" class="create__form__upload-img__display img-display-js b">
+        <img src="${defaultImg}" alt="no image upload" class="create__form__upload-img__display img-display-js b">
+        <button class="btn--none--g link--g link--red--g remove-img-js">remove image</button>
 
         <!-- upload -->
         <label for="create-img" class="create__form__upload-img__upload drop-area-js b">
@@ -507,6 +522,7 @@ function renderCreateForm() {
   `;
 
   const imgDisplay = backDrop.querySelector(".img-display-js");
+  const removeImgBtn = backDrop.querySelector(".remove-img-js");
   const imgDropArea = backDrop.querySelector(".drop-area-js");
   const inputImg = backDrop.querySelector("#create-img");
 
@@ -519,6 +535,15 @@ function renderCreateForm() {
     imgDisplay.setAttribute("src", imgLink);
     reader.readAsDataURL(inputImg.files[0]);
   }
+
+  removeImgBtn.addEventListener("click", e => {
+    e.preventDefault();
+
+    inputImg.value = "";
+    imgDisplay.setAttribute("src",  defaultImg);
+
+    console.log("remove img");
+  });
 
   imgDropArea.addEventListener("dragover", e => e.preventDefault());
 
@@ -573,7 +598,7 @@ function renderCreateForm() {
       name, 
       price, 
       quantity, 
-      img: inputImg.files[0] ? reader.result : `${IMG_ROOT_PATH}/${IMG_DEFAULT}.${IMG_TYPE}`,
+      img: inputImg.files[0] ? reader.result : defaultImg,
       rom, 
       ram, 
       batteryCapacity, 
@@ -612,5 +637,6 @@ function genCatesCheckBoxHtmlList(catesList=getCategoriesList(), currIdsList=[-1
     `;
   }).join("");
 }
+
 
 export { renderItems, responsiveCreateBtn };

@@ -81,6 +81,11 @@ export function updateProduct(id, product, productsList=getProductsList()) { //u
   return false;
 }
 
+// export function updateProductImg(id, imgLink) {
+//   const productsList = getProductsList();
+//   const findIndex = productsList.findIndex()
+// }
+
 export function checkProductExist(id, productsList=getProductsList()) {
   const existingProduct = productsList.find((item) => item.id === id);
   return existingProduct !== undefined;

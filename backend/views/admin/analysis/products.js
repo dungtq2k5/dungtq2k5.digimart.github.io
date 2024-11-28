@@ -81,7 +81,7 @@ function renderItems(list=getProductSoldList(rangeInputs[0].value, rangeInputs[1
             </div>
           </td>
           <td class="b" data-cell="sold">${sold}</td>
-          <td class="b" data-cell="total (cents)">${product.price * sold}</td>
+          <td class="b" data-cell="total (cents)">${product.price * sold}&#65504;</td>
           <td class="b" data-cell="action">
             <div>
               <button class="btn--none--g link--g btn-view-bills-js">view bills</button>
