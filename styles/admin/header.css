@@ -10,7 +10,18 @@
 
 .header__nav__list {
   display: flex;
-  gap: 1em;
+  gap: .5em;
+}
+.header__nav__list button {
+  padding: 0 .5em;
+  border-radius: var(--border-radius);
+  transition: background .15s;
+}
+.header__nav__list button:hover {
+  background: var(--darkwhite);
+}
+.header__nav__list button:active {
+  background: var(--darkwhite2);
 }
 
 .header__nav__list__analysis {
@@ -31,9 +42,9 @@
   text-align: left;
   border-radius: 0px;
 }
-.header__nav__list__analysis__dropdown li button:hover  {
+/* .header__nav__list__analysis__dropdown li button:hover  {
   background: var(--darkwhite2);
-}
+} */
 .header__nav__list__analysis:hover .header__nav__list__analysis__dropdown {
   display: block;
 }

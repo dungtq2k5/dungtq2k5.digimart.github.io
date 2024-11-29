@@ -138,10 +138,10 @@ max-width: 200px; */
   height: max-content;
   border: 1px solid transparent;
   border-radius: var(--border-radius);
-  transition: opacity .15s;
 }
 .btn--g:hover {
   opacity: .8;
+  transform: scale(1.1);
 }
 .btn--g:active {
   opacity: 1;

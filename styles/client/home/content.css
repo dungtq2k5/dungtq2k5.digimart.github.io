@@ -24,7 +24,13 @@
   border: 1px solid transparent;
   border-radius: var(--border-radius);
   padding: .25em .5em;
-
+  transition: background .15s;
+}
+.content__categories__item:hover {
+  background: var(--darkwhite);
+}
+.content__categories__item:active {
+  background: var(--darkwhite2);
 }
 /*products*/
 .content__products {
