@@ -1,5 +1,5 @@
-*.txt
 notes/
 test.*
-draft
+draft/
 cspell.json
+.vscode/

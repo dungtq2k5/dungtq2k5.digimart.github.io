@@ -295,6 +295,7 @@ function renderUpdateForm(productId) {
     let imgLink = URL.createObjectURL(inputImg.files[0]);
     imgDisplay.setAttribute("src", imgLink);
     reader.readAsDataURL(inputImg.files[0]);
+    showElements(removeImgBtn);
   }
 
   removeImgBtn.addEventListener("click", e => {
@@ -304,6 +305,7 @@ function renderUpdateForm(productId) {
     inputImg.value = "";
     product.img = defaultImg;
     imgDisplay.setAttribute("src",  defaultImg);
+    hideElements(removeImgBtn);
 
     console.log("remove img");
   });
@@ -395,7 +397,7 @@ function renderCreateForm() {
       <div class="create__form__upload-img b">
         <!-- display -->
         <img src="${defaultImg}" alt="no image upload" class="create__form__upload-img__display img-display-js b">
-        <button class="btn--none--g link--g link--red--g remove-img-js">remove image</button>
+        <button class="btn--none--g link--g link--red--g hide--g remove-img-js">remove image</button>
 
         <!-- upload -->
         <label for="create-img" class="create__form__upload-img__upload drop-area-js b">
@@ -534,6 +536,7 @@ function renderCreateForm() {
     let imgLink = URL.createObjectURL(inputImg.files[0]);
     imgDisplay.setAttribute("src", imgLink);
     reader.readAsDataURL(inputImg.files[0]);
+    showElements(removeImgBtn);
   }
 
   removeImgBtn.addEventListener("click", e => {
@@ -541,6 +544,7 @@ function renderCreateForm() {
 
     inputImg.value = "";
     imgDisplay.setAttribute("src",  defaultImg);
+    hideElements(removeImgBtn);
 
     console.log("remove img");
   });

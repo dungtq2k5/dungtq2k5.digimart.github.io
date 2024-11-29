@@ -14,28 +14,30 @@ import renderPackagesManagement from "./orders.js";
 import renderProductsAnalysis from "./analysis/products.js";
 import renderCustomersAnalysis from "./analysis/customers.js";
 
-const user = userAuthenticated();
-
-if(!(user && isSuperUser(user.id))) {
-  renderAuthForm();
-} else {
-  console.log("Login to admin page success");
-  responsiveHeader(genEmailToUsername(user.email));
-
-  //users
-  renderUsers();
-  resCreateUserBtn();
-
-  //products
-  renderProducts();
-  resCreateProductBtn();
-
-  //packages
-  renderPackagesManagement();
-
-  //products analysis
-  renderProductsAnalysis();
-
-  //customers analysis
-  renderCustomersAnalysis();
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const user = userAuthenticated();
+  
+  if(!(user && isSuperUser(user.id))) {
+    renderAuthForm();
+  } else {
+    console.log("Login to admin page success");
+    responsiveHeader(genEmailToUsername(user.email));
+  
+    //users
+    renderUsers();
+    resCreateUserBtn();
+  
+    //products
+    renderProducts();
+    resCreateProductBtn();
+  
+    //packages
+    renderPackagesManagement();
+  
+    //products analysis
+    renderProductsAnalysis();
+  
+    //customers analysis
+    renderCustomersAnalysis();
+  }
+});
