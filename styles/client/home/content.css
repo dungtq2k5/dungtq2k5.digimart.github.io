@@ -24,10 +24,11 @@
   border: 1px solid transparent;
   border-radius: var(--border-radius);
   padding: .25em .5em;
-  transition: background .15s;
+  transition: background .15s, transform .15s;
 }
 .content__categories__item:hover {
   background: var(--darkwhite);
+  transform: translateX(5%);
 }
 .content__categories__item:active {
   background: var(--darkwhite2);
@@ -48,10 +49,12 @@
   border: 1px solid var(--lightgrey);
   border-radius: var(--border-radius);
   cursor: pointer;
-  transition: background .15s;
+  transition: background .15s, transform 300ms;
 }
 .content__products__card:hover {
-  background: var(--darkwhite);
+  /* background: var(--darkwhite); */
+  /* background: var(--lightblue); */
+  transform: scale(1.05);
 }
 .content__products__card__info-box {
   display: flex;

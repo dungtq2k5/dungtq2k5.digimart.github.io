@@ -78,10 +78,26 @@ hr {
   z-index: 99;
 }
 .header__logo__g {
-  color: var(--blue);
+  /* color: var(--blue); */
   font-size: 1.65rem;
   font-weight: 500;
   white-space: nowrap;
+  background: radial-gradient( 
+  circle at 100%,
+  var(--blue),
+  var(--darkblue) 50%,
+  var(--darkwhite2) 75%,
+  var(--lightblue) 75%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: animatedTextGradient 5s linear infinite;
+}
+@keyframes animatedTextGradient {
+  to {
+    background-position: 200% center;
+  }
 }
 .content--g {
   padding-top: 6em !important; 
@@ -138,10 +154,11 @@ max-width: 200px; */
   height: max-content;
   border: 1px solid transparent;
   border-radius: var(--border-radius);
+  transition: opacity .15s, transform 300ms;
 }
 .btn--g:hover {
-  opacity: .8;
-  transform: scale(1.1);
+  opacity: .9;
+  transform: scale(1.05);
 }
 .btn--g:active {
   opacity: 1;
@@ -152,7 +169,7 @@ max-width: 200px; */
 }
 .btn--sec--g {
   color: var(--blue);
-  background: transparent;
+  background: var(--white);
   border-color: var(--lightgrey);
 }
 .btn--del--g {
@@ -248,10 +265,11 @@ max-width: 200px; */
   position: absolute;
   top: 2px;
   right: 2px;
-  transition: opacity .15s;
+  transition: opacity .15s, transform 300ms;
 }
 .form__close-btn--g:hover {
   opacity: .8;
+  transform: scale(1.1);
 }
 .form__field--g {
   display: flex;
