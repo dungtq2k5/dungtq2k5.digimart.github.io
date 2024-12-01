@@ -1,14 +1,28 @@
 /* general */
 .content {
   padding: 1em;
-}
 
+}
+.content section h2 {
+  font-size: 1.75rem;
+} 
+.content section h3 {
+  font-size: 1.5rem;
+}
 .content__create-btn {
   margin-bottom: .5em;
 }
-
 .content section:not(:first-child) {
   display: none;
+}
+
+.content-section__filter {
+  width: max-content;
+  min-width: 50%;
+  margin-top: 1.5em;
+  padding: 1em;
+  border: 1px solid var(--lightgrey);
+  border-radius: var(--border-radius);
 }
 
 table {

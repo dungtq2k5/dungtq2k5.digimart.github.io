@@ -24,24 +24,24 @@
       <!-- logo -->
       <a href="./admin.html">
         <div class="header__logo logo-js b">
-          <p>
+          <h1 class="h1--g">
             <span class="header__logo__g">Digi Mart</span>
             &#8211;
             Admin Page
-          </p>
+          </h1>
         </div>
       </a>
 
       <nav class="header__nav b">
         <ul class="header__nav__list nav-list-js">
           <li>
-            <button data-section="1" class="btn--none--g text--cap--g btn--choose--g">users</button>
+            <button data-section="1" class="btn--none--g text--cap--g btn--choose--g" title="users management">users</button>
           </li>
           <li>
-            <button data-section="2" class="btn--none--g text--cap--g">products</button>
+            <button data-section="2" class="btn--none--g text--cap--g" title="products management">products</button>
           </li>
           <li>
-            <button data-section="3" class="btn--none--g text--cap--g">orders</button>
+            <button data-section="3" class="btn--none--g text--cap--g" title="orders management">orders</button>
           </li>
           <li class="header__nav__list__analysis">
             <div class="header__nav__list__analysis__title text--cap--g">
@@ -222,8 +222,11 @@
 
       <!-- orders/packages section -->
       <section class="content__orders-section orders-section-js b">
+
+        <h2><i class="uil uil-package"></i> Orders Management</h2>
+
         <!-- filter search -->
-        <div class="content__orders-section__filter">
+        <div class="content-section__filter content__orders-section__filter">
           <!-- slider -->
           <div class="slider--g slider-js b">
             <!-- title -->
@@ -269,10 +272,7 @@
         <!-- data -->
         <table class="b">
           <caption class="b">
-            <h2>
-              <i class="uil uil-package"></i>
-              Orders management
-            </h2>
+            <h3>All Orders</h3>
           </caption>
 
           <thead class="b">
@@ -323,8 +323,11 @@
 
       <!-- products analysis section -->
       <section class="analysis-products-section-js b">
+
+        <h2><i class="uil uil-analytics"></i> Products Analysis</h2>
+
         <!-- filter -->
-        <div class="content-analysis__filter">
+        <div class="content-section__filter content-analysis__filter">
           <!-- slider -->
           <div class="slider--g slider-js b">
           <!-- title -->
@@ -357,10 +360,10 @@
         <div class="content-analysis__feature-products">
           <!-- top products sold -->
           <div class="content-analysis__top-products b">
-            <h2 class="content-analysis__top-products__heading">
+            <h3 class="content-analysis__top-products__heading">
               <i class="uil uil-arrow-growth"></i>
               Top products sold 
-            </h2>
+            </h3>
 
             <ul class="content-analysis__top-products__list top-products-sold-js b">
               <!-- <li class="content-analysis__top-products__list__item b">
@@ -371,14 +374,14 @@
                 <p>12 sold</p>
               </li> -->
             </ul>
-            </div>
+          </div>
 
             <!-- low products sold -->
             <div class="content-analysis__top-products b">
-            <h2 class="content-analysis__top-products__heading">
+            <h3 class="content-analysis__top-products__heading">
               <i class="uil uil-chart-down"></i>
               Lowest products sold 
-            </h2>
+            </h3>
 
             <ul class="content-analysis__top-products__list low-products-sold-js b">
               <!-- <li class="content-analysis__top-products__list__item b">
@@ -396,10 +399,7 @@
         <!-- product -->
         <table class="content-analysis__table">
           <caption class="b">
-            <h2>
-              <i class="uil uil-analytics"></i>
-              Products Analysis 
-            </h2>
+            <h3>All Products</h3>
           </caption>
 
           <thead class="b">
@@ -454,8 +454,11 @@
 
       <!-- customers analysis section -->
       <section class="analysis-customers-section-js b">
+
+        <h2><i class="uil uil-users-alt"></i> Users Analysis</h2>
+
         <!-- filter -->
-        <div class="content-analysis__filter">
+        <div class="content-section__filter content-analysis__filter">
           <!-- slider -->
           <div class="slider--g slider-js b">
             <!-- title -->
@@ -487,10 +490,10 @@
         <!-- customers -->
         <table class="content-analysis__table">
           <caption class="b">
-            <h2>
-              <i class="uil uil-users-alt"></i>
+            <h3>
+              <i class="uil uil-trophy"></i>
               Top 5 potential customers 
-            </h2>
+            </h3>
           </caption>
 
           <thead class="b">

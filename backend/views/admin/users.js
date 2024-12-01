@@ -78,7 +78,7 @@ function responsiveCreateBtn() {
 function renderCreateForm() {
   backDrop.innerHTML = `
     <form class="form--g create-form-js b">
-      <button class="form__close-btn--g btn--none--g close-btn-js b">
+      <button class="form__close-btn--g btn--none--g close-btn-js b" title="close">
         <i class="uil uil-times"></i>
       </button>
 
@@ -199,7 +199,7 @@ function genUserDelAddrsHtmlList(userId) {
 function renderDelForm(userId) {
   backDrop.innerHTML = `
     <div class="form--g b">
-      <button class="form__close-btn--g btn--none--g close-btn-js b">
+      <button class="form__close-btn--g btn--none--g close-btn-js b" title="close">
         <i class="uil uil-times"></i>
       </button>
 
@@ -238,7 +238,7 @@ function renderUpdateForm(userId) {
 
   backDrop.innerHTML = `
     <form class="create__form form--g update-form-js b">
-      <button class="form__close-btn--g btn--none--g close-btn-js b">
+      <button class="form__close-btn--g btn--none--g close-btn-js b" title="close">
         <i class="uil uil-times"></i>
       </button>
   

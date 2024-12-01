@@ -13,15 +13,15 @@
   </head>
   <body>
 
-    
+    <!-- TODO add title -->
     
     <!--header-->
     <header id="header" class="header header--g b">
 
       <!-- logo -->
-      <a href="./index.html">
-        <div class="header__logo__g logo-js b">
-          <p>Digi Mart</p>
+      <a href="./index.html" title="home">
+        <div class="logo-js b">
+          <h1 class="header__logo__g">Digi Mart</h1>
         </div>
       </a>
 
@@ -32,7 +32,7 @@
           <input type="text" id="search-bar" placeholder="What are you looking for&#63;" class="header__utils__search__input search-input-js"/>
           
           <label for="search-bar">
-            <button class="header__utils__search__btn search-btn-js">
+            <button class="header__utils__search__btn search-btn-js" title="search">
               <i class="uil uil-search"></i>
             </button>
           </label>
@@ -96,7 +96,7 @@
 
         <!-- cart -->
         <div class="header__utils__cart cart-icon-js b">   
-          <a href="#cart.html">
+          <a href="#cart.html" title="cart">
             <i class="uil uil-shopping-cart"></i>
             <span class="red-dot hide--g red-dot-js"></span>
           </a>
@@ -104,7 +104,7 @@
 
         <!-- orders -->
         <div class="header_utils__orders orders-icon-js b">
-          <a href="#orders.html">
+          <a href="#orders.html" title="orders">
             <i class="uil uil-package"></i>
             <span class="red-dot hide--g red-dot-js"></span>
           </a>
@@ -168,13 +168,13 @@
 
     <!--pagination-->
     <div id="paginat" class="paginat b2">
-      <button class="paginat__btn btn--none--g back-btn-js">
+      <button class="paginat__btn btn--none--g back-btn-js" title="backward">
         <i class="uil uil-arrow-left"></i>
       </button>
 
       <p class="index-js b">1</p>
 
-      <button class="paginat__btn btn--none--g next-btn-js">
+      <button class="paginat__btn btn--none--g next-btn-js" title="forward">
         <i class="uil uil-arrow-right"></i>
       </button>
     </div>
@@ -222,7 +222,7 @@
     <!--login form-->
     <div id="login-backdrop" class="backdrop--g hide--g b">
       <form class="form--g login-form-js b">
-        <button class="form__close-btn--g btn--none--g close-btn-js b">
+        <button class="form__close-btn--g btn--none--g close-btn-js b" title="close">
           <i class="uil uil-times"></i>
         </button>
 
@@ -267,7 +267,7 @@
     <!--register form-->
     <div id="register-backdrop" class="backdrop--g hide--g b">
       <form class="form--g register-form-js b">
-        <button class="form__close-btn--g btn--none--g close-btn-js b">
+        <button class="form__close-btn--g btn--none--g close-btn-js b" title="close">
           <i class="uil uil-times"></i>
         </button>
 

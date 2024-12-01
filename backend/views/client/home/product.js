@@ -158,7 +158,7 @@ function renderProductDetailPopUp(product) {
 
   productDetailBackDrop.innerHTML = `
     <div class="product-detail-box b">
-        <button class="form__close-btn--g btn--none--g close-btn-js b">
+        <button class="form__close-btn--g btn--none--g close-btn-js b" title="close">
           <i class="uil uil-times b"></i>
         </button>
 

@@ -98,7 +98,7 @@ function responsiveCreateBtn() {
 function renderDelForm(productId) {
   backDrop.innerHTML = `
     <div class="form--g b">
-      <button class="form__close-btn--g btn--none--g b close-btn-js">
+      <button class="form__close-btn--g btn--none--g b close-btn-js" title="close">
         <i class="uil uil-times"></i>
       </button>
 
@@ -138,7 +138,7 @@ function renderUpdateForm(productId) {
 
   backDrop.innerHTML = `
     <form class="create__form form--g update-form-js b">
-      <button class="form__close-btn--g btn--none--g close-btn-js b">
+      <button class="form__close-btn--g btn--none--g close-btn-js b" title="close">
         <i class="uil uil-times"></i>
       </button>
 
@@ -387,7 +387,7 @@ function renderCreateForm() {
 
   backDrop.innerHTML = `
     <form class="create__form form--g create-form-js b">
-      <button class="form__close-btn--g btn--none--g close-btn-js b">
+      <button class="form__close-btn--g btn--none--g close-btn-js b" title="close">
         <i class="uil uil-times"></i>
       </button>
 

@@ -56,15 +56,15 @@ function renderItems() {
             alt="" 
             class="content__items__item__select__label__img" 
           >
-          <label for="product-${item.id}" class="content__items__item__select__label text--cap--g">${product.name}</label>
+          <label for="product-${item.id}" class="content__items__item__select__label text--cap--g" title="select this item">${product.name}</label>
         </div>
 
         <p class="b">$${price}</p>
 
         <div class="content__items__item__quant b">
-          <i class="uil uil-arrow-left decs-quant-js b"></i>
+          <i class="uil uil-arrow-left decs-quant-js b" title="decrease quantity"></i>
           <span class="b">${item.quantity}</span>
-          <i class="uil uil-arrow-right incs-quant-js b"></i>
+          <i class="uil uil-arrow-right incs-quant-js b" title="increase quantity"></i>
         </div>
 
         <p class="b">$${total}</p>
