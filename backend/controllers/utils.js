@@ -74,8 +74,7 @@ export function generateUID() { //algorithm on stack overflow
 }
 
 export function hashPassword(password) {
-  return password;
-  // return encryptString(password);
+  return encryptString(password);
 }
 
 function encryptString(string, offset=1) {
