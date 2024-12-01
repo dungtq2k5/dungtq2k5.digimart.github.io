@@ -43,6 +43,11 @@
   margin-top: .5em;
   border: 1px solid var(--lightgrey);
   border-radius: var(--border-radius);
+  transition: transform 300ms, box-shadow 300ms;
+}
+.content__orders__order__items__item:hover {
+  transform: scale(1.01);
+  box-shadow: var(--box-shadow);
 }
 .content__orders__order__items__item__img {
   max-width: 100px;

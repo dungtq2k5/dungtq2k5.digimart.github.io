@@ -1,5 +1,4 @@
 import {
-  MAX_ITEM_SUGGESTION,
   CLASSNAME,
   LOCALSTORAGE,
 } from "../../../../settings.js";
@@ -14,6 +13,8 @@ import {
 } from "../../../../controllers/utils.js";
 import {
   filterProducts,
+  getMaxProductPrice,
+  getMinProductPrice,
 } from "../../../../controllers/products/products.js";
 import { getCategoriesList } from "../../../../controllers/products/categories.js";
 import renderProducts, { resetPaginatProduct } from "../product.js";
@@ -31,6 +32,10 @@ const filterSearchCategoryContainer = searchPopupContainer.querySelector(".filte
 const filterSearchResultContainer = searchPopupContainer.querySelector(".filter-search-result-js");
 
 //price-slider
+const minPrice = getMinProductPrice();
+const maxPrice = getMaxProductPrice();
+console.log(minPrice, maxPrice);
+const step = 100;
 let minVal = searchPopupContainer.querySelector(".min-js");
 let maxVal = searchPopupContainer.querySelector(".max-js");
 const rangeFill = searchPopupContainer.querySelector(".range-fill-js");
@@ -105,6 +110,8 @@ function responsiveSearchSuggestPopup() {
 }
 
 function responsivePriceSlider() {
+  initPriceRange();
+
   rangeInputs.forEach((e) => {
     e.addEventListener("input", validateRange);
   });
@@ -115,7 +122,7 @@ function responsivePriceSlider() {
 function renderSuggestProduct(
   productsList,
   start = 0,
-  end = MAX_ITEM_SUGGESTION
+  end
 ) {
   let htmlDoc = ``;
 
@@ -189,29 +196,45 @@ function renderCategory(categoriesList = getCategoriesList()) {
 }
 
 function validateRange() {
-  let minPrice = parseInt(rangeInputs[0].value);
-  let maxPrice = parseInt(rangeInputs[1].value); 
+  let min = parseInt(rangeInputs[0].value);
+  let max = parseInt(rangeInputs[1].value); 
 
-  if (minPrice > maxPrice) [minPrice, maxPrice] = [maxPrice, minPrice];
+  if (min > max) [min, max] = [max, min];
 
-  const minPercentage = calcPercentage(minPrice);
-  const maxPercentage = calcPercentage(maxPrice);
+  const minPercentage = calcPercentage(min, minPrice, maxPrice);
+  const maxPercentage = calcPercentage(max, minPrice, maxPrice);
 
   rangeFill.style.left = `${minPercentage}%`;
   rangeFill.style.width = `${maxPercentage - minPercentage}%`;
 
-  minVal.innerHTML = centsToDollars(minPrice);
-  maxVal.innerHTML = centsToDollars(maxPrice);
+  minVal.innerHTML = centsToDollars(min);
+  maxVal.innerHTML = centsToDollars(max);
 
   // console.log("price range");
   const productsListFiltered = filterProducts(
     valueLookup,
     categoriesLookup,
-    minPrice,
-    maxPrice
+    min,
+    max
   );
 
   renderSuggestProduct(productsListFiltered);
+}
+
+function initPriceRange() {
+  rangeInputs.forEach((input, index) => {
+    input.setAttribute("min", minPrice);
+    input.setAttribute("max", maxPrice);
+    input.setAttribute("step", step);
+    input.setAttribute(
+      "value", 
+      index === 0 
+        ? minPrice
+        : maxPrice
+    );
+  });
+
+  console.log("init price range");
 }
 
 export default responsiveSearch;

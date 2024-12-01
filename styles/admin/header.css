@@ -15,10 +15,11 @@
 .header__nav__list button {
   padding: 0 .5em;
   border-radius: var(--border-radius);
-  transition: background .15s;
+  transition: transform 300ms, box-shadow 300ms;
 }
 .header__nav__list button:hover {
-  background: var(--darkwhite);
+  transform: scale(1.1);
+  box-shadow: var(--box-shadow);
 }
 .header__nav__list button:active {
   background: var(--darkwhite2);

@@ -1,13 +1,10 @@
 import products from "../../../assets/models/products/products.js";
 import {
-  MIN_PRODUCT_PRICE,
-  MAX_PRODUCT_PRICE,
   LOCALSTORAGE,
 } from "../../settings.js";
 import { generateUID, getFromStorage, includesSubArr, saveToStorage } from "../utils.js";
 import { getBrandDetail } from "./brands.js";
-import { filterOrdersList, getEarliestOrderPlacedDate, getEarliestOrderReceivedDate, getOrdersList } from "../orders.js";
-import { isDelivered } from "../delivery/states.js";
+import { filterOrdersList, getEarliestOrderReceivedDate } from "../orders.js";
 
 
 function getPlainProductsList(from = 0, to = products.length) {
@@ -81,11 +78,6 @@ export function updateProduct(id, product, productsList=getProductsList()) { //u
   return false;
 }
 
-// export function updateProductImg(id, imgLink) {
-//   const productsList = getProductsList();
-//   const findIndex = productsList.findIndex()
-// }
-
 export function checkProductExist(id, productsList=getProductsList()) {
   const existingProduct = productsList.find((item) => item.id === id);
   return existingProduct !== undefined;
@@ -94,8 +86,8 @@ export function checkProductExist(id, productsList=getProductsList()) {
 export function filterProducts(
   value = "",
   categories = [],
-  minPrice = MIN_PRODUCT_PRICE,
-  maxPrice = MAX_PRODUCT_PRICE,
+  minPrice,
+  maxPrice,
   productsList = getProductsList()
 ) {
   minPrice = Number(minPrice);
@@ -200,4 +192,12 @@ export function getLowProductsSoldList(dateStart, dateEnd) {
   // console.log(minSold);
 
   return productsSoldList.filter(item => item.quantity == minSold);
+}
+
+export function getMinProductPrice() {
+  return Math.min(...getProductsList().map(product => product.price));
+}
+
+export function getMaxProductPrice() {
+  return Math.max(...getProductsList().map(product => product.price));
 }

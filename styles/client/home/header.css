@@ -115,10 +115,11 @@
   cursor: pointer;
   border: 1px solid var(--lightgrey);
   border-radius: var(--border-radius);
-  transition: transform 300ms;
+  transition: transform 300ms, box-shadow 300ms;
 }
 .header__search-popup__categories__item:hover {
   transform: scale(1.1);
+  box-shadow: var(--box-shadow);
 }
 .header__search-popup__categories__item__check {
   font-size: 1rem;

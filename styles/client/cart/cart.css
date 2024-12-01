@@ -33,9 +33,11 @@
 }
 .content__items__item {
   margin-top: 1em;
+  transition: transform 300ms, box-shadow 300ms;
 }
 .content__items__item:hover {
-  background: var(--darkwhite);
+  transform: scale(1.01);
+  box-shadow: var(--box-shadow);
 }
 .content__items__item__select {
   display: flex;

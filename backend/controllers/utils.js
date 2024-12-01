@@ -1,4 +1,4 @@
-import { CLASSNAME, MAX_PRODUCT_PRICE, MIN_PRODUCT_PRICE } from "../settings.js";
+import { CLASSNAME } from "../settings.js";
 
 export function includesSubArr(parentArr, subArr) {
   /**
@@ -193,11 +193,14 @@ export function fullDateFormatted(time) {
   return `${dateFormatted(time)} ${time.getFullYear()}`;
 }
 
-export function centsToDollars(cents, decimalPlaces=2) {
-  return (cents / 100).toFixed(decimalPlaces);
+export function centsToDollars(cents, decimalPlaces = 2) {
+  return (cents / 100).toLocaleString('en-US', {
+    minimumFractionDigits: decimalPlaces,
+    maximumFractionDigits: decimalPlaces
+  });
 }
 
-export function calculatePercentage(amount, minRange=MIN_PRODUCT_PRICE, maxRange=MAX_PRODUCT_PRICE) { //AI generate
+export function calculatePercentage(amount, minRange, maxRange) { //AI generate
   // Calculate the range
   const range = maxRange - minRange;
 
