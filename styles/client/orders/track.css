@@ -1,0 +1,31 @@
+.track {
+  position: relative;
+  padding: 1em;
+  border-radius: var(--border-radius);
+  background: var(--white);
+  width: max-content;
+  min-width: 555px;
+}
+
+.track__title {
+  margin-bottom: 1em;
+}
+
+.track__bar__title {
+  display: flex;
+  justify-content: space-between;
+}
+.track__bar__progress {
+  position: relative;
+  height: 1em;
+  border-radius: 15px;
+  border: 1px solid var(--lightgrey);
+  overflow: hidden;
+}
+.track__bar__progress__fill {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  /* width: 90%; */
+  background: var(--blue);
+}

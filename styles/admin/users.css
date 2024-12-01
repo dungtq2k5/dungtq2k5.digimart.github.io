@@ -1,0 +1,22 @@
+.content__body__del_addrs {
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+
+/* update form */
+.create__form__addrs__inputs {
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+  padding: .25em 0;
+  max-height: 100px;
+  overflow-y: auto;
+}
+.create__form__addrs__inputs__input {
+  display: grid;
+  grid-template-columns: 10ch auto;
+}
+.create__form__addrs__inputs__input__field {
+  padding: 0 .25em;
+}

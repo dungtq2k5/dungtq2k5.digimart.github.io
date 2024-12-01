@@ -1,0 +1,125 @@
+.content-analysis__filter {
+  margin-bottom: 1em;
+}
+
+.content-analysis__table__total {
+  font-weight: normal;
+}
+
+.content-analysis__table__product {
+  display: grid;
+  grid-template-columns: max-content 30ch auto;
+  gap: .5em;
+  align-items: center;
+  text-align: left;
+}
+
+.content-analysis__table__product img {
+  max-width: 80px;
+  max-height: 80px;
+}
+
+.content-analysis__table__product details {
+  justify-self: end;
+  text-align: left;
+}
+.content-analysis__table__product details ul {
+  border-top: 1px solid var(--lightgrey);
+  padding-top: .25em;
+  margin-top: .5em;
+}
+.content-analysis__table__product details ul li {
+  display: grid;
+  grid-template-columns: 17ch auto;
+}
+
+@media (max-width: 650px) {
+  .content-analysis__table__product {
+    grid-template-columns: none;
+  }
+  .content-analysis__table__product details {
+    justify-self: start;
+  }
+}
+
+/* view bills */
+.view-bills {
+  position: relative;
+  padding: 2em;
+  background: var(--white);
+  border-radius: var(--border-radius);
+}
+
+.view-bills__table-box {
+  margin-bottom: 2em;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.view-bills__table-box caption {
+  margin-bottom: 2em;
+}
+
+.view-bills__table-box table {
+  background: var(--white);
+}
+
+.view-bills__table-box__products {
+  display: flex;
+  flex-direction: column;
+  gap: .25em;
+  max-height: 100px;
+  overflow-y: auto;
+}
+.view-bills__table-box__products li {
+  display: grid;
+  grid-template-columns: 35ch auto auto;
+  gap: .5em;
+  text-align: left;
+}
+.view-bills__table-box__customers li {
+  grid-template-columns: 4rem repeat(3, auto);
+  align-items: center;
+}
+
+/* feature products */
+.content-analysis__feature-products {
+  display: flex;
+  justify-content: space-between;
+  max-width: max-content;
+  gap: 2rem;
+}
+
+.content-analysis__top-products__heading {
+  margin-bottom: .5em;
+}
+.content-analysis__top-products__list {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+  border: 1px solid var(--lightgrey);
+  padding: 1em;
+  border-radius: var(--border-radius);
+  max-height: 30vh;
+  overflow-y: auto;
+}
+
+.content-analysis__top-products__list__item {
+  display: grid;
+  grid-template-columns: 4rem repeat(4, auto);
+  min-width: max-content;
+  align-items: center;
+  justify-content: left;
+  gap: .5em;
+  padding: .5em;
+  border: 1px solid var(--lightgrey);
+  border-radius: var(--border-radius);
+  background: var(--lightblue);
+}
+
+@media (max-width:1000px) {
+  .content-analysis__feature-products {
+    flex-direction: column;
+  }
+}

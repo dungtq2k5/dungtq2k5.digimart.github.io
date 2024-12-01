@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" />
+    <link rel="stylesheet" href="styles/general.css" />
+    <link rel="stylesheet" href="styles/client/cart/cart.css" />
+    <link rel="icon" type="image/svg+xml" href="./assets/img/icon.svg">
+    <title>Digi Mart &#8739; Cart</title>
+  </head>
+  <body>
+
+    <!--header-->
+    <header id="header" class="header header--g b">
+      <a href="./index.html">
+        <div class="logo-js b">
+          <h1 class="h1--g"><span class="header__logo__g">Digi Mart</span> &#8211; Home</h1>
+        </div>
+      </a>
+
+      <span>&#47;</span>
+
+      <a href="./cart.html">
+        <div class="b">
+          <p>Cart</p>
+        </div>
+      </a>
+    </header>
+
+    <!--content-->
+    <div id="container" class="content content--g b">
+
+      <!-- items -->
+      <main class="content__items b">
+
+        <!-- title -->
+        <div class="content__items__header b">
+          <div class="content__items__header__select">
+            <input type="checkbox" id="select-all-product" class="content__items__header__select__checkbox select-all-js">
+            <label for="select-all-product">Product</label>
+          </div>
+          <p class="b">Unit Price</p>
+          <p class="b">Quantity</p>
+          <p class="b">Total Price</p>
+          <p class="b">Action</p>
+        </div>
+
+        <!-- items list -->
+        <ul class="items-container-js">
+          <!-- <li class="content__items__item b">
+            <div class="content__items__item__select b">
+              <input type="checkbox" id="product-id">
+              <img src="assets/img/products/samsung-galaxy-watch6.webp" alt="" class="content__items__item__select__label__img">
+              <label for="product-id" class="content__items__item__select__label text--cap--g">samsung Galaxy watch6</label>
+            </div>
+
+            <p class="b">$191</p>
+
+            <div class="content__items__item__quant b">
+              <i class="uil uil-arrow-left b"></i>
+              <span class="b">1</span>
+              <i class="uil uil-arrow-right b"></i>
+            </div>
+
+            <p class="b">$190</p>
+
+            <button class="link--g link--red--g btn--none--g b">Delete</button>
+          </li> -->
+        </ul>
+      </main>
+
+      <!-- checkout form -->
+      <div class="content__checkout-form checkout-form-js b">
+
+        <h2>Order Summary</h2>
+
+        <!-- info -->
+        <div class="content__checkout-form__info">
+          <div>
+            <p>Items(<span class="items-js">0</span>): </p>
+            <p>$<span class="items-total-js">0</span></p>
+          </div>
+          <div>
+            <p>Order total: </p>
+            <p>$<span class="total-js">0.00</span></p>
+          </div>
+        </div>
+        
+        <!-- delivery address -->
+        <div class="content__checkout-form__addr b">
+          <div>
+            <p>Delivery to:</p>
+            <address class="del-to-js"></address>
+          </div>
+
+          <div>
+            <label for="select-addr">Select another:</label>
+            <select id="select-addr" class="select-addr-js"></select>
+          </div>
+
+          <button class="link--g btn--none--g add-addr-btn-js">Add new</button>
+        </div>
+
+        <!-- payment -->
+        <div class="content__checkout-form__payment">
+          <!-- select -->
+          <div class="content__checkout-form__payment__method">
+            <label for="payment-method">Payment method:</label>
+            <select id="payment-method">
+              <option value="cash">Cash on Delivery</option>
+              <option value="card">Credit &#8725; Debit Card</option>
+            </select>
+          </div>
+
+          <!-- credit / debit card form -->
+          <div class="content__checkout-form__payment__card-form hide--g card-form-js b">
+            <div class="content__checkout-form__payment__card-form__title">
+              <i class="uil uil-credit-card"></i>
+              <h3 class="content__checkout-form__payment__card-form__title__heading">Input Card Details</h3>
+            </div>
+            
+            <!-- number -->
+            <div class="b">
+              <label for="payment-card-number">Card Number:</label>
+              <input
+                id="payment-card-number"
+                type="text"
+                placeholder="1234 1234 1234 1234"
+                required
+              />
+            </div>
+            <div class="form__invalid-msg--g invalid-number-msg-js hide--g b">
+              <i class="uil uil-exclamation-triangle icon--small--g"></i>
+              <span>Invalid card number&#33;</span>
+            </div>
+
+            <!-- expiry date -->
+            <div class="b">
+              <label for="payment-card-expire">Expiry Date:</label>
+              <input
+                id="payment-card-expire"
+                type="month"
+                required
+              />
+            </div>
+            <div class="form__invalid-msg--g invalid-date-msg-js hide--g b">
+              <i class="uil uil-exclamation-triangle icon--small--g"></i>
+              <span>Invalid expiry date&#33;</span>
+            </div>
+
+            <!-- cvv -->
+            <div class="b">
+              <label for="payment-card-cvv">CVV:</label>
+              <input
+                id="payment-card-cvv"
+                type="text"
+                placeholder="123"
+                required
+              />
+            </div>
+            <div class="form__invalid-msg--g invalid-cvv-msg-js hide--g b">
+              <i class="uil uil-exclamation-triangle icon--small--g"></i>
+              <span>Invalid CVV&#33;</span>
+            </div>
+
+            <!-- name -->
+            <div class="b">
+              <label for="payment-card-name">Name on Card:</label>
+              <input
+                id="payment-card-name"
+                type="text"
+                placeholder="NIKOLA TESLA"
+                required
+              />
+            </div>
+            <div class="form__invalid-msg--g invalid-name-msg-js hide--g b">
+              <i class="uil uil-exclamation-triangle icon--small--g"></i>
+              <span>Invalid name&#33;</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn--g btn--prim--g btn--mw--g checkout-btn-js">Place order</button>
+      </div>
+
+    </div>
+
+    <!--del addr backdrop-->
+    <div id="add-addr-backdrop" class="backdrop--g hide--g b">
+      <form class="form--g form-js b">
+        <button class="form__close-btn--g btn--none--g close-btn-js b">
+          <i class="uil uil-times"></i>
+        </button>
+
+        <h2>Add new delivery address</h2>
+
+        <div class="form__field--g b">
+          <label for="del-addr">Your new address</label>
+          <input
+            id="del-addr"
+            type="text"
+            placeholder="123 Wall Street, Los"
+            class="form__field__input--g input-js"
+          />
+        </div>
+
+        <button class="btn--g btn--prim--g btn--mw--g submit-btn-js">Add</button>
+      </form>
+    </div>
+
+    <!--remove item backdrop-->
+    <div id="remove-item-backdrop" class="backdrop--g hide--g b">
+      <!-- <div class="form--g b">
+        <button class="form__close-btn--g btn--none--g  b">
+          <i class="uil uil-times detail-close-icon b"></i>
+        </button>
+
+        <h2>Do you want to remove this item?</h2>
+
+        <span class="text--cap--g">Samsung Galaxy Watch6</span>
+
+        <div class="form__btns">
+          <button class="btn--g btn--prim--g btn--mw--g">Yes</button>
+          <button class="btn--g btn--sec--g btn--mw--g">No</button>
+        </div>
+      </div> -->
+    </div>
+
+     <!--footer-->
+     <footer class="footer--g b">
+      <p>&copy; Copyright 2024. All right reserved.</p>
+    </footer>
+
+    <script type="module" src="./backend/views/client/cart/main.js"></script>
+  </body>
+</html>
