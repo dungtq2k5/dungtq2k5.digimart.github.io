@@ -19,6 +19,10 @@ const categories = [
     "id": "5",
     "name": "fashion",
   },
+  {
+    "id": "6",
+    "name": "foldable",
+  },
 ];
 
 export default categories;

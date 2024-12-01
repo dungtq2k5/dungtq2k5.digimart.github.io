@@ -49,12 +49,11 @@
   border: 1px solid var(--lightgrey);
   border-radius: var(--border-radius);
   cursor: pointer;
-  transition: background .15s, transform 300ms;
+  transition: transform 300ms, box-shadow 300ms;
 }
 .content__products__card:hover {
-  /* background: var(--darkwhite); */
-  /* background: var(--lightblue); */
   transform: scale(1.05);
+  box-shadow: var(--box-shadow);
 }
 .content__products__card__info-box {
   display: flex;

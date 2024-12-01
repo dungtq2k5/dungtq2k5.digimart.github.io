@@ -15,6 +15,8 @@
   --border-radius: 4px;
   --max-screen-size: 1920px;
   --max-section-size: 1440px;
+
+  --box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 10px;
 }
 * {
   margin: 0;

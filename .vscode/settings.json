@@ -67,10 +67,16 @@
     "Chipset",
     "chipsets",
     "darkwhite",
+    "dimensity",
     "eles",
+    "exynos",
     "LOCALSTORAGE",
+    "nikolatesla",
     "Notifi",
     "paginat",
-    "promax"
+    "promax",
+    "qualcomm",
+    "samsung",
+    "unisoc"
   ]
 }

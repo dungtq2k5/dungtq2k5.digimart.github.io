@@ -22,15 +22,7 @@ const brands = [
   {
     "id": "6",
     "name": "realme",
-  },
-  {
-    "id": "7",
-    "name": "nokia",
-  },
-  {
-    "id": "8",
-    "name": "nubia",
-  },
+  }
 ];
 
 export default brands;

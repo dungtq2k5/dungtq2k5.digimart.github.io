@@ -7,7 +7,7 @@ const orders = [
     "deliveryAddressId": "1",
     "packages": [
       {
-        "productId": "1",
+        "productId": "101",
         "quantity": "1",
       },
     ],
@@ -22,11 +22,11 @@ const orders = [
     "deliveryAddressId": "1",
     "packages": [
       {
-        "productId": "1",
+        "productId": "101",
         "quantity": "2",
       },
       {
-        "productId": "2",
+        "productId": "201",
         "quantity": "3",
       },
     ],
@@ -41,15 +41,15 @@ const orders = [
     "deliveryAddressId": "1",
     "packages": [
       {
-        "productId": "1",
+        "productId": "101",
         "quantity": "2",
       },
       {
-        "productId": "2",
+        "productId": "201",
         "quantity": "2",
       },
       {
-        "productId": "3",
+        "productId": "301",
         "quantity": "3",
       },
     ],
@@ -64,7 +64,7 @@ const orders = [
     "deliveryAddressId": "3",
     "packages": [
       {
-        "productId": "1",
+        "productId": "101",
         "quantity": "3",
       },
     ],
