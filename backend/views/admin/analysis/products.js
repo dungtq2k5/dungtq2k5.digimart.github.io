@@ -26,7 +26,7 @@ const totalDollars = mainContainer.querySelector(".total-dollars-js");
 /* filter slider */
 const minDate = getEarliestOrderPlacedDate();
 const maxDate = getLatestCurrentDate();
-const dayStep = 23 * 59 * 59 * 999;
+const dayStep = 999;
 
 const slider = mainContainer.querySelector(".slider-js");
 const rangeInputs = slider.querySelectorAll(".range-input-js");
