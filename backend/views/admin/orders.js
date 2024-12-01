@@ -4,7 +4,6 @@ import {
   filterOrdersList, 
   getEarliestOrderPlacedDate, 
   getOrderDetail, 
-  getOrdersFilteredList, 
   updateOrder } from "../../controllers/orders.js";
 import { 
   fullDateFormatted, 
@@ -27,7 +26,7 @@ const mainContainer = document.getElementById("content").querySelector(".orders-
 /* filter dates */
 const minDate = getEarliestOrderPlacedDate(); minDate.setHours(0, 0, 0, 0);
 const maxDate = getLatestCurrentDate();
-const dayStep = 23 * 59 * 59 * 999; //per day
+const dayStep = 999;
 
 const slider = mainContainer.querySelector(".slider-js");
 const rangeInputs = slider.querySelectorAll(".range-input-js");
@@ -51,7 +50,14 @@ function renderPackagesManagement() {
   renderItems();
 }
 
-function renderItems(ordersList = getOrdersFilteredList()) {
+function renderItems(ordersList = filterOrdersList(
+  {
+    placedStart: rangeInputs[0].value, 
+    placedEnd: rangeInputs[1].value,
+    delStatesIdList: statesIdListLookup
+  }
+)) 
+{
   if(ordersList.length === 0) {
     itemsContainer.innerHTML = "";
     showElements(noItem);
@@ -159,9 +165,6 @@ function renderUpdateForm(orderId) {
     const delStateId = delStateSelect.options[delStateSelect.selectedIndex].value;
 
     updateOrder(orderId, {deliveryStateId: delStateId});
-
-    localStorage.removeItem(LOCALSTORAGE.packStatesIdListLookup); //avoid error when filter by states by update state to another
-
     form.submit();
   });
 
