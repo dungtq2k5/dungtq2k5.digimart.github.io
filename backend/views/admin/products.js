@@ -28,35 +28,35 @@ function renderItems() {
   
       htmlDoc += `
         <tr data-product-id="${product.id}">
-          <td class="b" data-cell="image">
+          <td data-cell="image">
             <img src="${product.img}" alt=""/>
           </td>
   
-          <td class="b" data-cell="id">${product.id}</td>
+          <td data-cell="id">${product.id}</td>
   
-          <td class="text--cap--g b" data-cell="name">${product.name}</td>
+          <td class="text--cap--g " data-cell="name">${product.name}</td>
   
-          <td class="text--cap--g b" data-cell="brand">${brand.name}</td>
+          <td class="text--cap--g " data-cell="brand">${brand.name}</td>
   
-          <td class="text--cap--g b" data-cell="chipset">${chipset.name}</td>
+          <td class="text--cap--g " data-cell="chipset">${chipset.name}</td>
   
-          <td class="b" data-cell="rom - ram">${product.rom} - ${product.ram}</td>
+          <td data-cell="rom - ram">${product.rom} - ${product.ram}</td>
   
-          <td class="b" data-cell="battery capacity">${product.batteryCapacity}</td>
+          <td data-cell="battery capacity">${product.batteryCapacity}</td>
   
-          <td class="text--cap--g b" data-cell="categories">${catesStrList}</td>
+          <td class="text--cap--g " data-cell="categories">${catesStrList}</td>
   
-          <td class="b" data-cell="price">${product.price}&#65504;</td>
+          <td data-cell="price">${product.price}&#65504;</td>
   
-          <td class="b" data-cell="quantity">${product.quantity}</td>
+          <td data-cell="quantity">${product.quantity}</td>
   
-          <td class="b" data-cell="description">
+          <td data-cell="description">
             <div class="content__products-table__description-box ">
               <p>${product.description}</p>
             </div>
           </td>
   
-          <td class="b" data-cell="actions">
+          <td data-cell="actions">
             <div>
               <button class="btn--none--g link--g update-btn-js">update</button>
               <button class="btn--none--g link--g link--red--g del-btn-js">delete</button>
@@ -80,13 +80,10 @@ function renderItems() {
       });
   
       delBtn.addEventListener("click", () => {
-        console.log(`activate delete product ${productId}`);
         renderDelForm(productId);
       });
     });
   }
-  
-  console.log("render products data");
 }
 
 function responsiveCreateBtn() {
@@ -97,7 +94,7 @@ function responsiveCreateBtn() {
 
 function renderDelForm(productId) {
   backDrop.innerHTML = `
-    <div class="form--g b">
+    <div class="form--g ">
       <button class="form__close-btn--g btn--none--g b close-btn-js" title="close">
         <i class="uil uil-times"></i>
       </button>
@@ -123,7 +120,6 @@ function renderDelForm(productId) {
 
   submitBtn.addEventListener("click", () => {
     handleDeleteProduct(productId);
-    console.log("confirm delete item");
   });
 
   showElements(backDrop);
@@ -137,8 +133,8 @@ function renderUpdateForm(productId) {
   const catesList = getCategoriesList();
 
   backDrop.innerHTML = `
-    <form class="create__form form--g update-form-js b">
-      <button class="form__close-btn--g btn--none--g close-btn-js b" title="close">
+    <form class="create__form form--g update-form-js ">
+      <button class="form__close-btn--g btn--none--g close-btn-js " title="close">
         <i class="uil uil-times"></i>
       </button>
 
@@ -146,16 +142,16 @@ function renderUpdateForm(productId) {
 
 
       <!-- img -->
-      <div class="create__form__upload-img b">
+      <div class="create__form__upload-img ">
         <!-- display -->
-        <img src="${product.img}" alt="" class="create__form__upload-img__display img-display-js b">
+        <img src="${product.img}" alt="" class="create__form__upload-img__display img-display-js ">
         <button class="btn--none--g link--g link--red--g remove-img-js">remove image</button>
 
         <!-- upload -->
-        <label for="update-img" class="create__form__upload-img__upload drop-area-js b">
+        <label for="update-img" class="create__form__upload-img__upload drop-area-js ">
           <input id="update-img" type="file" accept="image/webp" hidden>
 
-          <div class="create__form__upload-img__upload__info b">
+          <div class="create__form__upload-img__upload__info ">
           <div class="create__form__upload-img__upload__info__title">
             <i class="uil uil-upload icon--small--g"></i>
             <p>drag an image here or upload it</p>
@@ -168,7 +164,7 @@ function renderUpdateForm(productId) {
       </div>
       
       <!-- name -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="update-name">Name</label>
         <input
           id="update-name"
@@ -181,19 +177,19 @@ function renderUpdateForm(productId) {
       </div>
 
       <!-- brand -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="update-brand">Brand</label>
         <select id="update-brand" class="form__field__input--g">${genSelectOptionsHtml(brandsList, product.brandId)}</select>
       </div>
 
       <!-- chipset -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="update-chipset">Chipset</label>
         <select id="update-chipset" class="form__field__input--g">${genSelectOptionsHtml(chipsetsList, product.chipSetId)}</select>
       </div>
 
       <!-- rom -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="update-rom">ROM</label>
         <input
           id="update-rom"
@@ -207,7 +203,7 @@ function renderUpdateForm(productId) {
       </div>
 
       <!-- ram -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="update-ram">RAM</label>
         <input
           id="update-ram"
@@ -221,7 +217,7 @@ function renderUpdateForm(productId) {
       </div>
 
       <!-- battery -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="update-battery">Battery capacity</label>
         <input
           id="update-battery"
@@ -235,13 +231,13 @@ function renderUpdateForm(productId) {
       </div>
 
       <!-- categories -->
-      <div class="create__form__categories form__field--g b">
+      <div class="create__form__categories form__field--g ">
         <p>Categories</p>
         <ul class="create__form__categories__items">${genCatesCheckBoxHtmlList(catesList, product.typesId)}</ul>
       </div>
 
       <!-- price -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="update-price">Price</label>
         <input
           id="update-price"
@@ -255,7 +251,7 @@ function renderUpdateForm(productId) {
       </div>
 
       <!-- quantity -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="update-quant">Quantity</label>
         <input
           id="update-quant"
@@ -269,7 +265,7 @@ function renderUpdateForm(productId) {
       </div>
 
       <!-- description -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="update-description">Description</label>
         <textarea id="update-description" placeholder="Lorem ipsum" class="form__field__input--g">${product.description}</textarea>
       </div>
@@ -306,8 +302,6 @@ function renderUpdateForm(productId) {
     product.img = defaultImg;
     imgDisplay.setAttribute("src",  defaultImg);
     hideElements(removeImgBtn);
-
-    console.log("remove img");
   });
 
   imgDropArea.addEventListener("dragover", e => e.preventDefault());
@@ -320,7 +314,6 @@ function renderUpdateForm(productId) {
 
   inputImg.addEventListener("change", () => {
     renderUploadImg();
-    console.log("upload img");
   });
 
   closeBtn.addEventListener("click", e => {
@@ -375,7 +368,6 @@ function renderUpdateForm(productId) {
   });
 
   showElements(backDrop);
-  console.log("render update form");
 }
 
 function renderCreateForm() {
@@ -386,24 +378,24 @@ function renderCreateForm() {
   const catesList = getCategoriesList();
 
   backDrop.innerHTML = `
-    <form class="create__form form--g create-form-js b">
-      <button class="form__close-btn--g btn--none--g close-btn-js b" title="close">
+    <form class="create__form form--g create-form-js ">
+      <button class="form__close-btn--g btn--none--g close-btn-js " title="close">
         <i class="uil uil-times"></i>
       </button>
 
       <h2>Create products</h2>
 
       <!-- img -->
-      <div class="create__form__upload-img b">
+      <div class="create__form__upload-img ">
         <!-- display -->
-        <img src="${defaultImg}" alt="no image upload" class="create__form__upload-img__display img-display-js b">
+        <img src="${defaultImg}" alt="no image upload" class="create__form__upload-img__display img-display-js ">
         <button class="btn--none--g link--g link--red--g hide--g remove-img-js">remove image</button>
 
         <!-- upload -->
-        <label for="create-img" class="create__form__upload-img__upload drop-area-js b">
+        <label for="create-img" class="create__form__upload-img__upload drop-area-js ">
           <input id="create-img" type="file" accept="image/webp" hidden>
 
-          <div class="create__form__upload-img__upload__info b">
+          <div class="create__form__upload-img__upload__info ">
           <div class="create__form__upload-img__upload__info__title">
             <i class="uil uil-upload icon--small--g"></i>
             <p>click to upload or drop file here.</p>
@@ -416,7 +408,7 @@ function renderCreateForm() {
       </div>
       
       <!-- name -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="create-name">Name</label>
         <input
           id="create-name"
@@ -427,19 +419,19 @@ function renderCreateForm() {
       </div>
 
       <!-- brand -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="create-brand">Brand</label>
         <select id="create-brand" class="form__field__input--g">${genSelectOptionsHtml(brandsList)}</select>
       </div>
 
       <!-- chipset -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="create-chipset">Chipset</label>
         <select id="create-chipset" class="form__field__input--g">${genSelectOptionsHtml(chipsetsList)}</select>
       </div>
 
       <!-- rom -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="create-rom">ROM</label>
         <input
           id="create-rom"
@@ -452,7 +444,7 @@ function renderCreateForm() {
       </div>
 
       <!-- ram -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="create-ram">RAM</label>
         <input
           id="create-ram"
@@ -465,7 +457,7 @@ function renderCreateForm() {
       </div>
 
       <!-- battery -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="create-battery">Battery capacity</label>
         <input
           id="create-battery"
@@ -478,13 +470,13 @@ function renderCreateForm() {
       </div>
 
       <!-- categories -->
-      <div class="create__form__categories form__field--g b">
+      <div class="create__form__categories form__field--g ">
         <p>Categories</p>
         <ul class="create__form__categories__items">${genCatesCheckBoxHtmlList(catesList)}</ul>
       </div>
 
       <!-- price -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="create-price">Price</label>
         <input
           id="create-price"
@@ -497,7 +489,7 @@ function renderCreateForm() {
       </div>
 
       <!-- quantity -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="create-quant">Quantity</label>
         <input
           id="create-quant"
@@ -510,7 +502,7 @@ function renderCreateForm() {
       </div>
 
       <!-- description -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="create-description">Description</label>
         <textarea id="create-description" placeholder="Lorem ipsum" class="form__field__input--g"></textarea>
       </div>
@@ -545,8 +537,6 @@ function renderCreateForm() {
     inputImg.value = "";
     imgDisplay.setAttribute("src",  defaultImg);
     hideElements(removeImgBtn);
-
-    console.log("remove img");
   });
 
   imgDropArea.addEventListener("dragover", e => e.preventDefault());
@@ -559,7 +549,6 @@ function renderCreateForm() {
 
   inputImg.addEventListener("change", () => {
     renderUploadImg();
-    console.log("upload img");
   });
 
   closeBtn.addEventListener("click", e => {
@@ -614,7 +603,6 @@ function renderCreateForm() {
   });
 
   showElements(backDrop);
-  console.log("render update form");
 }
 
 function handleDeleteProduct(productId) {
@@ -622,7 +610,6 @@ function handleDeleteProduct(productId) {
   renderItems();
   hideElements(backDrop);
   backDrop.innerHTML = "";
-  console.log("delete item");
 }
 
 function genCatesCheckBoxHtmlList(catesList=getCategoriesList(), currIdsList=[-1]) {

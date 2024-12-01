@@ -27,7 +27,6 @@ function responsiveCartIcon() {
       window.location.href = `./${PAGES.cart}`;
     } else {
       showLoginForm();
-      console.log("Login first to go to cart page");
     }
   });
 }
@@ -36,7 +35,6 @@ function renderCartNotifi() {
   if(user) {
     if(getUserCart(user.id).length >= 1) {
       showCartNotifi();
-      // console.log("User have products in cart");
     } else {
       hideCartNotifi();
     }

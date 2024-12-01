@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if(!(user && isSuperUser(user.id))) {
     renderAuthForm();
   } else {
-    console.log("Login to admin page success");
     responsiveHeader(genEmailToUsername(user.email));
   
     //users

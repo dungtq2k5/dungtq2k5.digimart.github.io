@@ -63,7 +63,7 @@ function renderItems(list=getProductSoldList(rangeInputs[0].value, rangeInputs[1
   
       htmlDoc += `
         <tr data-product-id="${product.id}">
-          <td class="b" data-cell="product">
+          <td data-cell="product">
             <div class="content-analysis__table__product">
               <img src="${product.img}" alt="${product.name}">
               <p>${product.name} - ${product.ram}GB ${product.rom}GB</p>
@@ -80,9 +80,9 @@ function renderItems(list=getProductSoldList(rangeInputs[0].value, rangeInputs[1
               </details>
             </div>
           </td>
-          <td class="b" data-cell="sold">${sold}</td>
-          <td class="b" data-cell="total (cents)">${product.price * sold}&#65504;</td>
-          <td class="b" data-cell="action">
+          <td data-cell="sold">${sold}</td>
+          <td data-cell="total (cents)">${product.price * sold}&#65504;</td>
+          <td data-cell="action">
             <div>
               <button class="btn--none--g link--g btn-view-bills-js">view bills</button>
             </div>
@@ -104,8 +104,6 @@ function renderItems(list=getProductSoldList(rangeInputs[0].value, rangeInputs[1
   
     });
   }
-
-  // console.log("render items");
 }
 
 function updateTotal(productSoldList=getProductSoldList(rangeInputs[0].value, rangeInputs[1].value)) {
@@ -118,7 +116,6 @@ function updateTotal(productSoldList=getProductSoldList(rangeInputs[0].value, ra
 
   totalCents.innerHTML = total;
   totalDollars.innerHTML = centsToDollars(total);
-  // console.log("update total");
 }
 
 function validateRange() {
@@ -172,7 +169,6 @@ function initDateRange() {
         : getFromStorage(LOCALSTORAGE.analysisDateEnd) || maxDate.getTime()
     );
   });
-  console.log("init date range");
 }
 
 function responsiveResetFilterBtn() {
@@ -232,8 +228,8 @@ function renderProductBills(productId) {
 
 
   backDrop.innerHTML = `
-    <div class="view-bills b">
-      <button class="form__close-btn--g btn--none--g close-btn-js b" title="close">
+    <div class="view-bills ">
+      <button class="form__close-btn--g btn--none--g close-btn-js " title="close">
         <i class="uil uil-times"></i>
       </button>
 
@@ -276,7 +272,6 @@ function renderProductBills(productId) {
   });
 
   showElements(backDrop);
-  console.log(`render view bills product ${productId}`);
 }
 
 function renderTopProductsSold() {
@@ -294,7 +289,7 @@ function renderTopProductsSold() {
       const sold = item.quantity;
   
       htmlDoc += `
-        <li class="content-analysis__top-products__list__item b">
+        <li class="content-analysis__top-products__list__item ">
           <img src="${product.img}" alt="${product.name}">
           <i class="uil uil-times icon--small--g"></i>
           <p>${product.name} - ${product.ram}GB ${product.rom}GB</p>
@@ -326,7 +321,7 @@ function renderLowProductsSold() {
     const sold = item.quantity;
 
     htmlDoc += `
-      <li class="content-analysis__top-products__list__item b">
+      <li class="content-analysis__top-products__list__item ">
         <img src="${product.img}" alt="${product.name}">
         <i class="uil uil-times icon--small--g"></i>
         <p>${product.name} ${product.ram}GB ${product.rom}GB</p>

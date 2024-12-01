@@ -28,7 +28,6 @@ function responsiveOrdersIcon() {
       window.location.href = `./${PAGES.orders}`;
     } else {
       showLoginForm();
-      console.log("Login first to go to orders page");
     }
   });
 }
@@ -45,7 +44,6 @@ function renderOrdersNotifi() {
   if(user) {
     if(getUserOrders(user.id).length >= 1) {
       showElements(ordersNotifi);
-      // console.log("User have orders");
     } else {
       hideElements(ordersNotifi);
     }

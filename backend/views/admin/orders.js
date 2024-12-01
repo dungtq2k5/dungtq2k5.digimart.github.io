@@ -25,9 +25,9 @@ const backDrop = document.getElementById("backdrop");
 const mainContainer = document.getElementById("content").querySelector(".orders-section-js");
 
 /* filter dates */
-const minDate = getEarliestOrderPlacedDate(); minDate.setHours(0, 0, 0, 0);
+const minDate = getEarliestOrderPlacedDate();
 const maxDate = getLatestCurrentDate();
-const dayStep = 23 * 59 * 59 * 999; //per day
+const dayStep = 999; //per day
 
 const slider = mainContainer.querySelector(".slider-js");
 const rangeInputs = slider.querySelectorAll(".range-input-js");
@@ -79,17 +79,17 @@ function renderItems(ordersList = getOrdersFilteredList()) {
   
       htmlDoc += `
         <tr data-order-id="${order.id}">
-          <td data-cell="order id" class="b">${order.id}</td>
-          <td data-cell="buyer id" class="b">${order.userId}</td>
-          <td data-cell="products" class="content__orders-section__products b">
+          <td data-cell="order id">${order.id}</td>
+          <td data-cell="buyer id">${order.userId}</td>
+          <td data-cell="products" class="content__orders-section__products ">
             <ul>${packsHtmlList}</ul>
           </td>
-          <td data-cell="total" class="b">${order.total}&#162;</td>
-          <td data-cell="delivery to" class="b">
+          <td data-cell="total">${order.total}&#162;</td>
+          <td data-cell="delivery to">
             <address>${delAddr.address}</address>
           </td>
-          <td data-cell="placed" class="b">${fullDateFormatted(order.placed)}</td>
-          <td data-cell="package state" class="b">
+          <td data-cell="placed">${fullDateFormatted(order.placed)}</td>
+          <td data-cell="package state">
             <button class="btn--none--g link--g update-btn-js">${delState.name}</button>
           </td>
         </tr>
@@ -110,22 +110,20 @@ function renderItems(ordersList = getOrdersFilteredList()) {
   
     });
   }
-
-  // console.log("render packages data");
 }
 
 function renderUpdateForm(orderId) {
   const order = getOrderDetail(orderId);
 
   backDrop.innerHTML = `
-    <form class="form--g b">
-      <button class="form__close-btn--g btn--none--g close-btn-js b" title="close">
+    <form class="form--g ">
+      <button class="form__close-btn--g btn--none--g close-btn-js " title="close">
         <i class="uil uil-times"></i>
       </button>
   
       <h2>Update package id &#34;${orderId}&#34;</h2>
   
-      <div class="b">
+      <div>
         <label for="update-del-state">Delivery state</label>
         <select id="update-del-state">
           ${genSelectOptionsHtml(getDeliveryStatesList(), order.deliveryStateId)}
@@ -166,7 +164,6 @@ function renderUpdateForm(orderId) {
   });
 
   showElements(backDrop);
-  console.log(`Render update package ${orderId} form`);
 }
 
 /* filter dates */

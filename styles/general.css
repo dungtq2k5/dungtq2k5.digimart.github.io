@@ -350,14 +350,6 @@ max-width: 200px; */
 }
 
 
-/* testing */
-.b {
-  /* border: .5px solid rgb(255, 92, 92) !important; */
-}
-.b2 {
-  /* border: 1px solid blue !important; */
-}
-
 /*media query*/
 @media (max-width: 720px) {
   html {

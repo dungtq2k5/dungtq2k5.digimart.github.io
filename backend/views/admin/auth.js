@@ -6,10 +6,10 @@ const backDrop = document.getElementById("backdrop");
 
 export function renderAuthForm() {
   backDrop.innerHTML = `
-    <form class="form--g auth-form-js b">
+    <form class="form--g auth-form-js ">
       <h1>Login</h1>
 
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="login-email">Email</label>
         <input
           id="login-email"
@@ -18,7 +18,7 @@ export function renderAuthForm() {
         />
       </div>
 
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="login-pass">Password</label>
         <input
           id="login-pass"
@@ -27,8 +27,8 @@ export function renderAuthForm() {
         />
       </div>
 
-      <div class="form__invalid-msg--g hide--g invalid-msg-box-js b">
-        <i class="uil uil-exclamation-triangle icon--small--g b"></i>
+      <div class="form__invalid-msg--g hide--g invalid-msg-box-js ">
+        <i class="uil uil-exclamation-triangle icon--small--g "></i>
         <span class="invalid-msg-js"></span>
       </div>
 

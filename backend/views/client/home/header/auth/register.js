@@ -64,7 +64,6 @@ function responsiveRegisterBtn() {
         invalidPhonePopup,
       ]);
       showElements(backDrop);
-      console.log("show-register");
     });
   });
 }
@@ -73,7 +72,6 @@ function responsiveRegisterCloseBtn() {
   registerCloseBtn.addEventListener("click", (e) => {
     e.preventDefault();
     hideElements(backDrop);
-    // console.log("hide-register");
   });
 }
 
@@ -123,7 +121,6 @@ function validateRegisterForm({ email, phone, password }) {
     showElements(invalidEmailPopup);
     invalidEmailMsg.innerHTML = MSG.emailInvalid;
     result = false;
-    // console.log("Invalid email");
   } else {
     hideElements(invalidEmailPopup);
   }
@@ -132,7 +129,6 @@ function validateRegisterForm({ email, phone, password }) {
     showElements(invalidPhonePopup);
     invalidPhoneMsg.innerHTML = MSG.phoneInvalid;
     result = false;
-    // console.log("Invalid phone");
   } else {
     hideElements(invalidPhonePopup);
   }
@@ -140,7 +136,6 @@ function validateRegisterForm({ email, phone, password }) {
   if (!isValidPassword(password)) {
     showElements(invalidPasswordPopup);
     result = false;
-    // console.log("Invalid pass");
   } else {
     hideElements(invalidPasswordPopup);
   }
@@ -155,7 +150,6 @@ function validateAddingUser({ email, phone }) {
     showElements(invalidEmailPopup);
     invalidEmailMsg.innerHTML = MSG.emailTaken;
     result = false;
-    console.log("Taken email");
   } else {
     hideElements(invalidEmailPopup);
   }
@@ -164,7 +158,6 @@ function validateAddingUser({ email, phone }) {
     showElements(invalidPhonePopup);
     invalidPhoneMsg.innerHTML = MSG.phoneTaken;
     result = false;
-    console.log("Taken phone");
   } else {
     hideElements(invalidPhonePopup);
   }

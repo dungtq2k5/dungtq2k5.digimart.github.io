@@ -55,14 +55,14 @@ function renderProducts() {
   if(productsList.length >= 1) {
     productsList.forEach(product => {
       htmlDoc += `
-        <div class="content__products__card b" data-product-id="${product.id}">
+        <div class="content__products__card " data-product-id="${product.id}">
           <img
             src="${product.img}"
             alt="${product.name}"
-            class="b"
+           
           />
 
-          <div class="content__products__card__info-box b">
+          <div class="content__products__card__info-box ">
             <p class="content__products__card__info-box__title text--cap--g">
               ${product.name} - ${product.ram}GB ${product.rom}GB
             </p>
@@ -79,13 +79,10 @@ function renderProducts() {
 
   productContainer.querySelectorAll(".content__products__card").forEach(card => {
     card.addEventListener("click", () => {
-      // console.log("show product detail");
       const productId = card.dataset.productId;
       renderProductDetailPopUp(getProductDetail(productId));
     });
   });
-
-  // console.log("render-products");
 }
 
 function responsivePaginatProducts() {
@@ -99,8 +96,6 @@ function responsivePaginatProducts() {
       saveToStorage(LOCALSTORAGE.currentProductPagination, currentPaginateIndex);
       renderProductsPaginatBtns();
       renderProducts();
-      
-      // console.log("back");
     }
   });
   
@@ -112,8 +107,6 @@ function responsivePaginatProducts() {
       saveToStorage(LOCALSTORAGE.currentProductPagination, currentPaginateIndex);
       renderProductsPaginatBtns();
       renderProducts();
-
-      // console.log("forward");
     }
   });
 }
@@ -123,7 +116,6 @@ function resetPaginatProduct() {
   paginateIndex.innerHTML = currentPaginateIndex;
   localStorage.removeItem(LOCALSTORAGE.currentProductPagination);
   renderProductsPaginatBtns();
-  // console.log("reset page index");
 }
 
 function renderProductsPaginatBtns() {
@@ -157,17 +149,17 @@ function renderProductDetailPopUp(product) {
   const brand = getBrandDetail(product.brandId);
 
   productDetailBackDrop.innerHTML = `
-    <div class="product-detail-box b">
-        <button class="form__close-btn--g btn--none--g close-btn-js b" title="close">
-          <i class="uil uil-times b"></i>
+    <div class="product-detail-box ">
+        <button class="form__close-btn--g btn--none--g close-btn-js " title="close">
+          <i class="uil uil-times "></i>
         </button>
 
-        <img src="${product.img}" alt="${product.name}" class="product-detail-box__img b">
+        <img src="${product.img}" alt="${product.name}" class="product-detail-box__img ">
 
         <div class="product-detail-box__info-box">
-          <h2 class="text--cap--g b">${product.name} - ${product.ram}GB ${product.rom}GB</h2>
+          <h2 class="text--cap--g ">${product.name} - ${product.ram}GB ${product.rom}GB</h2>
 
-          <div class="product-detail-box__info-box__text-box b">
+          <div class="product-detail-box__info-box__text-box ">
             <p class="text--blue--bold--g text--big--g">&dollar;${centsToDollars(product.price)}</p>
             <p>${product.description}</p>
             <details>
@@ -181,7 +173,7 @@ function renderProductDetailPopUp(product) {
             </details>
           </div>
       
-          <div class="product-detail-box__info-box__btns b">
+          <div class="product-detail-box__info-box__btns ">
             <button class="btn--g btn--prim--g btn--mw--g buy-btn-js">Buy now</button>
             <button class="btn--g btn--sec--g btn--mw--g add-btn-js">Add to cart</button>
           </div>
@@ -196,7 +188,6 @@ function renderProductDetailPopUp(product) {
   closeBtn.addEventListener("click", () => {
     productDetailBackDrop.innerHTML = "";  
     hideElements(productDetailBackDrop);
-    // console.log("close-detail-products");
   });
 
   buyBtn.addEventListener("click", () => {
@@ -222,7 +213,6 @@ function renderProductDetailPopUp(product) {
   });
 
   showElements(productDetailBackDrop);
-  // console.log(`detail-product ${product.id}`);
 }
 
 function addToCartSignal(btn, timeout=800) {
@@ -232,7 +222,6 @@ function addToCartSignal(btn, timeout=800) {
 
   addToCartBtnTimeout = setTimeout(() => {
     btn.innerHTML = MSG.addToCart;
-    // console.log("reset btn");
   }, timeout);
 }
 

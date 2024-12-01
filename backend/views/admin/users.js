@@ -25,18 +25,18 @@ function renderItems() {
   
       htmlDoc += `
         <tr data-user-id="${user.id}">
-          <td class="b" data-cell="id">${user.id}</td>
-          <td class="b" data-cell="email">${user.email}</td>
-          <td class="b" data-cell="phone">${user.phone}</td>
-          <td class="b" data-cell="password">${user.password}</td>
+          <td data-cell="id">${user.id}</td>
+          <td data-cell="email">${user.email}</td>
+          <td data-cell="phone">${user.phone}</td>
+          <td data-cell="password">${user.password}</td>
   
-          <td class="b" data-cell="delivery addresses">
+          <td data-cell="delivery addresses">
             <ul class="content__body__del_addrs">${genUserDelAddrsHtmlList(user.id)}</ul>
           </td>
   
-          <td class="b" data-cell="state">${userState.name}</td>
+          <td data-cell="state">${userState.name}</td>
   
-          <td class="b" data-cell="actions">
+          <td data-cell="actions">
             <div class="btns">
               <button class="btn--none--g link--g update-btn-js">update</button>
               <button class="btn--none--g link--g link--red--g del-btn-js">delete</button>
@@ -55,18 +55,14 @@ function renderItems() {
       const delBtn = item.querySelector(".del-btn-js");
   
       updateBtn.addEventListener("click", () => {
-        console.log(`Activate update user ${userId}`);
         renderUpdateForm(userId);
       });
   
       delBtn.addEventListener("click", () => {
-        console.log(`Activate del user ${userId}`);
         renderDelForm(userId);
       });
     });
   }
-
-  console.log("render users");
 }
 
 function responsiveCreateBtn() {
@@ -77,15 +73,15 @@ function responsiveCreateBtn() {
 
 function renderCreateForm() {
   backDrop.innerHTML = `
-    <form class="form--g create-form-js b">
-      <button class="form__close-btn--g btn--none--g close-btn-js b" title="close">
+    <form class="form--g create-form-js ">
+      <button class="form__close-btn--g btn--none--g close-btn-js " title="close">
         <i class="uil uil-times"></i>
       </button>
 
       <h2>Create new user</h2>
 
       <!-- email -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="create-email">Email</label>
         <input
           id="create-email"
@@ -97,7 +93,7 @@ function renderCreateForm() {
       </div>
 
       <!-- pass -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="create-pass">Password</label>
         <input
           id="create-pass"
@@ -109,7 +105,7 @@ function renderCreateForm() {
       </div>
 
       <!-- phone -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="create-phone">Phone number</label>
         <input
           id="create-phone"
@@ -121,7 +117,7 @@ function renderCreateForm() {
       </div>
 
       <!-- address -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="create-addr">Delivery address</label>
         <input
           id="create-addr"
@@ -133,7 +129,7 @@ function renderCreateForm() {
       </div>
 
       <!-- state -->
-      <div class="b">
+      <div>
         <label for="create-state">State</label>
         <select id="create-state">${genSelectOptionsHtml(getStatesList(), getDefaultStateId())}</select>
       </div>
@@ -198,8 +194,8 @@ function genUserDelAddrsHtmlList(userId) {
 
 function renderDelForm(userId) {
   backDrop.innerHTML = `
-    <div class="form--g b">
-      <button class="form__close-btn--g btn--none--g close-btn-js b" title="close">
+    <div class="form--g ">
+      <button class="form__close-btn--g btn--none--g close-btn-js " title="close">
         <i class="uil uil-times"></i>
       </button>
 
@@ -237,15 +233,15 @@ function renderUpdateForm(userId) {
   const statesList = getStatesList();
 
   backDrop.innerHTML = `
-    <form class="create__form form--g update-form-js b">
-      <button class="form__close-btn--g btn--none--g close-btn-js b" title="close">
+    <form class="create__form form--g update-form-js ">
+      <button class="form__close-btn--g btn--none--g close-btn-js " title="close">
         <i class="uil uil-times"></i>
       </button>
   
       <h2>Update User</h2>
       
       <!-- email -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="update-email">Email</label>
         <input
           id="update-email"
@@ -258,7 +254,7 @@ function renderUpdateForm(userId) {
       </div>
       
       <!-- phone -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="update-phone">Phone</label>
         <input
           id="update-phone"
@@ -271,7 +267,7 @@ function renderUpdateForm(userId) {
       </div>
   
       <!-- password -->
-      <div class="form__field--g b">
+      <div class="form__field--g ">
         <label for="update-pass">Password</label>
         <input
           id="update-pass"
@@ -284,13 +280,13 @@ function renderUpdateForm(userId) {
       </div>
   
       <!-- del addrs -->
-      <div class="create__form__addrs form__field--g b">
+      <div class="create__form__addrs form__field--g ">
         <p>Delivery address</p>
-        <ul class="create__form__addrs__inputs b">${genUserDelAddrHtmlInputsList(userId)}</ul>
+        <ul class="create__form__addrs__inputs ">${genUserDelAddrHtmlInputsList(userId)}</ul>
       </div>
   
       <!-- state -->
-      <div class="b">
+      <div>
         <label for="update-state">State</label>
         <select id="update-state">${genSelectOptionsHtml(statesList, user.stateId)}</select>
       </div>
@@ -343,7 +339,6 @@ function renderUpdateForm(userId) {
   });
 
   showElements(backDrop);
-  console.log(`render user ${userId} update form`);
 }
 
 function genUserDelAddrHtmlInputsList(userId) {

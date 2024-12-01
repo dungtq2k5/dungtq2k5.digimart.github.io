@@ -122,14 +122,10 @@ export function filterOrdersList(
   if(placedStart) {
     if(!(placedStart instanceof Date)) placedStart = new Date(parseInt(placedStart));
     list = list.filter(order => new Date(order.placed) >= placedStart);
-    // console.log(`filter date start ${placedStart}`);
-    // console.log(list);
   }
   if(placedEnd) {
     if(!(placedEnd instanceof Date)) placedEnd = new Date(parseInt(placedEnd));
     list = list.filter(order => new Date(order.placed) <= placedEnd);
-    // console.log(`filter date end ${placedEnd}`);
-    // console.log(list);
   }
   
   if(receivedDateStart > receivedDateEnd) [receivedDateStart, receivedDateEnd] = [receivedDateEnd, receivedDateStart];
@@ -144,8 +140,6 @@ export function filterOrdersList(
 
   if(delStatesIdList && delStatesIdList.length !== 0) {
     list = list.filter(order => delStatesIdList.includes(order.deliveryStateId));
-    // console.log(`filter state ${delStatesIdList}`);
-    // console.log(list);
   }
 
   if(productId) {
@@ -157,8 +151,6 @@ export function filterOrdersList(
 
   if(userId) {
     list = list.filter(order => order.userId === userId);
-    // console.log(`filter user ${userId}`);
-    // console.log(list);
   }
 
   return list;

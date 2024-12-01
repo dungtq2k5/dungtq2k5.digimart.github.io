@@ -51,11 +51,11 @@ function renderItems(list=getTopPotentialUser(rangeInputs[0].value, rangeInputs[
   
       htmlDoc += `
         <tr data-user-id="${user.id}">
-          <td class="b" data-cell="customer id">${user.id}</td>
-          <td class="b" data-cell="email">${user.email}</td>
-          <td class="b" data-cell="phone">${user.phone}</td>
-          <td class="b" data-cell="total spent(cents)">${totalSpent}&#162;</td>
-          <td class="b" data-cell="all orders">
+          <td data-cell="customer id">${user.id}</td>
+          <td data-cell="email">${user.email}</td>
+          <td data-cell="phone">${user.phone}</td>
+          <td data-cell="total spent(cents)">${totalSpent}&#162;</td>
+          <td data-cell="all orders">
             <div>
               <button class="btn--none--g link--g view-bills-btn-js">view customer bills</button>
             </div>
@@ -77,8 +77,6 @@ function renderItems(list=getTopPotentialUser(rangeInputs[0].value, rangeInputs[
   
     });
   }
-
-  // console.log("render items");
 }
 
 function validateRange() {
@@ -129,7 +127,6 @@ function initDateRange() {
         : getFromStorage(LOCALSTORAGE.analysisCustomersDateEnd) || maxDate.getTime()
     );
   });
-  console.log("init date range");
 }
 
 function responsiveResetFilterBtn() {
@@ -178,23 +175,23 @@ function renderUserBills(userId) {
 
     ordersHtmlDoc += `
       <tr>
-        <td class="b" data-cell="bill id">${order.id}</td>
-        <td class="b" data-cell="products">
+        <td data-cell="bill id">${order.id}</td>
+        <td data-cell="products">
           <ul class="view-bills__table-box__products view-bills__table-box__customers">
             ${packagesHtmlDoc}
           </ul>
         </td>
-        <td class="b" data-cell="total(dollars)">&#36;${total}</td>
-        <td class="b" data-cell="delivery to"><address>${delAddr}</address></td>
-        <td class="b" data-cell="placed">${placed}</td>
-        <td class="b" data-cell="received date">${received}</td>
+        <td data-cell="total(dollars)">&#36;${total}</td>
+        <td data-cell="delivery to"><address>${delAddr}</address></td>
+        <td data-cell="placed">${placed}</td>
+        <td data-cell="received date">${received}</td>
       </tr>
     `;
   });
 
   backDrop.innerHTML = `
-    <div class="view-bills b">
-      <button class="form__close-btn--g btn--none--g close-btn-js b" title="close">
+    <div class="view-bills ">
+      <button class="form__close-btn--g btn--none--g close-btn-js " title="close">
         <i class="uil uil-times"></i>
       </button>
 
@@ -209,12 +206,12 @@ function renderUserBills(userId) {
 
           <thead>
             <tr>
-              <th class="b">bill id</th>
-              <th class="b">products</th>
-              <th class="b">total(dollars)</th>
-              <th class="b">delivery to</th>
-              <th class="b">placed</th> 
-              <th class="b">received date</th> 
+              <th>bill id</th>
+              <th>products</th>
+              <th>total(dollars)</th>
+              <th>delivery to</th>
+              <th>placed</th> 
+              <th>received date</th> 
             </tr>
           </thead>
 
@@ -236,7 +233,6 @@ function renderUserBills(userId) {
   });
 
   showElements(backDrop);
-  console.log(`render customer ${userId} bills`);
 }
 
 export default renderCustomersAnalysis;

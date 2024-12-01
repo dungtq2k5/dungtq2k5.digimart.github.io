@@ -43,8 +43,8 @@ function renderItems() {
     const total = centsToDollars(product.price * item.quantity);
 
     htmlDoc += `
-      <li class="content__items__item b" data-cart-id="${item.id}">
-        <div class="content__items__item__select b">
+      <li class="content__items__item " data-cart-id="${item.id}">
+        <div class="content__items__item__select ">
           <input 
             type="checkbox" 
             id="product-${item.id}" 
@@ -59,17 +59,17 @@ function renderItems() {
           <label for="product-${item.id}" class="content__items__item__select__label text--cap--g" title="select this item">${product.name}</label>
         </div>
 
-        <p class="b">$${price}</p>
+        <p class="">$${price}</p>
 
-        <div class="content__items__item__quant b">
-          <i class="uil uil-arrow-left decs-quant-js b" title="decrease quantity"></i>
-          <span class="b">${item.quantity}</span>
-          <i class="uil uil-arrow-right incs-quant-js b" title="increase quantity"></i>
+        <div class="content__items__item__quant ">
+          <i class="uil uil-arrow-left decs-quant-js " title="decrease quantity"></i>
+          <span class="">${item.quantity}</span>
+          <i class="uil uil-arrow-right incs-quant-js " title="increase quantity"></i>
         </div>
 
-        <p class="b">$${total}</p>
+        <p class="">$${total}</p>
 
-        <button class="link--g link--red--g btn--none--g del-btn-js b">Delete</button>
+        <button class="link--g link--red--g btn--none--g del-btn-js ">Delete</button>
       </li>
     `;
   });
@@ -112,8 +112,6 @@ function renderItems() {
   });
 
   updateCheckoutForm();
-
-  // console.log("render products in cart");
 }
 
 function responsiveSelectAllItem() {
@@ -129,7 +127,6 @@ function responsiveSelectAllItem() {
 
     });
 
-    // console.log("select/unselect all");
     saveToStorage(LOCALSTORAGE.allItemSelected, isSelected);
     updateCheckoutForm();
   });
@@ -144,7 +141,6 @@ function handleDecsItemQuant(cartId) {
     const quantAccum = -1;
     updateCart(cartId, {quantAccum});
     renderItems();
-    // console.log("decs quant");
   }
 }
 
@@ -152,11 +148,9 @@ function handleIncsItemQuant(cartId) {
   const quantAccum = 1;
   updateCart(cartId, {quantAccum});
   renderItems();
-  // console.log("incs quant");
 }
 
 function handleDelItem(cartId) {
-  // console.log(`del product ${cartId} in cart`);
   removeCart(cartId);
 
   if(getUserCart(user.id).length > 0) {
@@ -193,9 +187,9 @@ function renderRemoveItemPopup(cartId) {
   const product = getProductDetail(productId);
   
   removeItemBackDrop.innerHTML = `
-    <div class="form--g b">
-      <button class="form__close-btn--g btn--none--g close-btn-js b">
-        <i class="uil uil-times detail-close-icon b"></i>
+    <div class="form--g ">
+      <button class="form__close-btn--g btn--none--g close-btn-js ">
+        <i class="uil uil-times detail-close-icon "></i>
       </button>
 
       <h2>Do you want to remove this item?</h2>
@@ -219,7 +213,6 @@ function renderRemoveItemPopup(cartId) {
   });
 
   removeItemBackDrop.querySelector(".submit-btn-js").addEventListener("click", () => {
-    console.log("submit remove");
     handleDelItem(cartId);
     hideElements(removeItemBackDrop);
   });

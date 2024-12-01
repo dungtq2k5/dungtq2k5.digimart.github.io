@@ -24,7 +24,6 @@ function responsiveLogoutBtn() {
 function showLogoutBtn(username) {
   logoutName.innerHTML = username;
   showElements(logoutContainer);
-  console.log("Page refresh but user is already login");
 }
 
 function hideLogoutBtn() {

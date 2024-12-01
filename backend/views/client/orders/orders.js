@@ -66,8 +66,6 @@ function renderOrders() {
       renderTrackOrderPopup(orderId);
     });
   });
-
-  console.log("render user orders");
 }
 
 function renderEmptyOrders() {
@@ -140,8 +138,6 @@ function renderTrackOrderPopup(orderId) {
   })
 
   showElements(trackBackDrop);
-  // console.log("render track package");
-
 }
 
 export { renderOrders, renderEmptyOrders };

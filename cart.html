@@ -12,9 +12,9 @@
   <body>
 
     <!--header-->
-    <header id="header" class="header header--g b">
+    <header id="header" class="header header--g">
       <a href="./index.html">
-        <div class="logo-js b">
+        <div class="logo-js">
           <h1 class="h1--g"><span class="header__logo__g">Digi Mart</span> &#8211; Home</h1>
         </div>
       </a>
@@ -29,13 +29,13 @@
     </header>
 
     <!--content-->
-    <div id="container" class="content content--g b">
+    <div id="container" class="content content--g">
 
       <!-- items -->
-      <main class="content__items b">
+      <main class="content__items">
 
         <!-- title -->
-        <div class="content__items__header b">
+        <div class="content__items__header">
           <div class="content__items__header__select">
             <input type="checkbox" id="select-all-product" class="content__items__header__select__checkbox select-all-js">
             <label for="select-all-product">Product</label>
@@ -48,8 +48,8 @@
 
         <!-- items list -->
         <ul class="items-container-js">
-          <!-- <li class="content__items__item b">
-            <div class="content__items__item__select b">
+          <!-- <li class="content__items__item">
+            <div class="content__items__item__select">
               <input type="checkbox" id="product-id">
               <img src="assets/img/products/samsung-galaxy-watch6.webp" alt="" class="content__items__item__select__label__img">
               <label for="product-id" class="content__items__item__select__label text--cap--g">samsung Galaxy watch6</label>
@@ -57,21 +57,21 @@
 
             <p class="b">$191</p>
 
-            <div class="content__items__item__quant b">
-              <i class="uil uil-arrow-left b"></i>
+            <div class="content__items__item__quant">
+              <i class="uil uil-arrow-left"></i>
               <span class="b">1</span>
-              <i class="uil uil-arrow-right b"></i>
+              <i class="uil uil-arrow-right"></i>
             </div>
 
             <p class="b">$190</p>
 
-            <button class="link--g link--red--g btn--none--g b">Delete</button>
+            <button class="link--g link--red--g btn--none--g">Delete</button>
           </li> -->
         </ul>
       </main>
 
       <!-- checkout form -->
-      <div class="content__checkout-form checkout-form-js b">
+      <div class="content__checkout-form checkout-form-js">
 
         <h2>Order Summary</h2>
 
@@ -88,7 +88,7 @@
         </div>
         
         <!-- delivery address -->
-        <div class="content__checkout-form__addr b">
+        <div class="content__checkout-form__addr">
           <div>
             <p>Delivery to:</p>
             <address class="del-to-js"></address>
@@ -114,7 +114,7 @@
           </div>
 
           <!-- credit / debit card form -->
-          <div class="content__checkout-form__payment__card-form hide--g card-form-js b">
+          <div class="content__checkout-form__payment__card-form hide--g card-form-js">
             <div class="content__checkout-form__payment__card-form__title">
               <i class="uil uil-credit-card"></i>
               <h3 class="content__checkout-form__payment__card-form__title__heading">Input Card Details</h3>
@@ -130,7 +130,7 @@
                 required
               />
             </div>
-            <div class="form__invalid-msg--g invalid-number-msg-js hide--g b">
+            <div class="form__invalid-msg--g invalid-number-msg-js hide--g">
               <i class="uil uil-exclamation-triangle icon--small--g"></i>
               <span>Invalid card number&#33;</span>
             </div>
@@ -144,7 +144,7 @@
                 required
               />
             </div>
-            <div class="form__invalid-msg--g invalid-date-msg-js hide--g b">
+            <div class="form__invalid-msg--g invalid-date-msg-js hide--g">
               <i class="uil uil-exclamation-triangle icon--small--g"></i>
               <span>Invalid expiry date&#33;</span>
             </div>
@@ -159,7 +159,7 @@
                 required
               />
             </div>
-            <div class="form__invalid-msg--g invalid-cvv-msg-js hide--g b">
+            <div class="form__invalid-msg--g invalid-cvv-msg-js hide--g">
               <i class="uil uil-exclamation-triangle icon--small--g"></i>
               <span>Invalid CVV&#33;</span>
             </div>
@@ -174,7 +174,7 @@
                 required
               />
             </div>
-            <div class="form__invalid-msg--g invalid-name-msg-js hide--g b">
+            <div class="form__invalid-msg--g invalid-name-msg-js hide--g">
               <i class="uil uil-exclamation-triangle icon--small--g"></i>
               <span>Invalid name&#33;</span>
             </div>
@@ -187,15 +187,15 @@
     </div>
 
     <!--del addr backdrop-->
-    <div id="add-addr-backdrop" class="backdrop--g hide--g b">
-      <form class="form--g form-js b">
-        <button class="form__close-btn--g btn--none--g close-btn-js b">
+    <div id="add-addr-backdrop" class="backdrop--g hide--g">
+      <form class="form--g form-js">
+        <button class="form__close-btn--g btn--none--g close-btn-js">
           <i class="uil uil-times"></i>
         </button>
 
         <h2>Add new delivery address</h2>
 
-        <div class="form__field--g b">
+        <div class="form__field--g">
           <label for="del-addr">Your new address</label>
           <input
             id="del-addr"
@@ -210,10 +210,10 @@
     </div>
 
     <!--remove item backdrop-->
-    <div id="remove-item-backdrop" class="backdrop--g hide--g b">
-      <!-- <div class="form--g b">
-        <button class="form__close-btn--g btn--none--g  b">
-          <i class="uil uil-times detail-close-icon b"></i>
+    <div id="remove-item-backdrop" class="backdrop--g hide--g">
+      <!-- <div class="form--g">
+        <button class="form__close-btn--g btn--none--g ">
+          <i class="uil uil-times detail-close-icon"></i>
         </button>
 
         <h2>Do you want to remove this item?</h2>
@@ -228,7 +228,7 @@
     </div>
 
      <!--footer-->
-     <footer class="footer--g b">
+     <footer class="footer--g">
       <p>&copy; Copyright 2024. All right reserved.</p>
     </footer>
 

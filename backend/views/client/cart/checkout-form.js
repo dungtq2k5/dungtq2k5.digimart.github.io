@@ -69,7 +69,6 @@ function responsiveCheckoutBtn() {
       console.error("card input unvalid!");
     } else {
       handleCheckout();
-      console.log("Order added");
       window.location.href = PAGES.orders;
       localStorage.removeItem(LOCALSTORAGE.allItemSelected);
     }
@@ -113,8 +112,6 @@ function updateCheckoutForm() {
     checkoutBtn.disabled = true;
     checkoutBtn.classList.add(CLASSNAME.btnDisable);
   }
-
-  console.log("update checkout form");
 }
 
 function responsiveAddDelAddrBtn() {

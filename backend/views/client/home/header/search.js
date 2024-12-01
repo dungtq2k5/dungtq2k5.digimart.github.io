@@ -34,7 +34,6 @@ const filterSearchResultContainer = searchPopupContainer.querySelector(".filter-
 //price-slider
 const minPrice = getMinProductPrice();
 const maxPrice = getMaxProductPrice();
-console.log(minPrice, maxPrice);
 const step = 100;
 let minVal = searchPopupContainer.querySelector(".min-js");
 let maxVal = searchPopupContainer.querySelector(".max-js");
@@ -47,7 +46,6 @@ let categoriesLookup = [];
 
 if(getFromStorage(LOCALSTORAGE.categoryHidden)) { //avoid category menu show but filter still applied when refresh page
   hideCategories();
-  // console.log("Page refresh but category menu still hidden");
 }
 
 function responsiveSearch() {
@@ -73,7 +71,6 @@ function responsiveSearchField() {
 
 function responsiveSearchSuggestPopup() {
   searchBtn.addEventListener("click", () => {
-    // console.log("execute search");
     valueLookup = searchField.value;
 
     const productsListFiltered = filterProducts(
@@ -93,8 +90,6 @@ function responsiveSearchSuggestPopup() {
 
   searchField.addEventListener("focus", () => {
     showElements(searchPopupContainer);
-    // renderCategory();
-    // console.log("focus");
   });
 
   document.addEventListener("click", (e) => {
@@ -103,9 +98,7 @@ function responsiveSearchSuggestPopup() {
       !searchPopupContainer.contains(e.target)
     ) {
       searchPopupContainer.classList.add(CLASSNAME.hide);
-      // console.log("unfocus");
     }
-    // console.log("click");
   });
 }
 
@@ -131,13 +124,13 @@ function renderSuggestProduct(
 
     productsList.forEach(product => {
       htmlDoc += `
-        <li class="header__search-popup__result__item b" data-product-plain-name="${product.name}">
+        <li class="header__search-popup__result__item " data-product-plain-name="${product.name}">
           <img
             src="${product.img}"
             alt=""
-            class="header__search-popup__result__item__img b"
+            class="header__search-popup__result__item__img "
           />
-          <p class="b">${product.name}</p>
+          <p class="">${product.name}</p>
         </li>
       `;
     });
@@ -156,16 +149,13 @@ function renderSuggestProduct(
       searchBtn.click();
     });
   });
-
-  // console.log("render product suggest");
 }
 
 function renderCategory(categoriesList = getCategoriesList()) {
-  // console.log("render category");
   let htmlDoc = ``;
   categoriesList.forEach((item) => {
     htmlDoc += `
-      <li class="header__search-popup__categories__item b" data-category-id="${item.id}">
+      <li class="header__search-popup__categories__item " data-category-id="${item.id}">
         <p>${item.name}</p>
         <i class="uil uil-check icon--small--g hide--g"></i>
       </li>
@@ -183,7 +173,6 @@ function renderCategory(categoriesList = getCategoriesList()) {
 
         const categoryId = item.dataset.categoryId;
         toggleEleInArr(categoriesLookup, categoryId);
-        console.log(categoriesLookup);
         const productsListFiltered = filterProducts(
           valueLookup,
           categoriesLookup,
@@ -210,7 +199,6 @@ function validateRange() {
   minVal.innerHTML = centsToDollars(min);
   maxVal.innerHTML = centsToDollars(max);
 
-  // console.log("price range");
   const productsListFiltered = filterProducts(
     valueLookup,
     categoriesLookup,
@@ -233,8 +221,6 @@ function initPriceRange() {
         : maxPrice
     );
   });
-
-  console.log("init price range");
 }
 
 export default responsiveSearch;

@@ -118,11 +118,9 @@ export function hideElements(eles, className=CLASSNAME.hide) {
   eles.forEach(ele => {
     if(!ele.classList.contains(className)) ele.classList.add(className);
   })
-  // console.log("clear invalid msgs");
 }
 
 export function addClassName(eles, className) {
-  // console.log("add");
   if(!Array.isArray(eles)) { //handle single ele
     eles = [eles];
   } else { //handle nested arr
@@ -135,7 +133,6 @@ export function addClassName(eles, className) {
 }
 
 export function removeClassName(eles, className) {
-  // console.log("remove");
   if(!Array.isArray(eles)) { //handle single ele
     eles = [eles];
   } else { //handle nested arr
@@ -154,11 +151,9 @@ export function calculatePages(totalProducts, maxProductsPerPage) {
 
 export function saveToStorage(storage, data) {
   localStorage.setItem(storage, JSON.stringify(data));
-  // console.log(`Storage ${storage} saved`);
 }
 
 export function getFromStorage(storage) {
-  // console.log(`Storage ${storage} get`);
   return JSON.parse(localStorage.getItem(storage));
 }
 

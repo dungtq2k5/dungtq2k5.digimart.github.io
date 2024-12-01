@@ -10,7 +10,6 @@ const authPopup = header.querySelector(".auth-popup-js");
 function responsiveAuthBtn() {
   authBtn.addEventListener("click", () => {
     authPopup.classList.toggle(CLASSNAME.hide);
-    // console.log("toggle");
   });
   document.addEventListener("click", (e) => {
     if (
@@ -18,7 +17,6 @@ function responsiveAuthBtn() {
       !authPopup.classList.contains(CLASSNAME.hide)
     ) {
       authPopup.classList.add(CLASSNAME.hide);
-      // console.log("hidden");
     }
   });
 }

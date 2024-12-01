@@ -51,7 +51,6 @@ function responsiveLoginCloseBtn() {
   loginCloseBtn.addEventListener("click", (e) => {
     e.preventDefault();
     hideElements(backDrop);
-    // console.log("hide-login");
   });
 }
 
@@ -102,7 +101,6 @@ function handleLogin() {
     } else {
       invalidCredentialMsg.innerHTML = MSG.invalidCredential;
       showElements(invalidCredentialPopup);
-      console.log("Invalid credentials");
     }
   } else {
     console.error("User is already login!");
