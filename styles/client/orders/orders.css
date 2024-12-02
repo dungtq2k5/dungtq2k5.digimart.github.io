@@ -14,10 +14,12 @@
 }
 
 .orders-empty {
+  min-height: 50vh;
   display: flex;
   flex-direction: column;
   gap: .5em;
   align-items: center;
+  justify-content: center;
 }
 
 .content__orders {
@@ -29,7 +31,7 @@
 .content__orders__order__title {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   gap: 1em;
   padding: 1em;
   border: 1px solid var(--lightgrey);
@@ -51,5 +53,6 @@
 }
 .content__orders__order__items__item__img {
   max-width: 100px;
+  width: 20%;
   border-radius: var(--border-radius);
 }

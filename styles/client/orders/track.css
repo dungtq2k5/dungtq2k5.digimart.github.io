@@ -3,8 +3,8 @@
   padding: 1em;
   border-radius: var(--border-radius);
   background: var(--white);
-  width: max-content;
-  min-width: 555px;
+  width: 100%;
+  max-width: 1000px;
 }
 
 .track__title {
