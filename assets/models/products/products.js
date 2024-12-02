@@ -266,7 +266,7 @@ const samsungPhones = [
     "name": "samsung galaxy s24",
     "price": "79999",
     "quantity": "100",
-    "img": `${IMG_ROOT_PATH}/samsung/ssgalaxys24.${IMG_TYPE}`,
+    "img": `${IMG_ROOT_PATH}/samsung/ssgalaxyS24.${IMG_TYPE}`,
     "rom": "128",
     "ram": "8",
     "batteryCapacity": "4000",
