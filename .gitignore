@@ -1,0 +1,6 @@
+notes/
+test.*
+draft/
+cspell.json
+.vscode/
+**/.vscode/

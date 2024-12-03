@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+    />
+
+    <link rel="stylesheet" href="styles/general.css" />
+    <link rel="stylesheet" href="styles/admin/header.css" />
+    <link rel="stylesheet" href="styles/admin/content.css" />
+    <link rel="stylesheet" href="styles/admin/users.css" />
+    <link rel="stylesheet" href="styles/admin/products.css" />
+    <link rel="stylesheet" href="styles/admin/packages.css" />
+    <link rel="stylesheet" href="styles/admin/analysis.css" />
+    <link rel="icon" type="image/svg+xml" href="./assets/img/icon.svg">
+    <title>Digi Mart &#8739; Admin</title> 
+  </head>
+  <body> 
+
+    <header id="header" class="header header--g b">
+      <!-- logo -->
+      <a href="./admin.html">
+        <div class="header__logo logo-js b">
+          <h1 class="h1--g">
+            <span class="header__logo__g">Digi Mart</span>
+            &#8211;
+            Admin Page
+          </h1>
+        </div>
+      </a>
+
+      <nav class="header__nav b">
+        <ul class="header__nav__list nav-list-js">
+          <li>
+            <button data-section="1" class="btn--none--g text--cap--g btn--choose--g" title="users management">users</button>
+          </li>
+          <li>
+            <button data-section="2" class="btn--none--g text--cap--g" title="products management">products</button>
+          </li>
+          <li>
+            <button data-section="3" class="btn--none--g text--cap--g" title="orders management">orders</button>
+          </li>
+          <li class="header__nav__list__analysis">
+            <div class="header__nav__list__analysis__title text--cap--g">
+              analysis 
+              <i class="uil uil-angle-down icon--small--g"></i>
+            </div>
+            <ul class="header__nav__list__analysis__dropdown">
+              <li><button data-section="4" class="btn--none--g">products</button></li>
+              <li><button data-section="5" class="btn--none--g">customers</button></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="header__auth b">
+        <p>Hello Admin: <span class="auth-name-js">dungtran</span></p>
+        &#8739;
+        <button class="link--g btn--none--g logout-btn-js">logout</button>
+      </div>
+    </header>
+
+    <main id="content" class="content content--g b">
+      <!-- users section -->
+      <section class="users-section-js b">
+        <!-- create btn -->
+        <button class="content__create-btn link--g btn--none--g create-btn-js">
+          <i class="uil uil-plus icon--small--g"></i>
+          create new user
+        </button>
+  
+        <table class="b">
+          <caption class="b">
+            <h2>
+              <i class="uil uil-user"></i>
+              Users management
+            </h2>
+          </caption>
+          
+          <thead class="b">
+            <tr>
+              <th class="b">id</th>
+              <th class="b">email</th>
+              <th class="b">phone</th>
+              <th class="b">password</th>
+              <th class="b">delivery addresses</th> 
+              <th class="b">state</th> 
+              <th class="b">actions</th>
+            </tr>
+          </thead>
+  
+          <tbody class="items-container-js b">
+            <!-- <tr>
+              <td class="b" data-cell="id">123</td>
+              <td class="b" data-cell="email">dungtranquang2005@gmail.com</td>
+              <td class="b" data-cell="phone">0392018660</td>
+              <td class="b" data-cell="password">password123</td>
+              <td class="b" data-cell="delivery addresses">
+                <ul class="content__body__del_addrs">
+                  <li>abc WallSteer std.</li>
+                  <li>abc WallSteer std.</li>
+                  <li>abc WallSteer std.</li>
+                </ul>
+              </td>
+              <td class="b" data-cell="state">normal</td>
+              <td class="b" data-cell="actions">
+                <div class="btns">
+                  <button class="btn--none--g link--g">update</button>
+                  <button class="btn--none--g link--g link--red--g">delete</button>
+                </div>
+              </td>
+            </tr> -->
+            <!-- ... -->
+          </tbody>
+        </table>
+
+        <div class="no-items-found no-item-js hide--g">
+          <i class="uil uil-cloud-times"></i>
+          <p>There's no user found!</p>
+        </div>
+      </section>
+
+      <!-- products section -->
+      <section class="products-section-js b">
+        <!-- create btn -->
+        <button class="content__create-btn link--g btn--none--g create-btn-js">
+          <i class="uil uil-plus icon--small--g"></i>
+          create new product
+        </button>
+        
+        <!-- data -->
+        <table class="content__products-table b">
+          <caption class="b">
+            <h2>
+              <i class="uil uil-mobile-android"></i>
+              Products management
+            </h2>
+          </caption>
+
+          <thead class="b">
+            <tr>
+              <th class="b">img</th>
+              <th class="b">id</th>
+              <th class="b">name</th>
+              <th class="b">brand</th>
+              <th class="b">chipset</th>
+              <th class="b">ROM(GB) - RAM(GB)</th>
+              <th class="b">battery capacity(mah)</th>
+              <th class="b">categories</th>
+              <th class="b">price (cents)</th>
+              <th class="b">quantity</th>
+              <th class="b">description</th>
+              <th class="b">actions</th>
+            </tr>
+          </thead>
+
+          <tbody class="tbody-js b">
+            <!-- <tr>
+              <td class="b" data-cell="image">
+                <img src="./assets/img/products/example.webp" alt="" />
+              </td>
+
+              <td class="b" data-cell="id">123</td>
+
+              <td class="text--cap--g b" data-cell="name">
+                <span>iphone 15 promax</span>
+              </td>
+
+              <td class="text--cap--g b" data-cell="brand">
+                <span>apple</span>
+              </td>
+
+              <td class="text--cap--g b" data-cell="chipset">
+                <span>apple bionic 13</span>
+              </td>
+
+              <td class="b" data-cell="rom - ram">
+                <span>128 - 16</span>
+              </td>
+
+              <td class="b" data-cell="battery capacity">
+                <span>4800</span>
+              </td>
+
+              <td class="text--cap--g b" data-cell="categories">
+                <span>flagship, fashion</span>
+              </td>
+
+              <td class="b" data-cell="price">
+                <span>129900</span>
+              </td>
+
+              <td class="b" data-cell="quantity">
+                <span>100</span>
+              </td>
+
+              <td class="b" data-cell="description">
+                <div class="content__products-table__description-box">
+                  <p>Lorem ipsum.</p>
+                </div>
+              </td>
+
+              <td class="b" data-cell="actions">
+                <div>
+                  <button class="btn--none--g link--g">update</button>
+                  <button class="btn--none--g link--g link--red--g">delete</button>
+                </div>
+              </td>
+            </tr> -->
+            <!-- ... -->
+          </tbody>
+        </table>
+
+        <div class="no-items-found hide--g no-item-js">
+          <i class="uil uil-cloud-times"></i>
+          <p>There's no product found!</p>
+        </div>
+      </section>
+
+      <!-- orders/packages section -->
+      <section class="content__orders-section orders-section-js b">
+
+        <h2><i class="uil uil-package"></i> Orders Management</h2>
+
+        <!-- filter search -->
+        <div class="content-section__filter content__orders-section__filter">
+          <!-- slider -->
+          <div class="slider--g slider-js b">
+            <!-- title -->
+            <div class="slider__title--g b">
+              <label for="slider__bar__min">All packages from: <span class="min-js"></span></label>
+              <label for="slider__bar__max">to: <span class="max-js"></span></label>
+            </div>
+
+            <!-- bar -->
+            <div class="slider__bar--g b">
+              <div class="slider__bar__fill--g range-fill-js"></div>
+
+              <input
+                id="slider__bar__min"
+                type="range"
+                class="slider__bar__range--g range-input-js"
+              />
+
+              <input
+                id="slider__bar__max"
+                type="range"
+                class="slider__bar__range--g range-input-js"
+              />
+            </div>
+          </div>
+
+          <!-- filter states -->
+          <div class="content__orders-section__filter__states b">
+            <p>Filter by states: </p>
+            <ul class="states-filter-js b">
+              <!-- <li>
+                <button class="btn--g bg--blue--g">
+                  state1 <i class="uil uil-check icon--small--g"></i>
+                </button>
+              </li> -->
+              <!-- ... -->
+            </ul>
+          </div>
+          
+          <button class="btn--none--g link--g reset-btn-js">clear all filters</button>
+        </div>
+
+        <!-- data -->
+        <table class="b">
+          <caption class="b">
+            <h3>All Orders</h3>
+          </caption>
+
+          <thead class="b">
+            <tr>
+              <th class="b">id</th>
+              <th class="b">buyer id</th>
+              <th class="b">products</th>
+              <th class="b">total</th>
+              <th class="b">delivery to</th>
+              <th class="b">placed</th> 
+              <th class="b">package state</th>
+            </tr>
+          </thead>
+
+          <tbody class="items-container-js b">
+            <!-- <tr>
+              <td data-cell="order id" class="b">1</td>
+              <td data-cell="buyer id" class="b">1</td>
+              <td data-cell="products" class="content__orders-section__products b">
+                <ul>
+                  <li>
+                    <img src="./assets/img/products/example.webp" alt="">
+                    <p>iphone 16pro max</p>
+                    <i class="uil uil-times icon--small--g"></i>
+                    <p>15</p>
+                  </li>
+                </ul>
+              </td>
+              <td data-cell="total" class="b">1999</td>
+              <td data-cell="delivery to" class="b">
+                <address>123abc / xyz</address>
+              </td>
+              <td data-cell="placed" class="b">nov-11-2023</td>
+              <td data-cell="package state" class="b">
+                <span>preparing</span>
+                <button class="btn--none--g link--g">(click to edit)</button>
+              </td>
+            </tr> -->
+            <!-- ... -->
+          </tbody>
+        </table>
+
+        <div class="no-items-found hide--g no-item-js">
+          <i class="uil uil-cloud-times"></i>
+          <p>There's no packages found!</p>
+        </div>
+      </section>
+
+      <!-- products analysis section -->
+      <section class="analysis-products-section-js b">
+
+        <h2><i class="uil uil-analytics"></i> Products Analysis</h2>
+
+        <!-- filter -->
+        <div class="content-section__filter content-analysis__filter">
+          <!-- slider -->
+          <div class="slider--g slider-js b">
+          <!-- title -->
+          <div class="slider__title--g b">
+            <label for="analysis__slider__bar__min">From: <span class="min-js"></span></label>
+            <label for="analysis__slider__bar__max">To: <span class="max-js"></span></label>
+          </div>
+
+          <!-- bar -->
+          <div class="slider__bar--g b">
+            <div class="slider__bar__fill--g range-fill-js"></div>
+
+            <input
+              id="analysis__slider__bar__min"
+              type="range"
+              class="slider__bar__range--g range-input-js"
+            />
+
+            <input
+              id="analysis__slider__bar__max"
+              type="range"
+              class="slider__bar__range--g range-input-js"
+            />
+          </div>
+          </div>
+          <button class="btn--none--g link--g reset-btn-js">clear filter</button>
+        </div>
+
+        <!-- feature products -->
+        <div class="content-analysis__feature-products">
+          <!-- top products sold -->
+          <div class="content-analysis__top-products b">
+            <h3 class="content-analysis__top-products__heading">
+              <i class="uil uil-arrow-growth"></i>
+              Top products sold 
+            </h3>
+
+            <ul class="content-analysis__top-products__list top-products-sold-js b">
+              <!-- <li class="content-analysis__top-products__list__item b">
+                <img src="./assets/img/products/example.webp" alt="">
+                <i class="uil uil-times icon--small--g"></i>
+                <p>iphone 15 promax 16GB 512GB</p>
+                <i class="uil uil-times icon--small--g"></i>
+                <p>12 sold</p>
+              </li> -->
+            </ul>
+          </div>
+
+            <!-- low products sold -->
+            <div class="content-analysis__top-products b">
+            <h3 class="content-analysis__top-products__heading">
+              <i class="uil uil-chart-down"></i>
+              Lowest products sold 
+            </h3>
+
+            <ul class="content-analysis__top-products__list low-products-sold-js b">
+              <!-- <li class="content-analysis__top-products__list__item b">
+                <img src="./assets/img/products/example.webp" alt="">
+                <i class="uil uil-times icon--small--g"></i>
+                <p>iphone 15 promax 16GB 512GB</p>
+                <i class="uil uil-times icon--small--g"></i>
+                <p>12 sold</p>
+              </li> -->
+            </ul>
+            </div>
+          </div>
+        <hr>
+
+        <!-- product -->
+        <table class="content-analysis__table">
+          <caption class="b">
+            <h3>All Products</h3>
+          </caption>
+
+          <thead class="b">
+            <tr>
+              <th class="b">product</th>
+              <th class="b">sold</th>
+              <th class="b">total (cents): 
+                <div class="content-analysis__table__total">
+                  <span class="total-cents-js">0</span>&#162; &#61; &#36;<span class="total-dollars-js">0</span> 
+                </div>
+              </th>
+              <th class="b">action</th>
+            </tr>
+          </thead>
+
+          <tbody class="items-container-js b">
+          <!-- <tr>
+            <td class="b" data-cell="product">
+              <div class="content-analysis__table__product">
+                <img src="./assets/img/products/example.webp" alt="">
+                <p>iphone 16pro max</p>
+                <details>
+                  <summary>view more info</summary>
+                  <ul>
+                    <li>id: <span>1</span></li>
+                    <li>price: <span>39900cents</span></li>
+                    <li>chipset: <span>snapdragon 365</span></li>
+                    <li>battery capacity: <span>5000mah</span></li>
+                    <li>brand: <span>Samsung</span></li>
+                    <li>memory: <span>16GB RAM -  512GB ROM</span></li>
+                  </ul>
+                </details>
+              </div>
+            </td>
+            <td class="b" data-cell="sold">123</td>
+            <td class="b" data-cell="total (cents)">39900 * 123</td>
+            <td class="b" data-cell="action">
+              <div>
+                <button class="btn--none--g link--g">view bills</button>
+              </div>
+            </td>
+          </tr> -->
+          <!-- ... -->
+          </tbody>
+
+          <div class="no-items-found hide--g no-item-js">
+            <i class="uil uil-cloud-times"></i>
+            <p>There's no product found!</p>
+          </div>
+        </table>
+      </section>
+
+      <!-- customers analysis section -->
+      <section class="analysis-customers-section-js b">
+
+        <h2><i class="uil uil-users-alt"></i> Users Analysis</h2>
+
+        <!-- filter -->
+        <div class="content-section__filter content-analysis__filter">
+          <!-- slider -->
+          <div class="slider--g slider-js b">
+            <!-- title -->
+            <div class="slider__title--g b">
+              <label for="analysis__slider__bar__min">From: <span class="min-js"></span></label>
+              <label for="analysis__slider__bar__max">To: <span class="max-js"></span></label>
+            </div>
+
+            <!-- bar -->
+            <div class="slider__bar--g b">
+              <div class="slider__bar__fill--g range-fill-js"></div>
+
+              <input
+                id="analysis__slider__bar__min"
+                type="range"
+                class="slider__bar__range--g range-input-js"
+              />
+
+              <input
+                id="analysis__slider__bar__max"
+                type="range"
+                class="slider__bar__range--g range-input-js"
+              />
+            </div>
+          </div>
+          <button class="btn--none--g link--g reset-btn-js">clear filter</button>
+        </div>
+
+        <!-- customers -->
+        <table class="content-analysis__table">
+          <caption class="b">
+            <h3>
+              <i class="uil uil-trophy"></i>
+              Top 5 potential customers 
+            </h3>
+          </caption>
+
+          <thead class="b">
+            <tr>
+              <th class="b">customer id</th>
+              <th class="b">email</th>
+              <th class="b">phone</th> 
+              <th class="b">total spent(cents)</th> 
+              <th class="b">action</th>
+            </tr>
+          </thead>
+
+          <tbody class="items-container-js b">
+            <!-- <tr>
+              <td class="b" data-cell="customer id">123</td>
+              <td class="b" data-cell="email">dungtranquang2005@gmail.com</td>
+              <td class="b" data-cell="phone">0392018660</td>
+              <td class="b" data-cell="total spent(cents)">1234500&#162;</td>
+              <td class="b" data-cell="all orders">
+                <div>
+                  <button class="btn--none--g link--g">view customer bills</button>
+                </div>
+              </td>
+            </tr> -->
+          </tbody>
+        </table>
+
+        <div class="no-items-found hide--g no-item-js">
+          <i class="uil uil-cloud-times"></i>
+          <p>There's no user found</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- backdrop -->
+    <div id="backdrop" class="backdrop--g hide--g b"></div>
+
+    <!--footer-->
+    <footer class="footer--g b">
+      <p>&copy; Copyright 2024. All right reserved.</p>
+    </footer>
+
+    <script type="module" src="./backend/views/admin/main.js"></script>
+  </body>
+</html>
