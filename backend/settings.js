@@ -6,6 +6,7 @@ export const IMG_DEFAULT = "default"
 export const MAX_ITEM_SUGGESTION = 5;
 export const MAX_ITEM_CART_POPUP_RENDERED = 3;
 export const MAX_PRODUCT_RENDERED = 10;
+export const MILI_DAY_STEP = 24 * 60 * 60 * 1000;
 
 export const CLASSNAME = { //relative to css classes
   hide: "hide--g",

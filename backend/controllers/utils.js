@@ -256,11 +256,7 @@ export function validateCreditCardNumber(cardNumber) { //AI generate
 
 export function getLatestCurrentDate() {
   const now = new Date();
-  now.setHours(23, 59, 59, 999);
+  now.setHours(24, 60, 60, 1000);
 
   return now;
-}
-
-export function setLatestDate(time) {
-  
 }

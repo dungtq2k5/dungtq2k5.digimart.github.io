@@ -14,11 +14,11 @@ import {
   saveToStorage, 
   getFromStorage, 
   toggleEleInArr, 
-  includesSubArr, 
-  getLatestCurrentDate 
+  includesSubArr,
+  getLatestCurrentDate,
 } from "../../controllers/utils.js";
 import { getProductDetail } from "../../controllers/products/products.js"
-import { CLASSNAME, LOCALSTORAGE } from "../../settings.js";
+import { CLASSNAME, LOCALSTORAGE, MILI_DAY_STEP } from "../../settings.js";
 
 const backDrop = document.getElementById("backdrop");
 const mainContainer = document.getElementById("content").querySelector(".orders-section-js");
@@ -26,7 +26,6 @@ const mainContainer = document.getElementById("content").querySelector(".orders-
 /* filter dates */
 const minDate = getEarliestOrderPlacedDate(); minDate.setHours(0, 0, 0, 0);
 const maxDate = getLatestCurrentDate();
-const dayStep = 999;
 
 const slider = mainContainer.querySelector(".slider-js");
 const rangeInputs = slider.querySelectorAll(".range-input-js");
@@ -215,16 +214,13 @@ function responsiveSlider() {
 }
 
 function initDateRange() {
-  rangeInputs.forEach((input, index) => {
-    input.setAttribute("min", minDate.getTime());
-    input.setAttribute("max", maxDate.getTime());
-    input.setAttribute("step", dayStep);
-    input.setAttribute(
-      "value", 
-      index === 0 
-        ? getFromStorage(LOCALSTORAGE.dateStart) || minDate.getTime() 
-        : getFromStorage(LOCALSTORAGE.dateEnd) || maxDate.getTime()
-    );
+  rangeInputs.forEach((input, index) => { 
+    input.min = minDate.getTime();
+    input.max = maxDate.getTime();
+    input.step = MILI_DAY_STEP;
+    input.value = index === 0 
+      ? getFromStorage(LOCALSTORAGE.dateStart) || minDate.getTime() 
+      : getFromStorage(LOCALSTORAGE.dateEnd) || maxDate.getTime();
   });
 }
 

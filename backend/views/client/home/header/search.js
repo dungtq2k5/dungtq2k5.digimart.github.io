@@ -34,7 +34,6 @@ const filterSearchResultContainer = searchPopupContainer.querySelector(".filter-
 //price-slider
 const minPrice = getMinProductPrice();
 const maxPrice = getMaxProductPrice();
-console.log(minPrice, maxPrice);
 const step = 100;
 let minVal = searchPopupContainer.querySelector(".min-js");
 let maxVal = searchPopupContainer.querySelector(".max-js");
@@ -223,15 +222,12 @@ function validateRange() {
 
 function initPriceRange() {
   rangeInputs.forEach((input, index) => {
-    input.setAttribute("min", minPrice);
-    input.setAttribute("max", maxPrice);
-    input.setAttribute("step", step);
-    input.setAttribute(
-      "value", 
-      index === 0 
-        ? minPrice
-        : maxPrice
-    );
+    input.min = minPrice;
+    input.max = maxPrice;
+    input.step = step;
+    input.value = index === 0 
+      ? minPrice
+      : maxPrice;
   });
 
   console.log("init price range");

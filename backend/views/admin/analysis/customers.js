@@ -10,7 +10,7 @@ import {
   hideElements,
   showElements,
 } from "../../../controllers/utils.js";
-import { LOCALSTORAGE } from "../../../settings.js";
+import { LOCALSTORAGE, MILI_DAY_STEP } from "../../../settings.js";
 import { getProductDetail } from "../../../controllers/products/products.js";
 import { getDeliveryAddress } from "../../../controllers/delivery/addresses.js";
 
@@ -21,9 +21,8 @@ const itemsContainer = mainContainer.querySelector(".items-container-js");
 const noItem = mainContainer.querySelector(".no-item-js");
 
 /* filter slider */
-const minDate = getEarliestOrderReceivedDate();
+const minDate = getEarliestOrderReceivedDate(); minDate.setHours(0, 0, 0, 0);
 const maxDate = getLatestCurrentDate();
-const dayStep = 999; 
 
 const slider = mainContainer.querySelector(".slider-js");
 const rangeInputs = slider.querySelectorAll(".range-input-js");
@@ -119,17 +118,13 @@ function responsiveSlider() {
 
 function initDateRange() {
   rangeInputs.forEach((input, index) => {
-    input.setAttribute("min", minDate.getTime());
-    input.setAttribute("max", maxDate.getTime());
-    input.setAttribute("step", dayStep);
-    input.setAttribute(
-      "value", 
-      index === 0 
-        ? getFromStorage(LOCALSTORAGE.analysisCustomersDateStart) || minDate.getTime() 
-        : getFromStorage(LOCALSTORAGE.analysisCustomersDateEnd) || maxDate.getTime()
-    );
+    input.min = minDate.getTime();
+    input.max = maxDate.getTime();
+    input.step = MILI_DAY_STEP;
+    input.value = index === 0 
+      ? getFromStorage(LOCALSTORAGE.dateStart) || minDate.getTime() 
+      : getFromStorage(LOCALSTORAGE.dateEnd) || maxDate.getTime();
   });
-  console.log("init date range");
 }
 
 function responsiveResetFilterBtn() {
