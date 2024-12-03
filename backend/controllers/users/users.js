@@ -81,7 +81,7 @@ export function updateUser(
   if(findIndex !== -1) {
     if(email) usersList[findIndex].email = email;
     if(phone) usersList[findIndex].phone = phone;
-    if(password) usersList[findIndex].password = hashPassword(password);
+    if(password && password !== usersList[findIndex].password) usersList[findIndex].password = hashPassword(password);
     if(deliveryAddressId) usersList[findIndex].deliveryAddressId = deliveryAddressId;
     if(stateId) usersList[findIndex].stateId = stateId;
     
